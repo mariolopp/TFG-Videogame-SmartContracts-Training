@@ -11,6 +11,7 @@ public class Script : MonoBehaviour
     {
         boton = GetComponent<Button>();
         barra = FindObjectOfType<BarraProgreso>();
+        historialPanel = GameObject.Find("HistorialPanel").transform;
         boton.onClick.AddListener(Pulsar);
     }
 
