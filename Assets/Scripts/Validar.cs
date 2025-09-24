@@ -1,11 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Script : MonoBehaviour
+public class Validar : MonoBehaviour
 {
     public Button boton;                 // Referencia al botón
     public BarraProgreso barra;          // Referencia a la barra original
     public Transform historialPanel;     // Panel donde guardamos clones
+    public float tiempoMaximo = 10f;     // Tiempo máximo para pulsar el botón
+    private float temporizador = 0f;     // Temporizador interno
+    public int contadorBloques = 0;      // Contador de bloques perdidos
+    public int maxBloques = 5;          // Máximo de bloques perdidos antes de game over
+    public event System.Action OnValidar;
 
     void Start()
     {
@@ -13,6 +19,21 @@ public class Script : MonoBehaviour
         barra = FindObjectOfType<BarraProgreso>();
         historialPanel = GameObject.Find("HistorialPanel").transform;
         boton.onClick.AddListener(Pulsar);
+
+    }
+    private void Update()
+    {
+        temporizador += Time.deltaTime;
+        if (temporizador >= tiempoMaximo)
+        {
+            PierdesBloque();
+        }
+    }
+
+    public void PierdesBloque()
+    {
+        contadorBloques ++; // Incrementar el contador de bloques perdidos
+        barra.Resetear(); // Reiniciar la barra original
     }
 
     void Pulsar()
@@ -34,7 +55,7 @@ public class Script : MonoBehaviour
         {
             slider.value = barra.valorActual;
         }
-
+        OnValidar?.Invoke();
         // Reiniciar la barra original
         barra.Resetear();
     }

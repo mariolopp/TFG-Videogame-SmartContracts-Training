@@ -15,9 +15,6 @@ public class MantenerDerecha : MonoBehaviour
     // Acceder a la velocidad de la ruleta
     public RuletaLenta ruleta; // Referencia al script de la ruleta
 
-    private string[] posiblesTextos = { "Transfer\nFee: 1$\nGas: 1u", "Swap\nFee: 3$\nGas: 2u", "Deposit\nFee:4$\nGas: 6u" };
-    private float[] posiblesValores = { 1f,1f,3f,2f,4f,6f };    // Habra que multiplicar el indice de texto por 2 y usar ese valor y su vecino siguiente
-
     public void Start()
     {
         if (boton == null)
