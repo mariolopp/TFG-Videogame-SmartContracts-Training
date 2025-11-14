@@ -8,9 +8,11 @@ public class Validar : MonoBehaviour
     public BarraProgreso barra;          // Referencia a la barra original
     public Transform historialPanel;     // Panel donde guardamos clones
     public float tiempoMaximo = 10f;     // Tiempo máximo para pulsar el botón
-    private float temporizador = 0f;     // Temporizador interno
+    //private float temporizador = 0f;     // Temporizador interno
+    private Temporizador temporizador;
     public int contadorBloques = 0;      // Contador de bloques perdidos
     public int maxBloques = 5;          // Máximo de bloques perdidos antes de game over
+
     public event System.Action OnValidar;
 
     void Start()
@@ -23,19 +25,15 @@ public class Validar : MonoBehaviour
     }
     private void Update()
     {
-        temporizador += Time.deltaTime;
-        if (temporizador >= tiempoMaximo)
-        {
-            PierdesBloque();
-        }
     }
-
+    
     public void PierdesBloque()
     {
         contadorBloques ++; // Incrementar el contador de bloques perdidos
+        OnValidar?.Invoke();
         barra.Resetear(); // Reiniciar la barra original
     }
-
+    //public void temporizador.onTiempoAgotado += PierdesBloque;
     void Pulsar()
     {
         // Log de la validación
