@@ -27,10 +27,11 @@ public class BarraProgreso : MonoBehaviour
         }
     }
 
-    public void Resetear()
+    public void Resetear() 
     {
         valorActual = 0f;
         barra.fillAmount = 0f;
         llenadoSuave = true; // Volver al llenado suave
     }
 }
+  
