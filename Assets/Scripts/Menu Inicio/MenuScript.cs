@@ -9,7 +9,7 @@ public class MenuScript : MonoBehaviour
     public void Jugar()
     {
         Debug.Log("Iniciando juego...");
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("BlockMiner");
     }
     public void Salir()
     {
