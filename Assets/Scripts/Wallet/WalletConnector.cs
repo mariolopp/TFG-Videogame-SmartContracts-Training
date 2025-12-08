@@ -22,11 +22,15 @@ namespace Thirdweb.Unity
         [SerializeField] private GameObject walletInfoPanel;
         [SerializeField] private TMP_Text WalletBalanceText;
         [SerializeField] private TMP_Text WalletAddressText;
+        [SerializeField] private TMP_Text ConnectWalletButtonText;
         [SerializeField] private Button DisconnectWalletButton; // opcional boton de desconectar
 
         // External wallet
         [SerializeField] private WalletProvider externalWalletProvider = WalletProvider.ReownWallet;
         [SerializeField] private bool forceMetamaskOnWebGL = false;
+
+        // Temporal
+        private bool isAuthenticated = false;
 
         private void Awake()
         {
@@ -62,7 +66,6 @@ namespace Thirdweb.Unity
                     ConnectWallet();
                     signButton.interactable = true; // Habilitar el botón de loguearse una vez conectado
                 });
-
             }
             if (signButton == null)
             {
@@ -87,19 +90,21 @@ namespace Thirdweb.Unity
                 Debug.Log("[WalletConnector] EventSystem present.");
             }
         }
-        private bool WalletConnected()
+        public bool GetWalletAuthenticated()
+        {
+            // Aquí se debería comprobar si el usuario ya ha sido autenticado
+            // Esto es preliminar, sirve para que un usuario sin autenticar no pueda jugar
+            // Pero debe ser el servidor quien mande los datos de la partida solo a los usuarios autenticados
+            return isAuthenticated;
+        }
+        public bool GetWalletConnected()
         {
             var isConnected = ThirdwebManager.Instance.ActiveWallet != null;
-            if (!isConnected)
-            {
-                // Poner como print en pantalla
-                Debug.Log("Please authenticate to connect a wallet first.");
-            }
             return isConnected;
         }
         public async void Authenticate()
         {
-            if (!WalletConnected()) return;
+            if (!GetWalletConnected()) return;
 
             try
             {
@@ -112,8 +117,15 @@ namespace Thirdweb.Unity
 
                 // 2. LA FIRMA (El usuario firma con su Clave Privada)
                 Debug.Log("Solicitando firma...");
+                TutorialManager.Instance.ShowMessage("Authentication needed",
+                    "Please sign the prompt requested to your connected wallet to authenticate...", () => { });
                 var signature = await wallet.PersonalSign(messageToSign);
-                Debug.Log($"Firma recibida: {signature.Substring(0, 20)}...");
+                
+                TutorialManager.Instance.ShowMessage("Signature received",
+                    "Thank you! You are now authenticated.", () => { });
+
+                isAuthenticated = true; // Marcar como autenticado (temporal, debería venir del servidor)
+                Debug.Log($"Sign received: {signature.Substring(0, 20)}...");
 
                 // 3. VERIFICACIÓN (Recuperamos la Clave Pública/Dirección)
 
@@ -127,7 +139,7 @@ namespace Thirdweb.Unity
                 if (recoveredAddress.IsTheSameAddress(address))
                 {
                     Debug.Log("<color=green>VERIFICACIÓN EXITOSA: El usuario es legítimo.</color>");
-                    //this.LogPlayground("¡Login Correcto! Bienvenido al juego.");      // Mostrar en pantalla
+                    //this.LogPlayground("¡Login Correcto! Ahora puedes jugar.");      // Mostrar en pantalla
 
                     // LÓGICA DE ENTRADA AL JUEGO
                     // SceneManager.LoadScene("GameScene");
@@ -150,7 +162,7 @@ namespace Thirdweb.Unity
             Debug.Log("[WalletConnector] ConnectWallet invoked.");
             if (statusText != null)
             {
-                statusText.text = "Connecting wallet...";
+                TutorialManager.Instance.ShowMessage("Connecting wallet...", "...");
             }
             ConnectExternalWallet();
         }
@@ -180,18 +192,24 @@ namespace Thirdweb.Unity
                 );
 
                 Debug.Log("[WalletConnector] Calling ThirdwebManager.Instance.ConnectWallet...");
+                TutorialManager.Instance.ShowMessage("Connecting wallet...", "Select the wallet you installed in your phone...");
                 var wallet = await ThirdwebManager.Instance.ConnectWallet(options);
+                TutorialManager.Instance.ShowMessage("Connecting wallet...", "Obtaining data...");
                 Debug.Log("[WalletConnector] ConnectWallet finished. wallet != null: " + (wallet != null));
-                try {
-                    var address = "Addr: " + await wallet.GetAddress();
+                try
+                {
+                    var address = await wallet.GetAddress();
                     Debug.Log("[WalletConnector] Wallet Address: " + address);
-                    WalletAddressText.text = address;
+                    WalletAddressText.text = "Addr: "+address;
+                    ConnectWalletButtonText.text = "Your addr: "+ address;
+                    connectWalletButton.interactable = false;
+                    
                 }
                 catch (Exception e)
                 {
                     Debug.LogError("Error al obtener dirección de wallet: " + e);
                 }
-                
+
 
                 try
                 {
@@ -203,6 +221,7 @@ namespace Thirdweb.Unity
                 {
                     Debug.LogError("Error al obtener balance: " + e);
                 }
+                TutorialManager.Instance.ShowMessage("Wallet Connected", "Your wallet is now connected.");
             }
             catch (System.Exception e)
             {
