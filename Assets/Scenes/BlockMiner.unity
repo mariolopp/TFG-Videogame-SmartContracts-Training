@@ -181,8 +181,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -315,8 +315,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -449,8 +449,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 182228496}
   - component: {fileID: 182228499}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ValidarButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,6 +708,7 @@ MonoBehaviour:
   barra: {fileID: 0}
   historialPanel: {fileID: 0}
   tiempoMaximo: 10
+  temporizador: {fileID: 675578946}
   contadorBloques: 0
   maxBloques: 5
 --- !u!1 &320389561
@@ -722,7 +723,7 @@ GameObject:
   - component: {fileID: 320389564}
   - component: {fileID: 320389563}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BlockBarProgress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -845,8 +846,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Validar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -931,9 +932,8 @@ GameObject:
   - component: {fileID: 447987504}
   - component: {fileID: 447987507}
   - component: {fileID: 447987506}
-  - component: {fileID: 447987505}
   m_Layer: 5
-  m_Name: Tiempo
+  m_Name: TiempoRestanteText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,20 +958,6 @@ RectTransform:
   m_AnchoredPosition: {x: 127, y: 161}
   m_SizeDelta: {x: 200, y: 149}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &447987505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447987503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30187f0e0927f4e4b871e161493cd39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textoTemporizador: {fileID: 0}
-  tiempoInicial: 10
 --- !u!114 &447987506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &646149622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1251,6 +1237,52 @@ MonoBehaviour:
   - 4
   - 6
   assets: {fileID: 0}
+--- !u!1 &675578945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675578947}
+  - component: {fileID: 675578946}
+  m_Layer: 0
+  m_Name: TemporizadorObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &675578946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675578945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30187f0e0927f4e4b871e161493cd39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textoTemporizador: {fileID: 447987506}
+  tiempoInicial: 10
+--- !u!4 &675578947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675578945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 606.62134, y: 279.40027, z: -2.704685}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &739891687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,8 +1342,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1806,8 +1838,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1893,7 +1925,7 @@ GameObject:
   - component: {fileID: 1492298361}
   - component: {fileID: 1492298360}
   m_Layer: 5
-  m_Name: restanteText
+  m_Name: BloquesRestantesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2035,7 +2067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1577887552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2256,8 +2288,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2351,7 +2383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1599617480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2533,7 +2565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1652557738
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2715,7 +2747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1709042105
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3012,10 +3044,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b20243a33bfa8b4b889efaf8e322cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloquesRestantes: {fileID: 0}
+  bloquesRestantes: {fileID: 1492298360}
   bRestantes: 5
-  temporizador: {fileID: 0}
-  Validar: {fileID: 0}
+  temporizador: {fileID: 675578946}
+  Validar: {fileID: 182228499}
 --- !u!1 &1850236836
 GameObject:
   m_ObjectHideFlags: 0
@@ -3036,7 +3068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1850236837
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3257,8 +3289,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "A \u2192 B\nFee: 3$\nGas: 2u"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
+  m_sharedMaterial: {fileID: 5460641609269432071, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3414,7 +3446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053056926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3588,7 +3620,7 @@ GameObject:
   - component: {fileID: 2075024024}
   - component: {fileID: 2075024023}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MoneyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3718,3 +3750,4 @@ SceneRoots:
   - {fileID: 1717071040}
   - {fileID: 1198430821}
   - {fileID: 165394906}
+  - {fileID: 675578947}

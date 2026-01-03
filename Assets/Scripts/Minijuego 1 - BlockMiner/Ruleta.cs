@@ -13,6 +13,7 @@ public class RuletaLenta : MonoBehaviour
         {
             float angulo = i * Mathf.PI * 2f / n;
             Vector2 pos = new Vector2(Mathf.Cos(angulo), Mathf.Sin(angulo)) * radio;
+            botones[i].gameObject.SetActive(true);
             botones[i].GetComponent<RectTransform>().anchoredPosition = pos;
         }
     }

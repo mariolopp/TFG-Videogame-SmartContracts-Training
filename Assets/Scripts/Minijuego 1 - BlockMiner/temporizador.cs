@@ -4,17 +4,17 @@ using System.Collections;
 
 public class Temporizador : MonoBehaviour
 {
-    public TextMeshProUGUI textoTemporizador;
+    [SerializeField] private TextMeshProUGUI textoTemporizador;
     public int tiempoInicial = 10; // segundos
     public event System.Action OnTiempoAgotado;
     public event System.Action OnTiempoReset;
     public event System.Action OnTiempoCambiado;
     private int tiempoRestante;
 
+
     void Start()
     {
         tiempoRestante = tiempoInicial;
-        textoTemporizador = GetComponent<TextMeshProUGUI>();
         textoTemporizador.text = tiempoRestante.ToString();
         StartCoroutine(ContarTiempo());
     }
@@ -29,11 +29,12 @@ public class Temporizador : MonoBehaviour
             OnTiempoCambiado?.Invoke();
         }
 
-        // Aquí ya se acabó el tiempo
+        // Aquï¿½ ya se acabï¿½ el tiempo
         textoTemporizador.text = "0";
         Debug.Log("Tiempo agotado");
-        // Llamar a la lógica de perder el bloque, etc.
-        FindObjectOfType<Validar>().PierdesBloque();
+
+        // Notificar que el tiempo llego a 0
+        OnTiempoAgotado?.Invoke();
     }
     public void Reset()
     {
