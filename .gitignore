@@ -72,3 +72,12 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 ProjectSettings/GvhProjectSettings.xml
 .vscode/settings.json
+
+# Carpetas descargadas con texturas de la asset store
+/Assets/Cartoon_Texture_Pack/
+
+# Algunos archivos que se me generaron en linux
+ProjectSettings/GvhProjectSettings.xml
+Assets/Thirdweb/Examples/Scripts/PlaygroundManager.cs.meta
+Assets/TextMesh Pro/Resources/Fonts & Materials/PasseroOne-Regular SDF.asset
+Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
