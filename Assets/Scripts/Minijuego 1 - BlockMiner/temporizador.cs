@@ -5,17 +5,19 @@ using System.Collections;
 public class Temporizador : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textoTemporizador;
-    public int tiempoInicial = 10; // segundos
+    public float tiempoInicial = 10f; // segundos
+    public BarraProgreso barraTime;          // Referencia a la barra original
     public event System.Action OnTiempoAgotado;
     public event System.Action OnTiempoReset;
     public event System.Action OnTiempoCambiado;
-    private int tiempoRestante;
+    private float tiempoRestante;
 
 
     void Start()
     {
         tiempoRestante = tiempoInicial;
         textoTemporizador.text = tiempoRestante.ToString();
+        barraTime.Resetear(); // Asegurarnos de que la barra empieza llena
         StartCoroutine(ContarTiempo());
     }
 
@@ -25,11 +27,12 @@ public class Temporizador : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             tiempoRestante--;
+            barraTime.AnadirValor(-(1f / tiempoInicial)); // Actualizar la barra
             textoTemporizador.text = tiempoRestante.ToString();
             OnTiempoCambiado?.Invoke();
         }
 
-        // Aqu� ya se acab� el tiempo
+        // Aqu ya se acab el tiempo
         textoTemporizador.text = "0";
         Debug.Log("Tiempo agotado");
 
@@ -38,9 +41,10 @@ public class Temporizador : MonoBehaviour
     }
     public void Reset()
     {
+        StopAllCoroutines();
         tiempoRestante = tiempoInicial;
         textoTemporizador.text = tiempoRestante.ToString();
-        StopAllCoroutines();
+        barraTime.Resetear(); // Reiniciar la barra
         StartCoroutine(ContarTiempo());
     }
 }

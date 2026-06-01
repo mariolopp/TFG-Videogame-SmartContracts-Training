@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Validar : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class Validar : MonoBehaviour
     public float tiempoMaximo = 10f;     // Tiempo m�ximo para pulsar el bot�n
     //private float temporizador = 0f;     // Temporizador interno
     [SerializeField] private Temporizador temporizador;
-    public int contadorBloques = 0;      // Contador de bloques perdidos
+    public int contadorPerdidos = 0;      // Contador de bloques perdidos
+    public int contadorTotales = 0;       // Contador de bloques totales (validados + perdidos)
     public int maxBloques = 5;          // M�ximo de bloques perdidos antes de game over
 
     public event System.Action OnValidar;
@@ -18,8 +20,8 @@ public class Validar : MonoBehaviour
     void Start()
     {
         boton = GetComponent<Button>();
-        barra = FindObjectOfType<BarraProgreso>();
         historialPanel = GameObject.Find("HistorialPanel").transform;
+        barra.Resetear(); // Asegurarnos de que la barra empieza vacia
         boton.onClick.AddListener(Pulsar);
 
         // Si el temporizador llega a 0 y nohas validado el bloque, lo
@@ -28,24 +30,34 @@ public class Validar : MonoBehaviour
     private void Update()
     {
     }
-    
+    private IEnumerator DeshabilitarValidarUnSec()
+    {
+        boton.interactable = false; // Desactiva la interacción del botón
+        
+        yield return new WaitForSeconds(1f); // Espera exactamente 1.0 segundos
+        
+        boton.interactable = true;  // Vuelve a activar el botón
+    }
     public void PierdesBloque()
     {
-        contadorBloques ++; // Incrementar el contador de bloques perdidos
+        contadorPerdidos ++; // Incrementar el contador de bloques perdidos
         OnValidar?.Invoke();
         barra.Resetear(); // Reiniciar la barra original
+        temporizador.Reset(); // Reiniciar el temporizador
+        StartCoroutine(DeshabilitarValidarUnSec());
     }
     //public void temporizador.onTiempoAgotado += PierdesBloque;
     void Pulsar()
     {
         // Log de la validaci�n
-        Debug.Log("La barra iba al " + (barra.valorActual * 100f).ToString("F1") + "% cuando se valid�.");
-
+        //Debug.Log("La barra iba al " + (barra.valorActual * 100f).ToString("F1") + "% cuando se valid�.");
+        StartCoroutine(DeshabilitarValidarUnSec());
         // Crear un clon de la barra
         barra.llenadoSuave = false; // Hacer que la barra deje de llenarse suavemente
         barra.barra.fillAmount = barra.valorActual; // Asegurarnos de que la imagen muestra el fill al valor actual
         GameObject snapshot = Instantiate(barra.gameObject, historialPanel);
         snapshot.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+        
         // Congelarla: quitarle el script para que no se actualice m�s
         Destroy(snapshot.GetComponent<BarraProgreso>());
 
@@ -58,5 +70,6 @@ public class Validar : MonoBehaviour
         OnValidar?.Invoke();
         // Reiniciar la barra original
         barra.Resetear();
+        temporizador.Reset(); // Reiniciar el temporizador
     }
 }

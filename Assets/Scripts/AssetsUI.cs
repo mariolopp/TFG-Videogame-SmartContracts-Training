@@ -22,7 +22,7 @@ public class AssetsUI : MonoBehaviour
     private void ActualizarUI()
     {
         Debug.Log("Actualizando UI: " + assets.usd + " USD");
-        usdText.text = assets.usd + " USD";
+        usdText.text = assets.usd + "";
         //ethText.text = assets.eth + " ETH";
     }
 }

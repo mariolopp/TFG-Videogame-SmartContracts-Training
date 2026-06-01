@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // -----------------------------------------------
-// Clase para gestionar el botón de transacción en el minijuego
-// Gestiona la generación aleatoria de nuevos valores de los botones
+// Clase para gestionar el botï¿½n de transacciï¿½n en el minijuego
+// Gestiona la generaciï¿½n aleatoria de nuevos valores de los botones
 // (que simulan las transacciones)
 // -----------------------------------------------
 public class BotonTransaccion : MonoBehaviour
 {
-    public float valorGas = 0.0f;           // Valor que aporta esta transacción (0 a 1)
-    public float valorUSD = 1f;             // Coste de esta transacción (no usado en este script)
+    public float valorGas = 0.0f;           // Valor que aporta esta transacciï¿½n (0 a 1)
+    public float valorUSD = 1f;             // Coste de esta transacciï¿½n (no usado en este script)
     public BarraProgreso barra;             // Referencia a la barra (asignar en Inspector)
     private Button boton;
     public string[] posiblesTextos = { "Transfer\nFee: 1$\nGas: 1u", "Swap\nFee: 3$\nGas: 2u", "Deposit\nFee:4$\nGas: 6u" };
@@ -21,7 +21,6 @@ public class BotonTransaccion : MonoBehaviour
     void Start()
     {
         boton = GetComponent<Button>();
-        barra = FindObjectOfType<BarraProgreso>();  // Busca la barra en la escena
         boton.onClick.AddListener(Pulsar);          // Si se pulsa el boton, se ejecuta Pulsar
         assets = FindObjectOfType<AssetsManager>();
         GenerarBoton();
@@ -32,7 +31,7 @@ public class BotonTransaccion : MonoBehaviour
         boton.GetComponentInChildren<TextMeshProUGUI>().text = posiblesTextos[index];
         valorUSD = posiblesValores[index * 2];            // $ que aporta al validador (1 a 4)
         valorGas = posiblesValores[index * 2 + 1] / 10f;  // unidades de gas que ocupa (0 a 1)
-        boton.interactable = true;                        // Activar el botón
+        boton.interactable = true;                        // Activar el botï¿½n
     }
 
     void Pulsar()
@@ -40,13 +39,13 @@ public class BotonTransaccion : MonoBehaviour
         if (barra != null && (barra.valorActual + valorGas) <= 1.01f)
         {
             barra.AnadirValor(valorGas);
-            //assets.usd = assets.usd + (int)valorUSD; // Añadir el valor USD al total sin notificar a la ui
-            assets.AddUSD((int)valorUSD); // Notificar cambio de assets y añadir el valor usd
-            Debug.Log("Añadidos " + (int)valorUSD + " USD. Total ahora: " + assets.usd + " USD.");
-            boton.interactable = false; // Opcional: desactivar botón tras pulsar
+            //assets.usd = assets.usd + (int)valorUSD; // Aï¿½adir el valor USD al total sin notificar a la ui
+            assets.AddUSD((int)valorUSD); // Notificar cambio de assets y aï¿½adir el valor usd
+            Debug.Log("Aï¿½adidos " + (int)valorUSD + " USD. Total ahora: " + assets.usd + " USD.");
+            boton.interactable = false; // Opcional: desactivar botï¿½n tras pulsar
         }
         else if (barra != null) { 
-            Debug.Log("La barra ya está llena, no se puede añadir más valor.");
+            Debug.Log("La barra ya estï¿½ llena, no se puede aï¿½adir mï¿½s valor.");
         }
     }
 }
