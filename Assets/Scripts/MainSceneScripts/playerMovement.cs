@@ -20,14 +20,36 @@ public class playerMovement : MonoBehaviour
 
         // Actualizar animaciones
         // 'movement.y' vale -1 al ir hacia abajo (Frente)
-        if (movement.y < -0.1f)
+        // 1. EVALUAR DIRECCIÓN: FRENTE (Hacia abajo)
+        if (movement.y < -0.01f)
         {
-            animator.SetBool("AndandoFrente", true);
+            animator.SetBool("WalkingFront", true);
+            animator.SetBool("WalkingLeft", false); // Apagamos la otra por seguridad
+            animator.SetBool("WalkingRight", false);
         }
+        // 2. EVALUAR DIRECCIÓN: IZQUIERDA
+        else if (movement.x < -0.01f)
+        {
+            animator.SetBool("WalkingLeft", true);
+            animator.SetBool("WalkingFront", false); // Apagamos la otra por seguridad
+            animator.SetBool("WalkingRight", false);
+        }
+        // 3. EVALUAR DIRECCIÓN: DERECHA
+        else if (movement.x > 0.01f)
+        {
+            animator.SetBool("WalkingLeft", false);
+            animator.SetBool("WalkingFront", false); // Apagamos la otra por seguridad
+            animator.SetBool("WalkingRight", true);
+        }
+        // 3. SI ESTÁ QUIETO (No pulsa ni abajo ni izquierda)
         else
         {
-            animator.SetBool("AndandoFrente", false);
+            animator.SetBool("WalkingFront", false);
+            animator.SetBool("WalkingLeft", false);
+            animator.SetBool("WalkingRight", false);
         }
+
+        
     }
 
     void FixedUpdate()
