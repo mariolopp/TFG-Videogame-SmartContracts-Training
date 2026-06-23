@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Necesario para interactuar con componentes de UI
+using UnityEngine.UI;
 
 public class RuletaLenta : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class RuletaLenta : MonoBehaviour
         int n = botones.Length;
         Vector2[] posicionesBotones = new Vector2[n];
 
-        // 1. Posicionar primero todos los botones y guardar sus posiciones
+        //Posicionar primero todos los botones y guardar sus posiciones
         for (int i = 0; i < n; i++)
         {
             float angulo = i * Mathf.PI * 2f / n;
@@ -27,7 +27,7 @@ public class RuletaLenta : MonoBehaviour
             posicionesBotones[i] = pos; // Guardamos la posición para el cálculo de las cadenas
         }
 
-        // 2. Generar las cadenas entre los botones
+        // Generar las cadenas entre los botones
         if (prefabCadena != null)
         {
             for (int i = 0; i < n; i++)

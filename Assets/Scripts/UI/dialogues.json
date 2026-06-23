@@ -1,0 +1,19 @@
+{
+  "dialogues": [
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Oak",
+      "text": "¡Hola! Bienvenido al laboratorio. ¿Estás listo para empezar?"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Eso creo... aunque no entiendo muy bien cómo funciona esto."
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Oak",
+      "text": "No te preocupes, irás aprendiendo por el camino. ¡Vamos allá!",
+    }
+  ]
+}
