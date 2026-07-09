@@ -22,7 +22,7 @@ public class DialogLine
     public string characterId;
     public string characterName;
     public string text;
-    
+    public string evento;   // Activar evento externo
 }
 
 [Serializable]
@@ -42,6 +42,9 @@ public class CharacterPortrait
 public class DialogManager : MonoBehaviour
 {
     public static DialogManager Instance;
+    
+    // Megáfono al que otros scripts pueden suscribirse para ejecutar acciones ante un string concreto
+    public static event Action<string> OnDialogEvent;
     private Action onDialogFinished;
 
     private void Awake()
@@ -54,8 +57,9 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private CanvasGroup uiCanvasGroup;
     [SerializeField] private TMP_Text titleText;            // Nombre del personaje
     [SerializeField] private TMP_Text bodyText;             // Texto del diálogo
-    [SerializeField] private Image portraitImage;           // NUEVO: Foto del personaje
+    [SerializeField] private Image portraitImage;           // Foto del personaje
     [SerializeField] private GameObject overlayBackground;
+    private bool isAnimatingUI = false;                     // Evitar que se pueda pasar durante animaciones  
 
     [Header("Base de Datos de Personajes")]
     [Tooltip("Asigna aquí la ID del JSON y la foto correspondiente a cada personaje")]
@@ -103,9 +107,9 @@ public class DialogManager : MonoBehaviour
     // --- LÓGICA DE CONTROL ---
     private void Update()
     {
-        if (gameObject.activeInHierarchy && uiCanvasGroup.alpha >= 0.9f)
+        if (gameObject.activeInHierarchy)
         {
-            // Detecta click izquierdo del ratón o cualquier tecla
+            // Detecta click de cualquier tecla o mouse
             if (Input.GetMouseButtonDown(0) || Input.anyKeyDown)
             {
                 HandleInput();
@@ -115,6 +119,7 @@ public class DialogManager : MonoBehaviour
 
     private void HandleInput()
     {
+        if (isAnimatingUI) return; // Evitar que se pueda pasar durante animaciones
         if (isTyping)
         {
             CompleteTextImmediately();
@@ -143,38 +148,65 @@ public class DialogManager : MonoBehaviour
             }
         }
     }
+    // Permite a otros scripts bloquear o desbloquear la posibilidad de saltar el diálogo
+    public void BloquearInteraccion(bool bloquear)
+    {
+        isAnimatingUI = bloquear;
+    }
 
     // --- FUNCIONES VISUALES ---
     private void SetContent(DialogLine line)
     {
-        titleText.text = line.characterName;
-        currentFullText = line.text;
-        bodyText.text = "";
-
-        // Buscar y asignar la foto del personaje basada en su characterId
-        Sprite foundSprite = null;
-        foreach (var portrait in characterPortraits)
+        // Si el JSON es un texto vacío, no se mostrará la ventana en ese paso.
+        // esta pensado para si se marcan cosas en pantalla, que no las tape el texto.
+        if (string.IsNullOrEmpty(line.text))
         {
-            if (portrait.characterId == line.characterId)
-            {
-                foundSprite = portrait.portraitSprite;
-                break;
-            }
-        }
-
-        if (foundSprite != null)
-        {
-            portraitImage.sprite = foundSprite;
-            portraitImage.gameObject.SetActive(true);
+            // Si no hay texto, volvemos la ventana invisible
+            uiCanvasGroup.alpha = 0f;
+            isTyping = false;
+            bodyText.text = "";
         }
         else
         {
-            // Si el personaje no tiene foto, ocultamos la imagen
-            portraitImage.gameObject.SetActive(false);
-        }
+            // Si hay texto, nos aseguramos de que la ventana sea visible
+            uiCanvasGroup.alpha = 1f;
+            
+            titleText.text = line.characterName;
+            currentFullText = line.text;
+            bodyText.text = "";
+        
+            // Buscar y asignar la foto del personaje basada en su characterId
+            Sprite foundSprite = null;
+            foreach (var portrait in characterPortraits)
+            {
+                if (portrait.characterId == line.characterId)
+                {
+                    foundSprite = portrait.portraitSprite;
+                    break;
+                }
+            }
 
-        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeTextEffect(currentFullText));
+            if (foundSprite != null)
+            {
+                portraitImage.sprite = foundSprite;
+                portraitImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                // Si el personaje no tiene foto, ocultamos la imagen
+                portraitImage.gameObject.SetActive(false);
+            }
+
+            if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+
+            typingCoroutine = StartCoroutine(TypeTextEffect(currentFullText));
+        }
+        // Mandar el evento al CinematicStarter. 
+        // Si el JSON no tiene evento, le mandamos un texto vacío ("") para que sepa que debe apagar todo.
+        if (OnDialogEvent != null)
+        {
+            OnDialogEvent.Invoke(line.evento ?? ""); 
+        }
     }
 
     private void CompleteTextImmediately()
@@ -212,6 +244,7 @@ public class DialogManager : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        isAnimatingUI = true;
         float duration = 0.3f;
         float currentTime = 0f;
         uiCanvasGroup.interactable = true;
@@ -226,10 +259,12 @@ public class DialogManager : MonoBehaviour
             yield return null;
         }
         uiCanvasGroup.alpha = 1f;
+        isAnimatingUI = false;
     }
 
     IEnumerator FadeOut()
     {
+        isAnimatingUI = true;
         uiCanvasGroup.interactable = false;
         uiCanvasGroup.blocksRaycasts = false;
         float duration = 0.25f;
@@ -243,7 +278,7 @@ public class DialogManager : MonoBehaviour
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.9f, progress);
             yield return null;
         }
-
+        isAnimatingUI = false;
         gameObject.SetActive(false);
         overlayBackground.SetActive(false);
     }

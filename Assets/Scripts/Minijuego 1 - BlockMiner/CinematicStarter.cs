@@ -1,49 +1,151 @@
-using UnityEngine;
 using System.Collections;
+using System;
+using UnityEngine;
+
+// NUEVO: Una pequeña lista para emparejar eventos con partes de la UI
+[Serializable]
+public class AparicionProgresiva
+{
+    public string nombreEvento;     // Ej: "marcarVida"
+    public CanvasGroup elementoUI;  // El panel que tiene la barra de vida
+}
 
 public class CinematicStarter : MonoBehaviour
 {
     [Header("Archivo de Diálogo")]
-    [Tooltip("Archivo JSON con los dialogos")]
     [SerializeField] private TextAsset archivoDialogoJson;
 
-    [Header("Elementos a activar al terminar")]
-    [Tooltip("Canvas a encender")]
-    [SerializeField] private Canvas canvasDelJuego;
-    
-    [Tooltip("Temporizador a activar")]
-    [SerializeField] private GameObject temporizador;
+    [Header("Gestor de Tutorial (Círculos)")]
+    [SerializeField] private Transform contenedorCirculos;
+
+    [Header("Apariciones Progresivas de UI")]
+    [Tooltip("Añade aquí las partes del Canvas que irán apareciendo con cada evento")]
+    [SerializeField] private AparicionProgresiva[] elementosQueAparecen;
+
+    [Header("Elementos a Activar al Final de la Cinemática")]
+    [SerializeField] private GameObject jugadorSecundario; 
+    [SerializeField] private GameObject gameCanvas;
+    // Nota: Ya no apagamos el Canvas entero aquí, porque lo necesitamos encendido para mostrar sus partes poco a poco.
+
+    private void OnEnable()
+    {
+        DialogManager.OnDialogEvent += EscucharEvento;
+    }
+
+    private void OnDisable()
+    {
+        DialogManager.OnDialogEvent -= EscucharEvento;
+    }
 
     private IEnumerator Start()
     {
-        // 1. Apagamos lo que molesta
-        if (canvasDelJuego != null) canvasDelJuego.gameObject.SetActive(false);
-        if (temporizador != null) temporizador.gameObject.SetActive(false);
+        // 1. Apagamos al jugador (o lo que quieras dejar para el final)
+        if (jugadorSecundario != null) jugadorSecundario.SetActive(false);
+        ApagarTodosLosCirculos();
 
-        // 2. Esperar un poco para evitar condiciones de carrera
+        // 2. NUEVO: Hacemos invisibles todas las partes de la UI que deben aparecer más tarde
+        foreach (var item in elementosQueAparecen)
+        {
+            if (item.elementoUI != null)
+            {
+                item.elementoUI.alpha = 0f;
+                item.elementoUI.interactable = false;
+                item.elementoUI.blocksRaycasts = false;
+            }
+        }
+
         yield return new WaitForSeconds(0.1f);
 
-        // 3. Iniciar el diálogo usando el singleton
         if (DialogManager.Instance != null && archivoDialogoJson != null)
         {
             DialogManager.Instance.StartDialog(archivoDialogoJson, TerminarCinematica);
         }
-        else
+    }
+
+    private void EscucharEvento(string nombreEvento)
+    {
+        ApagarTodosLosCirculos();
+        if (string.IsNullOrEmpty(nombreEvento)) return;
+
+        // A. Mostrar el círculo correspondiente (tu código original)
+        if (contenedorCirculos != null)
         {
-            Debug.LogError("Falta asignar el JSON o el DialogManager no está en la escena.");
+            Transform circuloDeseado = contenedorCirculos.Find(nombreEvento);
+            if (circuloDeseado != null) circuloDeseado.gameObject.SetActive(true);
+        }
+
+        // B. NUEVO: Buscar si ese evento también debe hacer aparecer algo de la interfaz
+        foreach (var item in elementosQueAparecen)
+        {
+            if (item.nombreEvento == nombreEvento && item.elementoUI != null)
+            {
+                // Si la opacidad es 0, hacemos la animación para que aparezca
+                if (item.elementoUI.alpha == 0f)
+                {
+                    StartCoroutine(AparecerElementoUI(item.elementoUI));
+                }
+            }
         }
     }
 
-    // 3. Activar el juego por completo al terminar el diálogo. Implicito en el callback de la llamada al dialog manager
+    // Corrutina que hace el fundido poco a poco
+    private IEnumerator AparecerElementoUI(CanvasGroup grupo)
+    {
+        // Bloqueamos los clics para que el jugador disfrute de la aparición
+        if (DialogManager.Instance != null) DialogManager.Instance.BloquearInteraccion(true);
+
+        float duracion = 0.5f; // Medio segundo en aparecer
+        float tiempo = 0f;
+
+        while (tiempo < duracion)
+        {
+            tiempo += Time.deltaTime;
+            grupo.alpha = tiempo / duracion;
+            yield return null;
+        }
+
+        // Lo dejamos 100% visible y utilizable
+        grupo.alpha = 1f;
+        grupo.interactable = false;
+        grupo.blocksRaycasts = true;
+
+        if (DialogManager.Instance != null) DialogManager.Instance.BloquearInteraccion(false);
+    }
+
+    private void ApagarTodosLosCirculos()
+    {
+        if (contenedorCirculos == null) return;
+        foreach (Transform hijo in contenedorCirculos)
+        {
+            hijo.gameObject.SetActive(false);
+        }
+    }
     private void TerminarCinematica()
     {
-        Debug.Log("Diálogo terminado. Encendiendo el juego...");
+        ApagarTodosLosCirculos();
 
-        // Activamos de nuevo todo lo que querías
-        if (canvasDelJuego != null) canvasDelJuego.gameObject.SetActive(true);
-        if (temporizador != null) temporizador.gameObject.SetActive(true);
+        // Al terminar, encendemos al jugador y activamos el resto de la UI
+        if (jugadorSecundario != null) jugadorSecundario.SetActive(true);
+        
+        if (gameCanvas != null)
+        {
+            // Encender absolutamente todos los objetos (hijos, nietos, etc.)
+            Transform[] todosLosDescendientes = gameCanvas.GetComponentsInChildren<Transform>(true);
+            foreach (Transform objeto in todosLosDescendientes)
+            {
+                objeto.gameObject.SetActive(true);
+            }
 
-        // Una vez terminada la cinematica, la existencia de este objeto es innecesaria, lo destruimos
+            // Buscar todos los CanvasGroup de la UI y forzar que sean interactuables
+            CanvasGroup[] todosLosGrupos = gameCanvas.GetComponentsInChildren<CanvasGroup>(true);
+            foreach (CanvasGroup grupo in todosLosGrupos)
+            {
+                grupo.alpha = 1f;             // 100% de visibilidad
+                grupo.interactable = true;    // Permite interactuar (pulsar botones, ruleta, etc.)
+                grupo.blocksRaycasts = true;  // Permite que los elementos detecten el ratón/toques
+            }
+        }
+
         Destroy(gameObject);
     }
 }

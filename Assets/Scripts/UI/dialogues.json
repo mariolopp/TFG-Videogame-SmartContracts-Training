@@ -2,18 +2,489 @@
   "dialogues": [
     {
       "characterId": "profe",
-      "characterName": "Profesor Oak",
-      "text": "¡Hola! Bienvenido al laboratorio. ¿Estás listo para empezar?"
+      "characterName": "Profesor Merkle",
+      "text": "¡Hola! Bienvenido a mi mundo.",
+      "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
-      "text": "Eso creo... aunque no entiendo muy bien cómo funciona esto."
+      "text": "¿Perdona? ¿Dónde estoy...?",
+      "evento": ""
     },
     {
       "characterId": "profe",
-      "characterName": "Profesor Oak",
-      "text": "No te preocupes, irás aprendiendo por el camino. ¡Vamos allá!",
+      "characterName": "Profesor Merkle",
+      "text": "Estás dentro de la blockchain, por supuesto.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Bloque... qué?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Blockchain.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Imagina una enorme cadena hecha de bloques, como los cubos que ves aquí.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Cada bloque guarda información importante, como si fueran las páginas de un gran libro público.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Información de qué tipo?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Casi de cualquier tipo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Pero comúnmente es información de transacciones criptográficas.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Transacciones criptográficas? ¿Qué es eso?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Se trata de usuarios realizando movimientos de activos digitales de varios tipos.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Activos digitales? ¿Varios tipos?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "En efecto, existen varios tipos de activos digitales.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Pero por ahora solo nos centraremos en los activos fungibles, comúnmente conocidos como criptomonedas (como el dinero digital de la red) y tokens (que pueden representar otros bienes virtuales).",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Fungible? ¿Criptomonedas? ¿Tokens? Son muchas palabras nuevas de golpe...",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Está bien, no adelantemos acontecimientos.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Por ahora lo único que tienes que saber es que hay usuarios que necesitan que se sepa que sus activos (del tipo que sean) se han movido de un lugar a otro.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Todo esto lo gestionan desde su Wallet, que es como un monedero o billetera virtual donde guardan esos tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, ¿y cómo piensan que se sepa que han movido algo de su Wallet?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Tranquilo... es más simple de lo que piensas.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Imagina la blockchain como una gran base de datos a la que todo el mundo tiene acceso.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, pero si todo el mundo tiene acceso, ¿no podría cualquiera apuntar que tiene muchas criptomonedas de esas?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Ay pillín... tu duda tiene mucho sentido, y es justo eso lo que la blockchain viene a resolver.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "La idea es que no cualquiera puede escribir en esa base de datos, sino que existe una forma de impedir que alguien introduzca datos de forma arbitraria.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, pero entonces, ¿cómo hacen para apuntar los datos?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Es muy simple.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Para que un validador (los encargados de revisar todo) pueda escribir datos nuevos en esta base de datos especial, primero debe resolver un problema matemático complejo.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y en qué ayuda eso exactamente? ¿No podría cualquiera aprender a resolver problemas de matemáticas para escribir lo que quiera?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Ay amigo... no es tan sencillo. Hablamos de problemas muy complejos que solo los ordenadores más potentes pueden resolver.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Además, hay muchas máquinas a la vez intentando resolver el mismo problema, por lo que otro se puede adelantar y escribir por ti.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces, ¿los datos los maneja el que tiene el ordenador más potente?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Algo así podría suceder en bases de datos más pequeñas en fase de desarrollo, pero no debería.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Si una sola persona fuera capaz de elegir los datos que se añaden, la red dejaría de ser segura.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Esto suena peligroso... ¿Por qué querría guardar mi dinero en mi Wallet si un día puede llegar alguien con un ordenador muy potente que escriba un 0 en mi balance?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Entiendo tu preocupación, pero afortunadamente eso no puede suceder. Hay miles de validadores vigilando.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Si alguien intenta hacer trampas, los demás rechazarán su bloque. ¡Y aquí es donde entras tú! Hoy vas a trabajar como validador.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Yo? Pero si no sé nada de esto... ¿Y por qué querría yo hacer ese trabajo?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Por las recompensas, claro! Cada vez que alguien hace una transacción, incluye una pequeña propina llamada Fee (o comisión).",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Como validador, tú decides qué transacciones entran en tu bloque. ¡Y el validador se queda con esas Fees!",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Ah... ¡eso ya me gusta más! Entonces meto todas las transacciones que vea y me forro, ¿no?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡No tan rápido! Para hacer bien tu trabajo necesitas conocer tus herramientas.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Primero, fíjate en este indicador. Aquí es donde se irán acumulando todas las Fees que ganes.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "",
+      "evento": "ETH_bag_icon"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Ahora observa la ruleta.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Las transacciones irán apareciendo constantemente, y cada una tendrá una recompensa y un tamaño diferentes.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "",
+      "evento": "ruleta"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entendido... Entonces simplemente me fijo en las que paguen más y las meto directo al bloque, ¿verdad?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Cuidado, no te precipites!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Debes encontrar el balance perfecto entre el tamaño que ocupan y la Fee que te generan.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Balance? ¿A qué te refieres?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Imagina una transacción que ocupa 6 unidades y paga 4 $.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Poco después aparece otra que ocupa solo 2 unidades y paga 3 $. ¿Cual de las dos prefieres?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Ah... claro. Con la segunda gano casi lo mismo, pero gasto muchísimo menos espacio de mi límite de 10. ¡Podría meter muchas más transacciones pequeñas y ganar más dinero en total!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Exacto! Ese es el secreto de un gran validador.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Debes encontrar la combinación más rentable, teniendo siempre en cuenta el tiempo disponible y tu limitación de espacio.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Cada bloque tiene un límite de capacidad.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Los bloques de hoy admiten un máximo de 10 unidades de espacio.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces... Mi objetivo es elegir las transacciones que me den más beneficios en total, teniendo en cuenta el espacio máximo de 10 y el fee que aportan.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Exacto! Pero recuerda la regla de oro: otros validadores intentarán crear el bloque antes que tú.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Presta mucha atención a esta barra roja.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Representa el tiempo de la red. Si se agota, perderás el bloque y no podrás validarlo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "",
+      "evento": "BlockBarTimeProgress"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¡Entendido! Debo ser rápido antes de que se agote.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y donde veo cuánto espacio me queda para meter más transacciones?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Muy buena pregunta. Fíjate en este medidor de aquí.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Te indicará en tiempo real cuánto espacio has ocupado en tu bloque actual, que tiene un límite máximo de 10 unidades.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "",
+      "evento": "BlockBarSpace"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, entonces busco la máxima rentabilidad sin sobrepasar esa barra de espacio y sin que se me acabe el tiempo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Si, y recuerda, cuando estés satisfecho con las transacciones que has elegido...",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "...tendrás que pulsar este botón para enviar tu bloque a la red.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "",
+      "evento": "ValidarButton"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "O sea, que no basta con llenar el bloque. Si no pulso Validar antes de que se acabe el tiempo, lo perderé.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Exacto! No esperes al último segundo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "En cuanto tengas un bloque rentable, valídalo antes de que otro validador se te adelante.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "Por último, en este cubo puedes ver cuántos bloques te quedan por validar.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "",
+      "evento": "BlockBarRemainingBlocks"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¡Me queda claro! Gestión de espacio, límite de tiempo, bloques restantes y mi progreso total.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¡Estoy listo para ser validador!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Vamos a por ello!",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "",
+      "evento": ""
     }
   ]
 }
