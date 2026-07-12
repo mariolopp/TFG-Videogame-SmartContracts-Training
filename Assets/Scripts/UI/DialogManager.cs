@@ -241,7 +241,34 @@ public class DialogManager : MonoBehaviour
         }
         isTyping = false;
     }
+    // --- NUEVO: Permite saltar el diálogo completo desde fuera ---
+    public void StopDialog()
+    {
+        // Cortamos cualquier corrutina en marcha (typing, fade in/out)
+        StopAllCoroutines();
+        typingCoroutine = null;
+        isTyping = false;
+        isAnimatingUI = false;
 
+        // Ocultamos la ventana de golpe, sin animación
+        uiCanvasGroup.alpha = 0f;
+        uiCanvasGroup.interactable = false;
+        uiCanvasGroup.blocksRaycasts = false;
+
+        overlayBackground.SetActive(false);
+        gameObject.SetActive(false);
+
+        pendingDialogues = null;
+        currentStepIndex = 0;
+
+        // Disparamos el callback de fin, igual que si hubiera terminado normalmente
+        if (onDialogFinished != null)
+        {
+            var callback = onDialogFinished;
+            onDialogFinished = null;
+            callback.Invoke();
+        }
+    }
     IEnumerator FadeIn()
     {
         isAnimatingUI = true;

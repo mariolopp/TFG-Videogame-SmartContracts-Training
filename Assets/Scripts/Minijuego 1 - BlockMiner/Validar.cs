@@ -14,7 +14,7 @@ public class Validar : MonoBehaviour
     public int contadorPerdidos = 0;      // Contador de bloques perdidos
     public int contadorTotales = 0;       // Contador de bloques totales (validados + perdidos)
     public int maxBloques = 5;          // M�ximo de bloques perdidos antes de game over
-
+    [SerializeField] private AssetsManager assets; // Referencia al script de Assets para modificar USD
     public event System.Action OnValidar;
 
     void Start()
@@ -41,8 +41,10 @@ public class Validar : MonoBehaviour
     public void PierdesBloque()
     {
         contadorPerdidos ++; // Incrementar el contador de bloques perdidos
-        OnValidar?.Invoke();
         barra.Resetear(); // Reiniciar la barra original
+        assets.ResetTempUSD(); // Reiniciar el valor temporal de USD
+        OnValidar?.Invoke();
+
         temporizador.Reset(); // Reiniciar el temporizador
         StartCoroutine(DeshabilitarValidarUnSec());
     }
@@ -57,7 +59,7 @@ public class Validar : MonoBehaviour
         barra.barra.fillAmount = barra.valorActual; // Asegurarnos de que la imagen muestra el fill al valor actual
         GameObject snapshot = Instantiate(barra.gameObject, historialPanel);
         snapshot.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
-        
+
         // Congelarla: quitarle el script para que no se actualice m�s
         Destroy(snapshot.GetComponent<BarraProgreso>());
 
@@ -67,6 +69,9 @@ public class Validar : MonoBehaviour
         {
             slider.value = barra.valorActual;
         }
+        
+        assets.SubmitTempUSD(); // Anyadir el valor temporal de USD al total y resetearlo
+
         OnValidar?.Invoke();
         // Reiniciar la barra original
         barra.Resetear();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 // NUEVO: Una pequeña lista para emparejar eventos con partes de la UI
 [Serializable]
@@ -23,9 +24,14 @@ public class CinematicStarter : MonoBehaviour
     [SerializeField] private AparicionProgresiva[] elementosQueAparecen;
 
     [Header("Elementos a Activar al Final de la Cinemática")]
-    [SerializeField] private GameObject jugadorSecundario; 
+    [SerializeField] private GameObject dialogueCharacter; 
     [SerializeField] private GameObject gameCanvas;
     // Nota: Ya no apagamos el Canvas entero aquí, porque lo necesitamos encendido para mostrar sus partes poco a poco.
+
+    [SerializeField] private GameObject footText;
+
+    [Header("Botón de Saltar")]
+    [SerializeField] private Button botonSaltar;
 
     private void OnEnable()
     {
@@ -37,13 +43,12 @@ public class CinematicStarter : MonoBehaviour
         DialogManager.OnDialogEvent -= EscucharEvento;
     }
 
+    
+
     private IEnumerator Start()
     {
-        // 1. Apagamos al jugador (o lo que quieras dejar para el final)
-        if (jugadorSecundario != null) jugadorSecundario.SetActive(false);
         ApagarTodosLosCirculos();
 
-        // 2. NUEVO: Hacemos invisibles todas las partes de la UI que deben aparecer más tarde
         foreach (var item in elementosQueAparecen)
         {
             if (item.elementoUI != null)
@@ -54,6 +59,11 @@ public class CinematicStarter : MonoBehaviour
             }
         }
 
+        if (botonSaltar != null)
+        {
+            botonSaltar.onClick.AddListener(SaltarDialogo);
+        }
+
         yield return new WaitForSeconds(0.1f);
 
         if (DialogManager.Instance != null && archivoDialogoJson != null)
@@ -62,6 +72,36 @@ public class CinematicStarter : MonoBehaviour
         }
     }
 
+    // NUEVO: Salta directamente al final de la cinemática
+    public void SaltarDialogo()
+    {
+        // Paramos cualquier corrutina propia (fundidos de elementosQueAparecen, etc.)
+        StopAllCoroutines();
+
+        // Forzamos que toda la UI progresiva aparezca de golpe
+        foreach (var item in elementosQueAparecen)
+        {
+            if (item.elementoUI != null)
+            {
+                item.elementoUI.alpha = 1f;
+                item.elementoUI.interactable = false;
+                item.elementoUI.blocksRaycasts = true;
+            }
+        }
+
+        // Esto detiene el DialogManager y dispara TerminarCinematica automáticamente
+        if (DialogManager.Instance != null)
+        {
+            DialogManager.Instance.StopDialog();
+        }
+        else
+        {
+            // Fallback por si DialogManager no existiera
+            TerminarCinematica();
+        }
+    }
+
+    
     private void EscucharEvento(string nombreEvento)
     {
         ApagarTodosLosCirculos();
@@ -74,7 +114,7 @@ public class CinematicStarter : MonoBehaviour
             if (circuloDeseado != null) circuloDeseado.gameObject.SetActive(true);
         }
 
-        // B. NUEVO: Buscar si ese evento también debe hacer aparecer algo de la interfaz
+        // B. Buscar si ese evento también debe hacer aparecer algo de la interfaz
         foreach (var item in elementosQueAparecen)
         {
             if (item.nombreEvento == nombreEvento && item.elementoUI != null)
@@ -124,11 +164,12 @@ public class CinematicStarter : MonoBehaviour
     {
         ApagarTodosLosCirculos();
 
-        // Al terminar, encendemos al jugador y activamos el resto de la UI
-        if (jugadorSecundario != null) jugadorSecundario.SetActive(true);
+        // Al terminar activamos el resto de la UI y desactivamos el sprite del dialogante
+        if (footText != null) footText.SetActive(false);
+        if (dialogueCharacter != null) dialogueCharacter.SetActive(false);
         
         if (gameCanvas != null)
-        {
+        { 
             // Encender absolutamente todos los objetos (hijos, nietos, etc.)
             Transform[] todosLosDescendientes = gameCanvas.GetComponentsInChildren<Transform>(true);
             foreach (Transform objeto in todosLosDescendientes)

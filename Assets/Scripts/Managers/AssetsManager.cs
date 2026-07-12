@@ -8,10 +8,11 @@ public class AssetsManager : MonoBehaviour
     public static AssetsManager Instance;
     public int usd = 0;
     public int eth = 0;
+    public int t_usd = 0;
 
     private void Awake()
     {
-        // Patrón Singleton básico
+        // Patrï¿½n Singleton bï¿½sico
         if (Instance == null)
         {
             Instance = this;
@@ -32,6 +33,22 @@ public class AssetsManager : MonoBehaviour
     public void AddUSD(int amount)
     {
         usd += amount;
+        OnAssetsChanged?.Invoke();
+    }
+
+    public void AddTempUSD(int amount)
+    {
+        t_usd += amount;
+        OnAssetsChanged?.Invoke();
+    }
+    public void SubmitTempUSD()
+    {
+        usd += t_usd;
+        ResetTempUSD();
+    }
+    public void ResetTempUSD()
+    {
+        t_usd = 0;
         OnAssetsChanged?.Invoke();
     }
 

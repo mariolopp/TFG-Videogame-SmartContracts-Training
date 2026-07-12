@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class blockMinerUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI bloquesRestantes;
+    [SerializeField] private TextMeshProUGUI tempUSD; // USD que se obtendrán al validar
     private AssetsManager assets;
     public int bRestantes = 5;  // El décimo boque es el primero
     [SerializeField] public Temporizador temporizador;
@@ -15,7 +16,8 @@ public class blockMinerUI : MonoBehaviour
         //temporizador = FindObjectOfType<Temporizador>();
         assets = FindObjectOfType<AssetsManager>();
         //bloquesRestantes = transform.Find("BloquesRestantesText").GetComponent<TextMeshProUGUI>();
-        temporizador.OnTiempoCambiado += ActualizarMinerUI;
+        assets.OnAssetsChanged += ActualizarMinerUI;
+        //temporizador.OnTiempoCambiado += ActualizarMinerUI;
         Validar = FindObjectOfType<Validar>();
         Validar.OnValidar += DisminuirBloquesUI;
         DisminuirBloquesUI();
@@ -25,13 +27,13 @@ public class blockMinerUI : MonoBehaviour
     private void OnDestroy()
     {
         assets.OnAssetsChanged -= ActualizarMinerUI;
-        temporizador.OnTiempoCambiado -= ActualizarMinerUI;
+        //temporizador.OnTiempoCambiado -= ActualizarMinerUI;
         if (Validar != null) Validar.OnValidar -= DisminuirBloquesUI;
     }
 
     private void ActualizarMinerUI()
     {
-        
+        tempUSD.text = "+" + assets.t_usd.ToString() + " $"; // Mostrar el valor USD temporal
     }
     private void DisminuirBloquesUI()
     {
