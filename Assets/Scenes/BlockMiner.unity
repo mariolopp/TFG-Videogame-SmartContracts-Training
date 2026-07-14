@@ -740,8 +740,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -96.899994, y: 40.800003}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -100.5, y: 44.9}
+  m_SizeDelta: {x: 138.55, y: 51.105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &182228496
 MonoBehaviour:
@@ -762,7 +762,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -772,10 +772,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 84cab4bd6107e6a33878bf89b58f3ad2, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e83de6ba4c1797fb38338c1ff1de890b, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 2a7e5574169fefc1982a784aba4d8d37, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 4b2d0dc771fb2782ca837842cbeb8361, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -807,8 +807,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f6b42d521df9b85f888e53247b24108b, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1548,7 +1548,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 1.4890022, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2845,7 +2845,7 @@ MonoBehaviour:
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
-  m_colorMode: 3
+  m_colorMode: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
@@ -4591,6 +4591,7 @@ MonoBehaviour:
   tempUSD: {fileID: 1210957222}
   bRestantes: 5
   temporizador: {fileID: 675578946}
+  panelEndBlockMiner: {fileID: 0}
   Validar: {fileID: 182228499}
 --- !u!114 &1736990980 stripped
 MonoBehaviour:
@@ -5765,7 +5766,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 7b8a91456cbfb094298e873b27535126, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1970037801482203195, guid: e847a40744df74f2196d8138b6bbcf3c, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1293970417381491123, guid: e847a40744df74f2196d8138b6bbcf3c, type: 3}
       insertIndex: -1

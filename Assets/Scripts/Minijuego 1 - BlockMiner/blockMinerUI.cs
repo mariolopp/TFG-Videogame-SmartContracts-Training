@@ -9,6 +9,7 @@ public class blockMinerUI : MonoBehaviour
     private AssetsManager assets;
     public int bRestantes = 5;  // El décimo boque es el primero
     [SerializeField] public Temporizador temporizador;
+    [SerializeField] private GameObject panelEndBlockMiner; // Panel de fin de juego
     public Validar Validar;
 
     void Start()
@@ -74,7 +75,8 @@ public class blockMinerUI : MonoBehaviour
             ruleta.enabled = false;
         }
         
-        //if(panelEndBlockMiner != null) panelEndBlockMiner.SetActive(true); // Mostrar el panel de fin de juego
+        if(panelEndBlockMiner != null) panelEndBlockMiner.SetActive(true); // Mostrar el panel de fin de juego
+
 
 
     }
