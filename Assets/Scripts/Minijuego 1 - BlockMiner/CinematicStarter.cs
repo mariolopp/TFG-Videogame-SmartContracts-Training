@@ -167,6 +167,7 @@ public class CinematicStarter : MonoBehaviour
         // Al terminar activamos el resto de la UI y desactivamos el sprite del dialogante
         if (footText != null) footText.SetActive(false);
         if (dialogueCharacter != null) dialogueCharacter.SetActive(false);
+        if (botonSaltar != null) botonSaltar.gameObject.SetActive(false);
         
         if (gameCanvas != null)
         { 
