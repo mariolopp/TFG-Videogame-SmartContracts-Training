@@ -1,15 +1,17 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class blockMinerUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI bloquesRestantes;
     [SerializeField] private TextMeshProUGUI tempUSD; // USD que se obtendrán al validar
     private AssetsManager assets;
-    public int bRestantes = 5;  // El décimo boque es el primero
+    public int bRestantes = 10;  // El décimo boque es el primero
     [SerializeField] public Temporizador temporizador;
     [SerializeField] private GameObject panelEndBlockMiner; // Panel de fin de juego
+    [SerializeField] private Button endScreenButton; // Botón para cerrar el panel de fin de juego
     public Validar Validar;
 
     void Start()
@@ -75,7 +77,15 @@ public class blockMinerUI : MonoBehaviour
             ruleta.enabled = false;
         }
         
-        if(panelEndBlockMiner != null) panelEndBlockMiner.SetActive(true); // Mostrar el panel de fin de juego
+        if(panelEndBlockMiner != null)
+        {
+            panelEndBlockMiner.SetActive(true); // Mostrar el panel de fin de juego
+        }
+        
+        if (endScreenButton != null)
+        {
+            endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
+        }
 
 
 

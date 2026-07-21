@@ -16,7 +16,8 @@ public class Validar : MonoBehaviour
     public int maxBloques = 5;          // M�ximo de bloques perdidos antes de game over
     [SerializeField] private AssetsManager assets; // Referencia al script de Assets para modificar USD
     public event System.Action OnValidar;
-
+    public int maxVisibles = 5; // Bloques maximos visibles en el historial
+    private System.Collections.Generic.Queue<GameObject> historialSnapshots = new System.Collections.Generic.Queue<GameObject>();
     void Start()
     {
         boton = GetComponent<Button>();
@@ -49,6 +50,27 @@ public class Validar : MonoBehaviour
         StartCoroutine(DeshabilitarValidarUnSec());
     }
     //public void temporizador.onTiempoAgotado += PierdesBloque;
+
+    private IEnumerator AnimarYDestruir(GameObject obj)
+{
+    CanvasGroup cg = obj.GetComponent<CanvasGroup>();
+    if (cg == null) cg = obj.AddComponent<CanvasGroup>();
+
+    float duracion = 0.3f;
+    float t = 0f;
+    Vector3 escalaInicial = obj.transform.localScale;
+
+    while (t < duracion)
+    {
+        t += Time.deltaTime;
+        float p = t / duracion;
+        cg.alpha = Mathf.Lerp(1f, 0f, p);
+        obj.transform.localScale = Vector3.Lerp(escalaInicial, Vector3.zero, p);
+        yield return null;
+    }
+
+    Destroy(obj);
+}
     void Pulsar()
     {
         // Log de la validaci�n
@@ -58,7 +80,7 @@ public class Validar : MonoBehaviour
         barra.llenadoSuave = false; // Hacer que la barra deje de llenarse suavemente
         barra.barra.fillAmount = barra.valorActual; // Asegurarnos de que la imagen muestra el fill al valor actual
         GameObject snapshot = Instantiate(barra.gameObject, historialPanel);
-        snapshot.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+        snapshot.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
 
         // Congelarla: quitarle el script para que no se actualice m�s
         Destroy(snapshot.GetComponent<BarraProgreso>());
@@ -68,6 +90,14 @@ public class Validar : MonoBehaviour
         if (slider != null)
         {
             slider.value = barra.valorActual;
+        }
+
+        historialSnapshots.Enqueue(snapshot); // añadir el nuevo al final de la cola
+
+        if (historialSnapshots.Count > maxVisibles)
+        {
+            GameObject viejo = historialSnapshots.Dequeue(); // sacar el más antiguo
+            StartCoroutine(AnimarYDestruir(viejo));
         }
         
         assets.SubmitTempUSD(); // Anyadir el valor temporal de USD al total y resetearlo
