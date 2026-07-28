@@ -101,7 +101,7 @@ public class CinematicStarter : MonoBehaviour
         }
     }
 
-    
+    // En función del evento del diálogo se mostrará un objeto y circulo distinto
     private void EscucharEvento(string nombreEvento)
     {
         ApagarTodosLosCirculos();
@@ -134,7 +134,7 @@ public class CinematicStarter : MonoBehaviour
         // Bloqueamos los clics para que el jugador disfrute de la aparición
         if (DialogManager.Instance != null) DialogManager.Instance.BloquearInteraccion(true);
 
-        float duracion = 0.5f; // Medio segundo en aparecer
+        float duracion = 1f; // Un segundo en aparecer
         float tiempo = 0f;
 
         while (tiempo < duracion)

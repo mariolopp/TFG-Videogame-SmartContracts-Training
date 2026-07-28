@@ -1,0 +1,22 @@
+{
+  "dialogues": [
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Hola! Bienvenido a mi mundo.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Perdona? ¿Dónde estoy...?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Profesor Merkle",
+      "text": "¡Vamos a por ello!",
+      "evento": ""
+    }
+  ]
+}
