@@ -20,9 +20,11 @@ public class PriceManager : MonoBehaviour
     [Header("Botones (ya asignados en la escena)")]
     [SerializeField] private Button buyButton;   // gasta B, recibe A
     [SerializeField] private Button sellButton;  // gasta A, recibe B
+    [SerializeField] private Button swapPriceView;  // Alternar la visualización del precio de 1 A = x B -> 1B = xA
 
     [Header("UI (ya asignada en la escena)")]
     [SerializeField] private TMP_Text priceText; // "1 A = X B"
+    private bool viewAorB = true;       // True en caso de que se muestre 1 A = xB, false en caso de 1 B = x A
     [SerializeField] private TMP_Text amnt_a;
     [SerializeField] private TMP_Text amnt_b;
     [SerializeField] private TMP_Text amnt_user_a;
@@ -35,6 +37,7 @@ public class PriceManager : MonoBehaviour
     {
         buyButton.onClick.AddListener(OnBuy);
         sellButton.onClick.AddListener(OnSell);
+        swapPriceView.onClick.AddListener(OnView);
         UpdateUI();
     }
 
@@ -78,6 +81,12 @@ public class PriceManager : MonoBehaviour
         UpdateUI();
     }
 
+    public void OnView()
+    {
+        viewAorB = !viewAorB;
+        UpdateUI();
+    }
+
     // Fórmula AMM de producto constante (x*y=k) con comisión
     // amountOut = (amountIn*(100-fee)*reserveOut) / (reserveIn*100 + amountIn*(100-fee))
     private float GetAmountOut(float amountIn, float reserveIn, float reserveOut)
@@ -91,7 +100,10 @@ public class PriceManager : MonoBehaviour
     private void UpdateUI()
     {
         if (priceText != null)
-            priceText.text = $"1 A = {GetPrice():F4} B";
+            if (viewAorB)
+                priceText.text = $"1 A = {GetPriceA():F4} B";
+            else if(!viewAorB)
+                priceText.text = $"1 B = {GetPriceB():F4} A";
         if (amnt_a !=null)
             amnt_a.text = $"{GetReserveA():F2} A";
         if (amnt_b !=null)
@@ -107,5 +119,6 @@ public class PriceManager : MonoBehaviour
     public float GetReserveB() => reserveB;
     public float GetUserA() => userA;
     public float GetUserB() => userB;
-    public float GetPrice() => reserveB / reserveA;
+    public float GetPriceA() => reserveB / reserveA;
+    public float GetPriceB() => reserveA / reserveB;
 }
