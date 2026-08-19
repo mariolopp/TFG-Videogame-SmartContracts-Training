@@ -16,6 +16,7 @@ public class PriceManager : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private float feePercent = 1f;   // 1%
     [SerializeField] private float tradeAmount = 1f;  // unidades por cada click
+
     [Header("UI Slippage")]
     [SerializeField] private TMP_Text slippageText;
     [SerializeField] private Color slippageNegativeColor = Color.red;
@@ -33,6 +34,8 @@ public class PriceManager : MonoBehaviour
     [SerializeField] private TMP_Text amnt_b;
     [SerializeField] private TMP_Text amnt_user_a;
     [SerializeField] private TMP_Text amnt_user_b;
+    
+    [SerializeField] private CoinSwapAnimator swapAnimator; 
 
     // Otros scripts (UI, etc.) pueden suscribirse para reaccionar a cada trade
     public static event Action<float, float> OnTrade; // (amountIn, amountOut)
@@ -61,6 +64,8 @@ public class PriceManager : MonoBehaviour
         reserveB += tradeAmount;
         reserveA -= amountOut;
 
+        swapAnimator.PlayEthToBtc(1f, amountOut); // Visualiza la animación de swap de ETH a BTC
+
         OnTrade?.Invoke(tradeAmount, amountOut);
         UpdateUI();
     }
@@ -80,6 +85,8 @@ public class PriceManager : MonoBehaviour
         userB += amountOut;
         reserveA += tradeAmount;
         reserveB -= amountOut;
+
+        swapAnimator.PlayBtcToEth(1f, amountOut); // Visualiza la animación de swap de BTC a ETH
 
         OnTrade?.Invoke(tradeAmount, amountOut);
         UpdateUI();
