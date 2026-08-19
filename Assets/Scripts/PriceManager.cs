@@ -16,6 +16,10 @@ public class PriceManager : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private float feePercent = 1f;   // 1%
     [SerializeField] private float tradeAmount = 1f;  // unidades por cada click
+    [Header("UI Slippage")]
+    [SerializeField] private TMP_Text slippageText;
+    [SerializeField] private Color slippageNegativeColor = Color.red;
+    [SerializeField] private Color slippagePositiveColor = Color.green;
 
     [Header("Botones (ya asignados en la escena)")]
     [SerializeField] private Button buyButton;   // gasta B, recibe A
@@ -96,22 +100,47 @@ public class PriceManager : MonoBehaviour
         float denominator = (reserveIn * 100f) + amountInWithFee;
         return numerator / denominator;
     }
+    // Calcula el % de slippage para un trade hipotético de A -> B o B -> A
+    // direction: true = vendes A y recibes B, false = vendes B y recibes A
+    private float CalculateSlippagePercent(float amountIn, bool sellingA)
+    {
+        float reserveIn = sellingA ? reserveA : reserveB;
+        float reserveOut = sellingA ? reserveB : reserveA;
+
+        float spotPrice = reserveOut / reserveIn; // precio marginal actual
+        float expectedOut = amountIn * spotPrice;  // lo que "debería" dar el precio spot
+        float actualOut = GetAmountOut(amountIn, reserveIn, reserveOut); // lo que realmente da la curva
+
+        // % de diferencia respecto a lo esperado (negativo = recibes menos)
+        return ((actualOut - expectedOut) / expectedOut) * 100f;
+    }
+
+    private void UpdateSlippagePreview(bool sellingToken)
+    {
+        if (slippageText == null) return;
+
+        float slippage = CalculateSlippagePercent(tradeAmount, sellingToken);
+
+        slippageText.text = $"Slippage: {slippage:F2}%";
+        slippageText.color = slippage < 0 ? slippageNegativeColor : slippagePositiveColor;
+    }
 
     private void UpdateUI()
     {
         if (priceText != null)
             if (viewAorB)
-                priceText.text = $"1 A = {GetPriceA():F4} B";
+                priceText.text = $"1 BTC = {GetPriceA():F4} ETH";
             else if(!viewAorB)
-                priceText.text = $"1 B = {GetPriceB():F4} A";
+                priceText.text = $"1 ETH = {GetPriceB():F4} BTC";
         if (amnt_a !=null)
-            amnt_a.text = $"{GetReserveA():F2} A";
+            amnt_a.text = $"{GetReserveA():F2} BTC";
         if (amnt_b !=null)
-            amnt_b.text = $"{GetReserveB():F2} B"; 
+            amnt_b.text = $"{GetReserveB():F2} ETH"; 
          if (amnt_user_a !=null)
-            amnt_user_a.text = $"A ->{GetUserA():F2}";
+            amnt_user_a.text = $"BTC ->{GetUserA():F2}";
         if (amnt_user_b !=null)
-            amnt_user_b.text = $"B ->{GetUserB():F2}";
+            amnt_user_b.text = $"ETH ->{GetUserB():F2}";
+        UpdateSlippagePreview(viewAorB);
     }
 
     // Getters públicos por si algún otro script quiere mostrar el estado
