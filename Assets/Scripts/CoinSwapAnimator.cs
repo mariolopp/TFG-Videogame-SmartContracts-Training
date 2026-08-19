@@ -16,6 +16,10 @@ public class CoinSwapAnimator : MonoBehaviour
     [SerializeField] private Sprite btcSprite;
     [SerializeField] private Sprite ethSprite;
 
+    [Header("Depósitos")]
+    [SerializeField] private RectTransform depositoBtc;
+    [SerializeField] private RectTransform depositoEth;
+
     [Header("Timings")]
     [SerializeField] private float fadeDuration = 0.3f;
     [SerializeField] private float moveDuration = 0.4f;
@@ -25,6 +29,10 @@ public class CoinSwapAnimator : MonoBehaviour
     [Header("Colores")]
     [SerializeField] private Color colorNegativo = new Color(0.9f, 0.3f, 0.3f);
     [SerializeField] private Color colorPositivo = new Color(0.3f, 0.85f, 0.4f);
+
+    [Header("Escala moneda saliente")]
+    [SerializeField] private float startScale = 1f;
+    [SerializeField] private float endScale = 0.1f;
 
     public System.Action OnSwapStarted;
     public System.Action OnSwapFinished;
@@ -45,35 +53,62 @@ public class CoinSwapAnimator : MonoBehaviour
     {
         StartCoroutine(SwapRoutine(inName, inAmount, inSprite, outName, outAmount, outSprite));
     }
-
+    
     private IEnumerator SwapRoutine(string inName, float inAmount, Sprite inSprite,
-                                     string outName, float outAmount, Sprite outSprite)
+                                 string outName, float outAmount, Sprite outSprite)
     {
         OnSwapStarted?.Invoke();
 
-        // Moneda que entra: "-<inAmount> <inName>"
-        yield return StartCoroutine(AnimateCoinWithLabel(
-            inSprite, spawnPointEntrada.position, pozoCentral.position,
-            FormatAmount(inAmount, negative: true), colorNegativo));
+        RectTransform depositoIn = GetDeposito(inName);
+        RectTransform depositoOut = GetDeposito(outName);
 
-        // Monedas que salen (visual capado a 10, texto usa outAmount real solo en la primera)
+        // Moneda que entra: spawnEntrada -> pozo -> depositoIn (fade out al llegar al depósito)
+        Vector3[] rutaEntrada = {
+            spawnPointEntrada.position,
+            pozoCentral.position,
+            depositoIn.position
+        };
+
+        // Moneda que entra: fade out DURANTE el movimiento hacia el depósito
+        yield return StartCoroutine(AnimateCoinMultiPoint(
+            inSprite, rutaEntrada, FormatAmount(inAmount, negative: true), colorNegativo,
+            scaleUp: false, labelAtStart: true, fadeOutDuringLastSegment: true));
+
+        yield return new WaitForSeconds(delayBetweenOutCoins);
+
         int visualCount = Mathf.Clamp(Mathf.Max(1, Mathf.RoundToInt(outAmount)), 1, 10);
 
         for (int i = 0; i < visualCount; i++)
         {
-            bool showLabel = i == 0; // el texto con la cantidad total solo aparece una vez
-            StartCoroutine(AnimateCoinWithLabel(
-                outSprite, pozoCentral.position, spawnPointSalida.position,
+            bool showLabel = i == 0;
+
+            Vector3[] rutaSalida = {
+                depositoOut.position,
+                pozoCentral.position,
+                spawnPointSalida.position
+            };
+
+            // Moneda que sale: se mantiene visible hasta llegar, luego fade out normal
+            StartCoroutine(AnimateCoinMultiPoint(
+                outSprite, rutaSalida,
                 showLabel ? FormatAmount(outAmount, negative: false) : null,
-                colorPositivo));
+                colorPositivo, scaleUp: true, labelAtStart: false, fadeOutDuringLastSegment: false));
 
             if (i < visualCount - 1)
                 yield return new WaitForSeconds(delayBetweenOutCoins);
         }
 
-        yield return new WaitForSeconds(moveDuration + fadeDuration);
+        yield return new WaitForSeconds((moveDuration * 2) + fadeDuration);
 
         OnSwapFinished?.Invoke();
+    }
+    
+    private RectTransform GetDeposito(string coinName)
+    {
+        if (coinName == "BTC") return depositoBtc;
+        if (coinName == "ETH") return depositoEth;
+        Debug.LogWarning($"No hay depósito configurado para '{coinName}'");
+        return pozoCentral; // fallback de seguridad
     }
 
     private string FormatAmount(float amount, bool negative)
@@ -83,66 +118,96 @@ public class CoinSwapAnimator : MonoBehaviour
         string num = amount % 1f == 0f ? amount.ToString("0") : amount.ToString("0.##");
         return $"{sign}{num}";
     }
-
-    private IEnumerator AnimateCoinWithLabel(Sprite sprite, Vector3 from, Vector3 to, string label, Color labelColor)
+    private IEnumerator AnimateCoinMultiPoint(Sprite sprite, Vector3[] points, string label, Color labelColor, bool scaleUp, bool labelAtStart, bool fadeOutDuringLastSegment)
     {
-        // Moneda
         GameObject coinGo = Instantiate(coinPrefab, pozoCentral.parent);
         RectTransform coinRt = coinGo.GetComponent<RectTransform>();
         Image img = coinGo.GetComponent<Image>();
         CanvasGroup coinCg = coinGo.GetComponent<CanvasGroup>();
 
         img.sprite = sprite;
-        coinRt.position = from;
+        coinRt.position = points[0];
         coinCg.alpha = 0f;
 
-        // Texto flotante (opcional)
         RectTransform textRt = null;
         CanvasGroup textCg = null;
-        Vector3 textStart = from + Vector3.up * 20f;
+        Vector3 textStart = Vector3.zero;
 
-        if (!string.IsNullOrEmpty(label) && floatingTextPrefab != null)
+        int segments = points.Length - 1;
+
+        for (int seg = 0; seg < segments; seg++)
         {
-            GameObject textGo = Instantiate(floatingTextPrefab, pozoCentral.parent);
-            textRt = textGo.GetComponent<RectTransform>();
-            textCg = textGo.GetComponent<CanvasGroup>();
-            TMP_Text tmp = textGo.GetComponent<TMP_Text>();
+            Vector3 from = points[seg];
+            Vector3 to = points[seg + 1];
+            bool isFirstSegment = seg == 0;
+            bool isLastSegment = seg == segments - 1;
+            bool isLabelSegment = labelAtStart ? isFirstSegment : isLastSegment;
 
-            tmp.text = label;
-            tmp.color = labelColor;
-            textRt.position = textStart;
-            textCg.alpha = 0f;
-        }
-
-        float t = 0f;
-        while (t < moveDuration)
-        {
-            t += Time.deltaTime;
-            float p = t / moveDuration;
-
-            coinRt.position = Vector3.Lerp(from, to, p);
-            coinCg.alpha = Mathf.Lerp(0f, 1f, p / 0.5f);
-
-            if (textRt != null)
+            if (isLabelSegment && !string.IsNullOrEmpty(label) && floatingTextPrefab != null)
             {
-                textRt.position = textStart + Vector3.up * (textFloatDistance * p);
-                textCg.alpha = Mathf.Lerp(0f, 1f, p / 0.5f);
+                Vector3 anchor = labelAtStart ? from : to;
+                textStart = anchor + Vector3.up * 20f;
+
+                GameObject textGo = Instantiate(floatingTextPrefab, pozoCentral.parent);
+                textRt = textGo.GetComponent<RectTransform>();
+                textCg = textGo.GetComponent<CanvasGroup>();
+                TMP_Text tmp = textGo.GetComponent<TMP_Text>();
+
+                if (textCg == null) textCg = textGo.AddComponent<CanvasGroup>();
+
+                tmp.text = label;
+                tmp.color = labelColor;
+                textRt.position = textStart;
+                textCg.alpha = 0f;
             }
 
-            yield return null;
+            float t = 0f;
+            while (t < moveDuration)
+            {
+                t += Time.deltaTime;
+                float p = t / moveDuration;
+
+                coinRt.position = Vector3.Lerp(from, to, p);
+
+                if (isFirstSegment)
+                    coinCg.alpha = Mathf.Lerp(0f, 1f, p / 0.5f);
+                else if (isLastSegment && fadeOutDuringLastSegment)
+                    coinCg.alpha = Mathf.Lerp(1f, 0f, p); // se apaga mientras se mueve
+                else
+                    coinCg.alpha = 1f;
+
+                if (scaleUp && isLastSegment)
+                {
+                    float s = Mathf.Lerp(startScale, endScale, p);
+                    coinRt.localScale = new Vector3(s, s, 1f);
+                }
+
+                if (textRt != null && isLabelSegment)
+                {
+                    textRt.position = textStart + Vector3.up * (textFloatDistance * p);
+                    textCg.alpha = Mathf.Lerp(0f, 1f, p / 0.5f);
+                }
+
+                yield return null;
+            }
+
+            coinRt.position = to;
         }
 
-        coinRt.position = to;
-        coinCg.alpha = 1f;
-
-        float ft = 0f;
-        while (ft < fadeDuration)
+        // Si ya se apagó durante el movimiento, no hace falta el fade out extra al final
+        if (!fadeOutDuringLastSegment)
         {
-            ft += Time.deltaTime;
-            float a = Mathf.Lerp(1f, 0f, ft / fadeDuration);
-            coinCg.alpha = a;
-            if (textCg != null) textCg.alpha = a;
-            yield return null;
+            coinCg.alpha = 1f;
+
+            float ft = 0f;
+            while (ft < fadeDuration)
+            {
+                ft += Time.deltaTime;
+                float a = Mathf.Lerp(1f, 0f, ft / fadeDuration);
+                coinCg.alpha = a;
+                if (textCg != null) textCg.alpha = a;
+                yield return null;
+            }
         }
 
         Destroy(coinGo);

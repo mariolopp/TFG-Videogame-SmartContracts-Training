@@ -229,6 +229,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121335778}
   m_CullTransparentMesh: 1
+--- !u!1 &135309383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 135309384}
+  m_Layer: 5
+  m_Name: DepositoETH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &135309384
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135309383}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.5574365}
+  m_LocalScale: {x: 1.285, y: 1.285, z: 1.285}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1678111446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 312.3, y: 10.7}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &159590963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,6 +1636,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983609193}
   m_CullTransparentMesh: 1
+--- !u!1 &989754064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 989754065}
+  m_Layer: 5
+  m_Name: DepositoBTC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &989754065
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989754064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.5574365}
+  m_LocalScale: {x: 1.285, y: 1.285, z: 1.285}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1678111446}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -263.8, y: 11.6}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &990079484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,6 +2872,8 @@ Transform:
   - {fileID: 1074282047}
   - {fileID: 1387071920}
   - {fileID: 1785560443}
+  - {fileID: 989754065}
+  - {fileID: 135309384}
   m_Father: {fileID: 1717071040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1678111447
@@ -2823,12 +2895,16 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 7231625748667381483, guid: ba23f90bf0da20bf8b8f892ed6ee87aa, type: 3}
   btcSprite: {fileID: 21300000, guid: cd9b36e6c3cc96752bc6fa716c029819, type: 3}
   ethSprite: {fileID: 21300000, guid: 20ececf803aae53138f691c3da4a442c, type: 3}
+  depositoBtc: {fileID: 989754065}
+  depositoEth: {fileID: 135309384}
   fadeDuration: 0.3
   moveDuration: 0.4
   delayBetweenOutCoins: 0.08
   textFloatDistance: 40
   colorNegativo: {r: 0.9, g: 0.3, b: 0.3, a: 1}
   colorPositivo: {r: 0.3, g: 0.85, b: 0.4, a: 1}
+  startScale: 0.06
+  endScale: 0.1
 --- !u!1 &1717071036
 GameObject:
   m_ObjectHideFlags: 0
