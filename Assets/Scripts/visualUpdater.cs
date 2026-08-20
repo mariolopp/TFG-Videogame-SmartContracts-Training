@@ -5,6 +5,7 @@ public class PoolVisualizer : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private PriceManager priceManager; // arrastra aquí el GameObject que tiene PriceManager
+    [SerializeField] private CoinSwapAnimator coinSwapAnimator; // arrastra aquí el GameObject que tiene CoinSwapAnimator
     [SerializeField] private Image poolSpriteImage;      // arrastra aquí la Image donde se muestra el sprite del pool
 
     [Header("Sprites (80 frames, en orden: 1.png, 2.png, ... 80.png)")]
@@ -18,16 +19,21 @@ public class PoolVisualizer : MonoBehaviour
     [Header("Configuración del salto piecewise")]
     [SerializeField] private int totalLogicalSteps = 80; // niveles lógicos totales (1..N)
     [SerializeField] private int breakpoint = 43;         // a partir de aquí cambia el ritmo
+
     [SerializeField] private int blockSize = 10;          // cada nivel lógico ocupa X frames reales
 
     private void OnEnable()
-    {
-        PriceManager.OnTrade += HandleTrade;
+    {   // Este evento se ejecuta en el momento exacto de ejecutar el trade, pero para actualización visual de momento no se necesita
+        //PriceManager.OnTrade += HandleTrade;  
+
+        // Este evento se ejecuta en el momento que la animación de la moneda entra o sale del depósito
+        coinSwapAnimator.OnSwapFinished += HandleSwapFinished;
     }
 
     private void OnDisable()
     {
-        PriceManager.OnTrade -= HandleTrade;
+        //PriceManager.OnTrade -= HandleTrade;
+        coinSwapAnimator.OnSwapFinished -= HandleSwapFinished;
     }
 
     private void Start()
@@ -35,8 +41,11 @@ public class PoolVisualizer : MonoBehaviour
         // Pinta el frame inicial acorde al estado actual del pool
         UpdatePoolSprite();
     }
-
-    private void HandleTrade(float amountIn, float amountOut)
+    // private void HandleTrade(float amountIn, float amountOut)
+    // {
+    //     UpdatePoolSprite();
+    // }
+    private void HandleSwapFinished()
     {
         UpdatePoolSprite();
     }

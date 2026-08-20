@@ -1944,6 +1944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priceManager: {fileID: 1576762932}
+  coinSwapAnimator: {fileID: 1678111447}
   poolSpriteImage: {fileID: 159590964}
   poolFrames:
   - {fileID: 21300000, guid: ba6aef251a97ab613be3f768431ceec9, type: 3}
@@ -2769,6 +2770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priceManager: {fileID: 1576762932}
+  coinSwapAnimator: {fileID: 1678111447}
   poolSpriteImage: {fileID: 820755924}
   poolFrames:
   - {fileID: 21300000, guid: 0c7bd855ee18ba7a2b57568bf6baa6b5, type: 3}

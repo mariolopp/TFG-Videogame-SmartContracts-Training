@@ -73,7 +73,7 @@ public class CoinSwapAnimator : MonoBehaviour
         yield return StartCoroutine(AnimateCoinMultiPoint(
             inSprite, rutaEntrada, FormatAmount(inAmount, negative: true), colorNegativo,
             scaleUp: false, labelAtStart: true, fadeOutDuringLastSegment: true));
-
+        OnSwapFinished?.Invoke();
         yield return new WaitForSeconds(delayBetweenOutCoins);
 
         int visualCount = Mathf.Clamp(Mathf.Max(1, Mathf.RoundToInt(outAmount)), 1, 10);
@@ -100,7 +100,7 @@ public class CoinSwapAnimator : MonoBehaviour
 
         yield return new WaitForSeconds((moveDuration * 2) + fadeDuration);
 
-        OnSwapFinished?.Invoke();
+        // OnSwapFinished?.Invoke(); // Muevo esto a posta a la mitad de la animación para que las pools se actualicen cuando deben
     }
     
     private RectTransform GetDeposito(string coinName)
