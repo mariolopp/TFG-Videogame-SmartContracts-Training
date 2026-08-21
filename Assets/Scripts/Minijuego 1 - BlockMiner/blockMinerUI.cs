@@ -87,7 +87,5 @@ public class blockMinerUI : MonoBehaviour
             endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
         }
 
-
-
     }
 }

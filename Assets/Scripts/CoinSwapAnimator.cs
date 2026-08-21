@@ -8,6 +8,8 @@ public class CoinSwapAnimator : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private RectTransform pozoCentral;
     [SerializeField] private RectTransform spawnPointEntrada;
+    [SerializeField] private RectTransform externalSpawnPointEntrada;
+    [SerializeField] private RectTransform externalSpawnPointSalida;
     [SerializeField] private RectTransform spawnPointSalida;
     [SerializeField] private GameObject coinPrefab;   // Image + CanvasGroup
     [SerializeField] private GameObject floatingTextPrefab; // TMP_Text + CanvasGroup
@@ -31,31 +33,31 @@ public class CoinSwapAnimator : MonoBehaviour
     [SerializeField] private Color colorPositivo = new Color(0.3f, 0.85f, 0.4f);
 
     [Header("Escala moneda saliente")]
-    [SerializeField] private float startScale = 1f;
+    [SerializeField] private float startScale = 0.06f;
     [SerializeField] private float endScale = 0.1f;
 
     public System.Action OnSwapStarted;
     public System.Action OnSwapFinished;
 
     // Atajos
-    public void PlayBtcToEth(float btcAmount, float ethAmount)
-        => PlaySwap("BTC", btcAmount, btcSprite, "ETH", ethAmount, ethSprite);
+    public void PlayBtcToEth(float btcAmount, float ethAmount, bool externalTrader = false)
+        => PlaySwap("BTC", btcAmount, btcSprite, "ETH", ethAmount, ethSprite, externalTrader);
 
-    public void PlayEthToBtc(float ethAmount, float btcAmount)
-        => PlaySwap("ETH", ethAmount, ethSprite, "BTC", btcAmount, btcSprite);
+    public void PlayEthToBtc(float ethAmount, float btcAmount, bool externalTrader = false)
+        => PlaySwap("ETH", ethAmount, ethSprite, "BTC", btcAmount, btcSprite, externalTrader);
 
     /// <summary>
     /// inAmount y outAmount son las cantidades REALES (para el texto).
     /// El número de monedas dibujadas saliendo se capa a 10 automáticamente.
     /// </summary>
     public void PlaySwap(string inName, float inAmount, Sprite inSprite,
-                          string outName, float outAmount, Sprite outSprite)
+                          string outName, float outAmount, Sprite outSprite, bool externalTrader = false)
     {
-        StartCoroutine(SwapRoutine(inName, inAmount, inSprite, outName, outAmount, outSprite));
+        StartCoroutine(SwapRoutine(inName, inAmount, inSprite, outName, outAmount, outSprite, externalTrader));
     }
     
     private IEnumerator SwapRoutine(string inName, float inAmount, Sprite inSprite,
-                                 string outName, float outAmount, Sprite outSprite)
+                                 string outName, float outAmount, Sprite outSprite, bool externalTrader = false)
     {
         OnSwapStarted?.Invoke();
 
@@ -68,11 +70,23 @@ public class CoinSwapAnimator : MonoBehaviour
             pozoCentral.position,
             depositoIn.position
         };
+        Vector3[] rutaSalida = {
+                depositoOut.position,
+                pozoCentral.position,
+                spawnPointSalida.position
+            };
+        float scFactor = 1f;
+        if (externalTrader)
+        {
+            rutaEntrada[0] = externalSpawnPointEntrada.position;
+            rutaSalida[2] = externalSpawnPointSalida.position;
+            scFactor = 0.75f;
+        }
 
         // Moneda que entra: fade out DURANTE el movimiento hacia el depósito
         yield return StartCoroutine(AnimateCoinMultiPoint(
             inSprite, rutaEntrada, FormatAmount(inAmount, negative: true), colorNegativo,
-            scaleUp: false, labelAtStart: true, fadeOutDuringLastSegment: true));
+            scaleUp: false, labelAtStart: true, fadeOutDuringLastSegment: true, scaleFactor: scFactor));
         OnSwapFinished?.Invoke();
         yield return new WaitForSeconds(delayBetweenOutCoins);
 
@@ -82,17 +96,11 @@ public class CoinSwapAnimator : MonoBehaviour
         {
             bool showLabel = i == 0;
 
-            Vector3[] rutaSalida = {
-                depositoOut.position,
-                pozoCentral.position,
-                spawnPointSalida.position
-            };
-
             // Moneda que sale: se mantiene visible hasta llegar, luego fade out normal
             StartCoroutine(AnimateCoinMultiPoint(
                 outSprite, rutaSalida,
                 showLabel ? FormatAmount(outAmount, negative: false) : null,
-                colorPositivo, scaleUp: true, labelAtStart: false, fadeOutDuringLastSegment: false));
+                colorPositivo, scaleUp: true, labelAtStart: false, fadeOutDuringLastSegment: false, scaleFactor: scFactor));
 
             if (i < visualCount - 1)
                 yield return new WaitForSeconds(delayBetweenOutCoins);
@@ -118,9 +126,12 @@ public class CoinSwapAnimator : MonoBehaviour
         string num = amount % 1f == 0f ? amount.ToString("0") : amount.ToString("0.##");
         return $"{sign}{num}";
     }
-    private IEnumerator AnimateCoinMultiPoint(Sprite sprite, Vector3[] points, string label, Color labelColor, bool scaleUp, bool labelAtStart, bool fadeOutDuringLastSegment)
+    private IEnumerator AnimateCoinMultiPoint(Sprite sprite, Vector3[] points, string label, Color labelColor, bool scaleUp, bool labelAtStart, bool fadeOutDuringLastSegment, float moveDuration = 0.4f, float scaleFactor = 1f)
     {
+        float stSc = startScale*scaleFactor;
+        float endSc = endScale*scaleFactor;
         GameObject coinGo = Instantiate(coinPrefab, pozoCentral.parent);
+        coinGo.transform.localScale = new Vector3(stSc, stSc, 1f);
         RectTransform coinRt = coinGo.GetComponent<RectTransform>();
         Image img = coinGo.GetComponent<Image>();
         CanvasGroup coinCg = coinGo.GetComponent<CanvasGroup>();
@@ -178,7 +189,7 @@ public class CoinSwapAnimator : MonoBehaviour
 
                 if (scaleUp && isLastSegment)
                 {
-                    float s = Mathf.Lerp(startScale, endScale, p);
+                    float s = Mathf.Lerp(stSc, endSc, p);
                     coinRt.localScale = new Vector3(s, s, 1f);
                 }
 
