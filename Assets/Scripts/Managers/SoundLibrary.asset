@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: SoundLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
+  sfx:
+  - id: select_button
+    clip: {fileID: 8300000, guid: 265b005a285c1bd9fb7d15580f7a26f7, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: validarButtonSound
+    clip: {fileID: 8300000, guid: dda2c5c1656dfcdc9a38209144d28907, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: wosh
+    clip: {fileID: 8300000, guid: ddd58d459ff4b9b9f8af07cb90940c9c, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: coin_sound
+    clip: {fileID: 8300000, guid: dd1287eb1a493ab5ea7609b54493605d, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  music: []

@@ -50,6 +50,10 @@ public class PoolTraderTurnManager : MonoBehaviour
 
     private void Start()
     {
+        if (assetsManager == null)
+        {
+            assetsManager = FindObjectOfType<AssetsManager>();
+        }
         marketTrend = new MarketTrend(priceManager, config);
         priceManager.SetTradingEnabled(false);
         if (endGamePanel != null) endGamePanel.SetActive(false);
@@ -217,7 +221,7 @@ public class PoolTraderTurnManager : MonoBehaviour
                 StartCoroutine(AnimateNumber(endGameBagsBTCText, 0f, bagsFromBTC, 1.5f, 4.25f));
             if (endGameScoreText != null)
                 //endGameScoreText.text = $"x{assetsManager.usd}";
-                StartCoroutine(AnimateNumber(endGameScoreText, 0f, assetsManager.usd, 3.5f, 6f));
+                StartCoroutine(AnimateNumber(endGameScoreText, 0f, bagsFromBTC + bagsFromETH, 3.5f, 6f));
         }
         if (endGameCloseButton != null)
         {

@@ -205,6 +205,7 @@ public class CoinSwapAnimator : MonoBehaviour
 
             coinRt.position = to;
         }
+        AudioManager.Instance?.PlaySFX("coin_sound");
 
         // Si ya se apagó durante el movimiento, no hace falta el fade out extra al final
         if (!fadeOutDuringLastSegment)
@@ -221,7 +222,6 @@ public class CoinSwapAnimator : MonoBehaviour
                 yield return null;
             }
         }
-
         Destroy(coinGo);
         if (textRt != null) Destroy(textRt.gameObject);
     }

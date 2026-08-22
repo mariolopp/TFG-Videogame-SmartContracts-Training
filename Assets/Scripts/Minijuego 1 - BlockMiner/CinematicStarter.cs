@@ -48,7 +48,7 @@ public class CinematicStarter : MonoBehaviour
     private IEnumerator Start()
     {
         ApagarTodosLosCirculos();
-
+        AudioManager.Instance.PlaySFX("wosh");
         foreach (var item in elementosQueAparecen)
         {
             if (item.elementoUI != null)

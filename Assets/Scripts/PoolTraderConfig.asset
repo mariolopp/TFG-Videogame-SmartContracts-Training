@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cbdce1d6a7787e49dd5a7647eb097e, type: 3}
   m_Name: PoolTraderConfig
   m_EditorClassIdentifier: 
-  totalTurns: 8
+  totalTurns: 1
   playerTradeTurnDuration: 10
   conversionTurnDuration: 10
-  bagsPerBTC: 4
+  bagsPerBTC: 3
   bagsPerETH: 2
   factorBags: 1
   minTraders: 2

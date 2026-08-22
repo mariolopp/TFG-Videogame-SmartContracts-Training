@@ -16,6 +16,8 @@ public class blockMinerUI : MonoBehaviour
 
     void Start()
     {
+        // Restaurar el tiempo al entrar a la escena
+        Time.timeScale = 1f;
         //temporizador = FindObjectOfType<Temporizador>();
         assets = FindObjectOfType<AssetsManager>();
         //bloquesRestantes = transform.Find("BloquesRestantesText").GetComponent<TextMeshProUGUI>();
@@ -84,7 +86,7 @@ public class blockMinerUI : MonoBehaviour
         
         if (endScreenButton != null)
         {
-            endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
+            endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("PoolTrader"));
         }
 
     }

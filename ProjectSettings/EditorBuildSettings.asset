@@ -13,8 +13,11 @@ EditorBuildSettings:
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/BlockMiner.unity
-    guid: 0f3185f38231369419c24dbee39d3769
+    guid: 39d071d1501b7508583fd34cde6678f9
+  - enabled: 1
+    path: Assets/Scenes/PoolTrader.unity
+    guid: 441ce9c39eaf6124d9ee82f4c124f0f9
   - enabled: 0
     path: Assets/Scenes/unused.unity
-    guid: d56dc6e03f6df8a4ca0e583282eb92ca
+    guid: b1b995a3ccadbb705a4a53c208f11288
   m_configObjects: {}

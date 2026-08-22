@@ -8,16 +8,21 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private WalletConnector wc; // Elemento UI para ETH
     [SerializeField] private Button jugarButton;
     [SerializeField] private Button salirButton;
+    [SerializeField] private Button helpButton;
+    [SerializeField] private Button jugarSinWalletButton;
 
     public void Start()
     {
         jugarButton.onClick.AddListener(Jugar);
+        jugarSinWalletButton.onClick.AddListener(jugarSinWallet);
+        helpButton.onClick.AddListener(help);
         salirButton.onClick.AddListener(Salir);
     }
 
     private void Jugar()
     {
-        // Si se recibe una partida vacía de la wallet del mongoDB, iniciar tutorial - por implementar
+        AudioManager.Instance.PlaySFX("select_button");
+        // Si se recibe una partida vacï¿½a de la wallet del mongoDB, iniciar tutorial - por implementar
         if (wc.GetWalletAuthenticated())
         {
             Debug.Log("Iniciando juego...");
@@ -25,13 +30,13 @@ public class MenuScript : MonoBehaviour
         }
         else if (wc.GetWalletConnected())
         {
-            jugarButton.interactable = false; // Evitar múltiples clicks
+            jugarButton.interactable = false; // Evitar mï¿½ltiples clicks
             TutorialManager.Instance.ShowMessage("Authentication needed",
                 "In the next dialog you will be prompted to sign with your connected phone wallet", () =>
                 {
-                    // Este código solo se ejecutará cuando el usuario pulse una tecla para cerrar el mensaje
+                    // Este cï¿½digo solo se ejecutarï¿½ cuando el usuario pulse una tecla para cerrar el mensaje
                     wc.Authenticate();
-                    jugarButton.interactable = true; // Rehabilitar el botón
+                    jugarButton.interactable = true; // Rehabilitar el botï¿½n
                 });
         }
         // Si se recibe una partida guardada, cargarla directamente hacia la escena principal del juego - por implementar
@@ -41,20 +46,36 @@ public class MenuScript : MonoBehaviour
         }
         else
         {
-            jugarButton.interactable = false; // Evitar múltiples clicks
+            jugarButton.interactable = false; // Evitar mï¿½ltiples clicks
             TutorialManager.Instance.ShowMessage("Wallet Not Connected",
                 "Please connect your wallet first.", () =>
                 {
-                    // Este código solo se ejecutará cuando el usuario pulse una tecla para cerrar el mensaje
+                    // Este cï¿½digo solo se ejecutarï¿½ cuando el usuario pulse una tecla para cerrar el mensaje
                     wc.ConnectWallet();
-                    jugarButton.interactable = true; // Rehabilitar el botón
+                    jugarButton.interactable = true; // Rehabilitar el botï¿½n
                 });
         }
         
     }
-
+    private void jugarSinWallet()
+    {
+        AudioManager.Instance.PlaySFX("select_button");
+        // Si se recibe una partida vaca de la wallet del mongoDB, iniciar tutorial - por implementar
+        
+        jugarSinWalletButton.interactable = false; // Evitar mltiples clicks
+        Debug.Log("Iniciando juego...");
+        SceneManager.LoadScene("PoolTrader");
+        
+    }
+    private void help()
+    {
+        AudioManager.Instance.PlaySFX("select_button");
+        Debug.Log("Abriendo ayuda...");
+        // Por implementar
+    }
     private void Salir()
     {
+        AudioManager.Instance.PlaySFX("select_button");
         Debug.Log("Saliendo...");
         Application.Quit();
     }

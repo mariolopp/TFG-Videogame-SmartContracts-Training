@@ -21,6 +21,10 @@ public class Validar : MonoBehaviour
     void Start()
     {
         boton = GetComponent<Button>();
+        if (assets == null)
+        {
+            assets = FindFirstObjectByType<AssetsManager>();
+        }
         historialPanel = GameObject.Find("HistorialPanel").transform;
         barra.Resetear(); // Asegurarnos de que la barra empieza vacia
         boton.onClick.AddListener(Pulsar);
@@ -73,7 +77,8 @@ public class Validar : MonoBehaviour
 }
     void Pulsar()
     {
-        // Log de la validaci�n
+        AudioManager.Instance.PlaySFX("validarButtonSound");
+
         //Debug.Log("La barra iba al " + (barra.valorActual * 100f).ToString("F1") + "% cuando se valid�.");
         StartCoroutine(DeshabilitarValidarUnSec());
         // Crear un clon de la barra
