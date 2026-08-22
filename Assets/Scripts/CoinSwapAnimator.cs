@@ -9,6 +9,7 @@ public class CoinSwapAnimator : MonoBehaviour
     [SerializeField] private RectTransform pozoCentral;
     [SerializeField] private RectTransform spawnPointEntrada;
     [SerializeField] private RectTransform externalSpawnPointEntrada;
+    [SerializeField] private RectTransform externalSpawnPointEntrada2;
     [SerializeField] private RectTransform externalSpawnPointSalida;
     [SerializeField] private RectTransform spawnPointSalida;
     [SerializeField] private GameObject coinPrefab;   // Image + CanvasGroup
@@ -223,5 +224,49 @@ public class CoinSwapAnimator : MonoBehaviour
 
         Destroy(coinGo);
         if (textRt != null) Destroy(textRt.gameObject);
+    }
+    // NUEVO: liquidity providers añadiendo a ambos depósitos a la vez
+    public void PlayAddLiquidity(float btcAmount, float ethAmount)
+    {
+        StartCoroutine(LiquidityRoutine(btcAmount, ethAmount, entering: true));
+    }
+
+    // NUEVO: liquidity providers retirando de ambos depósitos a la vez
+    public void PlayRemoveLiquidity(float btcAmount, float ethAmount)
+    {
+        StartCoroutine(LiquidityRoutine(btcAmount, ethAmount, entering: false));
+    }
+
+    private IEnumerator LiquidityRoutine(float btcAmount, float ethAmount, bool entering)
+    {
+        OnSwapStarted?.Invoke();
+
+        // Las dos monedas viajan en paralelo (a diferencia del swap normal, que es secuencial)
+        Coroutine btcCoin = StartCoroutine(AnimateLiquidityCoin(btcSprite, depositoBtc, btcAmount, entering, externalSpawnPointEntrada));
+        Coroutine ethCoin = StartCoroutine(AnimateLiquidityCoin(ethSprite, depositoEth, ethAmount, entering, externalSpawnPointEntrada2));
+
+        yield return btcCoin;
+        yield return ethCoin;
+
+        OnSwapFinished?.Invoke();
+    }
+
+    // Mueve una única moneda entre el pozo y un depósito concreto, en cualquier dirección
+    private IEnumerator AnimateLiquidityCoin(Sprite sprite, RectTransform deposito, float amount, bool entering, RectTransform pointEntrada)
+    {
+        Vector3[] ruta = entering
+            ? new[] { pointEntrada.position, deposito.position }
+            : new[] { deposito.position, pointEntrada.position };
+
+        string label = FormatAmount(amount, negative: !entering); // entra = "+", sale = "-"
+        Color labelColor = entering ? colorPositivo : colorNegativo;
+
+        yield return StartCoroutine(AnimateCoinMultiPoint(
+            sprite, ruta, label, labelColor,
+            scaleUp: !entering,          // igual que en el swap: al salir se encoge, al entrar no
+            labelAtStart: entering,      // si entra, el label aparece al salir del spawn; si sale, al salir del depósito
+            fadeOutDuringLastSegment: entering, // si entra, se apaga justo al llegar al depósito
+            moveDuration: 1f,
+            scaleFactor: 0.5f )); 
     }
 }

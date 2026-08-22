@@ -15,6 +15,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     [SerializeField] private PriceManager priceManager;
     [SerializeField] private AssetsManager assetsManager;
     [SerializeField] private MarketActorAnimator actorAnimator;
+    [SerializeField] private CoinSwapAnimator coinSwapAnimator;
     [SerializeField] private ConversionUIController conversionUI;
 
     [Header("UI de turno")]
@@ -28,6 +29,10 @@ public class PoolTraderTurnManager : MonoBehaviour
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] private Button endGameCloseButton;
     [SerializeField] private TMP_Text endGameScoreText;
+    [SerializeField] private TMP_Text endGameBagsBTCText;
+    [SerializeField] private TMP_Text endGameBagsETHText;
+    [SerializeField] private TMP_Text endGameNumBTCText;
+    [SerializeField] private TMP_Text endGameNumETHText;
 
     [Header("Estado interno")]
     private bool conversionFinished = false;
@@ -165,10 +170,22 @@ public class PoolTraderTurnManager : MonoBehaviour
         float fraction = Random.Range(config.minLiquidityChangeFraction, config.maxLiquidityChangeFraction);
         Color tint = adds ? config.colorLiquidityAdd : config.colorLiquidityRemove;
 
-        yield return actorAnimator.RunActor(tint, config.providerWalkDuration, 0.1f, () =>
+        yield return actorAnimator.RunActor(tint, config.providerWalkDuration, 1.5f, () =>
         {
-            if (adds) priceManager.TryAddLiquidity(fraction);
-            else priceManager.TryRemoveLiquidity(fraction, config.minimumReserveBTC, config.minimumReserveETH);
+            float btcBefore = priceManager.GetReserveA();
+            float ethBefore = priceManager.GetReserveB();
+
+            bool success = adds
+                ? priceManager.TryAddLiquidity(fraction)
+                : priceManager.TryRemoveLiquidity(fraction, config.minimumReserveBTC, config.minimumReserveETH);
+
+            //if (!success) return; // orden ignorada (mínimo violado) -> sin animación de monedas
+
+            float btcDelta = Mathf.Abs(priceManager.GetReserveA() - btcBefore);
+            float ethDelta = Mathf.Abs(priceManager.GetReserveB() - ethBefore);
+
+            if (adds) coinSwapAnimator.PlayAddLiquidity(btcDelta, ethDelta);
+            else if (fraction > 0) coinSwapAnimator.PlayRemoveLiquidity(btcDelta, ethDelta);
         });
     }
 
@@ -186,8 +203,21 @@ public class PoolTraderTurnManager : MonoBehaviour
         if (endGamePanel != null)
         {
             endGamePanel.SetActive(true);
+            if (endGameNumETHText !=null)
+                //endGameNumETHText.text = $"x{priceManager.GetUserB()}";
+                StartCoroutine(AnimateNumber(endGameNumETHText, 0f, priceManager.GetUserB(), 1f));
+            if (endGameBagsETHText != null)
+                //endGameBagsETHText.text = $"x{bagsFromETH}"; 
+                StartCoroutine(AnimateNumber(endGameBagsETHText, 0f, bagsFromETH, 1.5f, 1.25f));   
+            if (endGameNumBTCText !=null)
+                //endGameNumBTCText.text = $"x{priceManager.GetUserA()}";
+                StartCoroutine(AnimateNumber(endGameNumBTCText, 0f, priceManager.GetUserA(), 1f, 3f));
+            if (endGameBagsBTCText != null)
+                //endGameBagsBTCText.text = $"x{bagsFromBTC}";
+                StartCoroutine(AnimateNumber(endGameBagsBTCText, 0f, bagsFromBTC, 1.5f, 4.25f));
             if (endGameScoreText != null)
-                endGameScoreText.text = $"x{assetsManager.usd}";
+                //endGameScoreText.text = $"x{assetsManager.usd}";
+                StartCoroutine(AnimateNumber(endGameScoreText, 0f, assetsManager.usd, 3.5f, 6f));
         }
         if (endGameCloseButton != null)
         {
@@ -224,5 +254,25 @@ public class PoolTraderTurnManager : MonoBehaviour
         }
 
         canvasEndTradingButton.alpha = 1f;
+    }
+    private IEnumerator AnimateNumber(TMP_Text text, float startValue, float targetValue, float duration, float wait=0f)
+    {
+        yield return new WaitForSeconds(wait);
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+            float currentValue = Mathf.Lerp(startValue, targetValue, t);
+
+            text.text = $"x{Mathf.RoundToInt(currentValue)}";
+
+            yield return null;
+        }
+
+        text.text = $"x{Mathf.RoundToInt(targetValue)}";
     }
 }
