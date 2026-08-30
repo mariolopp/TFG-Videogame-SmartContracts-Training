@@ -25,7 +25,8 @@ public class TurnAnnouncer : MonoBehaviour
     {
         announcementText.text = turnName;
         canvasGroup.alpha = 1f;
-
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
         float t = 0f;
         while (t < totalDuration)
         {
@@ -34,5 +35,6 @@ public class TurnAnnouncer : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0f;
+        
     }
 }

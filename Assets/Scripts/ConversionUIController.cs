@@ -99,6 +99,6 @@ public class ConversionUIController : MonoBehaviour
 
     private void RefreshUI()
     {
-        if (bagsBalanceText != null) bagsBalanceText.text = $"x{assets.usd}";
+        if (bagsBalanceText != null) bagsBalanceText.text = assets.getUSD().ToString("F2");
     }
 }

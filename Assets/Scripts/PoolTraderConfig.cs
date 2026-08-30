@@ -45,4 +45,10 @@ public class PoolTraderConfig : ScriptableObject
     public Color colorLiquidityAdd = new Color(0.3f, 0.85f, 0.4f);
     public Color colorLiquidityRemove = new Color(0.9f, 0.3f, 0.3f);
     public Color colorTraderNeutral = new Color(0.75f, 0.75f, 0.75f);
+
+    [Header("Fees de la red")]
+    [Tooltip("Fee fija en unidades de moneda, se recalcula cada turno")]
+    public float feeMin = 0.01f;
+    public float feeMax = 0.20f;
+
 }

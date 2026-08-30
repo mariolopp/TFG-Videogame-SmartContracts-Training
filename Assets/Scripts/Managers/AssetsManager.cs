@@ -6,9 +6,9 @@ public class AssetsManager : MonoBehaviour
 {
     public event System.Action OnAssetsChanged;
     public static AssetsManager Instance;
-    public int usd = 0;
+    public float usd = 0;
     public int eth = 0;
-    public int t_usd = 0;
+    public float t_usd = 0;
 
     private void Awake()
     {
@@ -25,18 +25,17 @@ public class AssetsManager : MonoBehaviour
     }
     private void Start()
     {
-        // Inicializar con 1000 USD y 0 ETH
         usd = 0;
         eth = 0;
         OnAssetsChanged?.Invoke();
     }
-    public void AddUSD(int amount)
+    public void AddUSD(float amount)
     {
         usd += amount;
         OnAssetsChanged?.Invoke();
     }
 
-    public void AddTempUSD(int amount)
+    public void AddTempUSD(float amount)
     {
         t_usd += amount;
         OnAssetsChanged?.Invoke();
@@ -52,9 +51,13 @@ public class AssetsManager : MonoBehaviour
         OnAssetsChanged?.Invoke();
     }
 
-    public void SpendUSD(int amount)
+    public void SpendUSD(float amount)
     {
         usd -= amount;
         OnAssetsChanged?.Invoke();
+    }
+    public float getUSD()
+    {
+        return usd;
     }
 }

@@ -14,7 +14,7 @@ public class PriceManager : MonoBehaviour
     [SerializeField] private float userB = 5f;
 
     [Header("Configuración")]
-    [SerializeField] private float feePercent = 1f;
+    [SerializeField] private float feePercent = 0f;
     [SerializeField] private float tradeAmount = 1f;
 
     [Header("UI Slippage")]
@@ -41,6 +41,14 @@ public class PriceManager : MonoBehaviour
     private int XposImgA;
     private int XposImgB;
 
+    [Header("Fees")]
+    [SerializeField] private float currentChainFee = 0.05f;
+    [SerializeField] private TMP_Text feeDisplayText; // NUEVO: cuadro persistente "Fee actual: 0.05"
+    [SerializeField] private AssetsManager assets;    // NUEVO: para cobrar la fee en bolsas
+
+
+    private Coroutine feeAnimCoroutine;
+
     public static event Action<float, float> OnTrade;
 
     // NUEVO: gating de turno
@@ -48,6 +56,8 @@ public class PriceManager : MonoBehaviour
 
     private void Start()
     {
+        if (assets == null) assets = FindObjectOfType<AssetsManager>(); // NUEVO, mismo patrón que otros scripts
+
         // Posiciones para intercambiar sprites si se cambia la vista de precio
         XposImgA = (int)imgBTC.rectTransform.anchoredPosition.x;
         XposImgB = (int)imgETH.rectTransform.anchoredPosition.x;
@@ -144,8 +154,16 @@ public class PriceManager : MonoBehaviour
             Debug.LogWarning("PriceManager: B insuficiente para comprar.");
             return;
         }
+        if (assets != null && assets.usd < currentChainFee) // NUEVO: chequeo de bolsas suficientes
+        {
+            Debug.LogWarning("PriceManager: bolsas insuficientes para pagar la fee.");
+            return;
+        }
+
         float amountOut = ExecuteTrade(sellingA: false, tradeAmount, touchUserBalances: true);
+        if (assets != null) assets.SpendUSD(currentChainFee); // NUEVO
         swapAnimator.PlayEthToBtc(1f, amountOut);
+        swapAnimator.PlayFee(currentChainFee);
         OnTrade?.Invoke(tradeAmount, amountOut);
         UpdateUI();
     }
@@ -158,12 +176,19 @@ public class PriceManager : MonoBehaviour
             Debug.LogWarning("PriceManager: A insuficiente para vender.");
             return;
         }
+        if (assets != null && assets.usd < currentChainFee) // NUEVO
+        {
+            Debug.LogWarning("PriceManager: bolsas insuficientes para pagar la fee.");
+            return;
+        }
+
         float amountOut = ExecuteTrade(sellingA: true, tradeAmount, touchUserBalances: true);
+        if (assets != null) assets.SpendUSD(currentChainFee); // NUEVO
         swapAnimator.PlayBtcToEth(1f, amountOut);
+        swapAnimator.PlayFee(currentChainFee);
         OnTrade?.Invoke(tradeAmount, amountOut);
         UpdateUI();
     }
-
     // Se utiliza para alternar las imágenes en el caso que el usuario cambie el orden de visualización de precio
     public void OnView()
     {
@@ -219,6 +244,17 @@ public class PriceManager : MonoBehaviour
         UpdateSlippagePreview(viewAorB);
     }
 
+    public void SetFee(float fee)
+    {
+        currentChainFee = Mathf.Max(0f, fee);
+        UpdateFeeDisplay(); // NUEVO: refresca el cuadro cada vez que cambia
+    }
+    private void UpdateFeeDisplay()
+    {
+        if (feeDisplayText != null)
+            feeDisplayText.text = $"{currentChainFee:F2}";
+    }
+    public float GetCurrentChainFee() => currentChainFee;
     public float GetReserveA() => reserveA;
     public float GetReserveB() => reserveB;
     public float GetUserA() => userA;

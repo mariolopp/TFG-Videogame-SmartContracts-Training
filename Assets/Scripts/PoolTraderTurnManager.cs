@@ -72,6 +72,9 @@ public class PoolTraderTurnManager : MonoBehaviour
                 turnCounterText.text = $"Turno {CurrentTurn} / {config.totalTurns}";
 
             yield return StartCoroutine(TradersPhase());
+
+            priceManager.SetFee(Random.Range(config.feeMin, config.feeMax)); // Nuevo: fee aleatoria cada turno
+            
             yield return StartCoroutine(PlayerTradingPhase());
 
             if (CurrentTurn < config.totalTurns)    // No se ejecuta en el último turno
@@ -235,7 +238,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     {
         if (turnLabelText != null) turnLabelText.text = label;
         if (turnAnnouncer != null) turnAnnouncer.Announce(label); // NUEVO
-        AudioManager.Instance?.PlaySFX("turn_change");
+        //AudioManager.Instance?.PlaySFX("turn_change");
     }
 
     public void EndConversionTurn()

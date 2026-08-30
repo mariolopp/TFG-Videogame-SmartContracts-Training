@@ -111,7 +111,46 @@ public class CoinSwapAnimator : MonoBehaviour
 
         // OnSwapFinished?.Invoke(); // Muevo esto a posta a la mitad de la animación para que las pools se actualicen cuando deben
     }
-    
+    // NUEVO: texto flotante de fee, sin moneda asociada — reutiliza el mismo prefab/patrón que las labels de swap
+    public void PlayFee(float feeAmount)
+    {
+        StartCoroutine(FeeRoutine(feeAmount));
+    }
+
+    private IEnumerator FeeRoutine(float feeAmount)
+    {
+        if (floatingTextPrefab == null) yield break;
+
+        Vector3 origin = pozoCentral.position + Vector3.down * 20f; // ligeramente debajo del pozo, para no solapar con el swap normal
+        Vector3 textStart = origin + Vector3.up * 20f;
+
+        GameObject textGo = Instantiate(floatingTextPrefab, pozoCentral.parent);
+        RectTransform textRt = textGo.GetComponent<RectTransform>();
+        CanvasGroup textCg = textGo.GetComponent<CanvasGroup>();
+        TMP_Text tmp = textGo.GetComponent<TMP_Text>();
+
+        if (textCg == null) textCg = textGo.AddComponent<CanvasGroup>();
+
+        tmp.text = $"-{feeAmount:F2} fee";
+        tmp.color = colorNegativo; // mismo rojo que ya usas para las salidas de moneda
+        textRt.position = textStart;
+        textCg.alpha = 0f;
+
+        float duration = moveDuration * 2f; // un poco más lento que el label de swap, para que no se pisen visualmente
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float p = t / duration;
+
+            textRt.position = textStart + Vector3.up * (textFloatDistance * p);
+            textCg.alpha = p < 0.2f ? Mathf.Lerp(0f, 1f, p / 0.2f) : Mathf.Lerp(1f, 0f, (p - 0.2f) / 0.8f);
+
+            yield return null;
+        }
+
+        Destroy(textGo);
+    }
     private RectTransform GetDeposito(string coinName)
     {
         if (coinName == "BTC") return depositoBtc;
