@@ -21,6 +21,10 @@ public class ConversionUIController : MonoBehaviour
 
     public void Open(PriceManager pm, PoolTraderConfig cfg)
     {
+        if (assets == null)
+        {
+            assets = FindObjectOfType<AssetsManager>();
+        }
         priceManager = pm;
         config = cfg;
 

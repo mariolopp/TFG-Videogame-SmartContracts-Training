@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cbdce1d6a7787e49dd5a7647eb097e, type: 3}
   m_Name: PoolTraderConfig
   m_EditorClassIdentifier: 
-  totalTurns: 1
+  totalTurns: 3
   playerTradeTurnDuration: 10
   conversionTurnDuration: 10
   bagsPerBTC: 3
   bagsPerETH: 2
   factorBags: 1
   minTraders: 2
-  maxTraders: 5
-  delayBetweenTraders: 2
+  maxTraders: 4
+  delayBetweenTraders: 1
   traderWalkDuration: 1
   traderTradeAmountRange: {x: 1, y: 6}
   trendBiasProbability: 0.66

@@ -41,6 +41,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     [Header("Animaciones recordatorio")]
     [SerializeField] private CanvasGroup canvasEndTradingButton;
     [SerializeField] private float blinkSpeed = 3f;
+    [SerializeField] private TurnAnnouncer turnAnnouncer; // NUEVO
     private bool blinking = false;
 
     public TurnPhase CurrentPhase { get; private set; }
@@ -233,6 +234,8 @@ public class PoolTraderTurnManager : MonoBehaviour
     private void SetTurnLabel(string label)
     {
         if (turnLabelText != null) turnLabelText.text = label;
+        if (turnAnnouncer != null) turnAnnouncer.Announce(label); // NUEVO
+        AudioManager.Instance?.PlaySFX("turn_change");
     }
 
     public void EndConversionTurn()
