@@ -6,7 +6,8 @@ public class TurnAnnouncer : MonoBehaviour
 {
     [SerializeField] private TMP_Text announcementText;
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private float totalDuration = 1.5f; // visible + fade, empieza a apagarse desde ya
+    [SerializeField] private float waitDuration = 1f; // Tiempo totalmente visible
+    [SerializeField] private float fadeDuration = 0.5f; // Tiempo en desaparecer
 
     private Coroutine current;
 
@@ -27,14 +28,14 @@ public class TurnAnnouncer : MonoBehaviour
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+        yield return new WaitForSeconds(waitDuration);
         float t = 0f;
-        while (t < totalDuration)
+        while (t < fadeDuration)
         {
             t += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(1f, 0f, t / totalDuration);
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
             yield return null;
         }
         canvasGroup.alpha = 0f;
-        
     }
 }

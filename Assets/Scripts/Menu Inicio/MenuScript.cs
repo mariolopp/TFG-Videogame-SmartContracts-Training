@@ -64,7 +64,7 @@ public class MenuScript : MonoBehaviour
         
         jugarSinWalletButton.interactable = false; // Evitar mltiples clicks
         Debug.Log("Iniciando juego...");
-        SceneManager.LoadScene("PoolTrader");
+        SceneManager.LoadScene("BlockMiner");
         
     }
     private void help()
