@@ -19,8 +19,11 @@ public class CinematicStarter : MonoBehaviour
     [Header("Gestor de Tutorial (Círculos)")]
     [SerializeField] private Transform contenedorCirculos;
 
-    [Header("Apariciones Progresivas de UI")]
-    [Tooltip("Añade aquí las partes del Canvas que irán apareciendo con cada evento")]
+    [Header("Cambios en la UI durante la cinemática")]
+    [HideInInspector] public bool esperandoAccion = false;
+    private Button botonActual;
+
+    [Tooltip("Partes del Canvas que irán apareciendo con cada evento")]
     [SerializeField] private AparicionProgresiva[] elementosQueAparecen;
 
     [Header("Elementos a Activar al Final de la Cinemática")]
@@ -30,6 +33,7 @@ public class CinematicStarter : MonoBehaviour
 
     [SerializeField] private GameObject footText;
 
+    
     [Header("Botón de Saltar")]
     [SerializeField] private Button botonSaltar;
 
@@ -107,25 +111,63 @@ public class CinematicStarter : MonoBehaviour
         ApagarTodosLosCirculos();
         if (string.IsNullOrEmpty(nombreEvento)) return;
 
-        // A. Mostrar el círculo correspondiente (tu código original)
-        if (contenedorCirculos != null)
+        if (nombreEvento.StartsWith("esperarAccion"))
         {
-            Transform circuloDeseado = contenedorCirculos.Find(nombreEvento);
-            if (circuloDeseado != null) circuloDeseado.gameObject.SetActive(true);
-        }
+            GameObject button = GameObject.FindGameObjectWithTag(nombreEvento);
 
-        // B. Buscar si ese evento también debe hacer aparecer algo de la interfaz
-        foreach (var item in elementosQueAparecen)
-        {
-            if (item.nombreEvento == nombreEvento && item.elementoUI != null)
+            if (button != null)
             {
-                // Si la opacidad es 0, hacemos la animación para que aparezca
-                if (item.elementoUI.alpha == 0f)
+                botonActual = button.GetComponent<Button>();
+
+                if (botonActual != null)
                 {
-                    StartCoroutine(AparecerElementoUI(item.elementoUI));
+                    botonActual.gameObject.SetActive(true); // lo activamos, por si estaba oculto
+                    botonActual.GetComponents<CanvasGroup>()[0].interactable = true; // aseguramos que sea interactuable
+
+                    if (DialogManager.Instance != null)
+                    {
+                        esperandoAccion = true;
+                        DialogManager.Instance.PauseDialog(); // pausa + oculta la ventana
+                    }
+
+                    botonActual.onClick.AddListener(AlPulsarBotonTemporal);
+
+                    Debug.Log("Se encontró un objeto con el tag: " + nombreEvento + " y se asignó la función para reanudar el diálogo al pulsarlo");
+
+                    StartCoroutine(EsperarHastaContinuar());
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró ningún objeto con el tag: " + nombreEvento);
+            }
+        }
+        else
+        {
+            if (contenedorCirculos != null)
+            {
+                Transform circuloDeseado = contenedorCirculos.Find(nombreEvento);
+                if (circuloDeseado != null) circuloDeseado.gameObject.SetActive(true);
+            }
+
+            foreach (var item in elementosQueAparecen)
+            {
+                if (item.nombreEvento == nombreEvento && item.elementoUI != null)
+                {
+                    if (item.elementoUI.alpha == 0f)
+                    {
+                        StartCoroutine(AparecerElementoUI(item.elementoUI));
+                    }
                 }
             }
         }
+    }
+
+    // NUEVA corrutina: solo se encarga de esperar
+    private IEnumerator EsperarHastaContinuar()
+    {
+        yield return new WaitUntil(() => !esperandoAccion);
+        DialogManager.Instance.ResumeDialogAndAdvance();
     }
 
     // Corrutina que hace el fundido poco a poco
@@ -158,6 +200,18 @@ public class CinematicStarter : MonoBehaviour
         foreach (Transform hijo in contenedorCirculos)
         {
             hijo.gameObject.SetActive(false);
+        }
+    }
+
+    private void AlPulsarBotonTemporal()
+    {
+        esperandoAccion = false;
+
+        if (botonActual != null)
+        {
+            botonActual.onClick.RemoveListener(AlPulsarBotonTemporal);
+            botonActual.GetComponents<CanvasGroup>()[0].interactable = false; // aseguramos que no sea interactuable
+            //botonActual.gameObject.SetActive(false); // lo apagamos hasta la próxima vez que haga falta
         }
     }
     private void TerminarCinematica()

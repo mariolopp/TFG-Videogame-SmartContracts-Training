@@ -269,6 +269,18 @@ public class DialogManager : MonoBehaviour
             callback.Invoke();
         }
     }
+    // --- NUEVO: pausa real. No aborta el diálogo, solo detiene el "typing" y oculta la ventana ---
+    public void PauseDialog()
+    {
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        isTyping = false;
+        isAnimatingUI = true; // evita que un click en pantalla avance el diálogo mientras se espera el botón
+    }
+    public void ResumeDialogAndAdvance()
+    {
+        isAnimatingUI = false;
+        AdvanceSequence();
+    }
     IEnumerator FadeIn()
     {
         isAnimatingUI = true;

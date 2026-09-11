@@ -1,0 +1,653 @@
+{
+  "dialogues": [
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "¡Bienvenido a Pool Trader!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Hoy vas a aprender a moverte dentro de un pequeño mercado de activos digitales.",
+      "evento": "Sell_A"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Un mercado?",
+      "evento": "esperarAccionSell"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Tengo que saber de trading o de criptomonedas para jugar?",
+      "evento": "Buy_A"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "No. Vamos a empezar desde cero.",
+      "evento": "esperarAccionBuy"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Primero entenderás qué estás comprando y vendiendo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Después veremos cómo ocurre todo esto en la blockchain.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y finalmente aprenderás cómo aprovechar los movimientos del mercado.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Empecemos por lo más importante.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "En este juego vas a encontrarte con dos tokens utilizados en una red ERC-20, como WBTC y ETH.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale… ¿pero qué es exactamente un token?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Un token es, básicamente, un activo digital que puede ser transferido entre usuarios.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "También puede utilizarse dentro de un sistema.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Puede representar múltiples cosas, desde ideas o bromas hasta activos físicos.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "También puede representar acciones, o incluso otras criptomonedas.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Puedes imaginarlo como una ficha digital.",
+      "evento": "LiveUserAmnt"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale... lo pillo, pero ¿cómo se supone que utilizo esos tokens?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Muy sencillo. Tú simplemente los vas a intercambiar.",
+      "evento": "LiveUserAmnt"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Para ello tendrás que pagar una pequeña comisión que llamamos fee.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Fee? ¿Me suena del minijuego que hemos jugado antes?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "¡Exacto!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Una fee es una tarifa que pagas por operar en la blockchain.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Es una tasa variable, por lo que puede ser distinta con el tiempo.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Pero yo no tengo dinero, ¿cómo voy a pagar eso?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Tranquilo, me he encargado de darte un par de bolsas.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Con estas bolsas podrás realizar tus primeros intercambios.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Aunque siempre puedes obtener más en tu turno de convertir.",
+      "evento": "ETH_bag_icon"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Estas bolsas son tu forma de intercambiar tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Sin ellas no podrás comprar ni vender, así que asegúrate de tener unas cuantas contigo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Además, las monedas que acumules en tu resultado final se transformarán en nuevas bolsas.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y lo harán a un cambio generoso.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "",
+      "evento": "Okey, cuentame mas sobre quienes son los que intercambian esos tokens"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "En este lugar, hay personas que quieren unos tokens y otras que quieren tokens diferentes.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Por ejemplo, alguien puede tener WBTC, la moneda naranja, y querer ETH",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Otra persona puede tener ETH, la moneda azul, y preferir WBTC.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y por qué alguien querría intercambiar un token?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Puede querer utilizarlo, guardarlo o intercambiarlo después.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "O simplemente pensar que su valor puede aumentar.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "No necesitas conocer el motivo exacto de cada persona.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Lo importante es que diferentes personas quieren intercambiar diferentes activos digitales.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Esos activos digitales son los tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Entonces esto existe porque no todos queremos las mismas monedas?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y necesitamos intercambiarlas?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "¡Exacto!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Lo que debes entender es que los tokens son activos digitales cuyo precio fluctúa.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Las personas los intercambian porque tienen diferentes necesidades, objetivos o expectativas sobre su valor.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "¡Y eso es lo fundamental que debes recordar!",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, sé qué estoy intercambiando. Pero… ¿con quién?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Aquí está la parte interesante.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "En la vida real, si tú quieres comprar un anillo, tienes que encontrar a otra persona que te lo venda.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Aquí no sucede exactamente así. No necesitas encontrar personalmente a alguien que quiera hacer el intercambio contrario.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Todo esto es gracias a la existencia de la liquidity pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Imagina la pool como un lugar con dos grandes depósitos similar a este:",
+      "evento": "PoolElements"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Cada uno tiene un token distinto para que los usuarios puedan intercambiarlos entre sí.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y quién mete esos activos en el depósito?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Los liquidity providers, o proveedores de liquidez.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Son usuarios que aportan activos a la pool para que otros puedan realizar intercambios.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces los liquidity providers ponen los activos…",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Y los traders los utilizan para intercambiar.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactamente. Puedes imaginarlo como una tienda de intercambio de libros.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Los liquidity providers llenan las estanterías, que equivalen a los depósitos de la pool.",
+      "evento": "PoolElements"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Los traders vienen a comprar y vender, dejando unos libros y llevándose otros.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y la librería, que equivaldría a la pool de liquidez, hace posible esos intercambios.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y los liquidity providers hacen todo esto gratis?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "En absoluto",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "En un sistema real, aportar liquidez exige recompensas, por cada intercambio.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Volviendo al ejemplo de la librería, imagina estas comisiones como un pequeño coste.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Ese coste se lo lleva el propietario de la librería por facilitar el lugar donde intercambias los libros, que es mayor a mas libros tenga disponibles.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "No obstante, en este minijuego, para facilitar las cosas, no las tomaremos en cuenta.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entiendo, entonces, los depósitos...",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Esos depósitos se llaman pool de liquidez, recuerda",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Está bien, entonces, la pool de liquidez proporciona los ¿libros?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Tokens. Lo que se intercambia son tokens, sigue...",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, la pool de liquidez proporciona los tokens, y los ¿usuarios? los intercambian.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "¡Muy bien! A los usuarios que hacen esto los llamamos traders, ¿recuerdas?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Comprendo, entonces la liquidity pool proporciona los tokens para que los traders los puedan intercambiar",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "¡Genial! Lo más importante es que una liquidity pool es una reserva de tokens mantenida por usuarios llamados liquidity providers.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "De ellos depende su funcionamiento. Gracias a ellos, los traders pueden realizar intercambios.",
+      "evento": ""
+    },
+
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Me flipa esto que cuentas, y ¿cómo funcionan esos intercambios de los que hablas?",
+      "evento": "."
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "JAJAJ, me encantan tus preguntas.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Supongamos dos tokens. Tú tienes WBTC",
+      "evento": "BTC_amnt"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Pulsas el botón correspondiente y entregas WBTC a la pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "A cambio, recibes ETH.",
+      "evento": "ETH_amnt"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces es como cambiar una moneda por otra.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Sí, pero hay una diferencia importante.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "La pool no tiene una cantidad infinita de activos.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Cada vez que alguien compra un activo, la cantidad disponible dentro de la pool cambia.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y eso afecta al precio?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactamente.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Imagina que hay mucha gente comprando ETH.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Cada intercambio va reduciendo la cantidad de ETH disponible en la pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y aumentando la cantidad del activo del otro depósito.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Por eso el precio cambia.",
+      "evento": "Se resaltan las cantidades de BTC y ETH de la pool."
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Piensa en la pool como un recipiente.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Si sacas mucho de un lado y añades mucho al otro, el equilibrio cambia.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "El siguiente intercambio tendrá unas condiciones diferentes.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "En otras palabras, el precio será distinto.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces no puedo asumir que BTC siempre cuesta lo mismo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Correcto.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y tampoco necesitas memorizar una fórmula para jugar.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Solo recuerda esta regla:",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Cada intercambio modifica el estado de la pool y, por tanto, el precio.",
+      "evento": "Se resalta el valor/precio del intercambio."
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "O sea que mis propias operaciones pueden cambiar el mercado.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Sí. Y eso será muy importante.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Lo importante es que cada intercambio cambia las cantidades de activos de la pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y esos cambios hacen que el precio pueda moverse.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "A más llenos estén los depósitos, menos pronunciadas serán estas variaciones de precios.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Si, en cambio, están muy vacíos, un pequeño intercambio puede cambiar el precio drásticamente.",
+      "evento": ""
+    }
+  ]
+}
