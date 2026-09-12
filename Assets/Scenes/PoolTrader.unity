@@ -2341,7 +2341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 521519137}
-  - component: {fileID: 521519136}
+  - component: {fileID: 521519138}
   m_Layer: 0
   m_Name: CinematicStarter
   m_TagString: Untagged
@@ -2349,7 +2349,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &521519136
+--- !u!4 &521519137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521519135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 551.198, y: 284.93576, z: -2.2569087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &521519138
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2358,12 +2373,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 521519135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5acfa6fbf64f92c2a03ca9eb10da099, type: 3}
+  m_Script: {fileID: 11500000, guid: 93397e3fd8a7d7641a56daef09e5e908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   archivoDialogoJson: {fileID: 4900000, guid: 385cfe0921473840d9d65e3faea5b774, type: 3}
   contenedorCirculos: {fileID: 2676415114870560710}
   esperandoAccion: 0
+  priceManager: {fileID: 1576762932}
+  assetsManager: {fileID: 0}
   elementosQueAparecen:
   - nombreEvento: LiveUserAmnt
     elementoUI: {fileID: 1905445428}
@@ -2383,21 +2400,6 @@ MonoBehaviour:
   gameCanvas: {fileID: 1717071036}
   footText: {fileID: 8600256283772819088}
   botonSaltar: {fileID: 1649853785824525948}
---- !u!4 &521519137
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521519135}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 551.198, y: 284.93576, z: -2.2569087}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556634556
 GameObject:
   m_ObjectHideFlags: 0
@@ -8774,7 +8776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reserveA: 15
   reserveB: 15
-  userA: 2
+  userA: 3
   userB: 0
   feePercent: 1
   tradeAmount: 1
