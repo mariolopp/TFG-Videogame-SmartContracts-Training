@@ -26,6 +26,15 @@ public class playerMovement : MonoBehaviour
             animator.SetBool("WalkingFront", true);
             animator.SetBool("WalkingLeft", false); // Apagamos la otra por seguridad
             animator.SetBool("WalkingRight", false);
+            animator.SetBool("WalkingBack", false);
+        }
+        // 2. EVALUAR DIRECCIÓN: IZQUIERDA
+        else if (movement.y > 0.01f)
+        {
+            animator.SetBool("WalkingLeft", false);
+            animator.SetBool("WalkingFront", false); // Apagamos la otra por seguridad
+            animator.SetBool("WalkingRight", false);
+            animator.SetBool("WalkingBack", true);
         }
         // 2. EVALUAR DIRECCIÓN: IZQUIERDA
         else if (movement.x < -0.01f)
@@ -33,6 +42,7 @@ public class playerMovement : MonoBehaviour
             animator.SetBool("WalkingLeft", true);
             animator.SetBool("WalkingFront", false); // Apagamos la otra por seguridad
             animator.SetBool("WalkingRight", false);
+            animator.SetBool("WalkingBack", false);
         }
         // 3. EVALUAR DIRECCIÓN: DERECHA
         else if (movement.x > 0.01f)
@@ -40,6 +50,7 @@ public class playerMovement : MonoBehaviour
             animator.SetBool("WalkingLeft", false);
             animator.SetBool("WalkingFront", false); // Apagamos la otra por seguridad
             animator.SetBool("WalkingRight", true);
+            animator.SetBool("WalkingBack", false);
         }
         // 3. SI ESTÁ QUIETO (No pulsa ni abajo ni izquierda)
         else
@@ -47,6 +58,7 @@ public class playerMovement : MonoBehaviour
             animator.SetBool("WalkingFront", false);
             animator.SetBool("WalkingLeft", false);
             animator.SetBool("WalkingRight", false);
+            animator.SetBool("WalkingBack", false);
         }
 
         
