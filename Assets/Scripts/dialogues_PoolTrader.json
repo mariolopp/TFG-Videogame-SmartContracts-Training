@@ -10,25 +10,25 @@
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "Hoy vas a aprender a moverte dentro de un pequeño mercado de activos digitales.",
-      "evento": "Sell_A"
+      "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
       "text": "¿Un mercado?",
-      "evento": "esperarAccionSell"
+      "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
       "text": "¿Tengo que saber de trading o de criptomonedas para jugar?",
-      "evento": "Buy_A"
+      "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "No. Vamos a empezar desde cero.",
-      "evento": "esperarAccionBuy"
+      "evento": ""
     },
     {
       "characterId": "profe",
@@ -130,7 +130,7 @@
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "Una fee es una tarifa que pagas por operar en la blockchain.",
-      "evento": ""
+      "evento": "LiveFeesContainer"
     },
     {
       "characterId": "profe",
@@ -147,20 +147,20 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Tranquilo, me he encargado de darte un par de bolsas.",
-      "evento": ""
+      "text": "Tranquilo, me he encargado de traer un par de bolsas para tí",
+      "evento": "ETH_bag_icon"
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "Con estas bolsas podrás realizar tus primeros intercambios.",
-      "evento": ""
+      "evento": "sumarBolsas"
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "Aunque siempre puedes obtener más en tu turno de convertir.",
-      "evento": "ETH_bag_icon"
+      "evento": ""
     },
     {
       "characterId": "profe",
@@ -171,7 +171,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Sin ellas no podrás comprar ni vender, así que asegúrate de tener unas cuantas contigo.",
+      "text": "Sin ellas no podrás comprar ni vender, así que asegúrate de tener unas cuantas contigo en todo momento.",
       "evento": ""
     },
     {
@@ -189,8 +189,8 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
-      "text": "",
-      "evento": "Okey, cuentame mas sobre quienes son los que intercambian esos tokens"
+      "text": "Okey, cuentame mas sobre quienes son los que intercambian esos tokens",
+      "evento": ""
     },
     {
       "characterId": "profe",
@@ -369,7 +369,19 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Los traders vienen a comprar y vender, dejando unos libros y llevándose otros.",
+      "text": "Fíjate como ahora hay la misma cantidad de cada tipo de token en ambos depósitos.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": "LivePoolsAssets"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Los traders vienen a comprar y vender, dejando unos 'libros' y llevándose otros.",
       "evento": ""
     },
     {
@@ -459,7 +471,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "¡Genial! Lo más importante es que una liquidity pool es una reserva de tokens mantenida por usuarios llamados liquidity providers.",
+      "text": "¡Efectivamente! Lo más importante es que una liquidity pool es una reserva de tokens mantenida por usuarios llamados liquidity providers.",
       "evento": ""
     },
     {
@@ -490,13 +502,37 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Pulsas el botón correspondiente y entregas WBTC a la pool.",
+      "text": "Y quieres obtener ETH",
+      "evento": "ETH_amnt"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "El precio se encuentra actualmente en 1 BTC por 1 ETH",
+      "evento": "LivePriceContainer"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Pulsarás el botón de vender, entregando BTC a la pool",
+      "evento": "Sell_A"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Adelante, púlsalo",
+      "evento": "esperarAccionSell"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "A cambio, recibes ETH.",
+      "text": "Muy bien! fíjate como a cambio, recibes ETH.",
       "evento": "ETH_amnt"
     },
     {
@@ -520,8 +556,20 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Cada vez que alguien compra un activo, la cantidad disponible dentro de la pool cambia.",
+      "text": "Cada vez que alguien compra un activo, la cantidad disponible dentro de la pool cambia. ",
       "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Fíjate como las cantidades ya no son iguales",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": "LivePoolsAssets"
     },
     {
       "characterId": "jugador",
@@ -550,14 +598,50 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Y aumentando la cantidad del activo del otro depósito.",
+      "text": "Y aumentando la cantidad del activo del otro depósito que utilizan para comprar",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Por eso el precio cambia.",
-      "evento": "Se resaltan las cantidades de BTC y ETH de la pool."
+      "text": "Por eso el precio cambia. Fíjate que ahora hay mas BTC que ETH",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": "LivePoolsAssets"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Esto es porque depositaste una moneda de BTC y sustrajiste CASI otra de ETH",
+      "evento": "PoolElements"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Fíjate que no has sustraido 1 ETH completo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Esto se debe a que, hay suficientemente pocas monedas para que, comprando 1, tu precio efectivo no sea exactamente 1:1, sino ligeramente menor, 1:0,93",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Fíjate como el precio general ha cambiado también",
+      "evento": "LivePriceContainer"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Esto es un poco complejo, ¿porque cambia tanto el precio?",
+      "evento": ""
     },
     {
       "characterId": "profe",
@@ -568,19 +652,19 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Si sacas mucho de un lado y añades mucho al otro, el equilibrio cambia.",
+      "text": "Si sacas de un lado y añades en otro, el equilibrio cambia.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "El siguiente intercambio tendrá unas condiciones diferentes.",
+      "text": "Esto provoca que cada intercambio tenga unas condiciones diferentes.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "En otras palabras, el precio será distinto.",
+      "text": "En otras palabras, cada intercambio pagará un precio algo distinto al anterior",
       "evento": ""
     },
     {
@@ -592,13 +676,13 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Correcto.",
+      "text": "Correcto. Aunque a veces haya poca diferencia, el precio rara vez es exacto al anterior",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Y tampoco necesitas memorizar una fórmula para jugar.",
+      "text": "Pero tampoco necesitas memorizar una fórmula para jugar.",
       "evento": ""
     },
     {
@@ -611,7 +695,7 @@
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "Cada intercambio modifica el estado de la pool y, por tanto, el precio.",
-      "evento": "Se resalta el valor/precio del intercambio."
+      "evento": "LivePriceContainer"
     },
     {
       "characterId": "jugador",
@@ -647,6 +731,210 @@
       "characterId": "profe",
       "characterName": "Mentor",
       "text": "Si, en cambio, están muy vacíos, un pequeño intercambio puede cambiar el precio drásticamente.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Recuerda que los depósitos son estos",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces puedo controlar el precio si hago suficientes intercambios.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "No tan rápido.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Tú no eres el único que opera.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Hay más personas?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Muchos. Se llaman traders, ¿recuerdas?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Durante la partida, estos traders también realizarán intercambios.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Algunos comprarán BTC.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Otros comprarán ETH.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y sus operaciones también modificarán la pool y, por consecuencia, el precio.",
+      "evento": "TraderCircle"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces el precio puede cambiar aunque yo no haga nada.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactamente.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y eso significa que no puedes controlarlo.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Solo puedes reaccionar a lo que está ocurriendo.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Entonces tengo que fijarme en lo que hacen los demás.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Correcto, pero sobre todo en cómo cambian las proporciones de la pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Porque una buena oportunidad puede aparecer precisamente después de la operación de otro trader.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Tu objetivo no es predecir cada movimiento.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Es aprender a reconocer cuándo tienes una oportunidad que aprovechar para conseguir más tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Lo importante es que juegas contra otros traders, que también modifican las proporciones de la pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Creando así oportunidades para ti.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Vale, ya entiendo la pool y los intercambios.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "Pero ¿cómo funciona todo durante una partida?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Aquí es donde entra nuestro sistema de turnos.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Cada turno tiene cuatro fases, siempre en este orden.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Primero: Traders.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Después: Conversión.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Luego: Intercambio del jugador.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Y finalmente: Liquidity providers.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "Tú",
+      "text": "¿Y después vuelve a empezar?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactamente.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Una vez terminan las cuatro fases, comienza un nuevo turno.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Me dejo ya de explicaciones y pruebalo tu mismo:",
       "evento": ""
     }
   ]

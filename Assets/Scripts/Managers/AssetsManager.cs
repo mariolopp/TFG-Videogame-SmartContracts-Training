@@ -56,8 +56,13 @@ public class AssetsManager : MonoBehaviour
         usd -= amount;
         OnAssetsChanged?.Invoke();
     }
-    public float getUSD()
+    public float GetUSD()
     {
         return usd;
+    }
+    public void SetUSD(float amount)
+    {
+        usd = Mathf.Max(0f, amount);
+        OnAssetsChanged?.Invoke();
     }
 }

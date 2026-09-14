@@ -249,6 +249,10 @@ public class PriceManager : MonoBehaviour
         currentChainFee = Mathf.Max(0f, fee);
         UpdateFeeDisplay(); // NUEVO: refresca el cuadro cada vez que cambia
     }
+    public void SetUserA(float amount) { userA = Mathf.Max(0f, amount); UpdateUI(); }
+    public void SetUserB(float amount) { userB = Mathf.Max(0f, amount); UpdateUI(); }
+    public void SetReserveA(float amount) { reserveA = Mathf.Max(0f, amount); UpdateUI(); }
+    public void SetReserveB(float amount) { reserveB = Mathf.Max(0f, amount); UpdateUI(); }
     private void UpdateFeeDisplay()
     {
         if (feeDisplayText != null)

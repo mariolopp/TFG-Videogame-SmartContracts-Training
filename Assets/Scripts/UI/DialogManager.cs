@@ -209,7 +209,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    private void CompleteTextImmediately()
+    public void CompleteTextImmediately()
     {
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         bodyText.text = currentFullText;

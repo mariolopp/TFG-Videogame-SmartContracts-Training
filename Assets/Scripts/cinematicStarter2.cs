@@ -87,7 +87,6 @@ public class CinematicStarter2 : MonoBehaviour
                 item.elementoUI.blocksRaycasts = true;
             }
         }
-
         // Esto detiene el DialogManager y dispara TerminarCinematica automáticamente
         if (DialogManager.Instance != null)
         {
@@ -116,6 +115,7 @@ public class CinematicStarter2 : MonoBehaviour
 
                 if (botonActual != null)
                 {
+                    DialogManager.Instance.CompleteTextImmediately(); // Forzamos que el diálogo se complete antes de pausar
                     priceManager.SetTradingEnabled(true);    // Habilitar el trading en este momento del tutorial
                     botonActual.onClick.AddListener(AlPulsarBotonTemporal);
                     assetsManager.AddUSD(0.05f); // Añadimos 0.05 para las fees
@@ -155,6 +155,10 @@ public class CinematicStarter2 : MonoBehaviour
                         StartCoroutine(AparecerElementoUI(item.elementoUI));
                     }
                 }
+            }
+            if (nombreEvento == "sumarBolsas")
+            {
+                assetsManager.AddUSD(2f);
             }
         }
     }
@@ -236,6 +240,15 @@ public class CinematicStarter2 : MonoBehaviour
                 grupo.interactable = true;    // Permite interactuar (pulsar botones, ruleta, etc.)
                 grupo.blocksRaycasts = true;  // Permite que los elementos detecten el ratón/toques
             }
+            // Inicializar los valores de la economía del juego
+            if (assetsManager.GetUSD() < 2f)
+            {
+                assetsManager.SetUSD(2f);   // Sumar bolsas base para poder hacer trades iniciales
+            }
+            priceManager.SetUserA(5f); // 5 Bitcoins iniciales
+            priceManager.SetUserB(5f); // 5 Ethereum iniciales
+            priceManager.SetReserveA(15f); // 15 Bitcoins en reserva
+            priceManager.SetReserveB(15f); // 15 Ethereum en reserva
         }
 
         Destroy(gameObject);
