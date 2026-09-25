@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PoolTrader.unity
     guid: 441ce9c39eaf6124d9ee82f4c124f0f9
+  - enabled: 1
+    path: Assets/Scenes/ContractApprover.unity
+    guid: 405eac06fae4fff00926b923848dbfa7
   - enabled: 0
     path: Assets/Scenes/unused.unity
     guid: b1b995a3ccadbb705a4a53c208f11288
