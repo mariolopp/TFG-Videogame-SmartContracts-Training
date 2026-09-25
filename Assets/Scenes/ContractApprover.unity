@@ -978,7 +978,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 158575031}
-  - component: {fileID: 158575032}
   m_Layer: 5
   m_Name: Hearts
   m_TagString: Untagged
@@ -1008,19 +1007,6 @@ RectTransform:
   m_AnchoredPosition: {x: -433, y: 250.00005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &158575032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158575030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c48b47833deb3d97aeedd6bccc4ceff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: d1191f8b958e4b1cc8284083aef41a14, type: 2}
 --- !u!1 &189779095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2223,6 @@ GameObject:
   - component: {fileID: 300258043}
   - component: {fileID: 300258042}
   - component: {fileID: 300258045}
-  - component: {fileID: 300258046}
   m_Layer: 5
   m_Name: Contrato
   m_TagString: Untagged
@@ -2321,40 +2306,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &300258046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300258040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ed1ad897e4a86aecbeacea56e31eaf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requestBody: {fileID: 934973962}
-  requestParameters: {fileID: 273527595}
-  rows:
-  - root: {fileID: 648208807}
-    label: {fileID: 37600611}
-    value: {fileID: 729469495}
-  - root: {fileID: 1749305128}
-    label: {fileID: 1673567690}
-    value: {fileID: 394848884}
-  sentTokenIcon: {fileID: 1640870949}
-  receivedTokenIcon: {fileID: 1676391374}
-  btcSprite: {fileID: 21300000, guid: cd9b36e6c3cc96752bc6fa716c029819, type: 3}
-  ethSprite: {fileID: 21300000, guid: 790e970a55f1bec1ea61a882b620282e, type: 3}
-  acceptButton: {fileID: 646477976}
-  rejectButton: {fileID: 1225798163}
-  cardRoot: {fileID: 300258041}
-  cardCanvasGroup: {fileID: 300258045}
-  slideDistance: 900
-  slideDuration: 0.35
-  feedbackFlashImage: {fileID: 0}
-  correctColor: {r: 0.3, g: 0.85, b: 0.4, a: 0.35}
-  wrongColor: {r: 0.9, g: 0.3, b: 0.3, a: 0.35}
 --- !u!1 &306818890
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,7 +3855,6 @@ GameObject:
   m_Component:
   - component: {fileID: 521519137}
   - component: {fileID: 521519138}
-  - component: {fileID: 521519139}
   m_Layer: 0
   m_Name: CinematicStarter
   m_TagString: Untagged
@@ -3939,7 +3889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5acfa6fbf64f92c2a03ca9eb10da099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  archivoDialogoJson: {fileID: 4900000, guid: f5df434c4aa140c0fb7d4449d26386a3, type: 3}
+  archivoDialogoJson: {fileID: 4900000, guid: 385cfe0921473840d9d65e3faea5b774, type: 3}
   contenedorCirculos: {fileID: 2676415114870560710}
   esperandoAccion: 0
   elementosQueAparecen: []
@@ -3947,19 +3897,6 @@ MonoBehaviour:
   gameCanvas: {fileID: 1717071036}
   footText: {fileID: 8600256283772819088}
   botonSaltar: {fileID: 1649853785824525948}
---- !u!114 &521519139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521519135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403253a7884af7e909afdcbdf9b09888, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 1071249982}
 --- !u!1 &556634556
 GameObject:
   m_ObjectHideFlags: 0
@@ -7842,71 +7779,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068392435}
   m_CullTransparentMesh: 1
---- !u!1 &1071249981
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1071249984}
-  - component: {fileID: 1071249983}
-  - component: {fileID: 1071249982}
-  m_Layer: 0
-  m_Name: ContractApproverGameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1071249982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071249981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6944ba50fce987e197390dfa8267d2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: d1191f8b958e4b1cc8284083aef41a14, type: 2}
-  cardView: {fileID: 300258046}
-  countdown: {fileID: 1071249983}
-  progress: {fileID: 158575032}
-  referencePanels: {fileID: 1772693856}
-  endGamePanel: {fileID: 7285706960087731535}
---- !u!114 &1071249983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071249981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d83095e6514e3ff8b98c78b948ee17a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeText: {fileID: 1417667305}
-  barraTiempo: {fileID: 1283452182}
---- !u!4 &1071249984
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071249981}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 309.58652, y: 200.73853, z: -2.544866}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072257693
 GameObject:
   m_ObjectHideFlags: 0
@@ -12883,7 +12755,6 @@ GameObject:
   - component: {fileID: 1772693852}
   - component: {fileID: 1772693851}
   - component: {fileID: 1772693855}
-  - component: {fileID: 1772693856}
   m_Layer: 5
   m_Name: PanelInfo
   m_TagString: Untagged
@@ -13009,22 +12880,6 @@ MonoBehaviour:
   - {fileID: 628631136}
   - {fileID: 1330277107}
   - {fileID: 224194504}
---- !u!114 &1772693856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772693849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172ef79f75389e6e68d80bfde543bad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scamAddressesText: {fileID: 0}
-  scamTokensText: {fileID: 0}
-  feesText: {fileID: 1862646434}
-  slippageText: {fileID: 0}
 --- !u!1 &1780501681
 GameObject:
   m_ObjectHideFlags: 0
@@ -13974,37 +13829,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990284099}
   m_CullTransparentMesh: 1
---- !u!1 &1992382221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1992382222}
-  m_Layer: 0
-  m_Name: TutorialDialogueBridge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1992382222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992382221}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 295.72003, y: 191.46492, z: -2.7172322}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1994368537
 GameObject:
   m_ObjectHideFlags: 0
@@ -17435,5 +17259,3 @@ SceneRoots:
   - {fileID: 978049872}
   - {fileID: 1377242101}
   - {fileID: 1453759471}
-  - {fileID: 1071249984}
-  - {fileID: 1992382222}
