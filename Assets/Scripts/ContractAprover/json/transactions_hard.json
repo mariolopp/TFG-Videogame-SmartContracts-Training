@@ -1,0 +1,142 @@
+{
+  "transactions": [
+    {
+      "id": "H01",
+      "requestText": "Envía 500 USDC (0xA0b86991c6218b36) a 0x2E4f6A8b0C1d3E5f.",
+      "request": { "tokenSent": "USDC", "tokenSentAddress": "0xA0b86991c6218b36", "amountSent": 500, "destination": "0x2E4f6A8b0C1d3E5f" },
+      "signature": {
+        "type": "send",
+        "tokenSent": { "symbol": "USDC", "address": "0xA0b86991c6218b37" },
+        "amountSent": 500,
+        "destination": "0x2E4f6A8b0C1d3E5f",
+        "gasFeeGwei": 21
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_token_address",
+      "explanation": "El símbolo dice USDC, pero la dirección acaba en ...b37 y la real en ...b36: es el USDC falso de la lista de tokens scam."
+    },
+    {
+      "id": "H02",
+      "requestText": "¡Rápido! Cambia 0.3 ETH por PEPE2 (0x0000e9e2a1b2c3d4) en BlockSwap (0x7a250d5630B4cF53) antes de que suba.",
+      "request": { "tokenSent": "ETH", "amountSent": 0.3, "tokenReceived": "PEPE2", "tokenReceivedAddress": "0x0000e9e2a1b2c3d4", "contract": "0x7a250d5630B4cF53" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.3,
+        "tokenReceived": { "symbol": "PEPE2", "address": "0x0000e9e2a1b2c3d4" },
+        "amountReceived": 900000,
+        "contract": "0x7a250d5630B4cF53",
+        "slippage": 0.8,
+        "gasFeeGwei": 38
+      },
+      "shouldApprove": false,
+      "errorCode": "scam_token",
+      "explanation": "Todo coincide con la petición, pero PEPE2 está en la lista de tokens scam (rug pull). La prisa es una señal de alarma."
+    },
+    {
+      "id": "H03",
+      "requestText": "Cambia 2 ETH por 4800 USDC (0xA0b86991c6218b36) en BlockSwap (0x7a250d5630B4cF53).",
+      "request": { "tokenSent": "ETH", "amountSent": 2, "tokenReceived": "USDC", "tokenReceivedAddress": "0xA0b86991c6218b36", "amountReceived": 4800, "contract": "0x7a250d5630B4cF53" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 2,
+        "tokenReceived": { "symbol": "USDC", "address": "0xA0b86991c6218b36" },
+        "amountReceived": 4080,
+        "contract": "0x7a250d5630B4cF53",
+        "slippage": 0.5,
+        "gasFeeGwei": 44
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_swap_amounts",
+      "explanation": "Recibirías 4080 USDC en lugar de 4800: los dígitos están cambiados de orden."
+    },
+    {
+      "id": "H04",
+      "requestText": "Autoriza a SushiX (0xd9e1cE17f2641f24) a usar 1000 DAI (0x6B175474E89094C4).",
+      "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E89094C4", "approveAmount": 1000, "contract": "0xd9e1cE17f2641f24" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "DAI", "address": "0x6B175474E89094C4" },
+        "approveAmount": 1000,
+        "approveUnlimited": false,
+        "contract": "0xd9e1cE17f2641f24",
+        "gasFeeGwei": 30
+      },
+      "shouldApprove": true,
+      "errorCode": "none",
+      "explanation": "Todo correcto. La fee (30 gwei) está justo en el máximo permitido para un approve."
+    },
+    {
+      "id": "H05",
+      "requestText": "Devuélvele a Luis los 1.2 ETH que me prestó: 0x4c3B2a1908F7e6D5.",
+      "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 1.2, "destination": "0x4c3B2a1908F7e6D5" },
+      "signature": {
+        "type": "send",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 1.2,
+        "destination": "0x4c3B2a1998F7e6D5",
+        "gasFeeGwei": 20
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_destination",
+      "explanation": "Envenenamiento de direcciones: empieza y acaba igual, pero en el centro pone ...1998... en lugar de ...1908..."
+    },
+    {
+      "id": "H06",
+      "requestText": "Cambia 0.8 ETH por 120 LINK (0x514910771AF9Ca65) en SushiX (0xd9e1cE17f2641f24).",
+      "request": { "tokenSent": "ETH", "amountSent": 0.8, "tokenReceived": "LINK", "tokenReceivedAddress": "0x514910771AF9Ca65", "amountReceived": 120, "contract": "0xd9e1cE17f2641f24" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.8,
+        "tokenReceived": { "symbol": "LINK", "address": "0x514910771AF9Ca65" },
+        "amountReceived": 120,
+        "contract": "0xd9e1cE17f2641f24",
+        "slippage": 1,
+        "gasFeeGwei": 45
+      },
+      "shouldApprove": true,
+      "errorCode": "none",
+      "explanation": "Legítima: slippage (1%) y fee (45 gwei) están justo en el límite, pero no lo superan."
+    },
+    {
+      "id": "H07",
+      "requestText": "Autoriza a AaveLend (0x87870Bca3F3fD635) a usar 25 LINK (0x514910771AF9Ca65).",
+      "request": { "tokenSent": "LINK", "tokenSentAddress": "0x514910771AF9Ca65", "approveAmount": 25, "contract": "0x87870Bca3F3fD635" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "USDC", "address": "0xA0b86991c6218b36" },
+        "approveAmount": 25,
+        "approveUnlimited": false,
+        "contract": "0x87870Bca3F3fD635",
+        "gasFeeGwei": 25
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_approve_token",
+      "explanation": "Se autoriza USDC en lugar de LINK: estarías dando permiso sobre otro de tus fondos."
+    },
+    {
+      "id": "H08",
+      "requestText": "Cambia 0.4 ETH por DAI (0x6B175474E89094C4) en SushiX (0xd9e1cE17f2641f24).",
+      "request": { "tokenSent": "ETH", "amountSent": 0.4, "tokenReceived": "DAI", "tokenReceivedAddress": "0x6B175474E89094C4", "contract": "0xd9e1cE17f2641f24" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.4,
+        "tokenReceived": { "symbol": "DAI", "address": "0x6B175474E89094C4" },
+        "amountReceived": 960,
+        "contract": "0x8badF00d0bAdCafe",
+        "slippage": 0.5,
+        "gasFeeGwei": 36
+      },
+      "shouldApprove": false,
+      "errorCode": "scam_contract",
+      "explanation": "El contrato no es el router de SushiX: es un clon fraudulento.",
+      "requiredBlacklist": {
+        "addresses": [ { "address": "0x8badF00d0bAdCafe", "label": "Clon del router SushiX" } ],
+        "tokens": []
+      }
+    }
+  ]
+}

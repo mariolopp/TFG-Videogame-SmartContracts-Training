@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SeccionAcordeon : MonoBehaviour
 {
-    [Header("Arrastra solo el panel que se debe ocultar")]
+    [Header("Panel que se debe ocultar")]
     [SerializeField] private GameObject contenido;
 
     public void Alternar()
@@ -11,7 +11,7 @@ public class SeccionAcordeon : MonoBehaviour
 
         bool abrir = !contenido.activeSelf;
 
-        // 1. Busca todas las secciones hermanas dentro del mismo menú y cierra sus contenidos
+        // Buscar todas las secciones hermanas dentro del mismo menú y cerrar sus contenidos
         if (transform.parent != null)
         {
             SeccionAcordeon[] todasLasSecciones = transform.parent.GetComponentsInChildren<SeccionAcordeon>(true);
@@ -24,7 +24,7 @@ public class SeccionAcordeon : MonoBehaviour
             }
         }
 
-        // 2. Si este panel estaba cerrado, lo abrimos
+        // Si este panel estaba cerrado, lo abrimos
         contenido.SetActive(abrir);
     }
 }

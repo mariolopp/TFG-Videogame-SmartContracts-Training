@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Bienvenido a tu primer turno como validador de firmas!", "evento": "" },
+        { "characterId": "profe", "characterName": "Profe", "text": "A la izquierda verás lo que el usuario PIDE. En el panel, lo que REALMENTE va a firmar. Tu trabajo es comprobar que coinciden y que nada es peligroso.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Para comprobarlo tienes cuatro desplegables. Solo puedes abrir uno a la vez, así que muévete rápido.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Este es la lista negra de direcciones: wallets y contratos que sabemos que son estafas.", "evento": "abrirPanel:addresses" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Aquí están los tokens falsos. Ojo: pueden llamarse igual que uno real, lo que cambia es su dirección.", "evento": "abrirPanel:tokens" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Esta tabla dice cuánta fee, en gwei, es aceptable para cada tipo de transacción.", "evento": "abrirPanel:fees" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Y esta, el slippage máximo que aceptamos en un swap según el token que recibes.", "evento": "abrirPanel:slippage" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Las listas se irán actualizando durante el turno. Si ves la marca de NUEVO, léela. ¡Vamos con la primera!", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Pulsa sobre el panel para ver los detalles de la firma. Compara token, cantidad, destino y fee con la petición.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T01",
+        "requestText": "Hola, soy Marta. Envía 0.1 ETH a Luis: 0x4c3B2a1908F7e6D5.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.1, "destination": "0x4c3B2a1908F7e6D5" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.1,
+          "destination": "0x4c3B2a1908F7e6D5",
+          "gasFeeGwei": 15
+        },
+        "shouldApprove": true,
+        "errorCode": "none",
+        "explanation": "Todo coincide y la fee es baja."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Perfecto! Todo coincidía, así que tocaba aprobar.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Esta era legítima: rechazar transacciones buenas también cuesta puntos. Revisa bien antes de decidir.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Esta parece igual de sencilla... ¿o no? Mira bien la fee y compárala con su tabla.", "evento": "abrirPanel:fees" }
+      ],
+      "transaction": {
+        "id": "T02",
+        "requestText": "Envía 40 DAI (0x6B175474E89094C4) a 0x2E4f6A8b0C1d3E5f.",
+        "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E89094C4", "amountSent": 40, "destination": "0x2E4f6A8b0C1d3E5f" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "DAI", "address": "0x6B175474E89094C4" },
+          "amountSent": 40,
+          "destination": "0x2E4f6A8b0C1d3E5f",
+          "gasFeeGwei": 60
+        },
+        "shouldApprove": false,
+        "errorCode": "excessive_fee",
+        "explanation": "60 gwei es más del doble del máximo para un envío (25 gwei)."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Bien visto! Una fee disparada puede vaciarte la cuenta aunque todo lo demás esté bien.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profe", "text": "La fee era de 60 gwei y el máximo para envíos es 25. Esa diferencia la pagas tú.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "A veces el usuario pide algo peligroso sin saberlo. Compara el destino con la lista negra.", "evento": "abrirPanel:addresses" }
+      ],
+      "transaction": {
+        "id": "T03",
+        "requestText": "¡Me ha tocado un airdrop! Para reclamarlo tengo que enviar 0.05 ETH a 0xDeAd0bEEf1337c0d.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.05, "destination": "0xDeAd0bEEf1337c0d" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.05,
+          "destination": "0xDeAd0bEEf1337c0d",
+          "gasFeeGwei": 18
+        },
+        "shouldApprove": false,
+        "errorCode": "scam_destination",
+        "explanation": "El destino es el drainer 'FakeAirdrop' de la lista negra."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Exacto! Nunca hay que pagar para recibir un regalo. Si está en la lista negra, se rechaza siempre.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Esa dirección estaba en la lista negra. Que el usuario la pida no la hace segura.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Ahora un swap. Aquí también importa el slippage: cuánto peor que lo previsto aceptas recibir.", "evento": "abrirPanel:slippage" }
+      ],
+      "transaction": {
+        "id": "T04",
+        "requestText": "Cambia 0.5 ETH por PEPE (0x6982508145454Ce3) en SushiX (0xd9e1cE17f2641f24).",
+        "request": { "tokenSent": "ETH", "amountSent": 0.5, "tokenReceived": "PEPE", "tokenReceivedAddress": "0x6982508145454Ce3", "contract": "0xd9e1cE17f2641f24" },
+        "signature": {
+          "type": "swap",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.5,
+          "tokenReceived": { "symbol": "PEPE", "address": "0x6982508145454Ce3" },
+          "amountReceived": 1300000,
+          "contract": "0xd9e1cE17f2641f24",
+          "slippage": 8,
+          "gasFeeGwei": 35
+        },
+        "shouldApprove": false,
+        "errorCode": "excessive_slippage",
+        "explanation": "Slippage del 8% cuando el máximo para PEPE es 3%."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Muy bien! Un slippage alto es una invitación a que un bot se quede con parte de tu swap.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profe", "text": "El slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Ya conoces lo básico. A partir de ahora habrá reloj, y cada vez tendrás menos tiempo.", "evento": "cerrarPaneles" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Aprobar un fraude te cuesta vidas. Acumula puntos para recuperarlas. ¡Suerte!", "evento": "" }
+      ]
+    }
+  ]
+}

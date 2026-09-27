@@ -7,14 +7,14 @@ public class AccordionManager : MonoBehaviour
     private void Awake()
     {
         foreach (var seccion in secciones)
-            seccion.OnAbierto += CerrarLasDemas;
+            seccion.OnAbierto += CloseOthers;
     }
 
-    private void CerrarLasDemas(AccordionSection seccionAbierta)
+    private void CloseOthers(AccordionSection openedSection)
     {
         foreach (var seccion in secciones)
         {
-            if (seccion != seccionAbierta && seccion.EstaAbierto)
+            if (seccion != openedSection && seccion.EstaAbierto)
                 seccion.Plegar();
         }
     }

@@ -77,7 +77,7 @@ public class DialogManager : MonoBehaviour
 
     private void Start()
     {
-        uiCanvasGroup.alpha = 0;
+        uiCanvasGroup.alpha = 0f;
         uiCanvasGroup.interactable = false;
         uiCanvasGroup.blocksRaycasts = false;
         overlayBackground.SetActive(false);

@@ -147,6 +147,7 @@ public class CinematicStarter : MonoBehaviour
             if (contenedorCirculos != null)
             {
                 Transform circuloDeseado = contenedorCirculos.Find(nombreEvento);
+                //overlayBackground.SetActive(false); // ocultamos el fondo gris, para que se vea el círculo
                 if (circuloDeseado != null) circuloDeseado.gameObject.SetActive(true);
             }
 

@@ -1,0 +1,26 @@
+{
+  "scamAddresses": [
+    { "address": "0xDeAd0bEEf1337c0d", "label": "Drainer 'FakeAirdrop'", "unlockAfter": 0 },
+    { "address": "0x9f8E7d6C5b4A3921", "label": "Wallet de phishing", "unlockAfter": 0 },
+    { "address": "0xBaDC0ffEe0DDF00D", "label": "Router falso 'B1ockSwap'", "unlockAfter": 0 },
+    { "address": "0x1337c0dE5ca3e001", "label": "Falso soporte técnico", "unlockAfter": 4 },
+    { "address": "0x8badF00d0bAdCafe", "label": "Clon del router SushiX", "unlockAfter": 8 }
+  ],
+  "scamTokens": [
+    { "address": "0xA0b86991c6218b37", "label": "USDC falso (envenenamiento)", "unlockAfter": 0 },
+    { "address": "0x0000e9e2a1b2c3d4", "label": "PEPE2 - rug pull", "unlockAfter": 0 },
+    { "address": "0x5149107710F9Ca65", "label": "LINK clonado", "unlockAfter": 6 }
+  ],
+  "feeLimits": [
+    { "type": "send", "maxGwei": 25 },
+    { "type": "swap", "maxGwei": 45 },
+    { "type": "approve", "maxGwei": 30 }
+  ],
+  "slippageLimits": [
+    { "token": "USDC", "maxPercent": 0.5 },
+    { "token": "DAI", "maxPercent": 0.5 },
+    { "token": "LINK", "maxPercent": 1 },
+    { "token": "UNI", "maxPercent": 1 },
+    { "token": "PEPE", "maxPercent": 3 }
+  ]
+}
