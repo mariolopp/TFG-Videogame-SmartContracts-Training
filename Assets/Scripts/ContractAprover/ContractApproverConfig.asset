@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: ContractApproverConfig
   m_EditorClassIdentifier: Assembly-CSharp::ContractApproverConfig
-  transactionsPerSession: 5
+  transactionsPerSession: 15
   playTutorial: 1
   easyWeight: 50
   normalWeight: 30

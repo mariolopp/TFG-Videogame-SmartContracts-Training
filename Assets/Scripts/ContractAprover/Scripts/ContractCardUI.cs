@@ -83,14 +83,14 @@ public class CardInfoRow
         switch (tx.Type)
         {
             case TxType.Send:
-                typeRow.Show("Tipo", "ENVÍO");
+                typeRow.Show("SEND","[ERC-20]");
                 tokenSentRow.Show("Token enviado", Token(s.tokenSent));
                 amountSentRow.Show("Cantidad", $"{Amount(s.amountSent)} {sentSym}");
                 destinationRow.Show("Destino", s.destination);
                 break;
 
             case TxType.Swap:
-                typeRow.Show("Tipo", "SWAP");
+                typeRow.Show("SWAP","[ERC-20]");
                 tokenSentRow.Show("Envías", Token(s.tokenSent));
                 amountSentRow.Show("Cantidad enviada", $"{Amount(s.amountSent)} {sentSym}");
                 tokenReceivedRow.Show("Recibes", Token(s.tokenReceived));
@@ -100,14 +100,14 @@ public class CardInfoRow
                 break;
 
             case TxType.Approve:
-                typeRow.Show("Tipo", "APPROVE");
+                typeRow.Show("APPROVE","[ERC-20]");
                 tokenSentRow.Show("Token a autorizar", Token(s.tokenSent));
                 amountSentRow.Show("Cantidad autorizada", s.approveUnlimited ? "ILIMITADA" : $"{Amount(s.approveAmount)} {sentSym}");
                 contractRow.Show("Contrato autorizado", s.contract);
                 break;
 
             default:
-                typeRow.Show("Tipo", "¿DESCONOCIDO?");
+                typeRow.Show("UNKNOWN?","[ERC-20]");
                 break;
         }
         feeRow.Show("Gas fee", $"{s.gasFeeGwei.ToString("0.##", Inv)} gwei");

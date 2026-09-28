@@ -84,6 +84,13 @@ public class DialogManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    // private void OnDisable()
+    // {
+    //     isAnimatingUI = false;
+    //     isTyping = false;
+    //     if (overlayBackground != null) overlayBackground.SetActive(false);
+    // }
+
     // --- API PÚBLICA ---
     public void StartDialog(TextAsset jsonFile, Action onFinishedAction = null)
     {
@@ -318,7 +325,8 @@ public class DialogManager : MonoBehaviour
             yield return null;
         }
         isAnimatingUI = false;
-        gameObject.SetActive(false);
+        // El overlay va antes: desactivar el gameObject detiene esta corrutina y no llegaría a ejecutarse
         overlayBackground.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

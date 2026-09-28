@@ -20,13 +20,13 @@
       ],
       "transaction": {
         "id": "T01",
-        "requestText": "Hola, soy Marta. Envía 0.1 ETH a Luis: 0x4c3B2a1908F7e6D5.",
-        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.1, "destination": "0x4c3B2a1908F7e6D5" },
+        "requestText": "Hola, soy Marta. Envía 0.1 ETH a Luis: 0x4c3B2a1908F7.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.1, "destination": "0x4c3B2a1908F7" },
         "signature": {
           "type": "send",
           "tokenSent": { "symbol": "ETH", "address": "native" },
           "amountSent": 0.1,
-          "destination": "0x4c3B2a1908F7e6D5",
+          "destination": "0x4c3B2a1908F7",
           "gasFeeGwei": 15
         },
         "shouldApprove": true,
@@ -47,13 +47,13 @@
       ],
       "transaction": {
         "id": "T02",
-        "requestText": "Envía 40 DAI (0x6B175474E89094C4) a 0x2E4f6A8b0C1d3E5f.",
-        "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E89094C4", "amountSent": 40, "destination": "0x2E4f6A8b0C1d3E5f" },
+        "requestText": "Envía 40 DAI (0x6B175474E894) a 0x2E4f6A8b0C1d.",
+        "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E894", "amountSent": 40, "destination": "0x2E4f6A8b0C1d" },
         "signature": {
           "type": "send",
-          "tokenSent": { "symbol": "DAI", "address": "0x6B175474E89094C4" },
+          "tokenSent": { "symbol": "DAI", "address": "0x6B175474E894" },
           "amountSent": 40,
-          "destination": "0x2E4f6A8b0C1d3E5f",
+          "destination": "0x2E4f6A8b0C1d",
           "gasFeeGwei": 60
         },
         "shouldApprove": false,
@@ -74,13 +74,13 @@
       ],
       "transaction": {
         "id": "T03",
-        "requestText": "¡Me ha tocado un airdrop! Para reclamarlo tengo que enviar 0.05 ETH a 0xDeAd0bEEf1337c0d.",
-        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.05, "destination": "0xDeAd0bEEf1337c0d" },
+        "requestText": "¡Me ha tocado un airdrop! Para reclamarlo tengo que enviar 0.05 ETH a 0xDeAd0bEEf133.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.05, "destination": "0xDeAd0bEEf133" },
         "signature": {
           "type": "send",
           "tokenSent": { "symbol": "ETH", "address": "native" },
           "amountSent": 0.05,
-          "destination": "0xDeAd0bEEf1337c0d",
+          "destination": "0xDeAd0bEEf133",
           "gasFeeGwei": 18
         },
         "shouldApprove": false,
@@ -101,15 +101,15 @@
       ],
       "transaction": {
         "id": "T04",
-        "requestText": "Cambia 0.5 ETH por PEPE (0x6982508145454Ce3) en SushiX (0xd9e1cE17f2641f24).",
-        "request": { "tokenSent": "ETH", "amountSent": 0.5, "tokenReceived": "PEPE", "tokenReceivedAddress": "0x6982508145454Ce3", "contract": "0xd9e1cE17f2641f24" },
+        "requestText": "Cambia 0.5 ETH por PEPE (0x698250814545) en SushiX (0xd9e1cE17f264).",
+        "request": { "tokenSent": "ETH", "amountSent": 0.5, "tokenReceived": "PEPE", "tokenReceivedAddress": "0x698250814545", "contract": "0xd9e1cE17f264" },
         "signature": {
           "type": "swap",
           "tokenSent": { "symbol": "ETH", "address": "native" },
           "amountSent": 0.5,
-          "tokenReceived": { "symbol": "PEPE", "address": "0x6982508145454Ce3" },
+          "tokenReceived": { "symbol": "PEPE", "address": "0x698250814545" },
           "amountReceived": 1300000,
-          "contract": "0xd9e1cE17f2641f24",
+          "contract": "0xd9e1cE17f264",
           "slippage": 8,
           "gasFeeGwei": 35
         },

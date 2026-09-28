@@ -35,6 +35,10 @@ public class ContractApproverManager : MonoBehaviour
     [Header("Tutorial")]
     [Tooltip("Objetos que solo deben verse durante el tutorial (personaje, 'pulse cualquier tecla'...)")]
     [SerializeField] private GameObject[] tutorialOnlyObjects;
+    [Tooltip("Fondo oscuro del diálogo. Se recorta por la derecha cuando el profe abre un desplegable")]
+    [SerializeField] private RectTransform tutorialOverlay;
+    [SerializeField] private float overlayCutRight = 700f;
+    [SerializeField] private float overlayCutDuration = 0.25f;
 
     [Header("Opciones")]
     [SerializeField] private bool autoStart = true;
@@ -51,10 +55,17 @@ public class ContractApproverManager : MonoBehaviour
     private bool lastWasCorrect;
     private int answered;
     private int correctAnswers;
+    private Vector2 overlayBaseSize, overlayBasePos;
+    private Coroutine overlayCo;
 
     // ------------------------------- ciclo de vida ----------------------------------- 
     private void Awake()
     {
+        if (tutorialOverlay != null)
+        {
+            overlayBaseSize = tutorialOverlay.sizeDelta;
+            overlayBasePos = tutorialOverlay.anchoredPosition;
+        }
         if (approveButton != null) approveButton.onClick.AddListener(Approve);
         if (rejectButton != null) rejectButton.onClick.AddListener(Reject);
         if (skipTutorialButton != null)
@@ -210,7 +221,8 @@ public class ContractApproverManager : MonoBehaviour
         if (applyScore) ApplyScore(approved, timeout, correct);
         if (!inTutorial) { answered++; if (correct) correctAnswers++; }
 
-        hud.ShowToast(BuildFeedback(tx, approved, timeout, correct), correct);
+        // En el tutorial la explicación la da el profe con dialoguesIfCorrect/IfWrong
+        if (!inTutorial) hud.ShowToast(BuildFeedback(tx, approved, timeout, correct), correct);
         hud.Flash(correct);
         PlaySfx(correct ? config.sfxCorrect : config.sfxWrong);
 
@@ -315,6 +327,7 @@ public class ContractApproverManager : MonoBehaviour
         SetObjectsActive(tutorialOnlyObjects, false);
         if (skipTutorialButton != null) skipTutorialButton.gameObject.SetActive(false);
         CloseAllSections();
+        SetOverlayCut(false);
         inTutorial = false;
     }
 
@@ -345,8 +358,43 @@ public class ContractApproverManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(ev)) return;
         const string open = "abrirPanel:";
-        if (ev.StartsWith(open)) OpenSection(ev.Substring(open.Length).Trim());
-        else if (ev == "cerrarPaneles") CloseAllSections();
+        if (ev.StartsWith(open))
+        {
+            OpenSection(ev.Substring(open.Length).Trim());
+            SetOverlayCut(true);
+        }
+        else if (ev == "cerrarPaneles")
+        {
+            CloseAllSections();
+            SetOverlayCut(false);
+        }
+    }
+
+    // Recorta el overlay por la derecha dejando fijo su borde izquierdo, para iluminar los desplegables
+    private void SetOverlayCut(bool cut)
+    {
+        if (tutorialOverlay == null) return;
+        float amount = cut ? overlayCutRight : 0f;
+        Vector2 size = overlayBaseSize - new Vector2(amount, 0f);
+        Vector2 pos = overlayBasePos - new Vector2(amount * (1f - tutorialOverlay.pivot.x), 0f);
+
+        if (overlayCo != null) StopCoroutine(overlayCo);
+        overlayCo = StartCoroutine(AnimateOverlay(size, pos));
+    }
+
+    private IEnumerator AnimateOverlay(Vector2 size, Vector2 pos)
+    {
+        Vector2 fromSize = tutorialOverlay.sizeDelta, fromPos = tutorialOverlay.anchoredPosition;
+        for (float t = 0f; t < overlayCutDuration; t += Time.deltaTime)
+        {
+            float e = Mathf.SmoothStep(0f, 1f, t / overlayCutDuration);
+            tutorialOverlay.sizeDelta = Vector2.Lerp(fromSize, size, e);
+            tutorialOverlay.anchoredPosition = Vector2.Lerp(fromPos, pos, e);
+            yield return null;
+        }
+        tutorialOverlay.sizeDelta = size;
+        tutorialOverlay.anchoredPosition = pos;
+        overlayCo = null;
     }
 
     public void OpenSection(string id)
