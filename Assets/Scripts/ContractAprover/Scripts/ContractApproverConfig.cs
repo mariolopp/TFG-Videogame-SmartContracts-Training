@@ -55,9 +55,16 @@ public class ContractApproverConfig : ScriptableObject
     public float cardMoveDuration = 0.3f;
     public float swipeDuration = 0.35f;
     public float stampHoldTime = 0.6f;
-    public float toastDuration = 3f;
     public Color correctColor = new Color(0.3f, 0.85f, 0.4f);
     public Color wrongColor = new Color(0.9f, 0.3f, 0.3f);
+
+    [Header("Diálogo de feedback tras decidir")]
+    [Tooltip("Si está desactivado, el profe solo explica los fallos y los tiempos agotados")]
+    public bool feedbackOnCorrect = false;
+    [Tooltip("Espera antes de abrir el diálogo, para que se vea la animación del corazón")]
+    public float feedbackDelay = 0.8f;
+    public string feedbackCharacterId = "profe";
+    public string feedbackCharacterName = "Profe";
 
     [Header("Sonidos (IDs de SoundLibrary)")]
     public string sfxCorrect = "";

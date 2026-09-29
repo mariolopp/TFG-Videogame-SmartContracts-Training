@@ -2,7 +2,7 @@
   "scamAddresses": [
     { "address": "0xDeAd0bEEf133", "label": "Drainer 'FakeAirdrop'", "unlockAfter": 0 },
     { "address": "0x9f8E7d6C5b4A", "label": "Wallet phishing", "unlockAfter": 0 },
-    { "address": "0xBaDC0ffEe0DD", "label": "Router fake 'B1ockSwap'", "unlockAfter": 0 },
+    { "address": "0xBaDC0ffEe0DD", "label": "Fake router", "unlockAfter": 0 },
     { "address": "0x1337c0dE5ca3", "label": "Fake IT support", "unlockAfter": 4 },
     { "address": "0x8badF00dCafe", "label": "Clon del router SushiX", "unlockAfter": 8 }
   ],

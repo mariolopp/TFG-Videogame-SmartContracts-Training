@@ -39,7 +39,6 @@ MonoBehaviour:
   cardMoveDuration: 0.3
   swipeDuration: 0.35
   stampHoldTime: 0.6
-  toastDuration: 3
   correctColor: {r: 0.3, g: 0.85, b: 0.4, a: 1}
   wrongColor: {r: 0.9, g: 0.3, b: 0.3, a: 1}
   sfxCorrect: 

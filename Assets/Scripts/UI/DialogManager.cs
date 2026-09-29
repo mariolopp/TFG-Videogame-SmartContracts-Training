@@ -84,13 +84,6 @@ public class DialogManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // private void OnDisable()
-    // {
-    //     isAnimatingUI = false;
-    //     isTyping = false;
-    //     if (overlayBackground != null) overlayBackground.SetActive(false);
-    // }
-
     // --- API PÚBLICA ---
     public void StartDialog(TextAsset jsonFile, Action onFinishedAction = null)
     {

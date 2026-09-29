@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Todo lo "informativo" de la pantalla: puntos, vidas, reloj, mensaje de feedback y pantalla final.
+// Todo lo "informativo" de la pantalla: puntos, vidas, reloj, destello y pantalla final.
 // Todos los campos son opcionales
 public class ContractHUD : MonoBehaviour
 {
@@ -25,11 +25,6 @@ public class ContractHUD : MonoBehaviour
     [SerializeField] private Color timerDangerColor = new Color(0.9f, 0.3f, 0.3f);
     [Range(0f, 1f)] [SerializeField] private float dangerThreshold = 0.25f;
 
-    [Header("Mensaje de feedback")]
-    [SerializeField] private CanvasGroup toastGroup;
-    [SerializeField] private TMP_Text toastText;
-    [SerializeField] private Image toastBackground;
-
     [Header("Destello de pantalla (opcional)")]
     [SerializeField] private Image flashImage;
     [Range(0f, 1f)] [SerializeField] private float flashAlpha = 0.25f;
@@ -39,11 +34,10 @@ public class ContractHUD : MonoBehaviour
     [SerializeField] private TMP_Text endTitleText;
     [SerializeField] private TMP_Text endScoreText;
 
-    private Coroutine toastCo, flashCo;
+    private Coroutine flashCo;
 
     private void Awake()
     {
-        if (toastGroup != null) { toastGroup.alpha = 0f; toastGroup.blocksRaycasts = false; }
         if (flashImage != null)
         {
             flashImage.raycastTarget = false;
@@ -61,7 +55,12 @@ public class ContractHUD : MonoBehaviour
         if (livesText != null) livesText.text = "x" + lives;
         if (lifeIcons != null)
             for (int i = 0; i < lifeIcons.Length; i++)
-                if (lifeIcons[i] != null) lifeIcons[i].SetActive(i < lives);
+            {
+                if (lifeIcons[i] == null) continue;
+                // Si el corazón tiene HeartIcon, que se anime él solo
+                if (lifeIcons[i].TryGetComponent(out HeartIcon heart)) heart.SetAlive(i < lives);
+                else lifeIcons[i].SetActive(i < lives);
+            }
     }
 
     public void SetRemaining(int remaining, int total)
@@ -82,13 +81,6 @@ public class ContractHUD : MonoBehaviour
         if (timerText != null) { timerText.text = Mathf.CeilToInt(remaining).ToString(); timerText.color = c; }
     }
 
-    public void ShowToast(string message, bool correct)
-    {
-        if (toastGroup == null || toastText == null) return;
-        if (toastCo != null) StopCoroutine(toastCo);
-        toastCo = StartCoroutine(ToastRoutine(message, correct));
-    }
-
     public void Flash(bool correct)
     {
         if (flashImage == null) return;
@@ -104,19 +96,6 @@ public class ContractHUD : MonoBehaviour
         if (endScoreText != null) endScoreText.text = $"Puntos: {score}\nAciertos: {correct}/{answered}";
     }
 
-    private IEnumerator ToastRoutine(string message, bool correct)
-    {
-        toastText.text = message;
-        if (toastBackground != null)
-        {
-            Color c = correct ? config.correctColor : config.wrongColor;
-            toastBackground.color = new Color(c.r, c.g, c.b, 0.9f);
-        }
-        yield return Fade(toastGroup, toastGroup.alpha, 1f, 0.15f);
-        yield return new WaitForSeconds(config.toastDuration);
-        yield return Fade(toastGroup, 1f, 0f, 0.3f);
-    }
-
     private IEnumerator FlashRoutine(Color c)
     {
         float t = 0f;
@@ -129,17 +108,5 @@ public class ContractHUD : MonoBehaviour
             yield return null;
         }
         flashImage.color = new Color(c.r, c.g, c.b, 0f);
-    }
-
-    private static IEnumerator Fade(CanvasGroup g, float from, float to, float duration)
-    {
-        float t = 0f;
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            g.alpha = Mathf.Lerp(from, to, t / duration);
-            yield return null;
-        }
-        g.alpha = to;
     }
 }

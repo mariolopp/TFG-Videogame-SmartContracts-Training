@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class ContractApproverManager : MonoBehaviour
 {
     private enum Decision { None, Approve, Reject, Timeout, Skipped }
+    private enum OverlayMode { Full, CutRight, Bottom }
 
     [Header("Configuración")]
     [SerializeField] private ContractApproverConfig config;
@@ -39,6 +40,8 @@ public class ContractApproverManager : MonoBehaviour
     [SerializeField] private RectTransform tutorialOverlay;
     [SerializeField] private float overlayCutRight = 700f;
     [SerializeField] private float overlayCutDuration = 0.25f;
+    [Tooltip("Altura del fondo oscuro, desde abajo, durante los diálogos de feedback de la partida")]
+    [SerializeField] private float feedbackOverlayHeight = 450f;
 
     [Header("Opciones")]
     [SerializeField] private bool autoStart = true;
@@ -221,10 +224,22 @@ public class ContractApproverManager : MonoBehaviour
         if (applyScore) ApplyScore(approved, timeout, correct);
         if (!inTutorial) { answered++; if (correct) correctAnswers++; }
 
-        // En el tutorial la explicación la da el profe con dialoguesIfCorrect/IfWrong
-        if (!inTutorial) hud.ShowToast(BuildFeedback(tx, approved, timeout, correct), correct);
         hud.Flash(correct);
         PlaySfx(correct ? config.sfxCorrect : config.sfxWrong);
+
+        // Fuera del tutorial el profe explica el resultado (en el tutorial ya lo hacen dialoguesIfCorrect/IfWrong)
+        if (!inTutorial && (!correct || config.feedbackOnCorrect))
+        {
+            SetOverlay(OverlayMode.Bottom, false); // sin animar: el overlay aún está apagado
+            yield return PlayDialogue(new[] { new DialogLine {
+                characterId = config.feedbackCharacterId,
+                characterName = config.feedbackCharacterName,
+                text = BuildFeedback(tx, approved, timeout, correct) } });
+            // El DialogManager apaga el overlay al terminar su fade out: hasta entonces no se restaura
+            while (tutorialOverlay != null && tutorialOverlay.gameObject.activeSelf) yield return null;
+            SetOverlay(OverlayMode.Full, false);
+            SetObjectsActive(tutorialOnlyObjects, false); // el DialogManager enciende el retrato pero no lo apaga
+        }
 
         yield return cards.Resolve(approved, correct, timeout);
     }
@@ -327,8 +342,9 @@ public class ContractApproverManager : MonoBehaviour
         SetObjectsActive(tutorialOnlyObjects, false);
         if (skipTutorialButton != null) skipTutorialButton.gameObject.SetActive(false);
         CloseAllSections();
-        SetOverlayCut(false);
+        SetOverlay(OverlayMode.Full);
         inTutorial = false;
+        skipRequested = false; // si no, PlayDialogue descartaría también los diálogos de la partida
     }
 
     private IEnumerator PlayDialogue(DialogLine[] lines)
@@ -361,25 +377,39 @@ public class ContractApproverManager : MonoBehaviour
         if (ev.StartsWith(open))
         {
             OpenSection(ev.Substring(open.Length).Trim());
-            SetOverlayCut(true);
+            SetOverlay(OverlayMode.CutRight);
         }
         else if (ev == "cerrarPaneles")
         {
             CloseAllSections();
-            SetOverlayCut(false);
+            SetOverlay(OverlayMode.Full);
         }
     }
 
-    // Recorta el overlay por la derecha dejando fijo su borde izquierdo, para iluminar los desplegables
-    private void SetOverlayCut(bool cut)
+    // Full: tamaño original
+    // CutRight: recorta por la derecha dejando fijo el borde izquierdo, para iluminar los desplegables
+    // Bottom: solo la franja inferior (feedbackOverlayHeight) dejando fijo el borde de abajo, para las advertencias
+    private void SetOverlay(OverlayMode mode, bool animate = true)
     {
         if (tutorialOverlay == null) return;
-        float amount = cut ? overlayCutRight : 0f;
-        Vector2 size = overlayBaseSize - new Vector2(amount, 0f);
-        Vector2 pos = overlayBasePos - new Vector2(amount * (1f - tutorialOverlay.pivot.x), 0f);
+        Vector2 pivot = tutorialOverlay.pivot;
+        Vector2 size = overlayBaseSize, pos = overlayBasePos;
 
-        if (overlayCo != null) StopCoroutine(overlayCo);
-        overlayCo = StartCoroutine(AnimateOverlay(size, pos));
+        if (mode == OverlayMode.CutRight)
+        {
+            size.x -= overlayCutRight;
+            pos.x -= overlayCutRight * (1f - pivot.x);
+        }
+        else if (mode == OverlayMode.Bottom)
+        {
+            float bottom = overlayBasePos.y - overlayBaseSize.y * pivot.y;
+            size.y = feedbackOverlayHeight;
+            pos.y = bottom + feedbackOverlayHeight * pivot.y;
+        }
+
+        if (overlayCo != null) { StopCoroutine(overlayCo); overlayCo = null; }
+        if (animate) overlayCo = StartCoroutine(AnimateOverlay(size, pos));
+        else { tutorialOverlay.sizeDelta = size; tutorialOverlay.anchoredPosition = pos; }
     }
 
     private IEnumerator AnimateOverlay(Vector2 size, Vector2 pos)
