@@ -12,7 +12,11 @@ public class TransactionDeck
         originals[0] = Load(easy, "Fácil");
         originals[1] = Load(normal, "Normal");
         originals[2] = Load(hard, "Difícil");
-        for (int i = 0; i < 3; i++) remaining[i] = new List<TransactionData>(originals[i]);
+        for (int i = 0; i < 3; i++)
+        {
+            foreach (var tx in originals[i]) tx.difficulty = i;
+            remaining[i] = new List<TransactionData>(originals[i]);
+        }
     }
 
     private static List<TransactionData> Load(TextAsset file, string name)

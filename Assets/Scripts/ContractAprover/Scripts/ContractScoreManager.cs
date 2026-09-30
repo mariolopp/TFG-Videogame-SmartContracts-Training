@@ -10,6 +10,11 @@ public class ContractScoreManager : MonoBehaviour
 
     public event Action<int> OnScoreChanged;
     public event Action<int> OnLivesChanged;
+    // Progreso 0-1 hacia la siguiente vida extra y si en este cambio se ha completado alguna
+    public event Action<float, bool> OnExtraLifeProgressChanged;
+
+    public float ExtraLifeProgress => config == null || config.pointsForExtraLife <= 0 ? 0f
+        : Mathf.Clamp01((Score - (nextExtraLifeAt - config.pointsForExtraLife)) / (float)config.pointsForExtraLife);
 
     private ContractApproverConfig config;
     private int nextExtraLifeAt;
@@ -22,6 +27,7 @@ public class ContractScoreManager : MonoBehaviour
         nextExtraLifeAt = cfg.pointsForExtraLife;
         OnScoreChanged?.Invoke(Score);
         OnLivesChanged?.Invoke(Lives);
+        OnExtraLifeProgressChanged?.Invoke(ExtraLifeProgress, false);
     }
 
     public void AddPoints(int points)
@@ -31,11 +37,14 @@ public class ContractScoreManager : MonoBehaviour
         OnScoreChanged?.Invoke(Score);
 
         // Vida extra cada X puntos acumulados, sin restar los puntos
+        bool completed = false;
         while (config.pointsForExtraLife > 0 && Score >= nextExtraLifeAt)
         {
             nextExtraLifeAt += config.pointsForExtraLife;
             ChangeLives(+1);
+            completed = true;
         }
+        OnExtraLifeProgressChanged?.Invoke(ExtraLifeProgress, completed);
     }
 
     public void RemovePoints(int points)
@@ -43,6 +52,7 @@ public class ContractScoreManager : MonoBehaviour
         if (points <= 0) return;
         Score = Mathf.Max(0, Score - points);
         OnScoreChanged?.Invoke(Score);
+        OnExtraLifeProgressChanged?.Invoke(ExtraLifeProgress, false);
     }
 
     public void LoseLives(int amount)

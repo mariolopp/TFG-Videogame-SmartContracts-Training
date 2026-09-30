@@ -18,6 +18,9 @@ public class ContractApproverConfig : ScriptableObject
     public float minTime = 8f;
     [Tooltip("Segundos que se restan al límite en cada transacción nueva")]
     public float timeDecreasePerTx = 1.5f;
+    [Tooltip("Multiplicador del límite de tiempo para transacciones del JSON normal / difícil (las fáciles usan 1)")]
+    public float normalTimeMultiplier = 1.25f;
+    public float hardTimeMultiplier = 1.5f;
     [Tooltip("Si está marcado, el reloj no corre hasta que el jugador abre el panel de la firma")]
     public bool timerStartsOnReveal = false;
 
@@ -40,6 +43,13 @@ public class ContractApproverConfig : ScriptableObject
     public int pointsLostOnGoodReject = 50;
     [Tooltip("Cada vez que se acumulan estos puntos se gana una vida extra sin superar maxLives")]
     public int pointsForExtraLife = 1000;
+
+    [Header("Recompensa final (bolsas)")]
+    [Tooltip("Bolsas por cada segundo que sobró en las transacciones acertadas")]
+    public float bagsPerSecondLeft = 1f;
+    public float bagsPerPoint = 0.5f;
+    [Tooltip("Bolsas por cada vida que queda al terminar")]
+    public float bagsPerLife = 25f;
 
     [Header("Listas negras")]
     [Tooltip("Cuántas transacciones ANTES de que aparezca un fraude se añade su dirección a la lista")]

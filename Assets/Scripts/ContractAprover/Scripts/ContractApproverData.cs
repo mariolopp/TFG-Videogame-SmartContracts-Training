@@ -78,6 +78,7 @@ public class TransactionData
     public string errorCode;                             // "none", "scam_destination", ... (informativo)
     public string explanation;                           // Se muestra al jugador tras decidir
     public BlacklistInjection requiredBlacklist = new BlacklistInjection(); // Entradas que DEBEN estar en las listas para que esta transacción sea justa
+    [NonSerialized] public int difficulty;               // 0 fácil, 1 normal, 2 difícil (lo asigna TransactionDeck, no viene del JSON)
 
     public TxType Type
     {

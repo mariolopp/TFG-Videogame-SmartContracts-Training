@@ -58,6 +58,7 @@ public class ContractApproverManager : MonoBehaviour
     private bool lastWasCorrect;
     private int answered;
     private int correctAnswers;
+    private float timeLeftTotal; // segundos sobrantes acumulados en los aciertos, para la recompensa final
     private Vector2 overlayBaseSize, overlayBasePos;
     private Coroutine overlayCo;
 
@@ -80,6 +81,7 @@ public class ContractApproverManager : MonoBehaviour
         {
             score.OnScoreChanged += hud.SetScore;
             score.OnLivesChanged += hud.SetLives;
+            score.OnExtraLifeProgressChanged += hud.SetExtraLifeProgress;
         }
     }
 
@@ -139,6 +141,7 @@ public class ContractApproverManager : MonoBehaviour
         score.ResetSession(config);
         answered = 0;
         correctAnswers = 0;
+        timeLeftTotal = 0f;
 
         if (config.playTutorial && tutorialJson != null)
             yield return TutorialRoutine();
@@ -162,7 +165,14 @@ public class ContractApproverManager : MonoBehaviour
         {
             references.AdvanceTo(i);
             hud.SetRemaining(session.Count - i, session.Count);
-            float limit = Mathf.Max(config.minTime, config.startTime - config.timeDecreasePerTx * i);
+            float multiplier = session[i].difficulty 
+            switch
+            {
+                1 => config.normalTimeMultiplier,
+                2 => config.hardTimeMultiplier,
+                _ => 1f
+            };
+            float limit = Mathf.Max(config.minTime, config.startTime - config.timeDecreasePerTx * i) * multiplier;
 
             yield return PlayTransaction(session[i], limit, true, true, null);
 
@@ -222,7 +232,11 @@ public class ContractApproverManager : MonoBehaviour
         lastWasCorrect = correct;
 
         if (applyScore) ApplyScore(approved, timeout, correct);
-        if (!inTutorial) { answered++; if (correct) correctAnswers++; }
+        if (!inTutorial)
+        {
+            answered++;
+            if (correct) { correctAnswers++; if (useTimer) timeLeftTotal += Mathf.Max(0f, timeLeft); }
+        }
 
         hud.Flash(correct);
         PlaySfx(correct ? config.sfxCorrect : config.sfxWrong);
@@ -300,7 +314,7 @@ public class ContractApproverManager : MonoBehaviour
     {
         acceptingInput = false;
         SetButtonsInteractable(false);
-        hud.ShowEnd(survived, score.Score, correctAnswers, answered);
+        hud.ShowEnd(survived, score.Score, correctAnswers, answered, score.Lives, timeLeftTotal);
         OnSessionEnded?.Invoke(score.Score, survived);
     }
 

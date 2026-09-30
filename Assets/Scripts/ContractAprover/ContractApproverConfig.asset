@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: ContractApproverConfig
   m_EditorClassIdentifier: Assembly-CSharp::ContractApproverConfig
-  transactionsPerSession: 15
+  transactionsPerSession: 5
   playTutorial: 1
   easyWeight: 50
   normalWeight: 30
   hardWeight: 20
-  startTime: 30
-  minTime: 8
-  timeDecreasePerTx: 1.5
+  startTime: 60
+  minTime: 15
+  timeDecreasePerTx: 1.1
+  normalTimeMultiplier: 1.25
+  hardTimeMultiplier: 1.5
   timerStartsOnReveal: 0
   tutorialHasTimer: 0
   tutorialTime: 60
@@ -29,9 +31,12 @@ MonoBehaviour:
   livesLostOnBadApprove: 1
   livesLostOnGoodReject: 0
   livesLostOnTimeout: 1
-  pointsCorrect: 100
-  pointsLostOnGoodReject: 50
-  pointsForExtraLife: 1000
+  pointsCorrect: 10
+  pointsLostOnGoodReject: 25
+  pointsForExtraLife: 50
+  bagsPerSecondLeft: 0.25
+  bagsPerPoint: 2
+  bagsPerLife: 25
   blacklistLeadTurns: 3
   newTagTurns: 2
   defaultMaxSlippage: 1
@@ -41,6 +46,10 @@ MonoBehaviour:
   stampHoldTime: 0.6
   correctColor: {r: 0.3, g: 0.85, b: 0.4, a: 1}
   wrongColor: {r: 0.9, g: 0.3, b: 0.3, a: 1}
+  feedbackOnCorrect: 0
+  feedbackDelay: 0.8
+  feedbackCharacterId: profe
+  feedbackCharacterName: Profe
   sfxCorrect: 
   sfxWrong: 
   sfxNewBlacklistEntry: 
