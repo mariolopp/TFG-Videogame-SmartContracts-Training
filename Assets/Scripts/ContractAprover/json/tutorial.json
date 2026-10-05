@@ -16,6 +16,34 @@
     {
       "kind": "transaction",
       "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Fíjate bien en la petición", "evento": "" },
+        { "characterId": "profe", "characterName": "Profe", "text": "Aprueba el contrato solo si coincide con la petición", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T00",
+        "requestText": "Hola, soy Luis. Envía 0.1 ETH a Marta: 0x5c3Y2a6909G5.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.1, "destination": "0x5c3Y2a6909G5" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.1,
+          "destination": "0x5c3B2a1908F7",
+          "gasFeeGwei": 15
+        },
+        "shouldApprove": false,
+        "errorCode": "none",
+        "explanation": "La dirección del contrato no es la de Marta"
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Perfecto! Luis se equivocó con la dirección. La dirección que pone en el contrato no es la de Marta", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profe", "text": "¡Casi! Fíjate bien, Luis se ha equivocado con la dirección. La dirección que pone en el contrato no es la de Marta.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
         { "characterId": "profe", "characterName": "Profe", "text": "Pulsa sobre el panel para ver los detalles de la firma. Compara token, cantidad, destino y fee con la petición.", "evento": "" }
       ],
       "transaction": {
@@ -38,6 +66,12 @@
       ],
       "dialoguesIfWrong": [
         { "characterId": "profe", "characterName": "Profe", "text": "Esta era legítima: rechazar transacciones buenas también cuesta puntos. Revisa bien antes de decidir.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profe", "text": "Se pueden introducir diálogos entre transacciones", "evento": "" }
       ]
     },
     {
