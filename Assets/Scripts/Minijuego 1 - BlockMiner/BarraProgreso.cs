@@ -9,7 +9,6 @@ public class BarraProgreso : MonoBehaviour
     public float velocidad = 0.5f; // velocidad de llenado
     public bool llenadoSuave = true; // Si es true, la barra se llena suavemente, si es false, se llena instant�neamente
 
-
     // A�ade un valor a la barra, se llama desde el bot�n
     public void AnadirValor(float valor)
     {
@@ -17,7 +16,7 @@ public class BarraProgreso : MonoBehaviour
         //objetivo = Mathf.Clamp(objetivo, 0f, 1f); // Evitar que supere 1
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (llenadoSuave) {
             // Llenado suave de la barra
@@ -28,7 +27,7 @@ public class BarraProgreso : MonoBehaviour
         }
     }
 
-    public void Resetear() 
+    public virtual void Resetear()
     {
         valorActual = valorInicio;      // Reiniciar al valor inicial
         barra.fillAmount = valorActual; // Actualizar la barra

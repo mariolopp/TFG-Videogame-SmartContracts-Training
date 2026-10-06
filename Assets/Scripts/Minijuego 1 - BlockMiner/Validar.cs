@@ -14,7 +14,12 @@ public class Validar : MonoBehaviour
     public int contadorPerdidos = 0;      // Contador de bloques perdidos
     public int contadorTotales = 0;       // Contador de bloques totales (validados + perdidos)
     public int maxBloques = 5;          // M�ximo de bloques perdidos antes de game over
+    public int contadorCompletos = 0;     // Bloques validados con la barra llena
+    public float segundosAhorrados = 0f;  // Suma del tiempo restante al validar cada bloque
+    public float usdGanados = 0f;         // USD (bolsas) entregados al validar bloques
     [SerializeField] private AssetsManager assets; // Referencia al script de Assets para modificar USD
+    [UnityEngine.Serialization.FormerlySerializedAs("fxCompleto")]
+    [SerializeField] private BloqueFX fx; // Efectos de bloque completo / perdido
     public event System.Action OnValidar;
     public int maxVisibles = 5; // Bloques maximos visibles en el historial
     private System.Collections.Generic.Queue<GameObject> historialSnapshots = new System.Collections.Generic.Queue<GameObject>();
@@ -24,6 +29,12 @@ public class Validar : MonoBehaviour
         if (assets == null)
         {
             assets = FindFirstObjectByType<AssetsManager>();
+        }
+        if (fx == null) fx = FindObjectOfType<BloqueFX>();
+        if (fx == null)
+        {
+            // Si no existe en la escena, se añade con los valores por defecto
+            fx = gameObject.AddComponent<BloqueFX>();
         }
         historialPanel = GameObject.Find("HistorialPanel").transform;
         barra.Resetear(); // Asegurarnos de que la barra empieza vacia
@@ -46,14 +57,25 @@ public class Validar : MonoBehaviour
     public void PierdesBloque()
     {
         contadorPerdidos ++; // Incrementar el contador de bloques perdidos
+        fx.Perdido(assets.t_usd); // Antes de resetear, para mostrar los USD perdidos
         barra.Resetear(); // Reiniciar la barra original
         assets.ResetTempUSD(); // Reiniciar el valor temporal de USD
+        RegenerarTransacciones();
         OnValidar?.Invoke();
 
         temporizador.Reset(); // Reiniciar el temporizador
         StartCoroutine(DeshabilitarValidarUnSec());
     }
     //public void temporizador.onTiempoAgotado += PierdesBloque;
+
+    // Las transacciones usadas en el bloque anterior vuelven a estar disponibles con un valor nuevo
+    private void RegenerarTransacciones()
+    {
+        foreach (BotonTransaccion t in FindObjectsOfType<BotonTransaccion>())
+        {
+            t.RegenerarSiUsado();
+        }
+    }
 
     private IEnumerator AnimarYDestruir(GameObject obj)
 {
@@ -105,8 +127,18 @@ public class Validar : MonoBehaviour
             StartCoroutine(AnimarYDestruir(viejo));
         }
         
+        // Estadisticas para la pantalla final (antes de OnValidar, que puede terminar el minijuego)
+        usdGanados += assets.t_usd;
+        segundosAhorrados += temporizador.TiempoRestante;
+        if (barra.valorActual >= 0.999f)
+        {
+            contadorCompletos++;
+            fx.Completo(snapshot, barra.barra.name);
+        }
+
         assets.SubmitTempUSD(); // Anyadir el valor temporal de USD al total y resetearlo
 
+        RegenerarTransacciones(); // Antes de OnValidar, para que el fin del minijuego pueda desactivarlas
         OnValidar?.Invoke();
         // Reiniciar la barra original
         barra.Resetear();

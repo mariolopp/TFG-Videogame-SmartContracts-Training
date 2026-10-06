@@ -10,12 +10,37 @@ using UnityEngine.UI;
 // -----------------------------------------------
 public class BotonTransaccion : MonoBehaviour
 {
+    [Serializable]
+    public struct TipoTransaccion
+    {
+        public string nombre;
+        public int fee;    // $ que aporta al validador
+        public int gas;    // Unidades de gas que ocupa en el bloque
+        public int peso;   // Probabilidad relativa de aparecer
+        public TipoTransaccion(string nombre, int fee, int gas, int peso)
+        {
+            this.nombre = nombre; this.fee = fee; this.gas = gas; this.peso = peso;
+        }
+    }
+
     public float valorGas = 0.0f;           // Valor que aporta esta transaccion (0 a 1)
     public float valorUSD = 1f;             // Coste de esta transaccion
-    public BarraProgreso barra;             // Referencia a la barra (asignado en Inspector)
+    public BarraGas barra;                  // Referencia a la barra (asignado en Inspector)
     private Button boton;
-    public string[] posiblesTextos = { "Transfer\nFee: 1$\nGas: 1u", "Swap\nFee: 3$\nGas: 2u", "Deposit\nFee:4$\nGas: 6u" };
-    public float[] posiblesValores = { 1f, 1f, 3f, 2f, 4f, 6f };    // Multiplicar el indice de texto por 2 y usar ese valor y el vecino que lo sigue
+
+    // Sin transacciones de 1-2u, que harían trivial llenar el bloque exacto.
+    // Con estos pesos, entre 5-6 cajitas hay una combinación que suma 10u un ~35-45% de las veces,
+    // y encontrarla a tiempo mientras gira la ruleta deja el bloque perfecto en ~1-2 de cada 10
+    public TipoTransaccion[] tipos =
+    {
+        new TipoTransaccion("Transfer", 1, 1, 1),
+        new TipoTransaccion("Approve",  1, 2, 1),
+        new TipoTransaccion("Claim",    2, 3, 4),
+        new TipoTransaccion("Mint",     3, 3, 4),
+        new TipoTransaccion("Swap",     4, 5, 2),
+        new TipoTransaccion("Deposit",  5, 8, 2),
+        new TipoTransaccion("Withdraw", 6, 9, 2),
+    };
     public AssetsManager assets; // Referencia al script de Assets para modificar USD
 
     void Start()
@@ -27,11 +52,32 @@ public class BotonTransaccion : MonoBehaviour
     }
 
     public void GenerarBoton() {
-        int index = UnityEngine.Random.Range(0, posiblesTextos.Length);
-        boton.GetComponentInChildren<TextMeshProUGUI>().text = posiblesTextos[index];
-        valorUSD = posiblesValores[index * 2];            // $ que aporta al validador (1 a 4)
-        valorGas = posiblesValores[index * 2 + 1] / 10f;  // unidades de gas que ocupa (0 a 1)
+        TipoTransaccion tipo = ElegirTipo();
+        boton.GetComponentInChildren<TextMeshProUGUI>().text = $"{tipo.nombre}\nFee: {tipo.fee} <sprite=\"ETH_bag\" index=0>\nGas: {tipo.gas} <sprite=\"gas\" index=0>";
+        valorUSD = tipo.fee;                              // $ que aporta al validador
+        valorGas = tipo.gas / (float)barra.unidadesMax;        // fracción del bloque que ocupa (0 a 1)
         boton.interactable = true;                        // Activar el bot�n
+    }
+
+    // Si el boton se uso en este bloque, vuelve a activarse con una transaccion nueva
+    public void RegenerarSiUsado()
+    {
+        if (boton != null && !boton.interactable) GenerarBoton();
+    }
+
+    // Sorteo ponderado por el peso de cada tipo
+    private TipoTransaccion ElegirTipo()
+    {
+        int total = 0;
+        foreach (TipoTransaccion t in tipos) total += Mathf.Max(0, t.peso);
+
+        int r = UnityEngine.Random.Range(0, total);
+        foreach (TipoTransaccion t in tipos)
+        {
+            r -= Mathf.Max(0, t.peso);
+            if (r < 0) return t;
+        }
+        return tipos[tipos.Length - 1];
     }
 
     void Pulsar()

@@ -11,6 +11,7 @@ public class Temporizador : MonoBehaviour
     public event System.Action OnTiempoReset;
     public event System.Action OnTiempoCambiado;
     private float tiempoRestante;
+    public float TiempoRestante => tiempoRestante;
 
 
     void Start()

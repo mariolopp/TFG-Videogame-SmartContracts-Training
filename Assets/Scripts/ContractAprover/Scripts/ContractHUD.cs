@@ -109,7 +109,7 @@ public class ContractHUD : MonoBehaviour
 
     public void SetRemaining(int remaining, int total)
     {
-        if (remainingText != null) remainingText.text = $"{remaining}/{total}";
+        if (remainingText != null) remainingText.text = $"{remaining}";
     }
 
     public void SetTimerVisible(bool visible)
