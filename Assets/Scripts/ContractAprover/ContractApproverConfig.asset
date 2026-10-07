@@ -34,7 +34,7 @@ MonoBehaviour:
   pointsCorrect: 10
   pointsLostOnGoodReject: 25
   pointsForExtraLife: 50
-  bagsPerSecondLeft: 0.25
+  bagsPerSecondLeft: 0.15
   bagsPerPoint: 2
   bagsPerLife: 25
   blacklistLeadTurns: 3

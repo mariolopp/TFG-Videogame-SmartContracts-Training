@@ -20,7 +20,7 @@ public class BarraGas : BarraProgreso
     }
 
     // El contador sigue al relleno visible para que suba a la vez que la barra
-    private void ActualizarTextoUnidades()
+    public void ActualizarTextoUnidades()
     {
         if (textoUnidades == null) return;
         int unidades = Mathf.RoundToInt(barra.fillAmount * unidadesMax);

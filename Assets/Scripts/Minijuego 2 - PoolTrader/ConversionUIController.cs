@@ -13,11 +13,12 @@ public class ConversionUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bagsToBTCText;
     [SerializeField] private Button bagsToETHButton;
     [SerializeField] private TextMeshProUGUI bagsToETHText;
-    [SerializeField] private TMP_Text bagsBalanceText;
+    [SerializeField] private TMP_Text bagsRemainingText; // Bolsas que quedan por gastar este turno (x/max)
 
     [SerializeField] private AssetsManager assets;
     private PriceManager priceManager;
     private PoolTraderConfig config;
+    private int bagsSpentThisTurn;
 
     public void Open(PriceManager pm, PoolTraderConfig cfg)
     {
@@ -27,6 +28,7 @@ public class ConversionUIController : MonoBehaviour
         }
         priceManager = pm;
         config = cfg;
+        bagsSpentThisTurn = 0;
 
         if (panel != null) panel.SetActive(true);
 
@@ -60,7 +62,8 @@ public class ConversionUIController : MonoBehaviour
     private void ConvertBagsToBTC()
     {
         int bags = config.bagsPerBTC;
-        if (bags <= 0 || bags > assets.usd) return;
+        if (!CanBuy(bags)) return;
+        bagsSpentThisTurn += bags;
         assets.SpendUSD(bags);
         priceManager.AddUserBTC(bags / config.bagsPerBTC);
     }
@@ -69,9 +72,18 @@ public class ConversionUIController : MonoBehaviour
     private void ConvertBagsToETH()
     {
         int bags = config.bagsPerETH;
-        if (bags <= 0 || bags > assets.usd) return;
+        if (!CanBuy(bags)) return;
+        bagsSpentThisTurn += bags;
         assets.SpendUSD(bags);
         priceManager.AddUserETH(bags / config.bagsPerETH);
+    }
+
+    // Comprueba saldo y el límite de bolsas gastadas en compras durante este turno
+    private bool CanBuy(int bags)
+    {
+        return bags > 0
+            && bags <= assets.usd
+            && bagsSpentThisTurn + bags <= config.maxBagsPerConversionTurn;
     }
 
     private void ConvertBTCToBags()
@@ -99,6 +111,13 @@ public class ConversionUIController : MonoBehaviour
 
     private void RefreshUI()
     {
-        if (bagsBalanceText != null) bagsBalanceText.text = assets.GetUSD().ToString("F2");
+        //if (bagsBalanceText != null) bagsBalanceText.text = assets.GetUSD().ToString("F2");
+        if (bagsRemainingText != null)
+        {
+            int remaining = config.maxBagsPerConversionTurn - bagsSpentThisTurn;
+            bagsRemainingText.text = $"{remaining}/{config.maxBagsPerConversionTurn}";
+        }
+        bagsToBTCButton.interactable = CanBuy(config.bagsPerBTC);
+        bagsToETHButton.interactable = CanBuy(config.bagsPerETH);
     }
 }

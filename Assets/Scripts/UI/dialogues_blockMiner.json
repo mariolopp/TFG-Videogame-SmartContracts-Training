@@ -273,7 +273,7 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
-      "text": "Las transacciones irán apareciendo constantemente, y cada una tendrá una recompensa y un tamaño diferentes.",
+      "text": "Las transacciones irán apareciendo constantemente, y cada una tendrá una recompensa <sprite=\"ETH_bag\" index=0> y un tamaño <sprite=\"gas\" index=0> diferentes.",
       "evento": ""
     },
     {
@@ -297,7 +297,7 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
-      "text": "Debes encontrar el balance perfecto entre el tamaño que ocupan y la Fee que te generan.",
+      "text": "Debes encontrar el balance perfecto entre el tamaño que ocupan <sprite=\"gas\" index=0> y la Fee que te generan <sprite=\"ETH_bag\" index=0>.",
       "evento": ""
     },
     {
@@ -309,19 +309,19 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
-      "text": "Imagina una transacción que ocupa 6 unidades y paga 4 $.",
+      "text": "Imagina una transacción que ocupa 6 unidades <sprite=\"gas\" index=0> y paga 4 <sprite=\"ETH_bag\" index=0>.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
-      "text": "Poco después aparece otra que ocupa solo 2 unidades y paga 3 $. ¿Cual de las dos prefieres?",
+      "text": "Poco después aparece otra que ocupa solo 2 unidades <sprite=\"gas\" index=0> y paga 3 <sprite=\"ETH_bag\" index=0>. ¿Cual de las dos prefieres?",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
-      "text": "Ah... claro. Con la segunda gano casi lo mismo, pero gasto muchísimo menos espacio de mi límite de 10. ¡Podría meter muchas más transacciones pequeñas y ganar más dinero en total!",
+      "text": "Ah... claro. Con la segunda gano casi lo mismo, pero gasto muchísimo menos espacio de mi límite de 20 <sprite=\"gas\" index=0>. ¡Podría meter muchas más transacciones pequeñas y ganar más dinero en total!",
       "evento": ""
     },
     {
@@ -345,13 +345,13 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
-      "text": "Los bloques de hoy admiten un máximo de 10 unidades de espacio.",
+      "text": "Los bloques de hoy admiten un máximo de 20 unidades ( <sprite=\"gas\" index=0> ) de espacio.",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
-      "text": "Entonces... Mi objetivo es elegir las transacciones que me den más beneficios en total, teniendo en cuenta el espacio máximo de 10 y el fee que aportan.",
+      "text": "Entonces... Mi objetivo es elegir las transacciones que me den más beneficios en total, teniendo en cuenta el espacio máximo de 20 <sprite=\"gas\" index=0> y el fee que aportan.",
       "evento": ""
     },
     {
@@ -399,7 +399,7 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
-      "text": "Te indicará en tiempo real cuánto espacio has ocupado en tu bloque actual, que tiene un límite máximo de 10 unidades.",
+      "text": "Te indicará en tiempo real cuánto espacio has ocupado en tu bloque actual, que tiene un límite máximo de 20 unidades <sprite=\"gas\" index=0>.",
       "evento": ""
     },
     {

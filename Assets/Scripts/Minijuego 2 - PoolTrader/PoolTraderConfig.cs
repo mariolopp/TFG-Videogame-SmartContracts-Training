@@ -14,6 +14,7 @@ public class PoolTraderConfig : ScriptableObject
     public int bagsPerBTC = 4;
     public int bagsPerETH = 2;
     public int factorBags = 1; // Comisión entre compra y venta
+    public int maxBagsPerConversionTurn = 12; // Máximo de bolsas que se pueden gastar comprando monedas por turno
 
     [Header("Turno de traders")]
     public int minTraders = 2;

@@ -21,7 +21,9 @@ public class Validar : MonoBehaviour
     [UnityEngine.Serialization.FormerlySerializedAs("fxCompleto")]
     [SerializeField] private BloqueFX fx; // Efectos de bloque completo / perdido
     public event System.Action OnValidar;
-    public int maxVisibles = 5; // Bloques maximos visibles en el historial
+    public int maxVisibles = 4; // Bloques maximos visibles en el historial
+    public float escalaHistorial = 0.65f;     // Escala de los bloques guardados en el historial
+    public float escalaTextoHistorial = 1.4f; // Multiplicador del tamaño de letra de los textos del historial (nº de bolsas)
     private System.Collections.Generic.Queue<GameObject> historialSnapshots = new System.Collections.Generic.Queue<GameObject>();
     void Start()
     {
@@ -106,8 +108,16 @@ public class Validar : MonoBehaviour
         // Crear un clon de la barra
         barra.llenadoSuave = false; // Hacer que la barra deje de llenarse suavemente
         barra.barra.fillAmount = barra.valorActual; // Asegurarnos de que la imagen muestra el fill al valor actual
+        (barra as BarraGas)?.ActualizarTextoUnidades(); // Y que el contador de unidades coincide con ese fill antes de clonar
         GameObject snapshot = Instantiate(barra.gameObject, historialPanel);
-        snapshot.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        snapshot.transform.localScale = new Vector3(escalaHistorial, escalaHistorial, 1f);
+
+        // Letra mas grande en los textos del historial
+        foreach (TMPro.TMP_Text texto in snapshot.GetComponentsInChildren<TMPro.TMP_Text>(true))
+        {
+            texto.enableAutoSizing = false;
+            texto.fontSize *= escalaTextoHistorial;
+        }
 
         // Congelarla: quitarle el script para que no se actualice m�s
         Destroy(snapshot.GetComponent<BarraProgreso>());
@@ -134,6 +144,10 @@ public class Validar : MonoBehaviour
         {
             contadorCompletos++;
             fx.Completo(snapshot, barra.barra.name);
+        }
+        else
+        {
+            fx.Validado();
         }
 
         assets.SubmitTempUSD(); // Anyadir el valor temporal de USD al total y resetearlo

@@ -36,10 +36,10 @@ public class BotonTransaccion : MonoBehaviour
         new TipoTransaccion("Transfer", 1, 1, 1),
         new TipoTransaccion("Approve",  1, 2, 1),
         new TipoTransaccion("Claim",    2, 3, 4),
-        new TipoTransaccion("Mint",     3, 3, 4),
-        new TipoTransaccion("Swap",     4, 5, 2),
-        new TipoTransaccion("Deposit",  5, 8, 2),
-        new TipoTransaccion("Withdraw", 6, 9, 2),
+        new TipoTransaccion("Mint",     3, 3, 3),
+        new TipoTransaccion("Swap",     3, 5, 2),
+        new TipoTransaccion("Deposit",  4, 8, 2),
+        new TipoTransaccion("Withdraw", 5, 9, 2),
     };
     public AssetsManager assets; // Referencia al script de Assets para modificar USD
 

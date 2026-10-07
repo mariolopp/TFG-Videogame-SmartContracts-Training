@@ -26,6 +26,12 @@ public class BloqueFX : MonoBehaviour
     [SerializeField] private float saltoEpico = 30f;
     [SerializeField] private float duracionEpica = 0.9f;
 
+    [Header("Validar sin completar (rebote leve)")]
+    [SerializeField] private float escalaLeve = 1.08f;
+    [SerializeField] private float giroLeve = 2f;
+    [SerializeField] private float saltoLeve = 8f;
+    [SerializeField] private float duracionLeve = 0.5f;
+
     [Header("Texto flotante")]
     [SerializeField] private TMP_Text textoFlotante;          // Se crea en ejecución, aunque se puede asignar
     [SerializeField] private TMP_FontAsset fuente;
@@ -135,7 +141,7 @@ public class BloqueFX : MonoBehaviour
         DetenerTemblor(); // Devolver las barras a su sitio antes de otras animaciones
         if (!string.IsNullOrEmpty(sfxId)) AudioManager.Instance?.PlaySFX(sfxId);
 
-        if (contenedorBarras != null) Lanzar(contenedorBarras, "epica", MovimientoEpico());
+        if (contenedorBarras != null) Lanzar(contenedorBarras, "epica", MovimientoEpico(escalaEpica, giroEpico, saltoEpico, duracionEpica));
 
         foreach (BarraProgreso b in new[] { barraBloque, barraTiempo })
         {
@@ -154,6 +160,13 @@ public class BloqueFX : MonoBehaviour
         }
 
         if (snapshot != null) StartCoroutine(BloqueDorado(snapshot, nombreRelleno));
+    }
+
+    // ---------- Bloque validado sin completar ----------
+
+    public void Validado()
+    {
+        if (contenedorBarras != null) Lanzar(contenedorBarras, "epica", MovimientoEpico(escalaLeve, giroLeve, saltoLeve, duracionLeve));
     }
 
     // ---------- Bloque perdido ----------
@@ -189,13 +202,14 @@ public class BloqueFX : MonoBehaviour
     }
 
     // Se encoje, sale disparado hacia arriba y vuelve a su sitio
-    private IEnumerator MovimientoEpico()
+    private IEnumerator MovimientoEpico(float escala, float giro, float salto, float duracion)
     {
         animacionEpica = true;
         float inicio = factorContenedor;
-        float anticipacion = duracionEpica * 0.15f;
-        float explosion = duracionEpica * 0.2f;
-        float asentar = duracionEpica - anticipacion - explosion;
+        float encogido = 1f - (escala - 1f) * 0.27f; // 0.88 con la escala epica
+        float anticipacion = duracion * 0.15f;
+        float explosion = duracion * 0.2f;
+        float asentar = duracion - anticipacion - explosion;
 
         // Se encoje
         float t = 0f;
@@ -203,7 +217,7 @@ public class BloqueFX : MonoBehaviour
         {
             t += Time.unscaledDeltaTime;
             float p = Mathf.SmoothStep(0f, 1f, t / anticipacion);
-            AplicarContenedor(Mathf.Lerp(inicio, 0.88f, p), 0f, -saltoEpico * 0.3f * p);
+            AplicarContenedor(Mathf.Lerp(inicio, encogido, p), 0f, -salto * 0.3f * p);
             yield return null;
         }
 
@@ -213,7 +227,7 @@ public class BloqueFX : MonoBehaviour
         {
             t += Time.unscaledDeltaTime;
             float p = 1f - Mathf.Pow(1f - Mathf.Clamp01(t / explosion), 3f); // ease out
-            AplicarContenedor(Mathf.Lerp(0.88f, escalaEpica, p), giroEpico * p, Mathf.Lerp(-saltoEpico * 0.3f, saltoEpico, p));
+            AplicarContenedor(Mathf.Lerp(encogido, escala, p), giro * p, Mathf.Lerp(-salto * 0.3f, salto, p));
             yield return null;
         }
 
@@ -224,7 +238,7 @@ public class BloqueFX : MonoBehaviour
             t += Time.unscaledDeltaTime;
             float p = Mathf.Clamp01(t / asentar);
             float amortiguado = Mathf.Exp(-5f * p) * Mathf.Cos(p * Mathf.PI * 3f);
-            AplicarContenedor(1f + (escalaEpica - 1f) * amortiguado, giroEpico * amortiguado, saltoEpico * amortiguado);
+            AplicarContenedor(1f + (escala - 1f) * amortiguado, giro * amortiguado, salto * amortiguado);
             yield return null;
         }
 

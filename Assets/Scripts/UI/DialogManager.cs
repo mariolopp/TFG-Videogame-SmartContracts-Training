@@ -213,6 +213,7 @@ public class DialogManager : MonoBehaviour
     {
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         bodyText.text = currentFullText;
+        bodyText.maxVisibleCharacters = 99999;
         isTyping = false;
     }
 
@@ -234,9 +235,15 @@ public class DialogManager : MonoBehaviour
     IEnumerator TypeTextEffect(string textToType)
     {
         isTyping = true;
-        foreach (char letter in textToType.ToCharArray())
+        // Se asigna el texto completo y se revela carácter a carácter, para que las etiquetas
+        // de rich text (sprites, size...) no aparezcan a medio escribir
+        bodyText.text = textToType;
+        bodyText.maxVisibleCharacters = 0;
+        bodyText.ForceMeshUpdate();
+        int totalCaracteres = bodyText.textInfo.characterCount;
+        for (int i = 1; i <= totalCaracteres; i++)
         {
-            bodyText.text += letter;
+            bodyText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(typingSpeed);
         }
         isTyping = false;

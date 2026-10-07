@@ -57,7 +57,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "En este juego vas a encontrarte con dos tokens utilizados en una red ERC-20, como WBTC y ETH.",
+      "text": "En este juego vas a encontrarte con dos tokens utilizados en una red ERC-20, como WBTC (<sprite=\"BTC\" index=0>) y ETH (<sprite=\"ETH\" index=0>).",
       "evento": ""
     },
     {
@@ -201,13 +201,13 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Por ejemplo, alguien puede tener WBTC, la moneda naranja, y querer ETH",
+      "text": "Por ejemplo, alguien puede tener WBTC (<sprite=\"BTC\" index=0>), la moneda naranja, y querer ETH (<sprite=\"ETH\" index=0>)",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Otra persona puede tener ETH, la moneda azul, y preferir WBTC.",
+      "text": "Otra persona puede tener ETH (<sprite=\"ETH\" index=0>), la moneda azul, y preferir WBTC (<sprite=\"BTC\" index=0>).",
       "evento": ""
     },
     {
@@ -496,25 +496,25 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Supongamos dos tokens. Tú tienes WBTC",
+      "text": "Supongamos dos tokens. Tú tienes WBTC (<sprite=\"BTC\" index=0>)",
       "evento": "BTC_amnt"
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Y quieres obtener ETH",
+      "text": "Y quieres obtener ETH (<sprite=\"ETH\" index=0>)",
       "evento": "ETH_amnt"
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "El precio se encuentra actualmente en 1 BTC por 1 ETH",
+      "text": "El precio se encuentra actualmente en 1 BTC (<sprite=\"BTC\" index=0>) por 1 ETH (<sprite=\"ETH\" index=0>)",
       "evento": "LivePriceContainer"
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Pulsarás el botón de vender, entregando BTC a la pool",
+      "text": "Pulsarás el botón de vender, entregando BTC (<sprite=\"BTC\" index=0>) a la pool",
       "evento": "Sell_A"
     },
     {
@@ -532,7 +532,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Muy bien! fíjate como a cambio, recibes ETH.",
+      "text": "Muy bien! fíjate como a cambio, recibes ETH (<sprite=\"ETH\" index=0>).",
       "evento": "ETH_amnt"
     },
     {
@@ -586,13 +586,13 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Imagina que hay mucha gente comprando ETH.",
+      "text": "Imagina que hay mucha gente comprando ETH (<sprite=\"ETH\" index=0>).",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Cada intercambio va reduciendo la cantidad de ETH disponible en la pool.",
+      "text": "Cada intercambio va reduciendo la cantidad de ETH (<sprite=\"ETH\" index=0>) disponible en la pool.",
       "evento": ""
     },
     {
@@ -604,7 +604,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Por eso el precio cambia. Fíjate que ahora hay mas BTC que ETH",
+      "text": "Por eso el precio cambia. Fíjate que ahora hay mas BTC (<sprite=\"BTC\" index=0>) que ETH (<sprite=\"ETH\" index=0>)",
       "evento": ""
     },
     {
@@ -616,13 +616,13 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Esto es porque depositaste una moneda de BTC y sustrajiste CASI otra de ETH",
+      "text": "Esto es porque depositaste una moneda de BTC (<sprite=\"BTC\" index=0>) y sustrajiste CASI otra de ETH (<sprite=\"ETH\" index=0>)",
       "evento": "PoolElements"
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Fíjate que no has sustraido 1 ETH completo.",
+      "text": "Fíjate que no has sustraido 1 ETH (<sprite=\"ETH\" index=0>) completo.",
       "evento": ""
     },
     {
@@ -670,7 +670,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
-      "text": "Entonces no puedo asumir que BTC siempre cuesta lo mismo.",
+      "text": "Entonces no puedo asumir que BTC (<sprite=\"BTC\" index=0>) siempre cuesta lo mismo.",
       "evento": ""
     },
     {
@@ -784,13 +784,13 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Algunos comprarán BTC.",
+      "text": "Algunos comprarán BTC (<sprite=\"BTC\" index=0>).",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
-      "text": "Otros comprarán ETH.",
+      "text": "Otros comprarán ETH (<sprite=\"ETH\" index=0>).",
       "evento": ""
     },
     {
