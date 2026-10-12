@@ -148,6 +148,8 @@ public class ContractHUD : MonoBehaviour
         if (AssetsManager.Instance != null) AssetsManager.Instance.AddUSD(totalBags);
         else Debug.LogWarning("[ContractApprover] No hay AssetsManager: las bolsas no se guardan.");
 
+        PlayerData.Save();      // Guardar en la BD las bolsas que han quedado
+
         // Se ponen a 0 antes de animar para que no se vea el valor del editor mientras esperan su turno
         foreach (var t in new[] { endTimeText, endTimeBagsText, endPointsText, endPointsBagsText,
                                   endLivesText, endLivesBagsText, endTotalBagsText })

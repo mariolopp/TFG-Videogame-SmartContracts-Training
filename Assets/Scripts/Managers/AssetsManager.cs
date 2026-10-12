@@ -25,7 +25,7 @@ public class AssetsManager : MonoBehaviour
     }
     private void Start()
     {
-        usd = 0;
+        usd = PlayerData.Bags;
         eth = 0;
         OnAssetsChanged?.Invoke();
     }

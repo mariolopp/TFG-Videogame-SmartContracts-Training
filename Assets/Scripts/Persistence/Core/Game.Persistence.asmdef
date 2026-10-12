@@ -1,0 +1,6 @@
+{
+    "name": "Game.Persistence",
+    "rootNamespace": "Game.Persistence",
+    "references": [],
+    "autoReferenced": true
+}

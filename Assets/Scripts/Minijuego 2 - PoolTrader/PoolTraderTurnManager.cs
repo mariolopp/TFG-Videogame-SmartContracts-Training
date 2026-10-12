@@ -207,6 +207,7 @@ public class PoolTraderTurnManager : MonoBehaviour
         int bagsFromETH = Mathf.RoundToInt(priceManager.GetUserB() * config.bagsPerETH);
 
         assetsManager.AddUSD(bagsFromBTC + bagsFromETH);
+        PlayerData.Save();
 
         if (endGamePanel != null)
         {

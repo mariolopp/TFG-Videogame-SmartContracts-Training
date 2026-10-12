@@ -11,6 +11,8 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Button helpButton;
     [SerializeField] private Button jugarSinWalletButton;
 
+    private const string GameScene = "BlockMiner";
+
     public void Start()
     {
         jugarButton.onClick.AddListener(Jugar);
@@ -19,60 +21,67 @@ public class MenuScript : MonoBehaviour
         salirButton.onClick.AddListener(Salir);
     }
 
-    private void Jugar()
+    private async void Jugar()
     {
         AudioManager.Instance.PlaySFX("select_button");
-        // Si se recibe una partida vac�a de la wallet del mongoDB, iniciar tutorial - por implementar
-        if (wc.GetWalletAuthenticated())
+
+        if (!wc.GetWalletConnected())
         {
-            Debug.Log("Iniciando juego...");
-            SceneManager.LoadScene("BlockMiner");
-        }
-        else if (wc.GetWalletConnected())
-        {
-            jugarButton.interactable = false; // Evitar m�ltiples clicks
-            TutorialManager.Instance.ShowMessage("Authentication needed",
-                "In the next dialog you will be prompted to sign with your connected phone wallet", () =>
-                {
-                    // Este c�digo solo se ejecutar� cuando el usuario pulse una tecla para cerrar el mensaje
-                    wc.Authenticate();
-                    jugarButton.interactable = true; // Rehabilitar el bot�n
-                });
-        }
-        // Si se recibe una partida guardada, cargarla directamente hacia la escena principal del juego - por implementar
-        else if (false)
-        {
-            // Por implementar
-        }
-        else
-        {
-            jugarButton.interactable = false; // Evitar m�ltiples clicks
+            jugarButton.interactable = false; // Evitar múltiples clicks
             TutorialManager.Instance.ShowMessage("Wallet Not Connected",
                 "Please connect your wallet first.", () =>
                 {
-                    // Este c�digo solo se ejecutar� cuando el usuario pulse una tecla para cerrar el mensaje
                     wc.ConnectWallet();
-                    jugarButton.interactable = true; // Rehabilitar el bot�n
+                    jugarButton.interactable = true;
                 });
+            return;
         }
-        
+
+        // Ya hay partida cargada de ESTA wallet (p. ej. al volver al menú): entrar directamente.
+        // Si el jugador ha cambiado de wallet, esto da false y se carga la partida de la nueva.
+        if (await PersistenceLogin.HasSessionForActiveWalletAsync())
+        {
+            SceneManager.LoadScene(GameScene);
+            return;
+        }
+
+        jugarButton.interactable = false; // Evitar múltiples clicks
+        TutorialManager.Instance.ShowMessage("Authentication needed",
+            "In the next dialog you will be prompted to sign with your connected phone wallet", async () =>
+            {
+                // Una sola firma: verifica la wallet en el servidor y carga su partida.
+                bool loaded = await PersistenceLogin.LoginWithActiveWalletAsync();
+                jugarButton.interactable = true;
+
+                if (loaded)
+                {
+                    SceneManager.LoadScene(GameScene);
+                    return;
+                }
+
+                // Firma rechazada o servidor caído: se puede jugar igual, sin guardar.
+                TutorialManager.Instance.ShowMessage("Progress not available",
+                    "We couldn't load your saved progress. You can play now, but this session won't be saved.",
+                    () => SceneManager.LoadScene(GameScene));
+            });
     }
+
     private void jugarSinWallet()
     {
         AudioManager.Instance.PlaySFX("select_button");
-        // Si se recibe una partida vaca de la wallet del mongoDB, iniciar tutorial - por implementar
-        
-        jugarSinWalletButton.interactable = false; // Evitar mltiples clicks
-        Debug.Log("Iniciando juego...");
-        SceneManager.LoadScene("BlockMiner");
-        
+        jugarSinWalletButton.interactable = false; // Evitar múltiples clicks
+
+        PersistenceLogin.PlayAsGuest(); // partida nueva que no se lee ni se guarda
+        SceneManager.LoadScene(GameScene);
     }
+
     private void help()
     {
         AudioManager.Instance.PlaySFX("select_button");
         Debug.Log("Abriendo ayuda...");
         // Por implementar
     }
+
     private void Salir()
     {
         AudioManager.Instance.PlaySFX("select_button");
