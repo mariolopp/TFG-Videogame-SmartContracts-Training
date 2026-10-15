@@ -54,12 +54,11 @@ public class StandInteractor : MonoBehaviour
         {
             StandInteractable stand = stands[i];
 
-            float centerDistance = Vector2.Distance(playerPosition, stand.transform.position);
-            stand.SetHighlighted(centerDistance <= stand.HighlightRadius);
-
-            // La interacción se mide desde el punto de acceso (delante del stand):
+            // Resalte e interacción se miden desde el punto de acceso (delante del stand):
             // así no se puede entrar desde detrás y el paseo automático es corto
             float accessDistance = Vector2.Distance(playerPosition, stand.AccessPosition);
+            stand.SetHighlighted(accessDistance <= stand.HighlightRadius);
+
             if (accessDistance <= stand.InteractRadius && accessDistance < closestDistance)
             {
                 closest = stand;

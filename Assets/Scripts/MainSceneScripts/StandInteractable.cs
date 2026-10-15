@@ -31,7 +31,7 @@ public class StandInteractable : MonoBehaviour
     [SerializeField] private Light2D standLight;
 
     [Header("Proximidad")]
-    [Tooltip("Distancia desde el centro del stand a la que la imagen destacada avanza.")]
+    [Tooltip("Distancia desde el punto de acceso a la que la imagen destacada avanza.")]
     [SerializeField] private float highlightRadius = 5f;
     [Tooltip("Distancia desde el punto de acceso a la que aparece el globo y se puede entrar.")]
     [SerializeField] private float interactRadius = 1.6f;
@@ -177,7 +177,7 @@ public class StandInteractable : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1f, 0.85f, 0.2f);
-        Gizmos.DrawWireSphere(transform.position, highlightRadius);
+        Gizmos.DrawWireSphere(AccessPosition, highlightRadius);
         Gizmos.color = new Color(0.2f, 1f, 0.4f);
         Gizmos.DrawWireSphere(AccessPosition, interactRadius);
     }

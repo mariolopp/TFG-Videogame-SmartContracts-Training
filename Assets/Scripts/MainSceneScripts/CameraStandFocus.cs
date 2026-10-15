@@ -2,10 +2,8 @@ using Cinemachine;
 using UnityEngine;
 
 /// <summary>
-/// Desplaza la cámara en vertical hacia el stand más cercano para que su globo de aviso
-/// quede siempre dentro de la vista al acercarse, también si el jugador llega desde lejos.
+/// Desplaza la cámara en vertical hacia el stand para que se lea un poco mejor el texto del globo
 /// Además acerca ligeramente la cámara (zoom) a medida que el jugador se aproxima al stand.
-/// Va en la Virtual Camera (Body = Framing Transposer) y modifica su Tracked Object Offset y su Orthographic Size.
 /// </summary>
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraStandFocus : MonoBehaviour
@@ -16,7 +14,7 @@ public class CameraStandFocus : MonoBehaviour
         public float weight;
     }
 
-    [Tooltip("Margen (en unidades) entre el globo y el borde superior/inferior de la pantalla.")]
+    [Tooltip("Margen (en unidades) entre el bocadillo de texto y el borde superior/inferior de la pantalla.")]
     [SerializeField] private float screenMargin = 1.2f;
     [Tooltip("Fracción de la distancia vertical al globo que la cámara se adelanta aunque el globo ya se vea (0 = solo lo justo).")]
     [SerializeField, Range(0f, 1f)] private float lookFraction = 0.3f;
@@ -82,7 +80,7 @@ public class CameraStandFocus : MonoBehaviour
         {
             StandInteractable stand = stands[i];
             float radius = stand.HighlightRadius;
-            float distance = Vector2.Distance(playerPosition, stand.transform.position);
+            float distance = Vector2.Distance(playerPosition, stand.AccessPosition);
             if (distance >= radius) continue;
 
             float weight = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(radius, radius * fullEffectAt, distance));
@@ -96,13 +94,12 @@ public class CameraStandFocus : MonoBehaviour
         if (best == null) return default;
 
         float delta = best.PromptPosition.y - playerPosition.y;
-        // Con el tamaño que tendrá la vista ya con zoom, para que el globo no se salga al acercarse
+        // Con el tamaño que tendrá la vista ya con zoom, para que el bocadillo no se salga al acercarse
         float zoomedSize = baseOrthoSize * (1f - maxZoom * bestWeight);
         float halfHeight = Mathf.Max(0f, zoomedSize - screenMargin);
 
-        // Lo justo para que el globo entre en pantalla con margen...
+        // Lo justo para que el bocadillo entre en pantalla con margen...
         float needed = delta > 0f ? Mathf.Max(0f, delta - halfHeight) : Mathf.Min(0f, delta + halfHeight);
-        // ...o un poco hacia él aunque ya se vea, para que se note que la cámara "mira" al stand
         float look = delta * lookFraction;
         float desired = delta > 0f ? Mathf.Max(needed, look) : Mathf.Min(needed, look);
 
