@@ -79,6 +79,7 @@ public class CameraStandFocus : MonoBehaviour
         for (int i = 0; i < stands.Count; i++)
         {
             StandInteractable stand = stands[i];
+            if (stand.IsLocked) continue;
             float radius = stand.HighlightRadius;
             float distance = Vector2.Distance(playerPosition, stand.AccessPosition);
             if (distance >= radius) continue;

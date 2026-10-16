@@ -207,6 +207,7 @@ public class PoolTraderTurnManager : MonoBehaviour
         int bagsFromETH = Mathf.RoundToInt(priceManager.GetUserB() * config.bagsPerETH);
 
         assetsManager.AddUSD(bagsFromBTC + bagsFromETH);
+        GameProgress.MarkPlayed(GameProgress.PoolTrader); // La primera vez sube la estatua y desbloquea ContractApprover
         PlayerData.Save();
 
         if (endGamePanel != null)
@@ -230,7 +231,7 @@ public class PoolTraderTurnManager : MonoBehaviour
         }
         if (endGameCloseButton != null)
         {
-            endGameCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
+            endGameCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
         yield return null;
     }

@@ -104,6 +104,7 @@ public class blockMinerUI : MonoBehaviour
         Debug.Log($"[BlockMiner] USD: {bolsasGanadas} | Segundos ahorrados: {Validar.segundosAhorrados} (+{bolsasTiempo}) | Bloques completos: {bloquesCompletos} (+{bolsasBloques}) | Total: {puntuacionTotal}");
 
         assets.AddUSD(bolsasTiempo + bolsasBloques); // Las bolsas ganadas ya se sumaron al validar cada bloque
+        GameProgress.MarkPlayed(GameProgress.BlockMiner); // La primera vez sube la estatua y desbloquea PoolTrader
         PlayerData.Save(); // Guardar la partida al terminar el minijuego
 
         if(panelEndBlockMiner != null)
@@ -127,7 +128,7 @@ public class blockMinerUI : MonoBehaviour
 
         if (endScreenButton != null)
         {
-            endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("PoolTrader"));
+            endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
 
     }

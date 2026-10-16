@@ -148,6 +148,7 @@ public class ContractHUD : MonoBehaviour
         if (AssetsManager.Instance != null) AssetsManager.Instance.AddUSD(totalBags);
         else Debug.LogWarning("[ContractApprover] No hay AssetsManager: las bolsas no se guardan.");
 
+        GameProgress.MarkPlayed(GameProgress.ContractApprover); // La primera vez sube la estatua
         PlayerData.Save();      // Guardar en la BD las bolsas que han quedado
 
         // Se ponen a 0 antes de animar para que no se vea el valor del editor mientras esperan su turno
@@ -160,7 +161,7 @@ public class ContractHUD : MonoBehaviour
         if (endCloseButton != null)
         {
             endCloseButton.onClick.RemoveAllListeners();
-            endCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
+            endCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
     }
 

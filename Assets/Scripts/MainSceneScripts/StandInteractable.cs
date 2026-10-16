@@ -62,6 +62,16 @@ public class StandInteractable : MonoBehaviour
     [Tooltip("Id del efecto en la SoundLibrary (vacío = sin sonido).")]
     [SerializeField] private string enterSfxId = "stand_enter";
 
+    [Header("Bloqueo")]
+    [Tooltip("Color que multiplica las imágenes del stand mientras su minijuego está bloqueado.")]
+    [SerializeField] private Color lockedTint = new Color(0.35f, 0.35f, 0.38f, 1f);
+    [Tooltip("Duración del paso de gris a color al desbloquearse con animación.")]
+    [SerializeField] private float unlockDuration = 0.8f;
+    [Tooltip("Cuánto crece la imagen destacada en el 'pop' del desbloqueo.")]
+    [SerializeField] private float unlockPopScale = 0.15f;
+    [Tooltip("Id del efecto al desbloquearse (vacío = sin sonido).")]
+    [SerializeField] private string unlockSfxId = "coin_sound";
+
     private Transform featuredTransform;
     private Vector3 restLocalPosition;
     private Vector3 restLocalScale;
@@ -69,6 +79,13 @@ public class StandInteractable : MonoBehaviour
     private bool isHighlighted;
     private bool isEntering;
 
+    private SpriteRenderer[] tintedRenderers;
+    private Color[] originalColors;
+    private float lockVisual;         // 0 = a color, 1 = gris (valor ya interpolado)
+    private float unlockPop;          // 1 al desbloquearse, baja a 0 durante unlockDuration
+
+    /// <summary>Minijuego aún no disponible: el stand se ve gris y no se puede resaltar ni entrar.</summary>
+    public bool IsLocked { get; private set; }
     public float HighlightRadius => highlightRadius;
     public float InteractRadius => interactRadius;
     public string SceneName => sceneName;
@@ -82,10 +99,28 @@ public class StandInteractable : MonoBehaviour
         featuredTransform = featuredPart.transform;
         restLocalPosition = featuredTransform.localPosition;
         restLocalScale = featuredTransform.localScale;
+
+        // Se tiñen las imágenes del stand (Visuals), no el globo de aviso ni la sombra
+        Transform visuals = sortingGroup != null ? sortingGroup.transform : featuredTransform;
+        tintedRenderers = visuals.GetComponentsInChildren<SpriteRenderer>(true);
+        originalColors = new Color[tintedRenderers.Length];
+        for (int i = 0; i < tintedRenderers.Length; i++)
+            originalColors[i] = tintedRenderers[i].color;
+
+        // En Awake, antes de cualquier Start: PathGuide puede cambiarlo después para animar el desbloqueo
+        SetLocked(!GameProgress.IsUnlocked(sceneName));
     }
 
     private void OnEnable() => activeStands.Add(this);
     private void OnDisable() => activeStands.Remove(this);
+
+    /// <summary>Stand activo que lleva a esa escena, o null.</summary>
+    public static StandInteractable Find(string sceneName)
+    {
+        for (int i = 0; i < activeStands.Count; i++)
+            if (activeStands[i].sceneName == sceneName) return activeStands[i];
+        return null;
+    }
 
     private void Update()
     {
@@ -98,11 +133,56 @@ public class StandInteractable : MonoBehaviour
         float eased = Mathf.SmoothStep(0f, 1f, highlight);
         float bob = Mathf.Sin(Time.time * bobSpeed) * bobAmplitude * eased;
 
+        UpdateLockVisual();
+        // Sube y baja una vez (media onda de seno) mientras se desbloquea
+        float pop = Mathf.Sin(unlockPop * Mathf.PI) * unlockPopScale;
+
         featuredTransform.localPosition = restLocalPosition + (Vector3)(highlightOffset * eased) + Vector3.up * bob;
-        featuredTransform.localScale = restLocalScale * Mathf.Lerp(1f, highlightScale, eased);
+        featuredTransform.localScale = restLocalScale * (Mathf.Lerp(1f, highlightScale, eased) + pop);
 
         if (standLight != null)
-            standLight.intensity = Mathf.Lerp(lightIdleIntensity, lightHighlightIntensity, eased);
+            standLight.intensity = Mathf.Lerp(lightIdleIntensity, lightHighlightIntensity, eased + pop) * (1f - lockVisual);
+    }
+
+    /// <summary>Bloquea o desbloquea el stand. Con animate, al desbloquear pasa de gris a color con un "pop".</summary>
+    public void SetLocked(bool locked, bool animate = false)
+    {
+        IsLocked = locked;
+        if (locked)
+        {
+            isHighlighted = false;
+            SetPromptVisible(false);
+        }
+
+        if (animate && !locked)
+        {
+            unlockPop = 1f;
+            if (!string.IsNullOrEmpty(unlockSfxId) && AudioManager.Instance != null)
+                AudioManager.Instance.PlaySFX(unlockSfxId);
+        }
+        else
+        {
+            lockVisual = locked ? 1f : 0f;
+            unlockPop = 0f;
+            ApplyTint();
+        }
+    }
+
+    private void UpdateLockVisual()
+    {
+        if (unlockPop > 0f)
+            unlockPop = Mathf.Max(0f, unlockPop - Time.deltaTime / unlockDuration);
+
+        float target = IsLocked ? 1f : 0f;
+        if (Mathf.Approximately(lockVisual, target)) return;
+        lockVisual = Mathf.MoveTowards(lockVisual, target, Time.deltaTime / unlockDuration);
+        ApplyTint();
+    }
+
+    private void ApplyTint()
+    {
+        for (int i = 0; i < tintedRenderers.Length; i++)
+            tintedRenderers[i].color = Color.Lerp(originalColors[i], originalColors[i] * lockedTint, lockVisual);
     }
 
     public void SetHighlighted(bool value) => isHighlighted = value;

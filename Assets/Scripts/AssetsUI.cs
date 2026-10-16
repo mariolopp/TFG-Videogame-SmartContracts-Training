@@ -10,13 +10,19 @@ public class AssetsUI : MonoBehaviour
     void Start()
     {
         assets = FindObjectOfType<AssetsManager>();
+        // Sin AssetsManager (p. ej. al abrir la escena directamente sin pasar por el menú)
+        if (assets == null)
+        {
+            Debug.LogWarning("AssetsUI: no hay AssetsManager en escena.", this);
+            return;
+        }
         assets.OnAssetsChanged += ActualizarUI;
         ActualizarUI(); // inicializar
     }
 
     private void OnDestroy()
     {
-        assets.OnAssetsChanged -= ActualizarUI;
+        if (assets != null) assets.OnAssetsChanged -= ActualizarUI;
     }
 
     private void ActualizarUI()

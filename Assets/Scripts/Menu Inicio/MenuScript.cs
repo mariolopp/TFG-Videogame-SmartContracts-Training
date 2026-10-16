@@ -11,7 +11,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Button helpButton;
     [SerializeField] private Button jugarSinWalletButton;
 
-    private const string GameScene = "BlockMiner";
+    private const string GameScene = "MainScene";
 
     public void Start()
     {
@@ -41,7 +41,7 @@ public class MenuScript : MonoBehaviour
         // Si el jugador ha cambiado de wallet, esto da false y se carga la partida de la nueva.
         if (await PersistenceLogin.HasSessionForActiveWalletAsync())
         {
-            SceneManager.LoadScene(GameScene);
+            LoadGame();
             return;
         }
 
@@ -55,14 +55,14 @@ public class MenuScript : MonoBehaviour
 
                 if (loaded)
                 {
-                    SceneManager.LoadScene(GameScene);
+                    LoadGame();
                     return;
                 }
 
                 // Firma rechazada o servidor caído: se puede jugar igual, sin guardar.
                 TutorialManager.Instance.ShowMessage("Progress not available",
                     "We couldn't load your saved progress. You can play now, but this session won't be saved.",
-                    () => SceneManager.LoadScene(GameScene));
+                    () => LoadGame());
             });
     }
 
@@ -72,6 +72,20 @@ public class MenuScript : MonoBehaviour
         jugarSinWalletButton.interactable = false; // Evitar múltiples clicks
 
         PersistenceLogin.PlayAsGuest(); // partida nueva que no se lee ni se guarda
+        LoadGame();
+    }
+
+    // La primera partida (estatua a 0) empieza directamente en BlockMiner;
+    // al terminarlo el jugador aparece en el mapa delante de su stand
+    private static void LoadGame()
+    {
+        if (GameProgress.IsNewGame)
+        {
+            StandInteractor.SetReturnStand(GameProgress.BlockMiner);
+            SceneManager.LoadScene(GameProgress.BlockMiner);
+            return;
+        }
+
         SceneManager.LoadScene(GameScene);
     }
 
