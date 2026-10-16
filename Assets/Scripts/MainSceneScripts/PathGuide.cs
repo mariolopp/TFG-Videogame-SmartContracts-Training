@@ -7,11 +7,10 @@ using UnityEngine.Tilemaps;
 
 /// <summary>
 /// Camino guía hacia el siguiente minijuego por jugar (ver GameProgress).
-/// La primera vez que se termina un minijuego, al volver al mapa se dibuja en el suelo un rastro
-/// de puntos desde su stand hasta el del siguiente, con la cámara siguiendo el trazo; al llegar,
-/// el stand de destino pasa de gris a color. Mientras el control lo tiene la animación, el jugador
-/// no puede moverse ni entrar en stands.
-/// La ruta se calcula sobre el Tilemap de caminos, así que sigue valiendo si se rediseña el mapa.
+/// La 1º vez que se termina un minijuego, al volver al mapa se dibuja un rastro
+/// de puntos desde su stand hasta el del siguiente, con la cámara siguiendo el trazo. Al llegar,
+/// el stand de destino pasa de gris a color.
+/// La ruta se calcula sobre el Tilemap de caminos, sigue funcionando si se cambia el mapa
 /// </summary>
 public class PathGuide : MonoBehaviour
 {
