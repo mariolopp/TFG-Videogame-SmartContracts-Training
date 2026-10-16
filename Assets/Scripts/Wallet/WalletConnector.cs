@@ -32,6 +32,12 @@ namespace Thirdweb.Unity
         // Temporal
         private bool isAuthenticated = false;
 
+        // Textos originales para restaurarlos al desconectar la wallet
+        private string defaultConnectButtonText;
+        private string defaultAddressText;
+        private string defaultBalanceText;
+        private GameObject disconnectRoot; // lo que se muestra/oculta junto al boton de desconectar
+
         private void Awake()
         {
             Debug.Log("[WalletConnector] Awake - GameObject active: " + gameObject.activeInHierarchy + " script enabled: " + enabled);
@@ -48,6 +54,12 @@ namespace Thirdweb.Unity
             {
                 walletInfoPanel.SetActive(false);
             }
+
+            if (ConnectWalletButtonText != null) defaultConnectButtonText = ConnectWalletButtonText.text;
+            if (WalletAddressText != null) defaultAddressText = WalletAddressText.text;
+            if (WalletBalanceText != null) defaultBalanceText = WalletBalanceText.text;
+
+            SetupDisconnectButton();
 
             if (connectWalletButton == null)
             {
@@ -89,6 +101,79 @@ namespace Thirdweb.Unity
             {
                 Debug.Log("[WalletConnector] EventSystem present.");
             }
+
+            // Al volver al menu la wallet sigue conectada: mostrar sus datos y el boton de desconectar
+            if (ThirdwebManager.Instance != null && GetWalletConnected())
+            {
+                _ = ShowWalletInfo(ThirdwebManager.Instance.ActiveWallet);
+            }
+        }
+
+        // Si no se asigna un boton en el Inspector se crea uno copiando el de conectar, justo debajo
+        private void SetupDisconnectButton()
+        {
+            if (DisconnectWalletButton == null && connectWalletButton != null)
+            {
+                // Se copia el contenedor del boton (ConnectModel) si solo contiene el boton, para mantener el estilo
+                var original = (RectTransform)connectWalletButton.transform;
+                var container = original.parent as RectTransform;
+                var template = container != null && container.childCount == 1 && container.GetComponent<Canvas>() == null
+                    ? container
+                    : original;
+
+                var copy = Instantiate(template, template.parent);
+                copy.name = "DisconnectWallet";
+                copy.anchoredPosition = template.anchoredPosition - new Vector2(0f, template.rect.height + 10f);
+
+                DisconnectWalletButton = copy.GetComponentInChildren<Button>(true);
+                DisconnectWalletButton.onClick.RemoveAllListeners();
+                DisconnectWalletButton.interactable = true;
+
+                var label = copy.GetComponentInChildren<TMP_Text>(true);
+                if (label != null) label.text = "Disconnect wallet";
+
+                disconnectRoot = copy.gameObject;
+            }
+
+            if (DisconnectWalletButton == null) return;
+
+            if (disconnectRoot == null) disconnectRoot = DisconnectWalletButton.gameObject;
+            DisconnectWalletButton.onClick.AddListener(DisconnectWallet);
+            disconnectRoot.SetActive(false);
+        }
+
+        // Desconecta la wallet actual para poder conectar otra con el boton de conectar
+        public async void DisconnectWallet()
+        {
+            AudioManager.Instance.PlaySFX("select_button");
+            DisconnectWalletButton.interactable = false; // Evitar multiples clicks
+
+            if (ThirdwebManager.Instance != null && GetWalletConnected())
+            {
+                try
+                {
+                    await ThirdwebManager.Instance.DisconnectWallet();
+                }
+                catch (Exception e)
+                {
+                    // ThirdwebManager deja ActiveWallet a null aunque falle la desconexion remota
+                    Debug.LogWarning("[WalletConnector] Error disconnecting wallet: " + e);
+                }
+            }
+
+            // La sesion de persistencia era de la wallet anterior: no debe seguir guardando en ella
+            PersistenceLogin.PlayAsGuest();
+            isAuthenticated = false;
+
+            if (ConnectWalletButtonText != null) ConnectWalletButtonText.text = defaultConnectButtonText;
+            if (WalletAddressText != null) WalletAddressText.text = defaultAddressText;
+            if (WalletBalanceText != null) WalletBalanceText.text = defaultBalanceText;
+            if (connectWalletButton != null) connectWalletButton.interactable = true;
+
+            DisconnectWalletButton.interactable = true;
+            disconnectRoot.SetActive(false);
+
+            TutorialManager.Instance.ShowMessage("Wallet Disconnected", "You can now connect another wallet.");
         }
         public bool GetWalletAuthenticated()
         {
@@ -170,6 +255,38 @@ namespace Thirdweb.Unity
         // Método público para test manual desde la consola o desde otro script
         public void TestInvokeConnect() => ConnectWallet();
 
+        // Muestra direccion y saldo de la wallet conectada y habilita el boton de desconectar
+        private async System.Threading.Tasks.Task ShowWalletInfo(IThirdwebWallet wallet)
+        {
+            if (disconnectRoot != null) disconnectRoot.SetActive(true);
+
+            try
+            {
+                var address = await wallet.GetAddress();
+                Debug.Log("[WalletConnector] Wallet Address: " + address);
+                WalletAddressText.text = "Addr: "+address;
+                ConnectWalletButtonText.text = "Your addr: "+ address;
+                connectWalletButton.interactable = false;
+                
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error al obtener dirección de wallet: " + e);
+            }
+
+
+            try
+            {
+                float balance = (float)await wallet.GetBalance(421614);  // Saldo en ETH en arbitrum Sepolia
+                balance = balance / 1e18f; // Convertir de wei a ETH
+                WalletBalanceText.text = "Balance: " + balance + " ETH";
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error al obtener balance: " + e);
+            }
+        }
+
         public async void ConnectExternalWallet()
         {
             try
@@ -196,31 +313,7 @@ namespace Thirdweb.Unity
                 var wallet = await ThirdwebManager.Instance.ConnectWallet(options);
                 TutorialManager.Instance.ShowMessage("Connecting wallet...", "Obtaining data...");
                 Debug.Log("[WalletConnector] ConnectWallet finished. wallet != null: " + (wallet != null));
-                try
-                {
-                    var address = await wallet.GetAddress();
-                    Debug.Log("[WalletConnector] Wallet Address: " + address);
-                    WalletAddressText.text = "Addr: "+address;
-                    ConnectWalletButtonText.text = "Your addr: "+ address;
-                    connectWalletButton.interactable = false;
-                    
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("Error al obtener dirección de wallet: " + e);
-                }
-
-
-                try
-                {
-                    float balance = (float)await wallet.GetBalance(421614);  // Saldo en ETH en arbitrum Sepolia
-                    balance = balance / 1e18f; // Convertir de wei a ETH
-                    WalletBalanceText.text = "Balance: " + balance + " ETH";
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("Error al obtener balance: " + e);
-                }
+                await ShowWalletInfo(wallet);
                 TutorialManager.Instance.ShowMessage("Wallet Connected", "Your wallet is now connected.");
             }
             catch (System.Exception e)
