@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Desplaza la cámara en vertical hacia el stand para que se lea un poco mejor el texto del globo
 /// Además acerca ligeramente la cámara (zoom) a medida que el jugador se aproxima al stand.
+/// Funciona con cualquier ICameraFocusTarget registrado (stands, estatua...).
 /// </summary>
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraStandFocus : MonoBehaviour
@@ -71,30 +72,30 @@ public class CameraStandFocus : MonoBehaviour
 
     private Focus ComputeFocus(Vector2 playerPosition)
     {
-        // Stand con más influencia: el más metido dentro de su radio de resalte
-        StandInteractable best = null;
+        // Objetivo con más influencia: el más metido dentro de su radio de resalte
+        ICameraFocusTarget best = null;
         float bestWeight = 0f;
 
-        var stands = StandInteractable.ActiveStands;
-        for (int i = 0; i < stands.Count; i++)
+        var targets = CameraFocusTargets.All;
+        for (int i = 0; i < targets.Count; i++)
         {
-            StandInteractable stand = stands[i];
-            if (stand.IsLocked) continue;
-            float radius = stand.HighlightRadius;
-            float distance = Vector2.Distance(playerPosition, stand.AccessPosition);
+            ICameraFocusTarget target = targets[i];
+            if (!target.CanFocus) continue;
+            float radius = target.HighlightRadius;
+            float distance = Vector2.Distance(playerPosition, target.AccessPosition);
             if (distance >= radius) continue;
 
             float weight = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(radius, radius * fullEffectAt, distance));
             if (weight > bestWeight)
             {
-                best = stand;
+                best = target;
                 bestWeight = weight;
             }
         }
 
         if (best == null) return default;
 
-        float delta = best.PromptPosition.y - playerPosition.y;
+        float delta = best.FocusPoint.y - playerPosition.y;
         // Con el tamaño que tendrá la vista ya con zoom, para que el bocadillo no se salga al acercarse
         float zoomedSize = baseOrthoSize * (1f - maxZoom * bestWeight);
         float halfHeight = Mathf.Max(0f, zoomedSize - screenMargin);

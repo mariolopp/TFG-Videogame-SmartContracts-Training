@@ -91,6 +91,9 @@ public class PathGuide : MonoBehaviour
 
         CreateDots();
 
+        // Si la estatua acaba de crecer, primero se enseña eso y después el camino
+        while (StatueBuilder.IsCinematicPlaying) yield return null;
+
         if (reveal) yield return RevealRoutine(to);
         else SpawnDotsUpTo(routeLength, Time.time - dotPopDuration); // ya dibujado: sin "pop"
     }

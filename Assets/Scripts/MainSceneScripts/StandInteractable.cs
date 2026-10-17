@@ -9,7 +9,7 @@ using UnityEngine.Rendering.Universal;
 /// resalte al acercarse, globo de aviso y animación de entrada + carga de escena.
 /// Quién está cerca y cuándo se pulsa la tecla lo decide StandInteractor (en el jugador).
 /// </summary>
-public class StandInteractable : MonoBehaviour
+public class StandInteractable : MonoBehaviour, ICameraFocusTarget
 {
     // Registro de stands activos: el interactor los recorre sin buscar en la escena cada frame
     private static readonly List<StandInteractable> activeStands = new List<StandInteractable>();
@@ -92,6 +92,9 @@ public class StandInteractable : MonoBehaviour
     public Vector2 AccessPosition => accessPoint != null ? (Vector2)accessPoint.position : (Vector2)transform.position;
     /// <summary>Posición del globo de aviso (o del stand si no tiene). La usa la cámara para encuadrarlo.</summary>
     public Vector2 PromptPosition => prompt != null ? (Vector2)prompt.transform.position : (Vector2)transform.position;
+    // La cámara se acerca a los stands disponibles y deja a la vista su globo
+    bool ICameraFocusTarget.CanFocus => !IsLocked;
+    Vector2 ICameraFocusTarget.FocusPoint => PromptPosition;
     public bool HasValidScene => !string.IsNullOrEmpty(sceneName) && Application.CanStreamedLevelBeLoaded(sceneName);
 
     private void Awake()
@@ -111,8 +114,17 @@ public class StandInteractable : MonoBehaviour
         SetLocked(!GameProgress.IsUnlocked(sceneName));
     }
 
-    private void OnEnable() => activeStands.Add(this);
-    private void OnDisable() => activeStands.Remove(this);
+    private void OnEnable()
+    {
+        activeStands.Add(this);
+        CameraFocusTargets.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        activeStands.Remove(this);
+        CameraFocusTargets.Unregister(this);
+    }
 
     /// <summary>Stand activo que lleva a esa escena, o null.</summary>
     public static StandInteractable Find(string sceneName)

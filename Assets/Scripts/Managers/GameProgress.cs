@@ -4,7 +4,7 @@ using UnityEngine;
 /// Avance del jugador por los minijuegos, deducido del crecimiento de la estatua
 /// (PlayerData.BuildingProgress): 0 = partida nueva, 0.1 = ha jugado BlockMiner,
 /// 0.2 = además PoolTrader, 0.3 = además ContractApprover. Por encima de 0.3 son mejoras
-/// de la estatua compradas con bolsas, que aquí no cuentan.
+/// de la estatua compradas con bolsas (ver StatueProgress), que aquí no cuentan.
 /// Los minijuegos se desbloquean en orden
 /// </summary>
 public static class GameProgress
@@ -21,6 +21,9 @@ public static class GameProgress
 
     // Estático: se marca en el minijuego y lo consume MainScene al cargar
     private static bool newUnlockPending;
+
+    /// <summary>Número de minijuegos: es también el número de niveles de la estatua que se ganan jugando.</summary>
+    public static int MinigameCount => Minigames.Length;
 
     /// <summary>Cuántos minijuegos se han jugado ya (0 a 3).</summary>
     public static int PlayedCount =>
@@ -46,6 +49,7 @@ public static class GameProgress
         int index = System.Array.IndexOf(Minigames, sceneName);
         if (index < 0 || index != PlayedCount) return;
 
+        StatueBuilder.RememberLevelBeforeGrowth(); // para que el mapa anime la capa nueva
         PlayerData.BuildingProgress = Mathf.Max(PlayerData.BuildingProgress, (index + 1) * ProgressPerMinigame);
         newUnlockPending = index + 1 < Minigames.Length;
     }

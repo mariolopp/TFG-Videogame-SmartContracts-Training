@@ -21,6 +21,9 @@ public class StandInteractor : MonoBehaviour
     /// <summary>Si es false no se resalta ni se entra en ningún stand (cinemáticas, como el camino guía).</summary>
     public bool InteractionEnabled { get; set; } = true;
 
+    /// <summary>true si hay un stand a distancia de entrar (con su globo visible). Otros interactuables ceden la tecla.</summary>
+    public bool HasStandInRange => currentStand != null;
+
     /// <summary>
     /// Al volver al mapa, el jugador aparecerá delante del stand de esa escena. Lo hace solo al entrar
     /// por un stand; llamarlo a mano sirve cuando se llega al minijuego por otra vía (la primera partida).
@@ -121,7 +124,7 @@ public class StandInteractor : MonoBehaviour
         movement.WalkTo(stand.AccessPosition, stand.Enter);
     }
 
-    private static bool InteractPressed()
+    public static bool InteractPressed()
     {
         return Input.GetKeyDown(KeyCode.Space)
             || Input.GetKeyDown(KeyCode.Return)
@@ -129,7 +132,7 @@ public class StandInteractor : MonoBehaviour
     }
 
     // Evita que la misma pulsación que avanza un diálogo meta al jugador en un stand
-    private static bool IsDialogOpen()
+    public static bool IsDialogOpen()
     {
         return DialogManager.Instance != null && DialogManager.Instance.gameObject.activeInHierarchy;
     }
