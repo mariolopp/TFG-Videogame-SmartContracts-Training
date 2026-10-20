@@ -7,23 +7,28 @@ public class TransactionDeck
     private readonly List<TransactionData>[] originals = new List<TransactionData>[3];
     private readonly List<TransactionData>[] remaining = new List<TransactionData>[3];
 
-    public TransactionDeck(TextAsset easy, TextAsset normal, TextAsset hard)
+    // es: los 3 JSON en español (fácil, normal, difícil) | en: sus versiones en inglés, de las que solo se copian los textos
+    public TransactionDeck(TextAsset[] es, TextAsset[] en)
     {
-        originals[0] = Load(easy, "Fácil");
-        originals[1] = Load(normal, "Normal");
-        originals[2] = Load(hard, "Difícil");
+        string[] names = { "Fácil", "Normal", "Difícil" };
         for (int i = 0; i < 3; i++)
         {
-            foreach (var tx in originals[i]) tx.difficulty = i;
+            originals[i] = Load(es[i], names[i], true);
+            List<TransactionData> translated = Load(en[i], names[i] + " (inglés)", false);
+            foreach (var tx in originals[i])
+            {
+                tx.difficulty = i;
+                tx.MergeTranslation(translated.Find(t => t.id == tx.id));
+            }
             remaining[i] = new List<TransactionData>(originals[i]);
         }
     }
 
-    private static List<TransactionData> Load(TextAsset file, string name)
+    private static List<TransactionData> Load(TextAsset file, string name, bool required)
     {
         if (file == null)
         {
-            Debug.LogWarning($"[ContractApprover] No hay JSON asignado para la dificultad {name}.");
+            if (required) Debug.LogWarning($"[ContractApprover] No hay JSON asignado para la dificultad {name}.");
             return new List<TransactionData>();
         }
         TransactionFile parsed = JsonUtility.FromJson<TransactionFile>(file.text);

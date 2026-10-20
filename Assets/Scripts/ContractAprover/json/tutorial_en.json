@@ -1,0 +1,309 @@
+{
+  "steps": [
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Welcome! So far you've learned what a validator is and how swaps work on the blockchain, but now it's time for something a little different...", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Oh, really? And what's so different about it?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Today you'll be in charge of deciding which transactions get to reach the blockchain.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "I'm going to decide which transactions get in?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly. Your job will be to review the requests you receive and decide whether they're safe or not.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "And what if I get it wrong?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Oh, my friend, you're not the kind of person who signs contracts without reading them, are you?", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Well, I have to admit I've done it plenty of times...", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Here, if you approve something you shouldn't, you'll only lose lives or points...", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "But do you know what you could lose in a real case?", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "I guess a bit of money.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "HAHAHAHA! A bit... More like anywhere from a bit to a lot, a whole lot. It all depends on what you have in your wallet.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "So you'd better pay attention. Some requests will be perfectly fine...", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "...and others will hide small details you shouldn't overlook.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Okay... so I have to find details that tell me a transaction is dangerous?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly. Let me explain in more detail...", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Before we start, you need to know what you're reviewing.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "When a user wants to move assets or interact with a smart contract, they need to create a transaction.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Is that what gets signed?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Indeed! Before sending it to the blockchain, the user has to sign it with their wallet. That signature is how they authorise the operation.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So... if I sign something without looking, I'm authorising exactly what it says.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly. Every time a request shows up, you'll see the details of what it will do.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "And are all requests the same?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "No. Depending on the operation, you'll have to look at some data or other.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Here comes the important part: you can't decide just by skimming the request.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Why? Does the sender make mistakes?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Unfortunately, yes. A request can look completely normal and hide a detail that makes it dangerous.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So I'll have to compare the information.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "That's it. The first thing you must do is READ the request CAREFULLY: make sure what it asks for matches the transaction.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Like how?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Very easy: double-check the amount it asks for and the addresses of the tokens and contracts used.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Wait, whaaat???", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "It's really simple, you won't have trouble understanding it. Every request is different, but there are two key sections you need to look at.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "The first is the amount, that is, how many tokens are being approved, sent or swapped.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "And the second is the contracts and addresses. Short and simple: make sure the addresses in the request match the ones in the contract.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Let's do a test. Look carefully at this request.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Approve the contract only if it matches what the request asks for.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T00",
+        "requestText": "Hi, I'm Luis. Send 0.1 ETH to Marta: 0x5c3Y2a6909G5.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.1, "destination": "0x5c3Y2a6909G5" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.1,
+          "destination": "0x5c3B2a1908F7",
+          "gasFeeGwei": 15
+        },
+        "shouldApprove": false,
+        "errorCode": "wrong_destination",
+        "explanation": "The destination address in the contract isn't Marta's."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Perfect! Luis got the address wrong: the one in the contract isn't Marta's.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Almost! Look carefully: Luis got the address wrong. The one in the contract isn't Marta's.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Let's see how this one goes.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T01",
+        "requestText": "Hi, I'm Marta. Send 0.1 ETH to Luis: 0x4c3B2a1908F7.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.1, "destination": "0x4c3B2a1908F7" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.1,
+          "destination": "0x4c3B2a1908F7",
+          "gasFeeGwei": 15
+        },
+        "shouldApprove": true,
+        "errorCode": "none",
+        "explanation": "The amount and the address match the request."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Very good! The amount and the address matched, so it was time to approve.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "This one was legitimate: the amount and the address matched. Rejecting good transactions also costs points.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "jugador", "characterName": "You", "text": "Got it. And is that all?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "I'm afraid not. The biggest dangers are the ones the user doesn't know about.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "But in this game you're in luck: you'll get to know all of them.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Take a good look at this column on your right. Here you'll find four sources of information.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "First we have this list. These are the addresses you should avoid.", "evento": "abrirPanel:addresses" },
+        { "characterId": "jugador", "characterName": "You", "text": "Contract addresses?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly. If any contract shows up on this blacklist, you shouldn't approve an operation it appears in.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So I have to check whether the suspicious address is here.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Indeed. But remember: that's not the only thing to look at, you still have to keep an eye on everything I told you before.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Let's see how you do with this request.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T02",
+        "requestText": "I've won an airdrop! To claim it I have to send 0.05 ETH to 0xDeAd0bEEf133.",
+        "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.05, "destination": "0xDeAd0bEEf133" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.05,
+          "destination": "0xDeAd0bEEf133",
+          "gasFeeGwei": 18
+        },
+        "shouldApprove": false,
+        "errorCode": "scam_destination",
+        "explanation": "The destination is the 'FakeAirdrop' drainer from the blacklist."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly! Everything matched the request, but the destination was on the blacklist. You should never have to pay to receive a gift.", "evento": "" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "That address was on the blacklist. The user asking for it doesn't make it safe.", "evento": "abrirPanel:addresses" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Check it yourself: 0xDeAd0bEEf133 is the 'FakeAirdrop' drainer.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Here we have another list. This time it contains tokens that aren't safe.", "evento": "abrirPanel:tokens" },
+        { "characterId": "jugador", "characterName": "You", "text": "Why wouldn't a token be safe?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Good question! These are tokens that don't work normally: for example, they can't be sold, or there's no liquidity pool where you can sell them.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "But isn't it enough to look at the name?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Not quite. A token's name isn't enough: anyone can choose whatever name they want for their token.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "What they can't change, and what really matters, is the token's address.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So two tokens could have similar names but different addresses.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Let's see how you do this time.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T03",
+        "requestText": "Hi, I'm Ana. I want to swap 0.2 ETH for USDC (0xA0b869c621B7) on SushiX (0xd9e1cE17f264).",
+        "request": { "tokenSent": "ETH", "amountSent": 0.2, "tokenReceived": "USDC", "tokenReceivedAddress": "0xA0b869c621B7", "contract": "0xd9e1cE17f264" },
+        "signature": {
+          "type": "swap",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.2,
+          "tokenReceived": { "symbol": "USDC", "address": "0xA0b869c621B7" },
+          "amountReceived": 500,
+          "contract": "0xd9e1cE17f264",
+          "slippage": 0.3,
+          "gasFeeGwei": 30
+        },
+        "shouldApprove": false,
+        "errorCode": "scam_token",
+        "explanation": "It's called USDC, but its address (0xA0b869c621B7) is the fake USDC's from the token list."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Well spotted! It was called USDC, but its address was the fake USDC's. The name isn't enough, the address is what counts.", "evento": "cerrarPaneles" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "The name fooled you. Look at the list: the address 0xA0b869c621B7 is a fake USDC.", "evento": "abrirPanel:tokens" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Anyone can call their token USDC. What they can't fake is the address.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Another very important point: here you'll find the maximum fee allowed for each transaction.", "evento": "abrirPanel:fees" },
+        { "characterId": "jugador", "characterName": "You", "text": "That rings a bell. It was what validators got paid for writing to the blockchain, right?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Very good! I see you were paying attention.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "As I told you in Pool Trader, when we swap a token we have to pay the validators for writing to the blockchain.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "And this fee keeps changing, right?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly. That's why some users have a budget limit when making transactions. If the fee is too expensive, they'd rather do it some other time.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Oh, how interesting! And what do I do?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Your part is to not allow transactions that go over the maximum fee set for each type of transaction.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "For example, when you get a swap, compare the request's fee with the maximum allowed for a swap. It's measured in GWEI.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "In this panel you have the maximum fees our users can afford for each type of operation.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "I see.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Come on, let's do another test.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T04",
+        "requestText": "Send 40 DAI (0x6B175474E894) to 0x2E4f6A8b0C1d.",
+        "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E894", "amountSent": 40, "destination": "0x2E4f6A8b0C1d" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "DAI", "address": "0x6B175474E894" },
+          "amountSent": 40,
+          "destination": "0x2E4f6A8b0C1d",
+          "gasFeeGwei": 60
+        },
+        "shouldApprove": false,
+        "errorCode": "excessive_fee",
+        "explanation": "60 gwei is more than double the maximum for a send (25 gwei)."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Well spotted! The fee was 60 gwei and the maximum for a send is 25.", "evento": "cerrarPaneles" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "The request matched, but the fee was 60 gwei and the maximum for a send is 25.", "evento": "abrirPanel:fees" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "The user pays that difference, and they weren't willing to pay that much.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Another very important point: here you'll find the maximum slippage allowed for each token.", "evento": "abrirPanel:slippage" },
+        { "characterId": "jugador", "characterName": "You", "text": "And what's that? Slip... like slipping on a banana peel?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Hahaha! I hope you're joking.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Do you remember what happened in Pool Trader when you swapped a token while the liquidity pool was fairly empty?", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "That's right, the price changed really easily...", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly! When there are very few tokens in the liquidity pool compared to the ones we want to swap...", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "...we get, proportionally, fewer tokens for that swap, because by affecting the price, it works against us.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "I see. And how do users solve this?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "I'm glad you asked, that's the heart of the matter. To solve it, many set a limit on how much the price can vary when swapping tokens: the 'slippage'.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Oh, how interesting! And what do I do?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Your part is to not allow transactions that go over the set maximum.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "For example, when you get a swap, compare the request's slippage with the maximum allowed for the token being received.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "And if it goes over, I reject it, right?", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly! Let's see how you do.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T05",
+        "requestText": "Swap 0.5 ETH for PEPE (0x698250814545) on SushiX (0xd9e1cE17f264).",
+        "request": { "tokenSent": "ETH", "amountSent": 0.5, "tokenReceived": "PEPE", "tokenReceivedAddress": "0x698250814545", "contract": "0xd9e1cE17f264" },
+        "signature": {
+          "type": "swap",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.5,
+          "tokenReceived": { "symbol": "PEPE", "address": "0x698250814545" },
+          "amountReceived": 1300000,
+          "contract": "0xd9e1cE17f264",
+          "slippage": 8,
+          "gasFeeGwei": 35
+        },
+        "shouldApprove": false,
+        "errorCode": "excessive_slippage",
+        "explanation": "8% slippage when the maximum for PEPE is 3%."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Very good! The slippage was 8% and for PEPE we accept 3% at most.", "evento": "cerrarPaneles" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Everything else was fine, but the slippage was 8% and for PEPE we accept 3% at most.", "evento": "abrirPanel:slippage" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "With such a high slippage, the user could receive far fewer tokens than they expect.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "There's one last thing you haven't seen yet.", "evento": "cerrarPaneles" },
+        { "characterId": "jugador", "characterName": "You", "text": "Let me guess... I also have to do it fast.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Exactly. Each request has a limited time to make a decision.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So I can't spend ten minutes staring at every address.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "No. You'll have to learn to check the important information quickly.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Also, as you progress, the time for each type of request will gradually go down.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Perfect... just what I needed.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Don't worry. With practice you'll quickly recognise which data you need to check.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Also, the hardest transactions get some extra time.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "And, of course, your decisions have consequences. When you get a decision right, you'll earn points.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "And when I get it wrong?", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "If you approve a transaction you shouldn't have, you'll lose a life. Mind you, if you earn enough points, you can get lives back.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So I can take some risks if I'm playing well.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "You can make mistakes, but remember every life counts. Each life you have left adds extra points at the end of the game.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Burn one last idea into your head: don't try to decide by looking at just one thing.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Check that all the data makes sense together. A request can look acceptable...", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "...until you check an address. Or a fee. Or the token. Or the slippage.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "So the trap could be hidden anywhere.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "And you have to find it before signing.", "evento": "" },
+        { "characterId": "jugador", "characterName": "You", "text": "Okay. I think I understand my job now.", "evento": "" },
+        { "characterId": "profe", "characterName": "Professor Merkle", "text": "Then you're ready. Let's begin!", "evento": "" }
+      ]
+    }
+  ]
+}

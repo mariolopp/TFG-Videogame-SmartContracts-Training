@@ -1,0 +1,941 @@
+{
+  "dialogues": [
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Welcome to Pool Trader!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Today you're going to learn how to find your way around a small market of digital assets.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "A market?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Do I need to know about trading or cryptocurrencies to play?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "No. We'll start from scratch.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "First you'll understand what you're buying and selling.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Then we'll see how all of this happens on the blockchain.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And finally you'll learn how to take advantage of market movements.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Let's start with the most important thing.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "In this game you'll come across two tokens used on an ERC-20 network: WBTC (<sprite=\"BTC\" index=0>) and ETH (<sprite=\"ETH\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay… but what exactly is a token?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "A token is basically a digital asset that can be transferred between users.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It can also be used inside a system.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It can represent many things, from ideas or jokes to physical assets.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It can also represent shares, or even other cryptocurrencies.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "You can think of it as a digital chip.",
+      "evento": "LiveUserAmnt"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay... I get it, but how am I supposed to use those tokens?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Very simple. You're just going to swap them.",
+      "evento": "LiveUserAmnt"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "To do that you'll have to pay a small charge that we call a fee.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Fee? Sounds familiar from the minigame we played before.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "A fee is a charge you pay to operate on the blockchain.",
+      "evento": "LiveFeesContainer"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It's a variable rate, so it can change over time.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "But I don't have any money, how am I going to pay that?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Don't worry, I've brought a couple of bags for you.",
+      "evento": "ETH_bag_icon"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "With these bags you'll be able to make your first swaps.",
+      "evento": "sumarBolsas"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And you can always get more during your conversion turn.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "These bags are how you swap tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Without them you won't be able to buy or sell, so make sure you always have a few with you.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Also, the coins you've collected in your final result will be turned into new bags.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And at a generous rate.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, tell me more about who swaps those tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Around here, some people want certain tokens and others want different ones.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "For example, someone might have WBTC (<sprite=\"BTC\" index=0>), the orange coin, and want ETH (<sprite=\"ETH\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Someone else might have ETH (<sprite=\"ETH\" index=0>), the blue coin, and prefer WBTC (<sprite=\"BTC\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And why would anyone want to swap a token?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "They might want to use it, keep it or swap it later.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Or they might simply think its value could go up.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "You don't need to know each person's exact reason.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "What matters is that different people want to swap different digital assets.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Those digital assets are the tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So this exists because not everyone wants the same coins?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And we need to swap them?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "What you need to understand is that tokens are digital assets whose price fluctuates.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "People swap them because they have different needs, goals or expectations about their value.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And that's the key thing you need to remember!",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, I know what I'm swapping. But… with whom?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Here's the interesting part.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "In real life, if you want to buy a ring, you have to find someone else who'll sell it to you.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It doesn't work quite like that here. You don't need to personally find someone who wants to make the opposite swap.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "All of this is thanks to the liquidity pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Imagine the pool as a place with two big reserves, like this one:",
+      "evento": "PoolElements"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Each one holds a different token so users can swap them with each other.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And who puts those assets into the reserve?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Liquidity providers.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "They're users who contribute assets to the pool so others can make swaps.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So the liquidity providers put in the assets…",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And the traders use them to swap.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly. You can think of it as a book-swap shop.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "The liquidity providers fill the shelves, which are the pool's reserves.",
+      "evento": "PoolElements"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Notice how there's now the same amount of each type of token in both reserves.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": "LivePoolsAssets"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Traders come in to buy and sell, leaving some 'books' and taking others.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And the bookshop, which would be the liquidity pool, makes those swaps possible.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And do liquidity providers do all this for free?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Not at all.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "In a real system, providing liquidity requires rewards for every swap.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Going back to the bookshop example, think of these fees as a small cost.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "The bookshop owner keeps that cost for providing the place where you swap books, and it's higher the more books they have available.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "However, in this minigame, to keep things simple, we won't take them into account.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "I see, so the reserves...",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Those reserves are called a liquidity pool, remember.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Alright, so the liquidity pool provides the... books?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Tokens. What gets swapped are tokens, go on...",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, the liquidity pool provides the tokens, and the... users? swap them.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Very good! The users who do this are called traders, remember?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "I see, so the liquidity pool provides the tokens so traders can swap them.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly! The most important thing is that a liquidity pool is a reserve of tokens kept by users called liquidity providers.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It depends on them to work. Thanks to them, traders can make swaps.",
+      "evento": ""
+    },
+
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "This is blowing my mind. And how do those swaps you're talking about work?",
+      "evento": "."
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "HAHAHA, I love your questions.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Let's take two tokens. You have WBTC (<sprite=\"BTC\" index=0>)",
+      "evento": "BTC_amnt"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And you want to get ETH (<sprite=\"ETH\" index=0>)",
+      "evento": "ETH_amnt"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "The price is currently 1 BTC (<sprite=\"BTC\" index=0>) for 1 ETH (<sprite=\"ETH\" index=0>)",
+      "evento": "LivePriceContainer"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "You'll press the sell button, giving BTC (<sprite=\"BTC\" index=0>) to the pool",
+      "evento": "Sell_A"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Go ahead, press it",
+      "evento": "esperarAccionSell"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Very good! Notice how, in return, you receive ETH (<sprite=\"ETH\" index=0>).",
+      "evento": "ETH_amnt"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So it's like exchanging one currency for another.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Yes, but there's an important difference.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "The pool doesn't have an infinite amount of assets.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Every time someone buys an asset, the amount available in the pool changes. ",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Notice how the amounts are no longer equal",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": "LivePoolsAssets"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And does that affect the price?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Imagine lots of people are buying ETH (<sprite=\"ETH\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Each swap reduces the amount of ETH (<sprite=\"ETH\" index=0>) available in the pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And increases the amount of the asset in the other reserve that they use to buy",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "That's why the price changes. Notice there's now more BTC (<sprite=\"BTC\" index=0>) than ETH (<sprite=\"ETH\" index=0>)",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": "LivePoolsAssets"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "That's because you deposited one BTC coin (<sprite=\"BTC\" index=0>) and took out ALMOST one ETH coin (<sprite=\"ETH\" index=0>)",
+      "evento": "PoolElements"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Notice you didn't take out a full 1 ETH (<sprite=\"ETH\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "That's because there are few enough coins that, when you buy 1, your effective price isn't exactly 1:1 but slightly lower, 1:0.93",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Notice how the overall price has changed too",
+      "evento": "LivePriceContainer"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "This is a bit complex, why does the price change so much?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Think of the pool as a container.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "If you take from one side and add to the other, the balance changes.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "This means every swap has different conditions.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "In other words, each swap will pay a slightly different price than the previous one",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So I can't assume BTC (<sprite=\"BTC\" index=0>) always costs the same.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Correct. Even if sometimes the difference is small, the price is rarely exactly the same as before",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "But you don't need to memorise a formula to play either.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Just remember this rule:",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Every swap changes the state of the pool and, therefore, the price.",
+      "evento": "LivePriceContainer"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So my own trades can change the market.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Yes. And that will be very important.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "What matters is that every swap changes the amounts of assets in the pool.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And those changes make the price move.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "The fuller the reserves are, the smaller these price swings will be.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "If, on the other hand, they're nearly empty, a small swap can change the price drastically.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Remember, these are the reserves",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So I can control the price if I make enough swaps.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Not so fast.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "You're not the only one trading.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "There are more people?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Lots. They're called traders, remember?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "During the game, these traders will also make swaps.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Some will buy BTC (<sprite=\"BTC\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Others will buy ETH (<sprite=\"ETH\" index=0>).",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And their trades will also change the pool and, as a result, the price.",
+      "evento": "TraderCircle"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So the price can change even if I do nothing.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And that means you can't control it.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "You can only react to what's happening.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So I have to watch what the others do.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Correct, but above all how the pool's proportions change.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Because a good opportunity can show up right after another trader's move.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Your goal isn't to predict every move.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "It's to learn to recognise when you have an opportunity to take advantage of and get more tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "What matters is that you're playing against other traders, who also change the pool's proportions.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And that creates opportunities for you.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, now I understand the pool and the swaps.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "But how does everything work during a game?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "This is where our turn system comes in.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Each turn has four phases, always in this order.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "First: Traders.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Then: Conversion.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Next: Player swap.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "And finally: Liquidity providers.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And then it starts again?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Exactly.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Once the four phases are over, a new turn begins.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Mentor",
+      "text": "Enough explaining, try it yourself:",
+      "evento": ""
+    }
+  ]
+}

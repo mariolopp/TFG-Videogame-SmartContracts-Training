@@ -20,6 +20,12 @@ public class ContractApproverManager : MonoBehaviour
     [SerializeField] private TextAsset normalJson;
     [SerializeField] private TextAsset hardJson;
 
+    [Header("Versiones en inglés (solo se leen sus textos)")]
+    [SerializeField] private TextAsset tutorialJsonEn;
+    [SerializeField] private TextAsset easyJsonEn;
+    [SerializeField] private TextAsset normalJsonEn;
+    [SerializeField] private TextAsset hardJsonEn;
+
     [Header("Sistemas")]
     [SerializeField] private ReferenceDataManager references;
     [SerializeField] private ContractScoreManager score;
@@ -75,6 +81,7 @@ public class ContractApproverManager : MonoBehaviour
         if (skipTutorialButton != null)
         {
             skipTutorialButton.onClick.AddListener(SkipTutorial);
+            LanguageToggleButton.CreateNextTo(skipTutorialButton);
             skipTutorialButton.gameObject.SetActive(false);
         }
         if (score != null && hud != null)
@@ -146,7 +153,7 @@ public class ContractApproverManager : MonoBehaviour
         if (config.playTutorial && tutorialJson != null)
             yield return TutorialRoutine();
 
-        var deck = new TransactionDeck(easyJson, normalJson, hardJson);
+        var deck = new TransactionDeck(new[] { easyJson, normalJson, hardJson }, new[] { easyJsonEn, normalJsonEn, hardJsonEn });
         List<TransactionData> session = deck.BuildSession(config.transactionsPerSession, config);
         if (session.Count == 0)
         {
@@ -174,7 +181,7 @@ public class ContractApproverManager : MonoBehaviour
             };
             float limit = Mathf.Max(config.minTime, config.startTime - config.timeDecreasePerTx * i) * multiplier;
 
-            yield return PlayTransaction(session[i], limit, true, true, null);
+            yield return PlayTransaction(session[i], limit, true, true, null, null);
 
             if (score.IsDead) break;
         }
@@ -182,14 +189,14 @@ public class ContractApproverManager : MonoBehaviour
         EndGame(!score.IsDead);
     }
 
-    private IEnumerator PlayTransaction(TransactionData tx, float limit, bool useTimer, bool applyScore, DialogLine[] preDialogues)
+    private IEnumerator PlayTransaction(TransactionData tx, float limit, bool useTimer, bool applyScore, DialogLine[] preDialogues, DialogLine[] preDialoguesEn)
     {
         decision = Decision.None;
         yield return cards.Present(tx);
         CrossCheck(tx);
 
         if (preDialogues != null && preDialogues.Length > 0)
-            yield return PlayDialogue(preDialogues);
+            yield return PlayDialogue(preDialogues, preDialoguesEn);
 
         if (inTutorial && skipRequested)
         {
@@ -247,8 +254,8 @@ public class ContractApproverManager : MonoBehaviour
             SetOverlay(OverlayMode.Bottom, false); // sin animar: el overlay aún está apagado
             yield return PlayDialogue(new[] { new DialogLine {
                 characterId = config.feedbackCharacterId,
-                characterName = config.feedbackCharacterName,
-                text = BuildFeedback(tx, approved, timeout, correct) } });
+                characterName = LanguageManager.Pick(config.feedbackCharacterName, config.feedbackCharacterNameEn),
+                text = BuildFeedback(tx, approved, timeout, correct) } }, null);
             // El DialogManager apaga el overlay al terminar su fade out: hasta entonces no se restaura
             while (tutorialOverlay != null && tutorialOverlay.gameObject.activeSelf) yield return null;
             SetOverlay(OverlayMode.Full, false);
@@ -280,18 +287,18 @@ public class ContractApproverManager : MonoBehaviour
 
     private string BuildFeedback(TransactionData tx, bool approved, bool timeout, bool correct)
     {
-        string why = !string.IsNullOrWhiteSpace(tx.explanation) ? tx.explanation : AutoExplanation(tx);
-        if (timeout) return "¡Se acabó el tiempo! " + (tx.shouldApprove ? "Era una transacción legítima." : "Era fraudulenta: " + why);
-        if (correct && approved) return "Firma correcta. " + why;
-        if (correct) return "¡Fraude detectado! " + why;
-        if (approved) return "¡Has firmado un fraude! " + why;
-        return "Era legítima y la has rechazado. " + why;
+        string why = !string.IsNullOrWhiteSpace(tx.Explanation) ? tx.Explanation : AutoExplanation(tx);
+        if (timeout) return L("¡Se acabó el tiempo! ", "Time's up! ") + (tx.shouldApprove ? L("Era una transacción legítima.", "It was a legitimate transaction.") : L("Era fraudulenta: ", "It was fraudulent: ") + why);
+        if (correct && approved) return L("Firma correcta. ", "Correct signature. ") + why;
+        if (correct) return L("¡Fraude detectado! ", "Fraud detected! ") + why;
+        if (approved) return L("¡Has firmado un fraude! ", "You signed a fraud! ") + why;
+        return L("Era legítima y la has rechazado. ", "It was legitimate and you rejected it. ") + why;
     }
 
     private string AutoExplanation(TransactionData tx)
     {
         var issues = TransactionValidator.Validate(tx, references);
-        if (issues.Count == 0) return "Todo coincidía con la petición.";
+        if (issues.Count == 0) return L("Todo coincidía con la petición.", "Everything matched the request.");
         var sb = new StringBuilder();
         foreach (var i in issues) sb.Append(i.message).Append(' ');
         return sb.ToString().Trim();
@@ -327,28 +334,39 @@ public class ContractApproverManager : MonoBehaviour
             Debug.LogWarning("[ContractApprover] tutorial.json vacío o mal formado: se salta el tutorial.");
             yield break;
         }
+        // La versión inglesa se recorre en paralelo: tiene que tener los mismos pasos
+        TutorialFile fileEn = tutorialJsonEn != null ? JsonUtility.FromJson<TutorialFile>(tutorialJsonEn.text) : null;
+        if (fileEn != null && (fileEn.steps == null || fileEn.steps.Count != file.steps.Count))
+        {
+            Debug.LogWarning("[ContractApprover] tutorial_en.json no tiene los mismos pasos que tutorial.json: el tutorial será solo en español.");
+            fileEn = null;
+        }
 
         inTutorial = true;
         skipRequested = false;
         SetObjectsActive(tutorialOnlyObjects, true);
         if (skipTutorialButton != null) skipTutorialButton.gameObject.SetActive(true);
 
-        foreach (TutorialStep step in file.steps)
+        for (int i = 0; i < file.steps.Count; i++)
         {
             if (skipRequested) break;
+            TutorialStep step = file.steps[i];
+            TutorialStep stepEn = fileEn != null ? fileEn.steps[i] : new TutorialStep();
             string kind = (step.kind ?? "").Trim().ToLowerInvariant();
 
             if (kind == "dialogue")
             {
-                yield return PlayDialogue(step.dialogues);
+                yield return PlayDialogue(step.dialogues, stepEn.dialogues);
             }
             else if (kind == "transaction" && step.transaction != null)
             {
+                step.transaction.MergeTranslation(stepEn.transaction);
                 references.InjectNow(step.transaction.requiredBlacklist);
                 yield return PlayTransaction(step.transaction, config.tutorialTime, config.tutorialHasTimer,
-                                             config.tutorialAffectsScore, step.dialogues);
+                                             config.tutorialAffectsScore, step.dialogues, stepEn.dialogues);
                 if (skipRequested) break;
-                yield return PlayDialogue(lastWasCorrect ? step.dialoguesIfCorrect : step.dialoguesIfWrong);
+                if (lastWasCorrect) yield return PlayDialogue(step.dialoguesIfCorrect, stepEn.dialoguesIfCorrect);
+                else yield return PlayDialogue(step.dialoguesIfWrong, stepEn.dialoguesIfWrong);
             }
         }
 
@@ -361,7 +379,7 @@ public class ContractApproverManager : MonoBehaviour
         skipRequested = false; // si no, PlayDialogue descartaría también los diálogos de la partida
     }
 
-    private IEnumerator PlayDialogue(DialogLine[] lines)
+    private IEnumerator PlayDialogue(DialogLine[] lines, DialogLine[] linesEn)
     {
         if (lines == null || lines.Length == 0 || skipRequested) yield break;
         DialogManager dm = dialogManager != null ? dialogManager : DialogManager.Instance;
@@ -373,12 +391,9 @@ public class ContractApproverManager : MonoBehaviour
 
         bool finished = false;
         dialogRunning = true;
-        // Tu DialogManager lee un TextAsset: creamos uno al vuelo con estas líneas
-        var asset = new TextAsset(JsonUtility.ToJson(new DialogData { dialogues = lines }));
-        dm.StartDialog(asset, () => finished = true);
+        dm.StartDialog(lines, linesEn, () => finished = true);
         while (!finished) yield return null;
         dialogRunning = false;
-        Destroy(asset);
     }
 
     // Posibles eventos para el campo evento del json
@@ -464,6 +479,8 @@ public class ContractApproverManager : MonoBehaviour
     }
 
     // ----------------------------- utilidades ------------------------------------- 
+    private static string L(string es, string en) => LanguageManager.Pick(es, en);
+
     private void SetButtonsInteractable(bool value)
     {
         if (approveButton != null) approveButton.interactable = value;

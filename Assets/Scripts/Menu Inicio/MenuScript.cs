@@ -10,6 +10,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Button salirButton;
     [SerializeField] private Button helpButton;
     [SerializeField] private Button jugarSinWalletButton;
+    [SerializeField] private Button languageButton;
 
     private const string GameScene = "MainScene";
 
@@ -19,6 +20,8 @@ public class MenuScript : MonoBehaviour
         jugarSinWalletButton.onClick.AddListener(jugarSinWallet);
         helpButton.onClick.AddListener(help);
         salirButton.onClick.AddListener(Salir);
+        // El menú de idioma copia el estilo del botón Help
+        LanguageMenuButton.Setup(languageButton, helpButton);
     }
 
     private async void Jugar()

@@ -75,6 +75,7 @@ public class ContractApproverConfig : ScriptableObject
     public float feedbackDelay = 0.8f;
     public string feedbackCharacterId = "profe";
     public string feedbackCharacterName = "Profe";
+    public string feedbackCharacterNameEn = "Prof";
 
     [Header("Sonidos (IDs de SoundLibrary)")]
     public string sfxCorrect = "";

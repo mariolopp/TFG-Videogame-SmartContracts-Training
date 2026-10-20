@@ -1,0 +1,215 @@
+{
+  "transactions": [
+    {
+      "id": "N01",
+      "requestText": "Send 0.75 ETH to Luis (0x4c3B2a1908F7) to pay for dinner.",
+      "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.75, "destination": "0x4c3B2a1908F7" },
+      "signature": {
+        "type": "send",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 7.5,
+        "destination": "0x4c3B2a1908F7",
+        "gasFeeGwei": 19
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_amount",
+      "explanation": "The signature sends 7.5 ETH and the request was for 0.75 ETH: ten times more!"
+    },
+    {
+      "id": "N02",
+      "requestText": "Swap 0.5 ETH for PEPE (0x698250814545) on SushiX (0xd9e1cE17f264).",
+      "request": { "tokenSent": "ETH", "amountSent": 0.5, "tokenReceived": "PEPE", "tokenReceivedAddress": "0x698250814545", "contract": "0xd9e1cE17f264" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.5,
+        "tokenReceived": { "symbol": "PEPE", "address": "0x698250814545" },
+        "amountReceived": 1250000,
+        "contract": "0xd9e1cE17f264",
+        "slippage": 12,
+        "gasFeeGwei": 40
+      },
+      "shouldApprove": false,
+      "errorCode": "excessive_slippage",
+      "explanation": "12% slippage when the maximum for PEPE is 3%: a bot could pocket the difference."
+    },
+    {
+      "id": "N03",
+      "requestText": "Allow AaveLend (0x87870Bca3F3f) to use 50 DAI (0x6B175474E894).",
+      "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E894", "approveAmount": 50, "contract": "0x87870Bca3F3f" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "DAI", "address": "0x6B175474E894" },
+        "approveAmount": 0,
+        "approveUnlimited": true,
+        "contract": "0x87870Bca3F3f",
+        "gasFeeGwei": 24
+      },
+      "shouldApprove": false,
+      "errorCode": "unnecessary_approve",
+      "explanation": "It asks for UNLIMITED authorisation when only 50 DAI are needed. It wouldn't mean a loss, but it's bad security practice."
+    },
+    {
+      "id": "N04",
+      "requestText": "Swap 1 ETH for LINK (0x514910771AF9) on BlockSwap (0x7a250d5630B4).",
+      "request": { "tokenSent": "ETH", "amountSent": 1, "tokenReceived": "LINK", "tokenReceivedAddress": "0x514910771AF9", "contract": "0x7a250d5630B4" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 1,
+        "tokenReceived": { "symbol": "UNI", "address": "0x1f9840a85d5a" },
+        "amountReceived": 230,
+        "contract": "0x7a250d5630B4",
+        "slippage": 1,
+        "gasFeeGwei": 35
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_received_token",
+      "explanation": "You would receive UNI instead of LINK."
+    },
+    {
+      "id": "N05",
+      "requestText": "Send 30 LINK (0x514910771AF9) to my partner: 0x7F3e9C1a5B2d.",
+      "request": { "tokenSent": "LINK", "tokenSentAddress": "0x514910771AF9", "amountSent": 30, "destination": "0x7F3e9C1a5B2d" },
+      "signature": {
+        "type": "send",
+        "tokenSent": { "symbol": "LINK", "address": "0x514910771AF9" },
+        "amountSent": 30,
+        "destination": "0x7F3e9C1a5B2d",
+        "gasFeeGwei": 24
+      },
+      "shouldApprove": true,
+      "errorCode": "none",
+      "explanation": "Everything matches and the fee (24 gwei) is below the maximum of 25."
+    },
+    {
+      "id": "N06",
+      "requestText": "I've been told UniStake pays 40% a year. Allow its contract 0x2bAd5e7a9C0d to use 100 UNI (0x1f9840a85d5a).",
+      "request": { "tokenSent": "UNI", "tokenSentAddress": "0x1f9840a85d5a", "approveAmount": 100, "contract": "0x2bAd5e7a9C0d" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "UNI", "address": "0x1f9840a85d5a" },
+        "approveAmount": 100,
+        "approveUnlimited": false,
+        "contract": "0x2bAd5e7a9C0d",
+        "gasFeeGwei": 26
+      },
+      "shouldApprove": false,
+      "errorCode": "scam_contract",
+      "explanation": "The 'UniStake' contract is on the blacklist. Returns that high are usually a trap.",
+      "requiredBlacklist": {
+        "addresses": [ { "address": "0x2bAd5e7a9C0d", "label": "Fraudulent staking 'UniStake'" } ],
+        "tokens": []
+      }
+    },
+    {
+      "id": "N07",
+      "requestText": "Swap 0.6 ETH for UNI (0x1f9840a85d5a) on SushiX (0xd9e1cE17f264).",
+      "request": { "tokenSent": "ETH", "amountSent": 0.6, "tokenReceived": "UNI", "tokenReceivedAddress": "0x1f9840a85d5a", "contract": "0xd9e1cE17f264" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.6,
+        "tokenReceived": { "symbol": "UNI", "address": "0x1f9840a85d5a" },
+        "amountReceived": 140,
+        "contract": "0x7a250d5630B4",
+        "slippage": 1,
+        "gasFeeGwei": 34
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_contract",
+      "explanation": "The signed contract is the BlockSwap router, not the SushiX one that was requested. Even if it isn't fraudulent, it's not what the user wants to sign."
+    },
+    {
+      "id": "N08",
+      "requestText": "Allow SushiX (0xd9e1cE17f264) to use 300 USDC (0xA0b869c621B6) for a swap.",
+      "request": { "tokenSent": "USDC", "tokenSentAddress": "0xA0b869c621B6", "approveAmount": 300, "contract": "0xd9e1cE17f264" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "USDC", "address": "0xA0b869c621B6" },
+        "approveAmount": 3000,
+        "approveUnlimited": false,
+        "contract": "0xd9e1cE17f264",
+        "gasFeeGwei": 26
+      },
+      "shouldApprove": false,
+      "errorCode": "unnecessary_approve",
+      "explanation": "3000 USDC are authorised when only 300 are needed: it isn't unlimited, but it's still ten times more than necessary."
+    },
+    {
+      "id": "N09",
+      "requestText": "Swap 0.3 ETH for UNI (0x1f9840a85d5a) on BlockSwap (0x7a250d5630B4).",
+      "request": { "tokenSent": "ETH", "amountSent": 0.3, "tokenReceived": "UNI", "tokenReceivedAddress": "0x1f9840a85d5a", "contract": "0x7a250d5630B4" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.3,
+        "tokenReceived": { "symbol": "UNI", "address": "0x1f9840a85d5a" },
+        "amountReceived": 70,
+        "contract": "0x7a250d5630B4",
+        "slippage": 0.8,
+        "gasFeeGwei": 41
+      },
+      "shouldApprove": true,
+      "errorCode": "none",
+      "explanation": "All correct: slippage (0.8%) below UNI's 1% and fee (41 gwei) below 45."
+    },
+    {
+      "id": "N10",
+      "requestText": "Send 40 UNI (0x1f9840a85d5a) to my partner: 0x7F3e9C1a5B2d.",
+      "request": { "tokenSent": "UNI", "tokenSentAddress": "0x1f9840a85d5a", "amountSent": 40, "destination": "0x7F3e9C1a5B2d" },
+      "signature": {
+        "type": "send",
+        "tokenSent": { "symbol": "UNI", "address": "0x1f9840a85d5a" },
+        "amountSent": 40,
+        "destination": "0x7F3e9C1a5B2d",
+        "gasFeeGwei": 28
+      },
+      "shouldApprove": false,
+      "errorCode": "excessive_fee",
+      "explanation": "The fee is 28 gwei and the maximum for a send is 25. It wouldn't have been a big loss, but it goes over the threshold."
+    },
+    {
+      "id": "N11",
+      "requestText": "I want to move 200 DAI (0x6B175474E894) to another network with QuickBridge. Allow its contract 0xB71d6E3aC0fE to use them.",
+      "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E894", "approveAmount": 200, "contract": "0xB71d6E3aC0fE" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "DAI", "address": "0x6B175474E894" },
+        "approveAmount": 200,
+        "approveUnlimited": false,
+        "contract": "0xB71d6E3aC0fE",
+        "gasFeeGwei": 25
+      },
+      "shouldApprove": false,
+      "errorCode": "scam_contract",
+      "explanation": "Everything matches the request, but the 'QuickBridge' contract is on the blacklist: it's a fake bridge that keeps the authorised funds.",
+      "requiredBlacklist": {
+        "addresses": [ { "address": "0xB71d6E3aC0fE", "label": "Fake bridge 'QuickBridge'" } ],
+        "tokens": []
+      }
+    },
+    {
+      "id": "N12",
+      "requestText": "In a Telegram group they say MOON (0x4d00Fe11a7C3) is going to do x100. Swap 0.2 ETH for 50000 MOON on BlockSwap (0x7a250d5630B4).",
+      "request": { "tokenSent": "ETH", "amountSent": 0.2, "tokenReceived": "MOON", "tokenReceivedAddress": "0x4d00Fe11a7C3", "amountReceived": 50000, "contract": "0x7a250d5630B4" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 0.2,
+        "tokenReceived": { "symbol": "MOON", "address": "0x4d00Fe11a7C3" },
+        "amountReceived": 50000,
+        "contract": "0x7a250d5630B4",
+        "slippage": 0.5,
+        "gasFeeGwei": 33
+      },
+      "shouldApprove": false,
+      "errorCode": "scam_token",
+      "explanation": "The swap is correct, but MOON is on the scam token list: it's a honeypot, you can buy it but never sell it.",
+      "requiredBlacklist": {
+        "addresses": [],
+        "tokens": [ { "address": "0x4d00Fe11a7C3", "label": "MOON - honeypot" } ]
+      }
+    }
+  ]
+}

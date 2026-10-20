@@ -2377,6 +2377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   archivoDialogoJson: {fileID: 4900000, guid: 385cfe0921473840d9d65e3faea5b774, type: 3}
+  archivoDialogoJsonEn: {fileID: 4900000, guid: ee004719508c49f3b82e19cdeb49b142, type: 3}
   contenedorCirculos: {fileID: 2676415114870560710}
   esperandoAccion: 0
   priceManager: {fileID: 1576762932}

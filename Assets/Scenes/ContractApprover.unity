@@ -12136,6 +12136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceJson: {fileID: 4900000, guid: b9b6062eed6bfc4c49d97d9dc7e7869e, type: 3}
+  referenceJsonEn: {fileID: 4900000, guid: b20fd5b13f364e0d81b6baa574fdd364, type: 3}
   config: {fileID: 11400000, guid: d1191f8b958e4b1cc8284083aef41a14, type: 2}
 --- !u!114 &1150008571
 MonoBehaviour:
@@ -12154,6 +12155,10 @@ MonoBehaviour:
   easyJson: {fileID: 4900000, guid: 97ce5b807f2d571b0b2cb24d71dda1e7, type: 3}
   normalJson: {fileID: 4900000, guid: 1445194619c2de71cad9d2d7112ac3b6, type: 3}
   hardJson: {fileID: 4900000, guid: 9802b69d933b696c991d42c4f2f4e74e, type: 3}
+  tutorialJsonEn: {fileID: 4900000, guid: 6c62fea7c2934b0b8fb6e0a973956d1a, type: 3}
+  easyJsonEn: {fileID: 4900000, guid: 3c989c7ae61d479e9190f0787554b0b2, type: 3}
+  normalJsonEn: {fileID: 4900000, guid: 22326d1acbe347d7b709d6ef1704c756, type: 3}
+  hardJsonEn: {fileID: 4900000, guid: 4a8a398099c14427ac889a261db988e3, type: 3}
   references: {fileID: 1150008570}
   score: {fileID: 1150008569}
   cards: {fileID: 1419910745}
@@ -23257,7 +23262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1649853785824525948
 MonoBehaviour:
   m_ObjectHideFlags: 0

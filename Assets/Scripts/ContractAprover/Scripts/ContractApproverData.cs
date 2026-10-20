@@ -7,6 +7,11 @@ using System.Collections.Generic;
 //  NO son componentes: no se añaden a ningún GameObject. Solo tienen que existir.
 //  IMPORTANTE: los nombres de las variables deben coincidir EXACTAMENTE con las claves
 //  del JSON (mayúsculas incluidas), o JsonUtility las dejará vacías sin avisar.
+//
+//  IDIOMAS: cada JSON tiene su copia "_en". La lógica (cantidades, direcciones...) se lee
+//  siempre de la versión española; de la inglesa solo se copian los textos con
+//  MergeTranslation() (transacciones por id, listas negras por dirección). Los scripts
+//  deben mostrar RequestText / Explanation / Label, que devuelven el idioma activo.
 // =====================================================================================
 
 public enum TxType { Send, Swap, Approve, Unknown }
@@ -58,6 +63,21 @@ public class BlacklistEntry
     public string address;      // Direccion scam (0x...) o token scam (0x... o "native")
     public string label;        // Descripción corta de porque es scam ("Drainer FakeAirdrop")
     public int unlockAfter;     // Solo en reference_data.json: nº de transacciones resueltas para que aparezca
+    [NonSerialized] public string labelEn;
+
+    public string Label => LanguageManager.Pick(label, labelEn);
+
+    // Copia las etiquetas inglesas de 'en' en las entradas de 'es' con la misma dirección
+    public static void MergeLabels(List<BlacklistEntry> es, List<BlacklistEntry> en)
+    {
+        if (es == null || en == null) return;
+        foreach (var e in es)
+        {
+            if (e == null) continue;
+            var match = en.Find(x => x != null && string.Equals(x.address?.Trim(), e.address?.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (match != null) e.labelEn = match.label;
+        }
+    }
 }
 
 [Serializable]
@@ -65,6 +85,13 @@ public class BlacklistInjection
 {
     public List<BlacklistEntry> addresses = new List<BlacklistEntry>();
     public List<BlacklistEntry> tokens = new List<BlacklistEntry>();
+
+    public void MergeTranslation(BlacklistInjection en)
+    {
+        if (en == null) return;
+        BlacklistEntry.MergeLabels(addresses, en.addresses);
+        BlacklistEntry.MergeLabels(tokens, en.tokens);
+    }
 }
 
 [Serializable]
@@ -79,6 +106,19 @@ public class TransactionData
     public string explanation;                           // Se muestra al jugador tras decidir
     public BlacklistInjection requiredBlacklist = new BlacklistInjection(); // Entradas que DEBEN estar en las listas para que esta transacción sea justa
     [NonSerialized] public int difficulty;               // 0 fácil, 1 normal, 2 difícil (lo asigna TransactionDeck, no viene del JSON)
+    [NonSerialized] public string requestTextEn;
+    [NonSerialized] public string explanationEn;
+
+    public string RequestText => LanguageManager.Pick(requestText, requestTextEn);
+    public string Explanation => LanguageManager.Pick(explanation, explanationEn);
+
+    public void MergeTranslation(TransactionData en)
+    {
+        if (en == null) return;
+        requestTextEn = en.requestText;
+        explanationEn = en.explanation;
+        requiredBlacklist?.MergeTranslation(en.requiredBlacklist);
+    }
 
     public TxType Type
     {
@@ -123,6 +163,13 @@ public class ReferenceDataFile
     public List<BlacklistEntry> scamTokens = new List<BlacklistEntry>();
     public List<FeeLimit> feeLimits = new List<FeeLimit>();
     public List<SlippageLimit> slippageLimits = new List<SlippageLimit>();
+
+    public void MergeTranslation(ReferenceDataFile en)
+    {
+        if (en == null) return;
+        BlacklistEntry.MergeLabels(scamAddresses, en.scamAddresses);
+        BlacklistEntry.MergeLabels(scamTokens, en.scamTokens);
+    }
 }
 
 // ---------- Tutorial ----------

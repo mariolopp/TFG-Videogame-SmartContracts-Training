@@ -1,0 +1,490 @@
+{
+  "dialogues": [
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Hello! Welcome to my world.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Excuse me? Where am I...?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "You're inside the blockchain, of course.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Block... what?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Blockchain.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Imagine a huge chain made of blocks, like the cubes you see here.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Each block stores important information, like the pages of a huge public book.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "What kind of information?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Almost any kind.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "But it's usually information about crypto transactions.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Crypto transactions? What's that?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "It's users moving different kinds of digital assets around.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Digital assets? Different kinds?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Indeed, there are several kinds of digital assets.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "But for now we'll only focus on fungible assets, commonly known as cryptocurrencies (like the network's digital money) and tokens (which can represent other virtual goods).",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Fungible? Cryptocurrencies? Tokens? That's a lot of new words all at once...",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Alright, let's not get ahead of ourselves.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "For now, all you need to know is that some users need everyone to know that their assets (whatever kind they are) have moved from one place to another.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "They manage all of this from their Wallet, which is like a virtual purse or wallet where they keep those tokens.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, and how do they plan to let everyone know they've moved something out of their Wallet?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Relax... it's simpler than you think.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Imagine the blockchain as a huge database that everyone has access to.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, but if everyone has access, couldn't anyone just write down that they own loads of those cryptocurrencies?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Oh, you rascal... your question makes a lot of sense, and that's exactly what the blockchain is here to solve.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "The idea is that not just anyone can write to that database: there's a way to stop someone from adding data arbitrarily.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, but then how do they write the data down?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "It's very simple.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "For a validator (the ones in charge of checking everything) to write new data to this special database, they first have to solve a complex math problem.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And how exactly does that help? Couldn't anyone learn to solve math problems and write whatever they want?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Oh, my friend... it's not that easy. We're talking about very complex problems that only the most powerful computers can solve.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Besides, there are lots of machines trying to solve the same problem at the same time, so someone else can beat you to it and write instead of you.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So the data is controlled by whoever has the most powerful computer?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Something like that could happen in smaller databases still in development, but it shouldn't.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "If a single person could choose which data gets added, the network would no longer be secure.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "That sounds dangerous... Why would I keep my money in my Wallet if one day someone with a really powerful computer could show up and write a 0 in my balance?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "I understand your concern, but luckily that can't happen. There are thousands of validators keeping watch.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "If someone tries to cheat, the others will reject their block. And this is where you come in! Today you'll be working as a validator.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Me? But I don't know anything about this... And why would I want to do that job?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "For the rewards, of course! Every time someone makes a transaction, they include a small tip called a Fee.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "As a validator, you decide which transactions go into your block. And the validator keeps those Fees!",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Ah... now that I like! So I just put in every transaction I see and get rich, right?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Not so fast! To do your job well you need to know your tools.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "First, look at this indicator. This is where all the Fees you earn will add up.",
+      "evento": ""
+    },
+    {
+      "characterId": "",
+      "characterName": "",
+      "text": "",
+      "evento": "ETH_bag_icon"
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Now look at the wheel.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Transactions will keep appearing, and each one will have a different reward <sprite=\"ETH_bag\" index=0> and size <sprite=\"gas\" index=0>.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "",
+      "evento": "ruleta"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Got it... So I just look for the ones that pay the most and put them straight into the block, right?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Careful, don't rush!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "You have to find the perfect balance between the space they take up <sprite=\"gas\" index=0> and the Fee they earn you <sprite=\"ETH_bag\" index=0>.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Balance? What do you mean?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Imagine a transaction that takes up 6 units <sprite=\"gas\" index=0> and pays 4 <sprite=\"ETH_bag\" index=0>.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Shortly after, another one appears that takes up only 2 units <sprite=\"gas\" index=0> and pays 3 <sprite=\"ETH_bag\" index=0>. Which one do you prefer?",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Ah... of course. With the second one I earn almost the same, but I use up much less of my 20 <sprite=\"gas\" index=0> limit. I could fit in many more small transactions and earn more money overall!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Exactly! That's the secret of a great validator.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "You have to find the most profitable combination, always keeping in mind the time available and your space limit.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Every block has a capacity limit.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Today's blocks hold a maximum of 20 units ( <sprite=\"gas\" index=0> ) of space.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So... My goal is to pick the transactions that give me the most profit overall, keeping in mind the maximum space of 20 <sprite=\"gas\" index=0> and the fee they bring.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Exactly! But remember the golden rule: other validators will try to create the block before you.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Pay close attention to this red bar.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "It represents the network's time. If it runs out, you'll lose the block and won't be able to validate it.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "",
+      "evento": "BlockBarTimeProgress"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Got it! I have to be quick before it runs out.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "And where can I see how much space I have left for more transactions?",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Very good question. Look at this meter right here.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "It shows you in real time how much space you've used in your current block, which has a maximum limit of 20 units <sprite=\"gas\" index=0>.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "",
+      "evento": "BlockBarSpace"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "Okay, so I go for maximum profit without going over that space bar and without running out of time.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Yes, and remember, when you're happy with the transactions you've chosen...",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "...you'll have to press this button to send your block to the network.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "",
+      "evento": "ValidarButton"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "So it's not enough to fill the block. If I don't press Validate before time runs out, I'll lose it.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Exactly! Don't wait until the last second.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "As soon as you have a profitable block, validate it before another validator beats you to it.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Finally, on this cube you can see how many blocks you have left to validate.",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "",
+      "evento": "BlockBarRemainingBlocks"
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "All clear! Space management, time limit, remaining blocks and my total progress.",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "I'm ready to be a validator!",
+      "evento": ""
+    },
+    {
+      "characterId": "profe",
+      "characterName": "Professor Merkle",
+      "text": "Let's do this!",
+      "evento": ""
+    },
+    {
+      "characterId": "jugador",
+      "characterName": "You",
+      "text": "",
+      "evento": ""
+    }
+  ]
+}

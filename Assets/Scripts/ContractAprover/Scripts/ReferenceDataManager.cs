@@ -20,6 +20,7 @@ public class ReferenceDataManager : MonoBehaviour
     }
 
     [SerializeField] private TextAsset referenceJson;
+    [SerializeField] private TextAsset referenceJsonEn;
     [SerializeField] private ContractApproverConfig config;
 
     // Se dispara cada vez que cambian las listas o avanza el turno (para refrescar la UI)
@@ -51,6 +52,7 @@ public class ReferenceDataManager : MonoBehaviour
         if (data.scamTokens == null) data.scamTokens = new List<BlacklistEntry>();
         if (data.feeLimits == null) data.feeLimits = new List<FeeLimit>();
         if (data.slippageLimits == null) data.slippageLimits = new List<SlippageLimit>();
+        if (referenceJsonEn != null) data.MergeTranslation(JsonUtility.FromJson<ReferenceDataFile>(referenceJsonEn.text));
 
         foreach (var e in data.scamAddresses) AddToSchedule(e, false, e.unlockAfter);
         foreach (var e in data.scamTokens) AddToSchedule(e, true, e.unlockAfter);

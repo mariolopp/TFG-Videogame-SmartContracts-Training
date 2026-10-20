@@ -23,6 +23,7 @@ public class ContractCardStack : MonoBehaviour
 
     private ContractCardUI front, back;
     private Vector2 basePos;
+    private TransactionData current;   // la que se muestra, para reescribir la petición si cambia el idioma
 
     public ContractCardUI Front => front;
 
@@ -37,6 +38,14 @@ public class ContractCardStack : MonoBehaviour
         front.Group.alpha = 0f;
         front.SetInteractable(false);
         if (requestText != null) requestText.text = "";
+        LanguageManager.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnDestroy() => LanguageManager.OnLanguageChanged -= OnLanguageChanged;
+
+    private void OnLanguageChanged(Language language)
+    {
+        if (requestText != null && current != null) requestText.text = current.RequestText;
     }
 
     // Sube la carta de detrás, la rellena con la transacción y escribe la petición
@@ -56,7 +65,8 @@ public class ContractCardStack : MonoBehaviour
         front = incoming;
         back = outgoing;
 
-        if (requestText != null) requestText.text = tx.requestText;
+        current = tx;
+        if (requestText != null) requestText.text = tx.RequestText;
 
         Vector2 p0 = front.Rect.anchoredPosition;
         float s0 = front.Rect.localScale.x;

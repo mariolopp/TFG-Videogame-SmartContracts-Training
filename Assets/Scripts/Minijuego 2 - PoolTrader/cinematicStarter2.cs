@@ -7,6 +7,8 @@ public class CinematicStarter2 : MonoBehaviour
 {
     [Header("Archivo de Diálogo")]
     [SerializeField] private TextAsset archivoDialogoJson;
+    [Tooltip("Mismo diálogo en inglés (mismas líneas y eventos)")]
+    [SerializeField] private TextAsset archivoDialogoJsonEn;
 
     [Header("Gestor de Tutorial (Círculos)")]
     [SerializeField] private Transform contenedorCirculos;
@@ -61,13 +63,14 @@ public class CinematicStarter2 : MonoBehaviour
         if (botonSaltar != null)
         {
             botonSaltar.onClick.AddListener(SaltarDialogo);
+            LanguageToggleButton.CreateNextTo(botonSaltar);
         }
 
         yield return new WaitForSeconds(0.1f);
 
         if (DialogManager.Instance != null && archivoDialogoJson != null)
         {
-            DialogManager.Instance.StartDialog(archivoDialogoJson, TerminarCinematica);
+            DialogManager.Instance.StartDialog(archivoDialogoJson, archivoDialogoJsonEn, TerminarCinematica);
         }
     }
 

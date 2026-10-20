@@ -50,6 +50,7 @@ MonoBehaviour:
   feedbackDelay: 0.8
   feedbackCharacterId: profe
   feedbackCharacterName: Profe
+  feedbackCharacterNameEn: Prof
   sfxCorrect: 
   sfxWrong: 
   sfxNewBlacklistEntry: 

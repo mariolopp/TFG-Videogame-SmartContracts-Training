@@ -28,13 +28,17 @@ public class ReferenceListUI : MonoBehaviour
     private void Awake()
     {
         if (references != null) references.OnListsChanged += Rebuild;
+        LanguageManager.OnLanguageChanged += OnLanguageChanged;
         if (headerBadge != null) headerBadge.SetActive(false);
     }
 
     private void OnDestroy()
     {
         if (references != null) references.OnListsChanged -= Rebuild;
+        LanguageManager.OnLanguageChanged -= OnLanguageChanged;
     }
+
+    private void OnLanguageChanged(Language language) => Rebuild();
 
     private void Start() => Rebuild();
 
@@ -61,7 +65,7 @@ public class ReferenceListUI : MonoBehaviour
                 {
                     bool isNew = references.IsNew(a);
                     anyNew |= isNew;
-                    AddRow(a.entry.address, a.entry.label, isNew);
+                    AddRow(a.entry.address, a.entry.Label, isNew);
                     count++;
                 }
                 break;
@@ -70,7 +74,7 @@ public class ReferenceListUI : MonoBehaviour
                 {
                     bool isNew = references.IsNew(a);
                     anyNew |= isNew;
-                    AddRow(a.entry.address, a.entry.label, isNew);
+                    AddRow(a.entry.address, a.entry.Label, isNew);
                     count++;
                 }
                 break;

@@ -9,9 +9,11 @@ using UnityEngine.UI;
  * GESTOR DE DIÁLOGOS DESDE JSON
  * ======================================================================================
  * USO:
- * DialogManager.Instance.StartDialog(miArchivoJson, () => {
+ * DialogManager.Instance.StartDialog(miArchivoJson, miArchivoJsonEn, () => {
  * Debug.Log("El diálogo ha terminado, empieza el juego.");
  * });
+ * Con las dos versiones (español / inglés), si se cambia el idioma a mitad del diálogo
+ * la línea actual se reescribe en el nuevo idioma. Ambos JSON deben tener las mismas líneas.
  * ======================================================================================
  */
 
@@ -73,6 +75,7 @@ public class DialogManager : MonoBehaviour
     private string currentFullText = "";
     private Coroutine typingCoroutine;
     private DialogLine[] pendingDialogues;
+    private DialogLine[] dialoguesEs, dialoguesEn;
     private int currentStepIndex = 0;
 
     private void Start()
@@ -84,24 +87,60 @@ public class DialogManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // --- API PÚBLICA ---
-    public void StartDialog(TextAsset jsonFile, Action onFinishedAction = null)
-    {
-        // Leemos el JSON y lo convertimos a objetos de C#
-        DialogData data = JsonUtility.FromJson<DialogData>(jsonFile.text);
+    private void OnEnable() => LanguageManager.OnLanguageChanged += OnLanguageChanged;
+    private void OnDisable() => LanguageManager.OnLanguageChanged -= OnLanguageChanged;
 
-        if (data == null || data.dialogues.Length == 0)
+    // --- API PÚBLICA ---
+    public void StartDialog(TextAsset jsonFile, Action onFinishedAction = null) => StartDialog(jsonFile, null, onFinishedAction);
+
+    public void StartDialog(TextAsset jsonEs, TextAsset jsonEn, Action onFinishedAction = null)
+    {
+        StartDialog(Parse(jsonEs), Parse(jsonEn), onFinishedAction);
+    }
+
+    public void StartDialog(DialogLine[] linesEs, DialogLine[] linesEn, Action onFinishedAction = null)
+    {
+        if (linesEs == null || linesEs.Length == 0)
         {
             Debug.LogWarning("DialogManager: El JSON está vacío o mal formateado.");
             return;
         }
+        if (linesEn != null && linesEn.Length != linesEs.Length)
+        {
+            Debug.LogWarning($"DialogManager: la versión en inglés tiene {linesEn.Length} líneas y la española {linesEs.Length}. Se usará solo la española.");
+            linesEn = null;
+        }
 
         onDialogFinished = onFinishedAction;
-        pendingDialogues = data.dialogues;
+        dialoguesEs = linesEs;
+        dialoguesEn = linesEn;
+        pendingDialogues = LanguageManager.Pick(dialoguesEs, dialoguesEn);
         currentStepIndex = 0;
 
         OpenWindow();
         SetContent(pendingDialogues[0]);
+    }
+
+    private static DialogLine[] Parse(TextAsset json)
+    {
+        if (json == null) return null;
+        // Leemos el JSON y lo convertimos a objetos de C#
+        DialogData data = JsonUtility.FromJson<DialogData>(json.text);
+        return data?.dialogues;
+    }
+
+    // Cambia al otro idioma y reescribe la línea actual sin volver a lanzar su evento
+    private void OnLanguageChanged(Language language)
+    {
+        if (pendingDialogues == null) return;
+        pendingDialogues = LanguageManager.Pick(dialoguesEs, dialoguesEn);
+        if (currentStepIndex >= pendingDialogues.Length) return;
+
+        DialogLine line = pendingDialogues[currentStepIndex];
+        if (string.IsNullOrEmpty(line.text)) return;
+        titleText.text = line.characterName;
+        currentFullText = line.text;
+        CompleteTextImmediately();
     }
 
     // --- LÓGICA DE CONTROL ---
@@ -110,7 +149,7 @@ public class DialogManager : MonoBehaviour
         if (gameObject.activeInHierarchy)
         {
             // Detecta click de cualquier tecla o mouse
-            if (Input.GetMouseButtonDown(0) || Input.anyKeyDown)
+            if ((Input.GetMouseButtonDown(0) || Input.anyKeyDown) && !LanguageToggleButton.IsUnderPointer())
             {
                 HandleInput();
             }
