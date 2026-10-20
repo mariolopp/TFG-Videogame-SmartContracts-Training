@@ -17,7 +17,7 @@
     },
     {
       "id": "H02",
-      "requestText": "¡Rápido! Cambia 0.3 ETH por PEPE2 (0x0000e9e2a1b2) en BlockSwap (0x7a250d5630B4) antes de que suba.",
+      "requestText": "¡Rápido! Cambia 0.3 ETH por PEPE2 (0x0000e9e2a1b2) en BlockSwap (0x7a250d5630B4) antes de que suba de precio.",
       "request": { "tokenSent": "ETH", "amountSent": 0.3, "tokenReceived": "PEPE2", "tokenReceivedAddress": "0x0000e9e2a1b2", "contract": "0x7a250d5630B4" },
       "signature": {
         "type": "swap",
@@ -80,7 +80,7 @@
       },
       "shouldApprove": false,
       "errorCode": "wrong_destination",
-      "explanation": "Envenenamiento de direcciones: empieza y acaba igual, pero en el centro pone ...1998... en lugar de ...1908..."
+      "explanation": "Envenenamiento de direcciones: empieza y acaba igual, pero en el centro pone ...1998... en lugar de ...1908... esta era dificil"
     },
     {
       "id": "H06",
@@ -135,6 +135,48 @@
       "explanation": "El contrato no es el router de SushiX: es un clon fraudulento.",
       "requiredBlacklist": {
         "addresses": [ { "address": "0x8badF00dCafe", "label": "Clon del router SushiX" } ],
+        "tokens": []
+      }
+    },
+    {
+      "id": "H09",
+      "requestText": "Cambia 1.5 ETH por 210 LINK (0x514910771AF9) en BlockSwap (0x7a250d5630B4).",
+      "request": { "tokenSent": "ETH", "amountSent": 1.5, "tokenReceived": "LINK", "tokenReceivedAddress": "0x514910771AF9", "amountReceived": 210, "contract": "0x7a250d5630B4" },
+      "signature": {
+        "type": "swap",
+        "tokenSent": { "symbol": "ETH", "address": "native" },
+        "amountSent": 1.5,
+        "tokenReceived": { "symbol": "LINK", "address": "0x514910462AF9" },
+        "amountReceived": 210,
+        "contract": "0x7a250d5630B4",
+        "slippage": 1,
+        "gasFeeGwei": 39
+      },
+      "shouldApprove": false,
+      "errorCode": "wrong_token_address",
+      "explanation": "El símbolo dice LINK, pero la dirección es 0x514910462AF9 y la real 0x514910771AF9: es el clon de LINK de la lista de tokens scam.",
+      "requiredBlacklist": {
+        "addresses": [],
+        "tokens": [ { "address": "0x514910462AF9", "label": "LINK clone" } ]
+      }
+    },
+    {
+      "id": "H10",
+      "requestText": "El soporte técnico de BlockSwap me ha escrito: para desbloquear mi cuenta tengo que autorizar su contrato de verificación 0x1337c0dE5ca3 a usar 500 USDC (0xA0b869c621B6).",
+      "request": { "tokenSent": "USDC", "tokenSentAddress": "0xA0b869c621B6", "approveAmount": 500, "contract": "0x1337c0dE5ca3" },
+      "signature": {
+        "type": "approve",
+        "tokenSent": { "symbol": "USDC", "address": "0xA0b869c621B6" },
+        "approveAmount": 500,
+        "approveUnlimited": false,
+        "contract": "0x1337c0dE5ca3",
+        "gasFeeGwei": 27
+      },
+      "shouldApprove": false,
+      "errorCode": "scam_contract",
+      "explanation": "Todo coincide con la petición, pero el contrato es 'Fake IT support' de la lista negra. Ningún soporte real te pide autorizar tokens para 'desbloquear' nada.",
+      "requiredBlacklist": {
+        "addresses": [ { "address": "0x1337c0dE5ca3", "label": "Fake IT support" } ],
         "tokens": []
       }
     }

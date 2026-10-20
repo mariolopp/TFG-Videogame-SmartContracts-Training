@@ -3,21 +3,50 @@
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Bienvenido a tu primer turno como validador de firmas!", "evento": "" },
-        { "characterId": "profe", "characterName": "Profe", "text": "A la izquierda verás lo que el usuario PIDE. En el panel, lo que REALMENTE va a firmar. Tu trabajo es comprobar que coinciden y que nada es peligroso.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Para comprobarlo tienes cuatro desplegables. Solo puedes abrir uno a la vez, así que muévete rápido.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Este es la lista negra de direcciones: wallets y contratos que sabemos que son estafas.", "evento": "abrirPanel:addresses" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Aquí están los tokens falsos. Ojo: pueden llamarse igual que uno real, lo que cambia es su dirección.", "evento": "abrirPanel:tokens" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Esta tabla dice cuánta fee, en gwei, es aceptable para cada tipo de transacción.", "evento": "abrirPanel:fees" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Y esta, el slippage máximo que aceptamos en un swap según el token que recibes.", "evento": "abrirPanel:slippage" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Las listas se irán actualizando durante el turno. Si ves la marca de NUEVO, léela. ¡Vamos con la primera!", "evento": "cerrarPaneles" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Bienvenido! Hasta ahora has entendido qué es un validador y cómo funcionan los intercambios en la blockchain, pero ahora te toca algo un poco distinto...", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Ah, sí? ¿Y qué tiene de distinto?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Hoy vas a encargarte de decidir qué transacciones pueden llegar a la blockchain.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Yo voy a decidir qué transacciones entran?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente. Tu trabajo será revisar las peticiones que recibas y decidir si son seguras o no.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y si me equivoco?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Ay, amigo, ¿no serás el tipo de persona que firma contratos sin leerlos, no?", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Bueno, he de admitir que muchas veces lo he hecho...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aquí, si apruebas algo que no debes, solo perderás vidas o puntuación...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Pero ¿sabes lo que podrías perder en un caso real?", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entiendo que un poco de dinero.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡JAJAJAJA! Un poco... Más bien desde un poco hasta mucho, muchísimo. Todo depende de lo que tengas en la billetera.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Así que será mejor que prestes atención. Algunas peticiones estarán perfectamente bien...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "...y otras esconderán pequeños detalles que no deberías pasar por alto.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Vale... ¿entonces tengo que encontrar detalles que me digan que una transacción es peligrosa?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exacto. Déjame que te explique más a fondo...", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Antes de empezar, necesitas saber qué estás revisando.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Cuando un usuario quiere mover activos o interactuar con un contrato inteligente, necesita crear una transacción.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Es eso lo que se firma?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Efectivamente! Antes de enviarla a la blockchain, el usuario debe firmarla con su wallet. Esa firma es la forma de autorizar la operación.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces... si firmo algo sin mirar, estoy autorizando exactamente lo que pone ahí.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente. Cada vez que aparezca una petición, conocerás sus detalles acerca de lo que hará.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y todas las peticiones son iguales?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "No. Dependiendo de la operación, tendrás que fijarte en unos datos u otros.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aquí viene lo importante: no puedes decidir simplemente mirando la petición por encima.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Por qué? ¿Acaso se equivoca quien la manda?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Desgraciadamente, así es. Una petición puede parecer completamente normal y esconder un detalle que la convierte en peligrosa.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces tendré que comparar la información.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Eso es. Lo primero que debes hacer es LEER BIEN la petición: asegúrate de que lo que pide coincide con la transacción.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿En plan cómo?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Muy fácil: comprueba bien la cantidad que pide y las direcciones de los tokens y contratos utilizados.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Espera, ¿¿¿qué???", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Es muy sencillo, no te va a costar entenderlo. Cada petición es distinta, pero hay dos apartados clave en los que debes fijarte.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "El primero es la cantidad, es decir, cuántos tokens se están aprobando, enviando o intercambiando.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Y el segundo son los contratos y direcciones. Dicho rápido y fácil: asegúrate de que las direcciones de la petición coinciden con las del contrato.", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Fíjate bien en la petición", "evento": "" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Aprueba el contrato solo si coincide con la petición", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a hacer una prueba. Fíjate bien en esta petición.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aprueba el contrato solo si coincide con lo que pide la petición.", "evento": "" }
       ],
       "transaction": {
         "id": "T00",
@@ -31,20 +60,20 @@
           "gasFeeGwei": 15
         },
         "shouldApprove": false,
-        "errorCode": "none",
-        "explanation": "La dirección del contrato no es la de Marta"
+        "errorCode": "wrong_destination",
+        "explanation": "La dirección de destino del contrato no es la de Marta."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Perfecto! Luis se equivocó con la dirección. La dirección que pone en el contrato no es la de Marta", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Perfecto! Luis se equivocó con la dirección: la que pone en el contrato no es la de Marta.", "evento": "" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Casi! Fíjate bien, Luis se ha equivocado con la dirección. La dirección que pone en el contrato no es la de Marta.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Casi! Fíjate bien: Luis se ha equivocado con la dirección. La que pone en el contrato no es la de Marta.", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Pulsa sobre el panel para ver los detalles de la firma. Compara token, cantidad, destino y fee con la petición.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a ver qué tal esta otra.", "evento": "" }
       ],
       "transaction": {
         "id": "T01",
@@ -59,55 +88,37 @@
         },
         "shouldApprove": true,
         "errorCode": "none",
-        "explanation": "Todo coincide y la fee es baja."
+        "explanation": "La cantidad y la dirección coinciden con la petición."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Perfecto! Todo coincidía, así que tocaba aprobar.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Muy bien! La cantidad y la dirección coincidían, así que tocaba aprobar.", "evento": "" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Esta era legítima: rechazar transacciones buenas también cuesta puntos. Revisa bien antes de decidir.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Esta era legítima: la cantidad y la dirección coincidían. Rechazar transacciones buenas también cuesta puntos.", "evento": "" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Se pueden introducir diálogos entre transacciones", "evento": "" }
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entendido. ¿Y eso es todo?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Me temo que no. Los peligros más importantes son los que el usuario no conoce.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Pero en este juego estás de suerte: vas a conocerlos todos.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Fíjate bien en esta columna que tienes a la derecha. Aquí encontrarás cuatro fuentes de información.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Primero tenemos esta lista. Aquí aparecen las direcciones que debes evitar.", "evento": "abrirPanel:addresses" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Direcciones de contratos?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exacto. Si cualquier contrato aparece en esta lista negra, no deberías aprobar una operación en la que aparezca.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces tengo que comprobar si la dirección sospechosa está aquí.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Efectivamente. Pero recuerda: no solo tienes que fijarte en eso, debes seguir pendiente de todo lo que te he contado antes.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Esta parece igual de sencilla... ¿o no? Mira bien la fee y compárala con su tabla.", "evento": "abrirPanel:fees" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a ver qué tal te va con esta petición.", "evento": "" }
       ],
       "transaction": {
         "id": "T02",
-        "requestText": "Envía 40 DAI (0x6B175474E894) a 0x2E4f6A8b0C1d.",
-        "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E894", "amountSent": 40, "destination": "0x2E4f6A8b0C1d" },
-        "signature": {
-          "type": "send",
-          "tokenSent": { "symbol": "DAI", "address": "0x6B175474E894" },
-          "amountSent": 40,
-          "destination": "0x2E4f6A8b0C1d",
-          "gasFeeGwei": 60
-        },
-        "shouldApprove": false,
-        "errorCode": "excessive_fee",
-        "explanation": "60 gwei es más del doble del máximo para un envío (25 gwei)."
-      },
-      "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Bien visto! Una fee disparada puede vaciarte la cuenta aunque todo lo demás esté bien.", "evento": "" }
-      ],
-      "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profe", "text": "La fee era de 60 gwei y el máximo para envíos es 25. Esa diferencia la pagas tú.", "evento": "" }
-      ]
-    },
-    {
-      "kind": "transaction",
-      "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "A veces el usuario pide algo peligroso sin saberlo. Compara el destino con la lista negra.", "evento": "abrirPanel:addresses" }
-      ],
-      "transaction": {
-        "id": "T03",
         "requestText": "¡Me ha tocado un airdrop! Para reclamarlo tengo que enviar 0.05 ETH a 0xDeAd0bEEf133.",
         "request": { "tokenSent": "ETH", "tokenSentAddress": "native", "amountSent": 0.05, "destination": "0xDeAd0bEEf133" },
         "signature": {
@@ -122,19 +133,126 @@
         "explanation": "El destino es el drainer 'FakeAirdrop' de la lista negra."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Exacto! Nunca hay que pagar para recibir un regalo. Si está en la lista negra, se rechaza siempre.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Exacto! Todo coincidía con la petición, pero el destino estaba en la lista negra. Nunca hay que pagar para recibir un regalo.", "evento": "" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Esa dirección estaba en la lista negra. Que el usuario la pida no la hace segura.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Esa dirección estaba en la lista negra. Que el usuario la pida no la hace segura.", "evento": "abrirPanel:addresses" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Compruébalo tú mismo: 0xDeAd0bEEf133 es el drainer 'FakeAirdrop'.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aquí tenemos otra lista. Esta vez contiene tokens que no son seguros.", "evento": "abrirPanel:tokens" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Por qué no iba a ser seguro un token?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Buena pregunta! Se trata de tokens que no funcionan de forma normal: por ejemplo, no se pueden vender, o no existe un pool de liquidez donde poder venderlos.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Pero no me basta con mirar el nombre?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "No exactamente. El nombre de un token no es suficiente: cualquiera puede elegir el nombre que quiera para su token.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Lo que no puede cambiar, y lo que realmente importa, es la dirección del token.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Así que dos tokens podrían tener nombres parecidos pero direcciones diferentes.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente.", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Ahora un swap. Aquí también importa el slippage: cuánto peor que lo previsto aceptas recibir.", "evento": "abrirPanel:slippage" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a ver qué tal lo haces esta vez.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T03",
+        "requestText": "Hola, soy Ana. Quiero cambiar 0.2 ETH por USDC (0xA0b869c621B7) en SushiX (0xd9e1cE17f264).",
+        "request": { "tokenSent": "ETH", "amountSent": 0.2, "tokenReceived": "USDC", "tokenReceivedAddress": "0xA0b869c621B7", "contract": "0xd9e1cE17f264" },
+        "signature": {
+          "type": "swap",
+          "tokenSent": { "symbol": "ETH", "address": "native" },
+          "amountSent": 0.2,
+          "tokenReceived": { "symbol": "USDC", "address": "0xA0b869c621B7" },
+          "amountReceived": 500,
+          "contract": "0xd9e1cE17f264",
+          "slippage": 0.3,
+          "gasFeeGwei": 30
+        },
+        "shouldApprove": false,
+        "errorCode": "scam_token",
+        "explanation": "Se llama USDC, pero su dirección (0xA0b869c621B7) es la del USDC falso de la lista de tokens."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Bien visto! Se llamaba USDC, pero su dirección era la del USDC falso. El nombre no basta, lo que manda es la dirección.", "evento": "cerrarPaneles" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Te ha engañado el nombre. Mira la lista: la dirección 0xA0b869c621B7 es un USDC falso.", "evento": "abrirPanel:tokens" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Cualquiera puede llamar USDC a su token. Lo que no puede falsificar es la dirección.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Otro punto muy importante: aquí encontrarás la fee máxima permitida para cada transacción.", "evento": "abrirPanel:fees" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Eso me suena. Era lo que se pagaba a los validadores por escribir en la blockchain, ¿no?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Muy bien! Veo que te has enterado.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Como te dije en Pool Trader, al intercambiar un token tenemos que pagar a los validadores por escribir en la blockchain.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Y esta fee va cambiando, ¿no?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exacto. Por eso hay usuarios que cuentan con un presupuesto límite a la hora de hacer transacciones. Si la fee está demasiado cara, prefieren hacerla en otro momento.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¡Anda, qué curioso! ¿Y por mi parte qué hago?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por tu parte, no debes permitir transacciones que superen la fee máxima establecida para cada tipo de transacción.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por ejemplo, cuando recibas un swap, compara la fee de la petición con el máximo permitido para un swap. Se mide en GWEI.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "En este panel tienes las fees máximas asumibles por nuestros usuarios para cada tipo de operación.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entiendo.", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Venga, vamos a hacer otra de prueba.", "evento": "" }
       ],
       "transaction": {
         "id": "T04",
+        "requestText": "Envía 40 DAI (0x6B175474E894) a 0x2E4f6A8b0C1d.",
+        "request": { "tokenSent": "DAI", "tokenSentAddress": "0x6B175474E894", "amountSent": 40, "destination": "0x2E4f6A8b0C1d" },
+        "signature": {
+          "type": "send",
+          "tokenSent": { "symbol": "DAI", "address": "0x6B175474E894" },
+          "amountSent": 40,
+          "destination": "0x2E4f6A8b0C1d",
+          "gasFeeGwei": 60
+        },
+        "shouldApprove": false,
+        "errorCode": "excessive_fee",
+        "explanation": "60 gwei es más del doble del máximo para un envío (25 gwei)."
+      },
+      "dialoguesIfCorrect": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Bien visto! La fee era de 60 gwei y el máximo para un envío es 25.", "evento": "cerrarPaneles" }
+      ],
+      "dialoguesIfWrong": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "La petición coincidía, pero la fee era de 60 gwei y el máximo para un envío es 25.", "evento": "abrirPanel:fees" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Esa diferencia la paga el usuario, y no estaba dispuesto a pagar tanto.", "evento": "cerrarPaneles" }
+      ]
+    },
+    {
+      "kind": "dialogue",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Otro punto muy importante: aquí encontrarás el slippage máximo permitido para cada token.", "evento": "abrirPanel:slippage" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y eso qué es? Slip... stick es pintalabios, ¿no?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Jajaja! Espero que sea broma.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¿Te acuerdas de qué pasaba en Pool Trader al intercambiar un token cuando la pool de liquidez estaba algo vacía?", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Es cierto, el precio cambiaba muy fácilmente...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Exactamente! Cuando hay muy pocos tokens en la pool de liquidez respecto a los que queremos intercambiar...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "...recibimos, en proporción, menos tokens por ese intercambio, porque al influir en el precio, este juega en nuestra contra.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entiendo. ¿Y cómo solucionan esto los usuarios?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Me alegra que preguntes, es el quid de la cuestión. Para resolverlo, muchos ponen un límite de variabilidad en el precio a la hora de intercambiar tokens: el 'slippage'.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¡Anda, qué curioso! ¿Y por mi parte qué hago?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por tu parte, no debes permitir transacciones que superen el máximo establecido.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por ejemplo, cuando recibas un swap, compara el slippage de la petición con el máximo permitido para el token que se recibe.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Y si se pasa, la rechazo, ¿no?", "evento": "" }
+      ]
+    },
+    {
+      "kind": "transaction",
+      "dialogues": [
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Exacto! A ver qué tal lo haces.", "evento": "" }
+      ],
+      "transaction": {
+        "id": "T05",
         "requestText": "Cambia 0.5 ETH por PEPE (0x698250814545) en SushiX (0xd9e1cE17f264).",
         "request": { "tokenSent": "ETH", "amountSent": 0.5, "tokenReceived": "PEPE", "tokenReceivedAddress": "0x698250814545", "contract": "0xd9e1cE17f264" },
         "signature": {
@@ -152,17 +270,39 @@
         "explanation": "Slippage del 8% cuando el máximo para PEPE es 3%."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profe", "text": "¡Muy bien! Un slippage alto es una invitación a que un bot se quede con parte de tu swap.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Muy bien! El slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "cerrarPaneles" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profe", "text": "El slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Todo lo demás estaba bien, pero el slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "abrirPanel:slippage" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Con un slippage tan alto, el usuario podría recibir muchos menos tokens de los que espera.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profe", "text": "Ya conoces lo básico. A partir de ahora habrá reloj, y cada vez tendrás menos tiempo.", "evento": "cerrarPaneles" },
-        { "characterId": "profe", "characterName": "Profe", "text": "Aprobar un fraude te cuesta vidas. Acumula puntos para recuperarlas. ¡Suerte!", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Hay una última cosa que todavía no has visto.", "evento": "cerrarPaneles" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Déjame adivinar... también tengo que hacerlo rápido.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente. Cada petición tiene un tiempo limitado para tomar una decisión.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces no puedo quedarme diez minutos mirando cada dirección.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "No. Tendrás que aprender a revisar la información importante con rapidez.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Además, a medida que avances, el tiempo de cada tipo de petición se reducirá poco a poco.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Perfecto... justo lo que necesitaba.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Tranquilo. Con práctica acabarás reconociendo rápidamente qué datos necesitas comprobar.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Además, las transacciones más difíciles tienen un extra de tiempo.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Y, por supuesto, tus decisiones tienen consecuencias. Cuando aciertes una decisión, conseguirás puntos.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y cuando falle?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Si apruebas una transacción que no debías, perderás una vida. Eso sí, si consigues suficientes puntos, podrás recuperar vidas.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces puedo asumir algunos riesgos si estoy jugando bien.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Puedes equivocarte, pero recuerda que cada vida cuenta. Cada vida sobrante suma puntos extra al final de la partida.", "evento": "" },
+
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Grábate en la cabeza una última idea: no intentes decidir mirando un solo aspecto.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Comprueba que todos los datos tengan sentido juntos. Una petición puede parecer aceptable...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "...hasta que compruebas una dirección. O una fee. O el token. O el slippage.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Así que la trampa puede estar escondida en cualquier parte.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Y tú tienes que encontrarla antes de firmar.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "text": "Vale. Creo que ya entiendo mi trabajo.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Entonces ya estás preparado. ¡Comencemos!", "evento": "" }
       ]
     }
   ]
