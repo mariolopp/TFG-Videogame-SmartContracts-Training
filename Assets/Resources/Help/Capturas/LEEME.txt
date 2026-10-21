@@ -1,0 +1,15 @@
+Capturas de la ventana de Ayuda (botón "Ayuda" del menú principal)
+
+Deja aquí tus capturas con estos nombres (png o jpg). Las que falten se sustituyen
+por la ilustración que ya trae la imagen de ayuda.
+
+  paso1  Móvil:   MetaMask en Play Store / App Store, con el botón de instalar
+  paso2  Móvil:   pantalla de MetaMask con la frase secreta (¡tapa las palabras!)
+  paso3  Ordenador: menú del juego con la ventana de WalletConnect y el código QR
+  paso4  Móvil:   escáner de MetaMask apuntando al código QR
+  paso5  Móvil:   petición de conexión de MetaMask con el botón "Conectar"
+
+Se recortan solas desde el centro para llenar la pantalla del dibujo, sin deformarse.
+Proporción ideal: móvil vertical (p. ej. 1080x2340) y ordenador 16:9 (p. ej. 1920x1080).
+
+Para cambiar textos o el diseño de la imagen: Tools/HelpGuide/build_help.py

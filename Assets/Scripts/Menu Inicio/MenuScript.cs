@@ -97,8 +97,7 @@ public class MenuScript : MonoBehaviour
     private void help()
     {
         AudioManager.Instance.PlaySFX("select_button");
-        Debug.Log("Abriendo ayuda...");
-        // Por implementar
+        HelpPanel.Show();
     }
 
     private static string L(string es, string en) => LanguageManager.Pick(es, en);
