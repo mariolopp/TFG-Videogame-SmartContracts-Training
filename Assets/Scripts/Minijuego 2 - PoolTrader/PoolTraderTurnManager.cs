@@ -48,6 +48,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     public int CurrentTurn { get; private set; } = 1;
 
     private MarketTrend marketTrend;
+    private string turnLabelEs, turnLabelEn; // el turno actual, para reescribirlo si cambia el idioma
 
     private void Start()
     {
@@ -61,15 +62,29 @@ public class PoolTraderTurnManager : MonoBehaviour
         EndConversionButton.onClick.AddListener(EndConversionTurn);
         EndTradingButton.onClick.AddListener(EndTradingTurn);
         canvasEndTradingButton.gameObject.SetActive(false);
+        LanguageManager.OnLanguageChanged += OnLanguageChanged;
         StartCoroutine(RunGame());
+    }
+
+    private void OnDestroy() => LanguageManager.OnLanguageChanged -= OnLanguageChanged;
+
+    private void OnLanguageChanged(Language language)
+    {
+        UpdateTurnCounter();
+        if (turnLabelText != null && turnLabelEs != null) turnLabelText.text = LanguageManager.Pick(turnLabelEs, turnLabelEn);
+    }
+
+    private void UpdateTurnCounter()
+    {
+        if (turnCounterText != null)
+            turnCounterText.text = $"{LanguageManager.Pick("Turno", "Turn")} {Mathf.Min(CurrentTurn, config.totalTurns)} / {config.totalTurns}";
     }
 
     private IEnumerator RunGame()
     {
         while (CurrentTurn <= config.totalTurns)
         {
-            if (turnCounterText != null)
-                turnCounterText.text = $"Turno {CurrentTurn} / {config.totalTurns}";
+            UpdateTurnCounter();
 
             yield return StartCoroutine(TradersPhase());
 
@@ -91,7 +106,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator PlayerTradingPhase()
     {
         CurrentPhase = TurnPhase.PlayerTrading;
-        SetTurnLabel("Turno de intercambio");
+        SetTurnLabel("Turno de intercambio", "Trading turn");
         priceManager.SetTradingEnabled(true);
         canvasEndTradingButton.gameObject.SetActive(true);
 
@@ -107,7 +122,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator ConversionPhase()
     {
         CurrentPhase = TurnPhase.Conversion;
-        SetTurnLabel("Turno de conversión");
+        SetTurnLabel("Turno de conversión", "Conversion turn");
 
         conversionFinished = false;
 
@@ -121,7 +136,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator TradersPhase()
     {
         CurrentPhase = TurnPhase.Traders;
-        SetTurnLabel("Turno de traders");
+        SetTurnLabel("Turno de traders", "Traders turn");
 
         int traderCount = Random.Range(config.minTraders, config.maxTraders + 1);
         bool shockThisTurn = marketTrend.RollShockEvent();
@@ -159,7 +174,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator LiquidityProvidersPhase()
     {
         CurrentPhase = TurnPhase.LiquidityProviders;
-        SetTurnLabel("Turno de liquidity providers");
+        SetTurnLabel("Turno de liquidity providers", "Liquidity providers turn");
 
         if (Random.value <= config.chanceLiquidityTurnHappens)
         {
@@ -200,7 +215,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator EndGame()
     {
         CurrentPhase = TurnPhase.GameOver;
-        SetTurnLabel("Fin de la partida");
+        SetTurnLabel("Fin de la partida", "Game over");
         priceManager.SetTradingEnabled(false);
 
         int bagsFromBTC = Mathf.RoundToInt(priceManager.GetUserA() * config.bagsPerBTC);
@@ -236,8 +251,11 @@ public class PoolTraderTurnManager : MonoBehaviour
         yield return null;
     }
 
-    private void SetTurnLabel(string label)
+    private void SetTurnLabel(string es, string en)
     {
+        turnLabelEs = es;
+        turnLabelEn = en;
+        string label = LanguageManager.Pick(es, en);
         if (turnLabelText != null) turnLabelText.text = label;
         if (turnAnnouncer != null) turnAnnouncer.Announce(label); // NUEVO
         //AudioManager.Instance?.PlaySFX("turn_change");

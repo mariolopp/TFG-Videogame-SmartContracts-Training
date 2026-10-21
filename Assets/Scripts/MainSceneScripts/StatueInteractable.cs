@@ -32,6 +32,16 @@ public class StatueInteractable : MonoBehaviour, ICameraFocusTarget
         "<size=70%><color=#94A3B8>Pulsa</color> <color=#FBBF24>Espacio</color> <color=#94A3B8>o</color> <color=#FBBF24>Enter</color></size>";
     [SerializeField, TextArea(2, 4)] private string completeText =
         "<b>¡Estatua completada!</b>";
+
+    [Header("Textos del globo en inglés")]
+    [SerializeField, TextArea(2, 4)] private string lockedTextEn =
+        "<b>Statue</b>\n<size=70%><color=#94A3B8>Play the minigames to build it</color></size>";
+    [SerializeField, TextArea(2, 4)] private string upgradeTextEn =
+        "<b>Upgrade statue</b>  <size=70%><color=#94A3B8>Level {0}/{1}</color></size>\n" +
+        "<size=80%>{2} bags</size>\n" +
+        "<size=70%><color=#94A3B8>Press</color> <color=#FBBF24>Space</color> <color=#94A3B8>or</color> <color=#FBBF24>Enter</color></size>";
+    [SerializeField, TextArea(2, 4)] private string completeTextEn =
+        "<b>Statue completed!</b>";
     [Tooltip("Color del coste cuando llegan las bolsas.")]
     [SerializeField] private Color affordableColor = new Color32(0xFB, 0xBF, 0x24, 0xFF);
     [Tooltip("Color del coste cuando no llegan las bolsas.")]
@@ -135,13 +145,13 @@ public class StatueInteractable : MonoBehaviour, ICameraFocusTarget
         if (promptText == null) return;
 
         string text;
-        if (StatueProgress.IsComplete) text = completeText;
-        else if (!StatueProgress.CanBuyUpgrade) text = lockedText;
+        if (StatueProgress.IsComplete) text = LanguageManager.Pick(completeText, completeTextEn);
+        else if (!StatueProgress.CanBuyUpgrade) text = LanguageManager.Pick(lockedText, lockedTextEn);
         else
         {
             string color = ColorUtility.ToHtmlStringRGB(StatueProgress.CanAffordNextUpgrade ? affordableColor : unaffordableColor);
             string cost = $"<color=#{color}>{StatueProgress.NextUpgradeCost}</color>";
-            text = string.Format(upgradeText, StatueProgress.Level + 1, StatueProgress.MaxLevel, cost);
+            text = string.Format(LanguageManager.Pick(upgradeText, upgradeTextEn), StatueProgress.Level + 1, StatueProgress.MaxLevel, cost);
         }
 
         // Solo se reasigna si cambia: TextMeshPro regenera la malla en cada asignación

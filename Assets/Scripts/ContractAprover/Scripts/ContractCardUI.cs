@@ -84,26 +84,26 @@ public class CardInfoRow
         {
             case TxType.Send:
                 typeRow.Show("SEND","[ERC-20]");
-                tokenSentRow.Show("Token enviado", Token(s.tokenSent));
-                amountSentRow.Show("Cantidad", $"{Amount(s.amountSent)} {sentSym}");
-                destinationRow.Show("Destino", s.destination);
+                tokenSentRow.Show(L("Token enviado", "Token sent"), Token(s.tokenSent));
+                amountSentRow.Show(L("Cantidad", "Amount"), $"{Amount(s.amountSent)} {sentSym}");
+                destinationRow.Show(L("Destino", "Destination"), s.destination);
                 break;
 
             case TxType.Swap:
                 typeRow.Show("SWAP","[ERC-20]");
-                tokenSentRow.Show("Envías", Token(s.tokenSent));
-                amountSentRow.Show("Cantidad enviada", $"{Amount(s.amountSent)} {sentSym}");
-                tokenReceivedRow.Show("Recibes", Token(s.tokenReceived));
-                amountReceivedRow.Show("Cantidad a recibir", $"{Amount(s.amountReceived)} {s.tokenReceived?.symbol}");
-                contractRow.Show("Contrato (router)", s.contract);
-                slippageRow.Show("Slippage máx.", $"{s.slippage.ToString("0.##", Inv)} %");
+                tokenSentRow.Show(L("Envías", "You send"), Token(s.tokenSent));
+                amountSentRow.Show(L("Cantidad enviada", "Amount sent"), $"{Amount(s.amountSent)} {sentSym}");
+                tokenReceivedRow.Show(L("Recibes", "You receive"), Token(s.tokenReceived));
+                amountReceivedRow.Show(L("Cantidad a recibir", "Amount to receive"), $"{Amount(s.amountReceived)} {s.tokenReceived?.symbol}");
+                contractRow.Show(L("Contrato (router)", "Contract (router)"), s.contract);
+                slippageRow.Show(L("Slippage máx.", "Max slippage"), $"{s.slippage.ToString("0.##", Inv)} %");
                 break;
 
             case TxType.Approve:
                 typeRow.Show("APPROVE","[ERC-20]");
-                tokenSentRow.Show("Token a autorizar", Token(s.tokenSent));
-                amountSentRow.Show("Cantidad autorizada", s.approveUnlimited ? "ILIMITADA" : $"{Amount(s.approveAmount)} {sentSym}");
-                contractRow.Show("Contrato autorizado", s.contract);
+                tokenSentRow.Show(L("Token a autorizar", "Token to approve"), Token(s.tokenSent));
+                amountSentRow.Show(L("Cantidad autorizada", "Approved amount"), s.approveUnlimited ? L("ILIMITADA", "UNLIMITED") : $"{Amount(s.approveAmount)} {sentSym}");
+                contractRow.Show(L("Contrato autorizado", "Approved contract"), s.contract);
                 break;
 
             default:
@@ -146,7 +146,7 @@ public class CardInfoRow
         if (resultLabel != null)
         {
             resultLabel.gameObject.SetActive(true);
-            resultLabel.text = timeout ? "¡TIEMPO!" : (correct ? "¡CORRECTO!" : "¡ERROR!");
+            resultLabel.text = timeout ? L("¡TIEMPO!", "TIME'S UP!") : (correct ? L("¡CORRECTO!", "CORRECT!") : L("¡ERROR!", "WRONG!"));
             resultLabel.color = c;
         }
     }
@@ -173,4 +173,6 @@ public class CardInfoRow
     }
 
     private static string Amount(float v) => v.ToString("0.########", Inv);
+
+    private static string L(string es, string en) => LanguageManager.Pick(es, en);
 }

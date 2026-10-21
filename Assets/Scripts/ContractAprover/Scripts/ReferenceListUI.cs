@@ -81,14 +81,14 @@ public class ReferenceListUI : MonoBehaviour
             case ListKind.FeeLimits:
                 foreach (var f in references.FeeLimits)
                 {
-                    AddRow(TypeName(f.type), $"máx. {f.maxGwei.ToString("0.##", Inv)} gwei", false);
+                    AddRow(TypeName(f.type), $"{Max} {f.maxGwei.ToString("0.##", Inv)} gwei", false);
                     count++;
                 }
                 break;
             case ListKind.SlippageLimits:
                 foreach (var s in references.SlippageLimits)
                 {
-                    AddRow(s.token, $"máx. {s.maxPercent.ToString("0.##", Inv)} %", false);
+                    AddRow(s.token, $"{Max} {s.maxPercent.ToString("0.##", Inv)} %", false);
                     count++;
                 }
                 break;
@@ -106,11 +106,13 @@ public class ReferenceListUI : MonoBehaviour
         row.Set(main, secondary, isNew);
     }
 
+    private static string Max => LanguageManager.Pick("máx.", "max.");
+
     private static string TypeName(string type)
     {
         switch ((type ?? "").Trim().ToLowerInvariant())
         {
-            case "send": return "Envío";
+            case "send": return LanguageManager.Pick("Envío", "Send");
             case "swap": return "Swap";
             case "approve": return "Approve";
             default: return type;

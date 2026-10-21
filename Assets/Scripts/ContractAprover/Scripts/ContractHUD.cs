@@ -136,8 +136,10 @@ public class ContractHUD : MonoBehaviour
     {
         SetTimerVisible(false);
         if (endScreen != null) endScreen.SetActive(true);
-        if (endTitleText != null) endTitleText.text = survived ? "¡Turno completado!" : "Te han vaciado la wallet";
-        if (endScoreText != null) endScoreText.text = $"Puntos: {score}\nAciertos: {correct}/{answered}";
+        if (endTitleText != null) endTitleText.text = survived ? LanguageManager.Pick("¡Turno completado!", "Shift completed!")
+                                                               : LanguageManager.Pick("Te han vaciado la wallet", "Your wallet has been drained");
+        if (endScoreText != null) endScoreText.text = LanguageManager.Pick($"Puntos: {score}\nAciertos: {correct}/{answered}",
+                                                                   $"Points: {score}\nCorrect: {correct}/{answered}");
 
         int seconds = Mathf.FloorToInt(timeLeft);
         int bagsFromTime = Mathf.RoundToInt(seconds * config.bagsPerSecondLeft);

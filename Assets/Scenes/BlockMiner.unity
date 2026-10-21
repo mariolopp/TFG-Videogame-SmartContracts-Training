@@ -701,12 +701,17 @@ MonoBehaviour:
   giroEpico: 12
   saltoEpico: 30
   duracionEpica: 0.9
+  escalaLeve: 1.08
+  giroLeve: 2
+  saltoLeve: 8
+  duracionLeve: 0.5
   textoFlotante: {fileID: 0}
   fuente: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   tamanoFuente: 56
   subida: 120
   duracionTexto: 1.4
-  mensaje: "\xA1PERFECT BLOCK!"
+  mensaje: "\xA1BLOQUE PERFECTO!"
+  mensajeEn: PERFECT BLOCK!
   colorDorado: {r: 1, g: 0.82, b: 0.2, a: 1}
   intensidadSacudida: 10
   duracionSacudida: 0.35
@@ -714,7 +719,8 @@ MonoBehaviour:
   duracionRebote: 0.4
   escalaReboteBarras: 1.12
   sfxId: coin_sound
-  mensajePerdido: "\xA1LOST BLOCK!"
+  mensajePerdido: "\xA1BLOQUE PERDIDO!"
+  mensajePerdidoEn: BLOCK LOST!
   colorRojo: {r: 1, g: 0.25, b: 0.25, a: 1}
   intensidadSacudidaPerdido: 18
   duracionPerdido: 1
@@ -8142,8 +8148,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -8412,12 +8418,17 @@ MonoBehaviour:
   giroEpico: 12
   saltoEpico: 30
   duracionEpica: 0.9
+  escalaLeve: 1.08
+  giroLeve: 2
+  saltoLeve: 8
+  duracionLeve: 0.5
   textoFlotante: {fileID: 0}
   fuente: {fileID: 11400000, guid: c8a4e5228da8f0346a5656c1d78d25de, type: 2}
   tamanoFuente: 56
   subida: 120
   duracionTexto: 1.4
   mensaje: "\xA1BLOQUE PERFECTO!"
+  mensajeEn: PERFECT BLOCK!
   colorDorado: {r: 1, g: 0.82, b: 0.2, a: 1}
   intensidadSacudida: 10
   duracionSacudida: 0.35
@@ -8426,6 +8437,7 @@ MonoBehaviour:
   escalaReboteBarras: 1.12
   sfxId: coin_sound
   mensajePerdido: "\xA1BLOQUE PERDIDO!"
+  mensajePerdidoEn: BLOCK LOST!
   colorRojo: {r: 1, g: 0.25, b: 0.25, a: 1}
   intensidadSacudidaPerdido: 18
   duracionPerdido: 0.6

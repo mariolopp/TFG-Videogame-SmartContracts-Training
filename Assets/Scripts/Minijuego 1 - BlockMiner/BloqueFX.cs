@@ -41,6 +41,7 @@ public class BloqueFX : MonoBehaviour
 
     [Header("Bloque completo")]
     [SerializeField] private string mensaje = "¡BLOQUE PERFECTO!";
+    [SerializeField] private string mensajeEn = "PERFECT BLOCK!";
     [SerializeField] private Color colorDorado = new Color(1f, 0.82f, 0.2f);
     [SerializeField] private float intensidadSacudida = 10f;
     [SerializeField] private float duracionSacudida = 0.35f;
@@ -51,6 +52,7 @@ public class BloqueFX : MonoBehaviour
 
     [Header("Bloque perdido")]
     [SerializeField] private string mensajePerdido = "¡BLOQUE PERDIDO!";
+    [SerializeField] private string mensajePerdidoEn = "BLOCK LOST!";
     [SerializeField] private Color colorRojo = new Color(1f, 0.25f, 0.25f);
     [SerializeField] private float intensidadSacudidaPerdido = 18f;
     [SerializeField] private float duracionPerdido = 0.6f;
@@ -153,7 +155,7 @@ public class BloqueFX : MonoBehaviour
         {
             Lanzar(barraBloque.transform, "posicion", Sacudir(barraBloque.transform, intensidadSacudida, duracionSacudida, false));
 
-            string texto = mensaje;
+            string texto = LanguageManager.Pick(mensaje, mensajeEn);
             blockMinerUI ui = FindObjectOfType<blockMinerUI>();
             if (ui != null) texto += $"\n+{Mathf.RoundToInt(ui.BagsPerBlock)} <sprite=\"ETH_bag\" index=0>";
             Lanzar(this, "texto", TextoFlotante(barraBloque.transform, texto, colorDorado, subida, duracionTexto, true));
@@ -186,7 +188,7 @@ public class BloqueFX : MonoBehaviour
         Transform ancla = barraBloque != null ? barraBloque.transform : barraTiempo != null ? barraTiempo.transform : null;
         if (ancla != null)
         {
-            string texto = mensajePerdido;
+            string texto = LanguageManager.Pick(mensajePerdido, mensajePerdidoEn);
             if (usdPerdidos > 0f) texto += $"\n-{Mathf.RoundToInt(usdPerdidos)} <sprite=\"ETH_bag\" index=0>";
             Lanzar(this, "texto", TextoFlotante(ancla, texto, colorRojo, subidaPerdido, duracionTextoPerdido, false));
         }

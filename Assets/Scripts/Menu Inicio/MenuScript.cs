@@ -31,8 +31,8 @@ public class MenuScript : MonoBehaviour
         if (!wc.GetWalletConnected())
         {
             jugarButton.interactable = false; // Evitar múltiples clicks
-            TutorialManager.Instance.ShowMessage("Wallet Not Connected",
-                "Please connect your wallet first.", () =>
+            TutorialManager.Instance.ShowMessage(L("Wallet no conectada", "Wallet Not Connected"),
+                L("Primero conecta tu wallet.", "Please connect your wallet first."), () =>
                 {
                     wc.ConnectWallet();
                     jugarButton.interactable = true;
@@ -49,8 +49,9 @@ public class MenuScript : MonoBehaviour
         }
 
         jugarButton.interactable = false; // Evitar múltiples clicks
-        TutorialManager.Instance.ShowMessage("Authentication needed",
-            "In the next dialog you will be prompted to sign with your connected phone wallet", async () =>
+        TutorialManager.Instance.ShowMessage(L("Autenticación necesaria", "Authentication needed"),
+            L("En el siguiente paso se te pedirá firmar con la wallet conectada en tu móvil",
+              "In the next dialog you will be prompted to sign with your connected phone wallet"), async () =>
             {
                 // Una sola firma: verifica la wallet en el servidor y carga su partida.
                 bool loaded = await PersistenceLogin.LoginWithActiveWalletAsync();
@@ -63,8 +64,9 @@ public class MenuScript : MonoBehaviour
                 }
 
                 // Firma rechazada o servidor caído: se puede jugar igual, sin guardar.
-                TutorialManager.Instance.ShowMessage("Progress not available",
-                    "We couldn't load your saved progress. You can play now, but this session won't be saved.",
+                TutorialManager.Instance.ShowMessage(L("Progreso no disponible", "Progress not available"),
+                    L("No se ha podido cargar tu progreso guardado. Puedes jugar, pero esta partida no se guardará.",
+                      "We couldn't load your saved progress. You can play now, but this session won't be saved."),
                     () => LoadGame());
             });
     }
@@ -98,6 +100,8 @@ public class MenuScript : MonoBehaviour
         Debug.Log("Abriendo ayuda...");
         // Por implementar
     }
+
+    private static string L(string es, string en) => LanguageManager.Pick(es, en);
 
     private void Salir()
     {

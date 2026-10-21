@@ -45,7 +45,9 @@ public class ContractCardStack : MonoBehaviour
 
     private void OnLanguageChanged(Language language)
     {
-        if (requestText != null && current != null) requestText.text = current.RequestText;
+        if (current == null) return;
+        if (requestText != null) requestText.text = current.RequestText;
+        if (front != null) front.Fill(current);   // etiquetas de la firma
     }
 
     // Sube la carta de detrás, la rellena con la transacción y escribe la petición
