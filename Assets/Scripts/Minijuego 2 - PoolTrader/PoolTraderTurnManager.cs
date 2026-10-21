@@ -25,6 +25,16 @@ public class PoolTraderTurnManager : MonoBehaviour
     [SerializeField] private Button EndConversionButton;
     [SerializeField] private Button EndTradingButton;
 
+    [Header("Estilo del HUD de turno")]
+    [SerializeField] private Color colorPhaseTrading = new Color(0.36f, 0.95f, 0.69f);
+    [SerializeField] private Color colorPhaseConversion = new Color(0.5f, 0.85f, 1f);
+    [SerializeField] private Color colorPhaseTraders = new Color(1f, 0.69f, 0.36f);
+    [SerializeField] private Color colorPhaseLiquidity = new Color(0.78f, 0.62f, 1f);
+    [SerializeField] private Color colorPhaseGameOver = new Color(1f, 0.85f, 0.4f);
+    [SerializeField] private Color hudOutlineColor = new Color(0.04f, 0.05f, 0.14f, 1f);
+    [SerializeField] private float punchScale = 1.25f;    // tamaño del "pop" al cambiar de turno
+    [SerializeField] private float punchDuration = 0.35f;
+
     [Header("UI Fin de partida")]
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] private Button endGameCloseButton;
@@ -40,18 +50,26 @@ public class PoolTraderTurnManager : MonoBehaviour
 
     [Header("Animaciones recordatorio")]
     [SerializeField] private CanvasGroup canvasEndTradingButton;
-    [SerializeField] private float blinkSpeed = 3f;
-    [SerializeField] private TurnAnnouncer turnAnnouncer; // NUEVO
+    [SerializeField] private float blinkSpeed = 1.5f;
+    [SerializeField] private float pulseSpeed = 4f;
+    [SerializeField] private float pulseAmount = 0.04f; // cuánto crece y encoge el botón (0.08 = ±8%)
+    [SerializeField] private float pulseRampDuration = 12f; // segundos hasta llegar al pulso máximo
+    [SerializeField] private float idleDelayBeforePulse = 6f; // segundos sin pulsar nada antes de empezar a agitarse
     private bool blinking = false;
+    private Vector3 endTradingButtonScale;
 
     public TurnPhase CurrentPhase { get; private set; }
     public int CurrentTurn { get; private set; } = 1;
 
     private MarketTrend marketTrend;
     private string turnLabelEs, turnLabelEn; // el turno actual, para reescribirlo si cambia el idioma
+    private int shownTurn = -1;
+    private Coroutine labelPunchCo, counterPunchCo;
 
     private void Start()
     {
+        StyleHudText(turnLabelText);
+        StyleHudText(turnCounterText);
         if (assetsManager == null)
         {
             assetsManager = FindObjectOfType<AssetsManager>();
@@ -62,6 +80,7 @@ public class PoolTraderTurnManager : MonoBehaviour
         EndConversionButton.onClick.AddListener(EndConversionTurn);
         EndTradingButton.onClick.AddListener(EndTradingTurn);
         canvasEndTradingButton.gameObject.SetActive(false);
+        endTradingButtonScale = canvasEndTradingButton.transform.localScale;
         LanguageManager.OnLanguageChanged += OnLanguageChanged;
         StartCoroutine(RunGame());
     }
@@ -76,8 +95,57 @@ public class PoolTraderTurnManager : MonoBehaviour
 
     private void UpdateTurnCounter()
     {
-        if (turnCounterText != null)
-            turnCounterText.text = $"{LanguageManager.Pick("Turno", "Turn")} {Mathf.Min(CurrentTurn, config.totalTurns)} / {config.totalTurns}";
+        if (turnCounterText == null) return;
+        int turn = Mathf.Min(CurrentTurn, config.totalTurns);
+        turnCounterText.text = $"<size=65%>{LanguageManager.Pick("TURNO", "TURN")}</size> {turn}<size=75%><alpha=#99>/{config.totalTurns}</size>";
+
+        // Solo hace "pop" cuando cambia el número, no al cambiar de idioma
+        if (turn != shownTurn)
+        {
+            shownTurn = turn;
+            Punch(ref counterPunchCo, turnCounterText, Color.white); // el dorado lo pone el degradado del texto
+        }
+    }
+
+    // Contorno oscuro + sombra para que el texto destaque sobre el panel (crea una instancia propia del material)
+    private void StyleHudText(TMP_Text text)
+    {
+        if (text == null) return;
+        text.outlineWidth = 0.2f;
+        text.outlineColor = hudOutlineColor;
+
+        Material mat = text.fontMaterial;
+        mat.EnableKeyword(ShaderUtilities.Keyword_Underlay);
+        mat.SetColor("_UnderlayColor", new Color(0f, 0f, 0f, 0.65f));
+        mat.SetFloat("_UnderlayOffsetX", 0.7f);
+        mat.SetFloat("_UnderlayOffsetY", -0.7f);
+        mat.SetFloat("_UnderlaySoftness", 0.25f);
+        text.UpdateMeshPadding();
+    }
+
+    private void Punch(ref Coroutine co, TMP_Text text, Color targetColor)
+    {
+        if (text == null) return;
+        if (co != null) StopCoroutine(co);
+        co = StartCoroutine(PunchRoutine(text, targetColor));
+    }
+
+    // Empieza grande y en blanco y vuelve a su tamaño y color con ease-out
+    private IEnumerator PunchRoutine(TMP_Text text, Color targetColor)
+    {
+        Transform tr = text.transform;
+        float elapsed = 0f;
+        while (elapsed < punchDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / punchDuration);
+            float ease = 1f - (1f - t) * (1f - t);
+            tr.localScale = Vector3.one * Mathf.Lerp(punchScale, 1f, ease);
+            text.color = Color.Lerp(Color.white, targetColor, ease);
+            yield return null;
+        }
+        tr.localScale = Vector3.one;
+        text.color = targetColor;
     }
 
     private IEnumerator RunGame()
@@ -106,7 +174,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator PlayerTradingPhase()
     {
         CurrentPhase = TurnPhase.PlayerTrading;
-        SetTurnLabel("Turno de intercambio", "Trading turn");
+        SetTurnLabel("Turno de intercambio", "Trading turn", colorPhaseTrading);
         priceManager.SetTradingEnabled(true);
         canvasEndTradingButton.gameObject.SetActive(true);
 
@@ -122,7 +190,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator ConversionPhase()
     {
         CurrentPhase = TurnPhase.Conversion;
-        SetTurnLabel("Turno de conversión", "Conversion turn");
+        SetTurnLabel("Turno de conversión", "Conversion turn", colorPhaseConversion);
 
         conversionFinished = false;
 
@@ -136,7 +204,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator TradersPhase()
     {
         CurrentPhase = TurnPhase.Traders;
-        SetTurnLabel("Turno de traders", "Traders turn");
+        SetTurnLabel("Turno de traders", "Traders turn", colorPhaseTraders);
 
         int traderCount = Random.Range(config.minTraders, config.maxTraders + 1);
         bool shockThisTurn = marketTrend.RollShockEvent();
@@ -174,7 +242,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator LiquidityProvidersPhase()
     {
         CurrentPhase = TurnPhase.LiquidityProviders;
-        SetTurnLabel("Turno de liquidity providers", "Liquidity providers turn");
+        SetTurnLabel("Turno de liquidity providers", "Liquidity providers turn", colorPhaseLiquidity);
 
         if (Random.value <= config.chanceLiquidityTurnHappens)
         {
@@ -215,7 +283,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator EndGame()
     {
         CurrentPhase = TurnPhase.GameOver;
-        SetTurnLabel("Fin de la partida", "Game over");
+        SetTurnLabel("Fin de la partida", "Game over", colorPhaseGameOver);
         priceManager.SetTradingEnabled(false);
 
         int bagsFromBTC = Mathf.RoundToInt(priceManager.GetUserA() * config.bagsPerBTC);
@@ -251,13 +319,16 @@ public class PoolTraderTurnManager : MonoBehaviour
         yield return null;
     }
 
-    private void SetTurnLabel(string es, string en)
+    private void SetTurnLabel(string es, string en, Color phaseColor)
     {
         turnLabelEs = es;
         turnLabelEn = en;
         string label = LanguageManager.Pick(es, en);
-        if (turnLabelText != null) turnLabelText.text = label;
-        if (turnAnnouncer != null) turnAnnouncer.Announce(label); // NUEVO
+        if (turnLabelText != null)
+        {
+            turnLabelText.text = label;
+            Punch(ref labelPunchCo, turnLabelText, phaseColor);
+        }
         //AudioManager.Instance?.PlaySFX("turn_change");
     }
 
@@ -273,6 +344,8 @@ public class PoolTraderTurnManager : MonoBehaviour
     private IEnumerator BlinkButton()
     {
         blinking = true;
+        float lastInputTime = Time.time;
+        float ramp = 0f;
 
         while (blinking)
         {
@@ -280,10 +353,22 @@ public class PoolTraderTurnManager : MonoBehaviour
 
             canvasEndTradingButton.alpha = Mathf.Lerp(0.6f, 1f, alpha);
 
+            // Cualquier clic o tecla (comprar, vender, ver...) reinicia la espera
+            if (Input.anyKeyDown) lastInputTime = Time.time;
+            bool idle = Time.time - lastInputTime >= idleDelayBeforePulse;
+
+            // Si el jugador está parado el pulso crece poco a poco hasta pulseAmount; si actúa, se calma rápido
+            ramp = idle
+                ? Mathf.Clamp01(ramp + Time.deltaTime / Mathf.Max(pulseRampDuration, 0.01f))
+                : Mathf.MoveTowards(ramp, 0f, Time.deltaTime * 4f);
+            float pulse = Mathf.Sin(Time.time * pulseSpeed);
+            canvasEndTradingButton.transform.localScale = endTradingButtonScale * (1f + pulse * pulseAmount * ramp);
+
             yield return null;
         }
 
         canvasEndTradingButton.alpha = 1f;
+        canvasEndTradingButton.transform.localScale = endTradingButtonScale;
     }
     private IEnumerator AnimateNumber(TMP_Text text, float startValue, float targetValue, float duration, float wait=0f)
     {
