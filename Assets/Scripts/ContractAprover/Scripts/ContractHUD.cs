@@ -163,6 +163,7 @@ public class ContractHUD : MonoBehaviour
         if (endCloseButton != null)
         {
             endCloseButton.onClick.RemoveAllListeners();
+            endCloseButton.onClick.AddListener(PlayButtonSound);
             endCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
     }
@@ -233,5 +234,10 @@ public class ContractHUD : MonoBehaviour
             yield return null;
         }
         flashImage.color = new Color(c.r, c.g, c.b, 0f);
+    }
+
+    private static void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
     }
 }

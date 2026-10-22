@@ -70,7 +70,11 @@ public class CardInfoRow
 
     private void Awake()
     {
-        if (coverButton != null) coverButton.onClick.AddListener(Reveal);
+        if (coverButton != null)
+        {
+            coverButton.onClick.AddListener(Reveal);
+            coverButton.onClick.AddListener(() => ContractApproverManager.PlaySfx("select_button"));
+        }
         HideResult();
     }
 

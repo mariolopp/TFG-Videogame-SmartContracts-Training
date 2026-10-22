@@ -106,6 +106,11 @@ public class MenuScript : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("select_button");
         Debug.Log("Saliendo...");
+#if UNITY_EDITOR
+        // Application.Quit no hace nada en el editor: se detiene el modo Play
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }

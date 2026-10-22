@@ -79,6 +79,8 @@ public class PoolTraderTurnManager : MonoBehaviour
         if (endGamePanel != null) endGamePanel.SetActive(false);
         EndConversionButton.onClick.AddListener(EndConversionTurn);
         EndTradingButton.onClick.AddListener(EndTradingTurn);
+        EndConversionButton.onClick.AddListener(PlayButtonSound);
+        EndTradingButton.onClick.AddListener(PlayButtonSound);
         canvasEndTradingButton.gameObject.SetActive(false);
         endTradingButtonScale = canvasEndTradingButton.transform.localScale;
         LanguageManager.OnLanguageChanged += OnLanguageChanged;
@@ -314,6 +316,7 @@ public class PoolTraderTurnManager : MonoBehaviour
         }
         if (endGameCloseButton != null)
         {
+            endGameCloseButton.onClick.AddListener(PlayButtonSound);
             endGameCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
         yield return null;
@@ -389,5 +392,10 @@ public class PoolTraderTurnManager : MonoBehaviour
         }
 
         text.text = $"x{Mathf.RoundToInt(targetValue)}";
+    }
+
+    private static void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
     }
 }

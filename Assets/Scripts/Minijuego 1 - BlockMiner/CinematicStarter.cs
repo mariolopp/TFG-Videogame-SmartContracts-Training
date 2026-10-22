@@ -68,6 +68,7 @@ public class CinematicStarter : MonoBehaviour
         if (botonSaltar != null)
         {
             botonSaltar.onClick.AddListener(SaltarDialogo);
+            botonSaltar.onClick.AddListener(PlayButtonSound);
             LanguageToggleButton.CreateNextTo(botonSaltar);
         }
 
@@ -247,5 +248,10 @@ public class CinematicStarter : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private static void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
     }
 }

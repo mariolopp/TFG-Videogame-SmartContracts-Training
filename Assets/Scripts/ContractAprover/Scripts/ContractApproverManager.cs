@@ -81,6 +81,7 @@ public class ContractApproverManager : MonoBehaviour
         if (skipTutorialButton != null)
         {
             skipTutorialButton.onClick.AddListener(SkipTutorial);
+            skipTutorialButton.onClick.AddListener(() => PlaySfx("select_button"));
             LanguageToggleButton.CreateNextTo(skipTutorialButton);
             skipTutorialButton.gameObject.SetActive(false);
         }

@@ -128,6 +128,7 @@ public class blockMinerUI : MonoBehaviour
 
         if (endScreenButton != null)
         {
+            endScreenButton.onClick.AddListener(PlayButtonSound);
             endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
 
@@ -155,5 +156,10 @@ public class blockMinerUI : MonoBehaviour
         }
 
         text.text = $"{prefix}{Mathf.RoundToInt(targetValue)}{suffix}";
+    }
+
+    private static void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
     }
 }

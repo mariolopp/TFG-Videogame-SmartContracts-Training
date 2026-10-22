@@ -35,18 +35,22 @@ public class ConversionUIController : MonoBehaviour
         bagsToBTCButton.onClick.RemoveAllListeners();
         bagsToBTCText.text = $"x{config.bagsPerBTC}              x1";
         bagsToBTCButton.onClick.AddListener(ConvertBagsToBTC);
+        bagsToBTCButton.onClick.AddListener(PlayButtonSound);
 
         bagsToETHButton.onClick.RemoveAllListeners();
         bagsToETHText.text = $"x{config.bagsPerETH}              x1";
         bagsToETHButton.onClick.AddListener(ConvertBagsToETH);
+        bagsToETHButton.onClick.AddListener(PlayButtonSound);
 
         BTCToBagsButton.onClick.RemoveAllListeners();
         BTCToBagsText.text = $"x1              x{config.bagsPerBTC-config.factorBags}";
         BTCToBagsButton.onClick.AddListener(ConvertBTCToBags);
+        BTCToBagsButton.onClick.AddListener(PlayButtonSound);
 
         ETHToBagsButton.onClick.RemoveAllListeners();
         ETHToBagsText.text = $"x1              x{config.bagsPerETH-config.factorBags}";
         ETHToBagsButton.onClick.AddListener(ConvertETHToBags);
+        ETHToBagsButton.onClick.AddListener(PlayButtonSound);
 
         assets.OnAssetsChanged += RefreshUI;
         RefreshUI();
@@ -119,5 +123,10 @@ public class ConversionUIController : MonoBehaviour
         }
         bagsToBTCButton.interactable = CanBuy(config.bagsPerBTC);
         bagsToETHButton.interactable = CanBuy(config.bagsPerETH);
+    }
+
+    private static void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
     }
 }

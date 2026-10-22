@@ -65,6 +65,7 @@ public class PriceManager : MonoBehaviour
         buyButton.onClick.AddListener(OnBuy);
         sellButton.onClick.AddListener(OnSell);
         swapPriceView.onClick.AddListener(OnView);
+        swapPriceView.onClick.AddListener(PlayButtonSound);
         
         UpdateUI();
     }
@@ -265,4 +266,9 @@ public class PriceManager : MonoBehaviour
     public float GetUserB() => userB;
     public float GetPriceA() => reserveB / reserveA;
     public float GetPriceB() => reserveA / reserveB;
+
+    private static void PlayButtonSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
+    }
 }
