@@ -239,31 +239,44 @@ public class ContractApproverManager : MonoBehaviour
         bool correct = !timeout && approved == tx.shouldApprove;
         lastWasCorrect = correct;
 
-        if (applyScore) ApplyScore(approved, timeout, correct);
+        if (applyScore && correct) ApplyScore(approved, timeout, correct);   // al fallar se aplica tras la bronca del profe
         if (!inTutorial)
         {
             answered++;
             if (correct) { correctAnswers++; if (useTimer) timeLeftTotal += Mathf.Max(0f, timeLeft); }
         }
 
-        hud.Flash(correct);
-        PlaySfx(correct ? config.sfxCorrect : config.sfxWrong);
-
         // Fuera del tutorial el profe explica el resultado (en el tutorial ya lo hacen dialoguesIfCorrect/IfWrong)
-        if (!inTutorial && (!correct || config.feedbackOnCorrect))
+        if (correct)
         {
-            SetOverlay(OverlayMode.Bottom, false); // sin animar: el overlay aún está apagado
-            yield return PlayDialogue(new[] { new DialogLine {
-                characterId = config.feedbackCharacterId,
-                characterName = LanguageManager.Pick(config.feedbackCharacterName, config.feedbackCharacterNameEn),
-                text = BuildFeedback(tx, approved, timeout, correct) } }, null);
-            // El DialogManager apaga el overlay al terminar su fade out: hasta entonces no se restaura
-            while (tutorialOverlay != null && tutorialOverlay.gameObject.activeSelf) yield return null;
-            SetOverlay(OverlayMode.Full, false);
-            SetObjectsActive(tutorialOnlyObjects, false); // el DialogManager enciende el retrato pero no lo apaga
+            hud.Flash(true);
+            PlaySfx(config.sfxCorrect);
+            if (!inTutorial && config.feedbackOnCorrect) yield return PlayFeedback(tx, approved, timeout, correct);
+            yield return cards.Resolve(approved, correct, timeout);
         }
+        else
+        {
+            // Al fallar: primero el sello, luego la explicación y por último el rojo y la sacudida
+            yield return cards.Stamp(approved, timeout);
+            if (!inTutorial) yield return PlayFeedback(tx, approved, timeout, correct);
+            if (applyScore) ApplyScore(approved, timeout, correct);
+            hud.Flash(false);
+            PlaySfx(config.sfxWrong);
+            yield return cards.Finish(approved, correct, timeout);
+        }
+    }
 
-        yield return cards.Resolve(approved, correct, timeout);
+    private IEnumerator PlayFeedback(TransactionData tx, bool approved, bool timeout, bool correct)
+    {
+        SetOverlay(OverlayMode.Bottom, false); // sin animar: el overlay aún está apagado
+        yield return PlayDialogue(new[] { new DialogLine {
+            characterId = config.feedbackCharacterId,
+            characterName = LanguageManager.Pick(config.feedbackCharacterName, config.feedbackCharacterNameEn),
+            text = BuildFeedback(tx, approved, timeout, correct) } }, null);
+        // El DialogManager apaga el overlay al terminar su fade out: hasta entonces no se restaura
+        while (tutorialOverlay != null && tutorialOverlay.gameObject.activeSelf) yield return null;
+        SetOverlay(OverlayMode.Full, false);
+        SetObjectsActive(tutorialOnlyObjects, false); // el DialogManager enciende el retrato pero no lo apaga
     }
 
     private void Decide(Decision d)

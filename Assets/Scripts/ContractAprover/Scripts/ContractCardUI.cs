@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -68,8 +69,15 @@ public class CardInfoRow
 
     private static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
 
+    // Pose de los sellos en el editor (a la que llegan al terminar de caer)
+    private Vector3 approvedScale, rejectedScale;
+    private Quaternion approvedRotation, rejectedRotation;
+
     private void Awake()
     {
+        if (stampApproved != null) { approvedScale = stampApproved.transform.localScale; approvedRotation = stampApproved.transform.localRotation; }
+        if (stampRejected != null) { rejectedScale = stampRejected.transform.localScale; rejectedRotation = stampRejected.transform.localRotation; }
+
         if (coverButton != null)
         {
             coverButton.onClick.AddListener(Reveal);
@@ -136,11 +144,15 @@ public class CardInfoRow
         if (cover != null) cover.SetActive(false);
     }
 
-    public void ShowResult(bool approved, bool correct, bool timeout, ContractApproverConfig cfg)
+    public void ShowStamp(bool approved, bool timeout)
     {
         if (stampApproved != null) stampApproved.SetActive(approved && !timeout);
         if (stampRejected != null) stampRejected.SetActive(!approved && !timeout);
+    }
 
+    // Tinte y texto de resultado
+    public void ShowVerdict(bool correct, bool timeout, ContractApproverConfig cfg)
+    {
         Color c = correct ? cfg.correctColor : cfg.wrongColor;
         if (resultOverlay != null)
         {
@@ -153,6 +165,54 @@ public class CardInfoRow
             resultLabel.text = timeout ? L("¡TIEMPO!", "TIME'S UP!") : (correct ? L("¡CORRECTO!", "CORRECT!") : L("¡ERROR!", "WRONG!"));
             resultLabel.color = c;
         }
+    }
+
+    /// Anima el sello activo: cae grande y girado, golpea la carta (onImpact) y se asienta con un pequeño rebote
+    public IEnumerator PlayStamp(ContractApproverConfig cfg, Action onImpact)
+    {
+        GameObject stamp = null;
+        Vector3 endScale = Vector3.one;
+        Quaternion baseRot = Quaternion.identity;
+        if (stampApproved != null && stampApproved.activeSelf) { stamp = stampApproved; endScale = approvedScale; baseRot = approvedRotation; }
+        else if (stampRejected != null && stampRejected.activeSelf) { stamp = stampRejected; endScale = rejectedScale; baseRot = rejectedRotation; }
+        if (stamp == null) { onImpact?.Invoke(); yield break; }
+
+        Transform tr = stamp.transform;
+        CanvasGroup cg = stamp.GetComponent<CanvasGroup>();
+        if (cg == null) cg = stamp.AddComponent<CanvasGroup>();
+        cg.blocksRaycasts = false;
+
+        Quaternion endRot = baseRot * Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(-cfg.stampRandomTilt, cfg.stampRandomTilt));
+        Quaternion startRot = endRot * Quaternion.Euler(0f, 0f, cfg.stampStartRotation);
+        Vector3 startScale = endScale * cfg.stampStartScale;
+        Vector3 squashScale = endScale * 0.88f;
+
+        // Caída: acelera hasta aplastarse un poco contra la carta
+        float t = 0f;
+        while (t < 1f)
+        {
+            t = Mathf.Min(1f, t + Time.deltaTime / Mathf.Max(0.01f, cfg.stampDropDuration));
+            float e = t * t * t;                  // ease-in
+            tr.localScale = Vector3.LerpUnclamped(startScale, squashScale, e);
+            tr.localRotation = Quaternion.Slerp(startRot, endRot, e);
+            cg.alpha = Mathf.Clamp01(t * 2.5f);
+            yield return null;
+        }
+
+        onImpact?.Invoke();
+
+        // Rebote: del aplastamiento a su tamaño, pasándose un poco
+        t = 0f;
+        while (t < 1f)
+        {
+            t = Mathf.Min(1f, t + Time.deltaTime / Mathf.Max(0.01f, cfg.stampSettleDuration));
+            float e = 1f + 2.7f * Mathf.Pow(t - 1f, 3f) + 1.7f * Mathf.Pow(t - 1f, 2f);  // ease-out back
+            tr.localScale = Vector3.LerpUnclamped(squashScale, endScale, e);
+            yield return null;
+        }
+        tr.localScale = endScale;
+        tr.localRotation = endRot;
+        cg.alpha = 1f;
     }
 
     public void HideResult()

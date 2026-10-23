@@ -88,11 +88,39 @@ public class ContractCardStack : MonoBehaviour
     /// Muestra el sello, sacude si hay error y lanza la carta fuera
     public IEnumerator Resolve(bool approved, bool correct, bool timeout)
     {
+        front.ShowVerdict(correct, timeout, config);
+        yield return Stamp(approved, timeout);
+        yield return Leave(approved, correct);
+    }
+
+    /// Solo pone el sello (o el golpe si se acabó el tiempo), sin teñir la carta
+    public IEnumerator Stamp(bool approved, bool timeout)
+    {
         front.SetInteractable(false);
         front.Reveal();
-        front.ShowResult(approved, correct, timeout, config);
+        front.ShowStamp(approved, timeout);
 
-        yield return Punch(front.Rect, 0.15f, 0.06f);
+        if (timeout) yield return Punch(front.Rect, 0.15f, 0.06f);   // sin sello
+        else
+        {
+            RectTransform card = front.Rect;
+            yield return front.PlayStamp(config, () =>
+            {
+                ContractApproverManager.PlaySfx(config.sfxStamp);
+                StartCoroutine(Punch(card, 0.12f, -0.04f));          // la carta se hunde con el golpe
+            });
+        }
+    }
+
+    /// Tras el sello: tiñe la carta según el resultado, sacude si hay error y la lanza fuera
+    public IEnumerator Finish(bool approved, bool correct, bool timeout)
+    {
+        front.ShowVerdict(correct, timeout, config);
+        yield return Leave(approved, correct);
+    }
+
+    private IEnumerator Leave(bool approved, bool correct)
+    {
         if (!correct) yield return Shake(front.Rect, 0.3f, 14f);
         yield return new WaitForSeconds(config.stampHoldTime);
         yield return SwipeOut(front, approved ? 1 : -1);

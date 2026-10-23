@@ -65,6 +65,16 @@ public class ContractApproverConfig : ScriptableObject
     public float cardMoveDuration = 0.3f;
     public float swipeDuration = 0.35f;
     public float stampHoldTime = 0.6f;
+    [Tooltip("Lo que tarda el sello en caer sobre la carta")]
+    public float stampDropDuration = 0.18f;
+    [Tooltip("Lo que tarda el sello en asentarse tras el golpe")]
+    public float stampSettleDuration = 0.12f;
+    [Tooltip("Escala desde la que cae el sello (1 = tamaño final)")]
+    public float stampStartScale = 2.5f;
+    [Tooltip("Giro extra (grados) con el que empieza a caer el sello")]
+    public float stampStartRotation = 20f;
+    [Tooltip("Inclinación aleatoria máxima (grados) del sello al quedar puesto")]
+    public float stampRandomTilt = 6f;
     public Color correctColor = new Color(0.3f, 0.85f, 0.4f);
     public Color wrongColor = new Color(0.9f, 0.3f, 0.3f);
 
@@ -80,6 +90,7 @@ public class ContractApproverConfig : ScriptableObject
     [Header("Sonidos (IDs de SoundLibrary)")]
     public string sfxCorrect = "";
     public string sfxWrong = "";
+    public string sfxStamp = "";
     public string sfxNewBlacklistEntry = "";
 
     [Header("Debug")]
