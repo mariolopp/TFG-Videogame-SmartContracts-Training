@@ -256,12 +256,11 @@ public class ContractApproverManager : MonoBehaviour
         }
         else
         {
-            // Al fallar: primero el sello, luego la explicación y por último el rojo y la sacudida
-            yield return cards.Stamp(approved, timeout);
+            // Al fallar: primero el sello (con el sonido de fallo), luego la explicación y por último el rojo y la sacudida
+            yield return cards.Stamp(approved, timeout, config.sfxWrong);
             if (!inTutorial) yield return PlayFeedback(tx, approved, timeout, correct);
             if (applyScore) ApplyScore(approved, timeout, correct);
             hud.Flash(false);
-            PlaySfx(config.sfxWrong);
             yield return cards.Finish(approved, correct, timeout);
         }
     }
@@ -481,8 +480,10 @@ public class ContractApproverManager : MonoBehaviour
         foreach (var l in referenceLists)
             if (l != null && l.Section != null && !targets.Contains(l.Section) && l.Section.EstaAbierto)
                 l.Section.Plegar();
+        bool opened = false;
         foreach (var s in targets)
-            if (!s.EstaAbierto) s.Desplegar();
+            if (!s.EstaAbierto) { s.Desplegar(); opened = true; }
+        if (opened) PlaySfx("pop"); // el profe abre el desplegable: suena igual que al pulsarlo
     }
 
     public void CloseAllSections()

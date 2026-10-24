@@ -61,6 +61,7 @@ public class CoinSwapAnimator : MonoBehaviour
                                  string outName, float outAmount, Sprite outSprite, bool externalTrader = false)
     {
         OnSwapStarted?.Invoke();
+        AudioManager.Instance?.PlaySFX("pt_swap");
 
         RectTransform depositoIn = GetDeposito(inName);
         RectTransform depositoOut = GetDeposito(outName);
@@ -279,6 +280,7 @@ public class CoinSwapAnimator : MonoBehaviour
     private IEnumerator LiquidityRoutine(float btcAmount, float ethAmount, bool entering)
     {
         OnSwapStarted?.Invoke();
+        AudioManager.Instance?.PlaySFX(entering ? "pt_liquidity_add" : "pt_liquidity_remove");
 
         // Las dos monedas viajan en paralelo (a diferencia del swap normal, que es secuencial)
         Coroutine btcCoin = StartCoroutine(AnimateLiquidityCoin(btcSprite, depositoBtc, btcAmount, entering, externalSpawnPointEntrada));

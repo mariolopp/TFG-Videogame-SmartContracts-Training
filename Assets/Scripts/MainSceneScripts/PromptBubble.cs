@@ -15,6 +15,8 @@ public class PromptBubble : MonoBehaviour
     [SerializeField] private string sortingLayer = "WorldUI";
     [Tooltip("Orden del globo dentro de su capa. Debe ser mayor que el del jugador para quedar siempre por delante.")]
     [SerializeField] private int sortingOrder = 500;
+    [Tooltip("Id del efecto al aparecer el globo (vacío = sin sonido). Solo suena si se llama a Show con playSfx.")]
+    [SerializeField] private string showSfxId = "pop";
 
     private Vector3 baseScale;
     private Vector3 basePosition;
@@ -54,8 +56,10 @@ public class PromptBubble : MonoBehaviour
             gameObject.SetActive(false);
     }
 
-    public void Show()
+    public void Show(bool playSfx = false)
     {
+        if (playSfx && !shouldShow && !string.IsNullOrEmpty(showSfxId) && AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(showSfxId);
         shouldShow = true;
         gameObject.SetActive(true);
     }

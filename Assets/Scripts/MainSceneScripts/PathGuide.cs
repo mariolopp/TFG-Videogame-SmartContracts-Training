@@ -41,8 +41,8 @@ public class PathGuide : MonoBehaviour
     [SerializeField] private float holdOnTarget = 1.2f;
     [Tooltip("Tiempo que se da a la cámara para volver al jugador antes de devolverle el control.")]
     [SerializeField] private float cameraReturnTime = 0.8f;
-    [Tooltip("Id del efecto al empezar a dibujar (vacío = sin sonido).")]
-    [SerializeField] private string drawSfxId = "wosh";
+    [Tooltip("Id del efecto que suena en bucle mientras se dibuja (vacío = sin sonido).")]
+    [SerializeField] private string drawSfxId = "scoreCounterBucle";
 
     [Header("Onda de brillo")]
     [Tooltip("Velocidad a la que los destellos recorren el rastro hacia el destino (0 = sin destellos).")]
@@ -117,8 +117,8 @@ public class PathGuide : MonoBehaviour
         Transform previousFollow = vcam != null ? vcam.Follow : null;
         if (vcam != null) vcam.Follow = tip;
 
-        if (!string.IsNullOrEmpty(drawSfxId) && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(drawSfxId);
+        AudioSource drawLoop = !string.IsNullOrEmpty(drawSfxId) && AudioManager.Instance != null
+            ? AudioManager.Instance.PlayLoopSFX(drawSfxId, this) : null;
 
         float drawn = 0f;
         while (drawn < routeLength)
@@ -128,6 +128,7 @@ public class PathGuide : MonoBehaviour
             SpawnDotsUpTo(drawn, Time.time);
             yield return null;
         }
+        if (AudioManager.Instance != null) AudioManager.Instance.StopLoopSFX(drawLoop);
 
         target.SetLocked(false, animate: true);
         yield return new WaitForSeconds(holdOnTarget);

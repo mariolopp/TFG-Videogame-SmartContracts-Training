@@ -48,7 +48,7 @@ public class BloqueFX : MonoBehaviour
     [SerializeField] private float escalaRebote = 1.5f;
     [SerializeField] private float duracionRebote = 0.4f;
     [SerializeField] private float escalaReboteBarras = 1.12f;
-    [SerializeField] private string sfxId = "coin_sound";
+    [SerializeField] private string sfxId = "bm_block_valid";
 
     [Header("Bloque perdido")]
     [SerializeField] private string mensajePerdido = "¡BLOQUE PERDIDO!";
@@ -60,7 +60,7 @@ public class BloqueFX : MonoBehaviour
     [SerializeField] private float subidaPerdido = 180f;
     [SerializeField] private float duracionTextoPerdido = 2.2f;
     [Tooltip("Id del sonido en la SoundLibrary. Vacío = sin sonido")]
-    [SerializeField] private string sfxIdPerdido = "";
+    [SerializeField] private string sfxIdPerdido = "bm_block_rejected";
 
     // Estado original para restaurar si se solapan
     private readonly Dictionary<Transform, Vector3> posicionesOriginales = new Dictionary<Transform, Vector3>();

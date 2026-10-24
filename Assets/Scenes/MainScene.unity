@@ -3500,7 +3500,7 @@ MonoBehaviour:
   affordableColor: {r: 0.9843137, g: 0.7490196, b: 0.14117648, a: 1}
   unaffordableColor: {r: 0.972549, g: 0.44313726, b: 0.44313726, a: 1}
   buySfxId: validarButtonSound
-  deniedSfxId: 
+  deniedSfxId: ui_error
   shakeDuration: 0.35
   shakeAmplitude: 0.12
 --- !u!114 &1136909809
@@ -3534,7 +3534,7 @@ MonoBehaviour:
   squashAmount: 0.06
   squashDuration: 0.3
   delayBetweenLayers: 0.2
-  layerSfxId: coin_sound
+  layerSfxId: statue_build
   focusCameraOnGrowth: 1
   startDelay: 0.6
   cameraTravelTime: 1
@@ -59034,7 +59034,7 @@ MonoBehaviour:
   dotPopDuration: 0.25
   holdOnTarget: 1.2
   cameraReturnTime: 0.8
-  drawSfxId: wosh
+  drawSfxId: scoreCounterBucle
   pulseSpeed: 5
   pulseSpacing: 6
   pulseScale: 0.5

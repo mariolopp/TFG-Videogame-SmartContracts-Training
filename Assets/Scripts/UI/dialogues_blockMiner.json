@@ -3,30 +3,35 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "¡Hola! Bienvenido a mi mundo.",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Perdona? ¿Dónde estoy...?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "extranezaProfe3",
       "text": "Estás dentro de la blockchain, por supuesto.",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Bloque... qué?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Blockchain.",
       "evento": ""
     },
@@ -45,12 +50,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Información de qué tipo?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Casi de cualquier tipo.",
       "evento": ""
     },
@@ -63,24 +70,28 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Transacciones criptográficas? ¿Qué es eso?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Se trata de usuarios realizando movimientos de activos digitales de varios tipos.",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Activos digitales? ¿Varios tipos?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "En efecto, existen varios tipos de activos digitales.",
       "evento": ""
     },
@@ -93,12 +104,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Fungible? ¿Criptomonedas? ¿Tokens? Son muchas palabras nuevas de golpe...",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Está bien, no adelantemos acontecimientos.",
       "evento": ""
     },
@@ -117,12 +130,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale, ¿y cómo piensan que se sepa que han movido algo de su Wallet?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Tranquilo... es más simple de lo que piensas.",
       "evento": ""
     },
@@ -135,12 +150,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale, pero si todo el mundo tiene acceso, ¿no podría cualquiera apuntar que tiene muchas criptomonedas de esas?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Ay pillín... tu duda tiene mucho sentido, y es justo eso lo que la blockchain viene a resolver.",
       "evento": ""
     },
@@ -153,12 +170,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale, pero entonces, ¿cómo hacen para apuntar los datos?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "Es muy simple.",
       "evento": ""
     },
@@ -171,12 +190,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Y en qué ayuda eso exactamente? ¿No podría cualquiera aprender a resolver problemas de matemáticas para escribir lo que quiera?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "extranezaProfe3",
       "text": "Ay amigo... no es tan sencillo. Hablamos de problemas muy complejos que solo los ordenadores más potentes pueden resolver.",
       "evento": ""
     },
@@ -189,12 +210,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Entonces, ¿los datos los maneja el que tiene el ordenador más potente?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "extranezaProfe3",
       "text": "Algo así podría suceder en bases de datos más pequeñas en fase de desarrollo, pero no debería.",
       "evento": ""
     },
@@ -207,12 +230,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Esto suena peligroso... ¿Por qué querría guardar mi dinero en mi Wallet si un día puede llegar alguien con un ordenador muy potente que escriba un 0 en mi balance?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Entiendo tu preocupación, pero afortunadamente eso no puede suceder. Hay miles de validadores vigilando.",
       "evento": ""
     },
@@ -225,12 +250,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Yo? Pero si no sé nada de esto... ¿Y por qué querría yo hacer ese trabajo?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Por las recompensas, claro! Cada vez que alguien hace una transacción, incluye una pequeña propina llamada Fee (o comisión).",
       "evento": ""
     },
@@ -243,12 +270,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "risaChica1",
       "text": "Ah... ¡eso ya me gusta más! Entonces meto todas las transacciones que vea y me forro, ¿no?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "extranezaProfe3",
       "text": "¡No tan rápido! Para hacer bien tu trabajo necesitas conocer tus herramientas.",
       "evento": ""
     },
@@ -285,12 +314,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entendido... Entonces simplemente me fijo en las que paguen más y las meto directo al bloque, ¿verdad?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "extranezaProfe3",
       "text": "¡Cuidado, no te precipites!",
       "evento": ""
     },
@@ -303,12 +334,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Balance? ¿A qué te refieres?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Imagina una transacción que ocupa 6 unidades <sprite=\"gas\" index=0> y paga 4 <sprite=\"ETH_bag\" index=0>.",
       "evento": ""
     },
@@ -321,12 +354,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Ah... claro. Con la segunda gano casi lo mismo, pero gasto muchísimo menos espacio de mi límite de 20 <sprite=\"gas\" index=0>. ¡Podría meter muchas más transacciones pequeñas y ganar más dinero en total!",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Exacto! Ese es el secreto de un gran validador.",
       "evento": ""
     },
@@ -351,12 +386,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entonces... Mi objetivo es elegir las transacciones que me den más beneficios en total, teniendo en cuenta el espacio máximo de 20 <sprite=\"gas\" index=0> y el fee que aportan.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Exacto! Pero recuerda la regla de oro: otros validadores intentarán crear el bloque antes que tú.",
       "evento": ""
     },
@@ -381,6 +418,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "¡Entendido! Debo ser rápido antes de que se agote.",
       "evento": ""
     },
@@ -393,6 +431,7 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "Muy buena pregunta. Fíjate en este medidor de aquí.",
       "evento": ""
     },
@@ -411,12 +450,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Vale, entonces busco la máxima rentabilidad sin sobrepasar esa barra de espacio y sin que se me acabe el tiempo.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "Si, y recuerda, cuando estés satisfecho con las transacciones que has elegido...",
       "evento": ""
     },
@@ -435,12 +476,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "O sea, que no basta con llenar el bloque. Si no pulso Validar antes de que se acabe el tiempo, lo perderé.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Exacto! No esperes al último segundo.",
       "evento": ""
     },
@@ -465,6 +508,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "risaChica1",
       "text": "¡Me queda claro! Gestión de espacio, límite de tiempo, bloques restantes y mi progreso total.",
       "evento": ""
     },
@@ -477,6 +521,7 @@
     {
       "characterId": "profe",
       "characterName": "Profesor Merkle",
+      "murmullo": "risaProfe1",
       "text": "¡Vamos a por ello!",
       "evento": ""
     },

@@ -51,7 +51,9 @@ MonoBehaviour:
   feedbackCharacterId: profe
   feedbackCharacterName: Profe
   feedbackCharacterNameEn: Prof
-  sfxCorrect: 
-  sfxWrong: 
-  sfxNewBlacklistEntry: 
+  sfxCorrect: ui_confirm
+  sfxWrong: fail
+  sfxStampApproved: ca_stamp_approved
+  sfxStampRejected: ca_stamp_rejected
+  sfxNewBlacklistEntry: ca_blacklist_new
   crossCheckJson: 1

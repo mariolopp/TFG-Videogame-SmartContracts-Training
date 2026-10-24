@@ -36,8 +36,11 @@ public class StatueBuilder : MonoBehaviour
     [SerializeField] private float squashDuration = 0.3f;
     [Tooltip("Pausa entre capas cuando suben varias a la vez.")]
     [SerializeField] private float delayBetweenLayers = 0.2f;
-    [Tooltip("Id del efecto al encajar cada capa (vacío = sin sonido).")]
-    [SerializeField] private string layerSfxId = "coin_sound";
+    [Tooltip("Id del efecto al encajar cada capa (vacío = sin sonido). Es el mismo clip para todas las capas.")]
+    [SerializeField] private string layerSfxId = "statue_build";
+    [Tooltip("Semitonos respecto al tono original del clip para cada capa, de abajo a arriba. Pentatónica de Do: " +
+             "la capa 1 suena grave y metálica (pedestal) y la 10 aguda y cristalina, resolviendo en la tónica una octava arriba.")]
+    [SerializeField] private int[] layerSemitones = { -10, -8, -5, -3, 0, 2, 4, 7, 9, 12 };
 
     [Header("Cinemática al volver de un minijuego")]
     [Tooltip("Si es false, las capas nuevas aparecen igual pero sin mover la cámara ni bloquear al jugador.")]
@@ -223,11 +226,21 @@ public class StatueBuilder : MonoBehaviour
 
         layerTransform.localPosition = rest;
         layer.color = color;
-        if (!string.IsNullOrEmpty(layerSfxId) && AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(layerSfxId);
+        PlayLayerSfx(index);
 
         // El aplastado va aparte para que la siguiente capa pueda empezar a caer mientras rebota
         if (visualsRoot != null) StartCoroutine(Squash());
+    }
+
+    // Un solo clip para todas las capas: el pitch sube con la altura, así varias capas seguidas forman un arpegio
+    private void PlayLayerSfx(int index)
+    {
+        if (string.IsNullOrEmpty(layerSfxId) || AudioManager.Instance == null) return;
+
+        int semitones = layerSemitones != null && layerSemitones.Length > 0
+            ? layerSemitones[Mathf.Min(index, layerSemitones.Length - 1)]
+            : 0;
+        AudioManager.Instance.PlaySFX(layerSfxId, Mathf.Pow(2f, semitones / 12f));
     }
 
     private IEnumerator Squash()

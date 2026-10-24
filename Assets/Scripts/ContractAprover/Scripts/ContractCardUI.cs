@@ -81,7 +81,7 @@ public class CardInfoRow
         if (coverButton != null)
         {
             coverButton.onClick.AddListener(Reveal);
-            coverButton.onClick.AddListener(() => ContractApproverManager.PlaySfx("select_button"));
+            coverButton.onClick.AddListener(() => ContractApproverManager.PlaySfx("ca_contract_open"));
         }
         HideResult();
     }

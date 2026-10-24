@@ -164,6 +164,7 @@ public class ContractHUD : MonoBehaviour
         {
             endCloseButton.onClick.RemoveAllListeners();
             endCloseButton.onClick.AddListener(PlayButtonSound);
+            endCloseButton.onClick.AddListener(() => ContractApproverManager.PlaySfx("level_out&in"));
             endCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
     }
@@ -184,12 +185,16 @@ public class ContractHUD : MonoBehaviour
     private IEnumerator AnimateNumber(TMP_Text text, float target, float duration)
     {
         if (text == null) yield break;
+        // Si no hay nada que contar (se queda en 0) no suena
+        AudioSource countLoop = Mathf.RoundToInt(target) != 0 && AudioManager.Instance != null
+            ? AudioManager.Instance.PlayLoopSFX("scoreCounterBucle", this) : null;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             text.text = $"x{Mathf.RoundToInt(Mathf.Lerp(0f, target, t / duration))}";
             yield return null;
         }
         text.text = $"x{Mathf.RoundToInt(target)}";
+        if (AudioManager.Instance != null) AudioManager.Instance.StopLoopSFX(countLoop);
         yield return new WaitForSeconds(stepPause);
     }
 

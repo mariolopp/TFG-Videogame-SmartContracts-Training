@@ -84,13 +84,20 @@ public class BotonTransaccion : MonoBehaviour
     {
         if (barra != null && (barra.valorActual + valorGas) <= 1.01f)
         {
+            PlaySfx("ruleta_buttons");
             barra.AnadirValor(valorGas);
             assets.AddTempUSD((int)valorUSD); // Anyadir el valor usd del bloque
             Debug.Log("Anyadidos " + (int)valorUSD + " USD. Total ahora: " + assets.usd + " USD.");
             boton.interactable = false; // Desactivar boton tras pulsar
         }
         else if (barra != null) { 
+            PlaySfx("ca_stamp_rejected"); // No cabe en el bloque
             Debug.Log("La barra ya esta llena, no se puede anyadir mas valor.");
         }
+    }
+
+    private static void PlaySfx(string id)
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX(id);
     }
 }

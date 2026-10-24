@@ -44,6 +44,9 @@ public class playerMovement : MonoBehaviour
     /// <summary>Si es false se ignora el teclado. No afecta a WalkTo.</summary>
     public bool ControlEnabled { get; set; } = true;
 
+    /// <summary>true si el jugador se está moviendo con el teclado (no con WalkTo ni quieto).</summary>
+    public bool IsMovingByInput => !isAutoWalking && movement != Vector2.zero;
+
     private void Awake()
     {
         // En Awake (no en Start) para que otros scripts puedan usar Teleport/WalkTo desde su Start

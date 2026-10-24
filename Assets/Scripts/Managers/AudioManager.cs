@@ -18,6 +18,10 @@ public class AudioManager : MonoBehaviour
     private Dictionary<string, SoundLibrary.SoundEntry> sfxLookup;
     private Dictionary<string, SoundLibrary.SoundEntry> musicLookup;
 
+    // Bucles (escritura, recuentos...): cada uno con el componente que lo pidió
+    private readonly List<AudioSource> loopSources = new List<AudioSource>();
+    private readonly Dictionary<AudioSource, Behaviour> loopOwners = new Dictionary<AudioSource, Behaviour>();
+
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -55,21 +59,65 @@ public class AudioManager : MonoBehaviour
 
     // ---------- API pública ----------
 
-    public void PlaySFX(string id)
+    public void PlaySFX(string id) => PlaySFX(id, 1f);
+
+    /// <summary>
+    /// Igual que PlaySFX(id) pero multiplicando el pitch de la entrada. Permite que un mismo clip
+    /// suene distinto según el contexto (p. ej. la estatua sube de tono con cada capa).
+    /// </summary>
+    public void PlaySFX(string id, float pitchMultiplier)
     {
-        if (!sfxLookup.TryGetValue(id, out var entry) || entry.clip == null)
-        {
-            Debug.LogWarning($"AudioManager: SFX '{id}' no encontrado en la biblioteca.");
-            return;
-        }
+        if (!TryGetSfx(id, out var entry)) return;
 
         AudioSource src = GetFreeSfxSource();
         src.clip = entry.clip;
         src.volume = entry.volume * masterSfxVolume;
-        src.pitch = entry.randomizePitch
+        float pitch = entry.randomizePitch
             ? entry.pitch + Random.Range(-entry.pitchVariance, entry.pitchVariance)
             : entry.pitch;
+        src.pitch = pitch * pitchMultiplier;
         src.Play();
+    }
+
+    /// <summary>
+    /// Reproduce un SFX en bucle hasta llamar a StopLoopSFX con el AudioSource devuelto.
+    /// Si owner se destruye o se desactiva (p. ej. cambio de escena a mitad de una animación)
+    /// el bucle se para solo, porque sus corrutinas ya no llegarán a pararlo.
+    /// </summary>
+    public AudioSource PlayLoopSFX(string id, Behaviour owner)
+    {
+        if (!TryGetSfx(id, out var entry)) return null;
+
+        AudioSource src = loopSources.Find(s => !loopOwners.ContainsKey(s));
+        if (src == null)
+        {
+            src = gameObject.AddComponent<AudioSource>();
+            src.playOnAwake = false;
+            src.loop = true;
+            loopSources.Add(src);
+        }
+        src.clip = entry.clip;
+        src.volume = entry.volume * masterSfxVolume;
+        src.pitch = entry.pitch;
+        src.Play();
+        loopOwners[src] = owner;
+        return src;
+    }
+
+    public void StopLoopSFX(AudioSource src)
+    {
+        if (src == null || !loopOwners.Remove(src)) return;
+        src.Stop();
+    }
+
+    private void Update()
+    {
+        if (loopOwners.Count == 0) return;
+        foreach (var src in loopSources)
+        {
+            if (loopOwners.TryGetValue(src, out var owner) && (owner == null || !owner.isActiveAndEnabled))
+                StopLoopSFX(src);
+        }
     }
 
     public void PlayMusic(string id, bool restartIfSame = false)
@@ -95,6 +143,13 @@ public class AudioManager : MonoBehaviour
     {
         masterMusicVolume = Mathf.Clamp01(v);
         musicSource.volume = masterMusicVolume;
+    }
+
+    private bool TryGetSfx(string id, out SoundLibrary.SoundEntry entry)
+    {
+        if (sfxLookup.TryGetValue(id, out entry) && entry.clip != null) return true;
+        Debug.LogWarning($"AudioManager: SFX '{id}' no encontrado en la biblioteca.");
+        return false;
     }
 
     private AudioSource GetFreeSfxSource()

@@ -25,6 +25,7 @@ public class DialogLine
     public string characterName;
     public string text;
     public string evento;   // Activar evento externo
+    public string murmullo; // Id del SFX que suena al cambiar de personaje. Solo se lee del JSON en español
 }
 
 [Serializable]
@@ -39,6 +40,14 @@ public class CharacterPortrait
 {
     public string characterId; // Ej: "profe", "jugador"
     public Sprite portraitSprite;
+}
+
+// --- MURMULLO POR DEFECTO DE CADA PERSONAJE (si su línea del JSON no trae "murmullo") ---
+[Serializable]
+public class CharacterMurmur
+{
+    public string characterId;
+    public string sfxId;
 }
 
 public class DialogManager : MonoBehaviour
@@ -70,6 +79,15 @@ public class DialogManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float typingSpeed = 0.04f;
 
+    [Header("Sonido")]
+    [Tooltip("Suena en bucle mientras se escribe el texto (vacío = sin sonido)")]
+    [SerializeField] private string typingSfxId = "escritura";
+    [SerializeField] private CharacterMurmur[] defaultMurmurs =
+    {
+        new CharacterMurmur { characterId = "profe", sfxId = "risaProfe1" },
+        new CharacterMurmur { characterId = "jugador", sfxId = "entendimientoChica3" },
+    };
+
     // --- Variables Internas ---
     private bool isTyping = false;
     private string currentFullText = "";
@@ -77,6 +95,8 @@ public class DialogManager : MonoBehaviour
     private DialogLine[] pendingDialogues;
     private DialogLine[] dialoguesEs, dialoguesEn;
     private int currentStepIndex = 0;
+    private string lastSpeakerId;   // Se mantiene entre diálogos de la misma escena
+    private AudioSource typingLoop;
 
     private void Start()
     {
@@ -88,7 +108,11 @@ public class DialogManager : MonoBehaviour
     }
 
     private void OnEnable() => LanguageManager.OnLanguageChanged += OnLanguageChanged;
-    private void OnDisable() => LanguageManager.OnLanguageChanged -= OnLanguageChanged;
+    private void OnDisable()
+    {
+        LanguageManager.OnLanguageChanged -= OnLanguageChanged;
+        StopTypingSfx();
+    }
 
     // --- API PÚBLICA ---
     public void StartDialog(TextAsset jsonFile, Action onFinishedAction = null) => StartDialog(jsonFile, null, onFinishedAction);
@@ -213,6 +237,7 @@ public class DialogManager : MonoBehaviour
             titleText.text = line.characterName;
             currentFullText = line.text;
             bodyText.text = "";
+            PlayMurmurIfNewSpeaker(line);
         
             // Buscar y asignar la foto del personaje basada en su characterId
             Sprite foundSprite = null;
@@ -248,9 +273,39 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    // El murmullo solo suena en el primer bocadillo de cada personaje: si habla varios seguidos no se repite
+    private void PlayMurmurIfNewSpeaker(DialogLine line)
+    {
+        if (line.characterId == lastSpeakerId) return;
+        lastSpeakerId = line.characterId;
+
+        // El murmullo es lógica, no texto: se lee de la versión española aunque se muestre la inglesa
+        DialogLine lineEs = dialoguesEs != null && currentStepIndex < dialoguesEs.Length ? dialoguesEs[currentStepIndex] : line;
+        string id = lineEs.murmullo;
+        if (string.IsNullOrEmpty(id) && defaultMurmurs != null)
+        {
+            foreach (var m in defaultMurmurs)
+                if (m.characterId == line.characterId) { id = m.sfxId; break; }
+        }
+        if (!string.IsNullOrEmpty(id) && AudioManager.Instance != null) AudioManager.Instance.PlaySFX(id);
+    }
+
+    private void StartTypingSfx()
+    {
+        if (typingLoop != null || string.IsNullOrEmpty(typingSfxId) || AudioManager.Instance == null) return;
+        typingLoop = AudioManager.Instance.PlayLoopSFX(typingSfxId, this);
+    }
+
+    private void StopTypingSfx()
+    {
+        if (typingLoop != null && AudioManager.Instance != null) AudioManager.Instance.StopLoopSFX(typingLoop);
+        typingLoop = null;
+    }
+
     public void CompleteTextImmediately()
     {
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        StopTypingSfx();
         bodyText.text = currentFullText;
         bodyText.maxVisibleCharacters = 99999;
         isTyping = false;
@@ -267,6 +322,7 @@ public class DialogManager : MonoBehaviour
     private void CloseWindow()
     {
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        StopTypingSfx();
         StartCoroutine(FadeOut());
     }
 
@@ -280,11 +336,13 @@ public class DialogManager : MonoBehaviour
         bodyText.maxVisibleCharacters = 0;
         bodyText.ForceMeshUpdate();
         int totalCaracteres = bodyText.textInfo.characterCount;
+        if (totalCaracteres > 0) StartTypingSfx();
         for (int i = 1; i <= totalCaracteres; i++)
         {
             bodyText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(typingSpeed);
         }
+        StopTypingSfx();
         isTyping = false;
     }
     // --- NUEVO: Permite saltar el diálogo completo desde fuera ---
@@ -293,6 +351,7 @@ public class DialogManager : MonoBehaviour
         // Cortamos cualquier corrutina en marcha (typing, fade in/out)
         StopAllCoroutines();
         typingCoroutine = null;
+        StopTypingSfx();
         isTyping = false;
         isAnimatingUI = false;
 
@@ -319,6 +378,7 @@ public class DialogManager : MonoBehaviour
     public void PauseDialog()
     {
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+        StopTypingSfx();
         isTyping = false;
         isAnimatingUI = true; // evita que un click en pantalla avance el diálogo mientras se espera el botón
     }

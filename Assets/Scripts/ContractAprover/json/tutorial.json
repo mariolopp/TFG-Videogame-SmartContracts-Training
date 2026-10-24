@@ -3,41 +3,41 @@
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Bienvenido! Hasta ahora has entendido qué es un validador y cómo funcionan los intercambios en la blockchain, pero ahora te toca algo un poco distinto...", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Ah, sí? ¿Y qué tiene de distinto?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Hoy vas a encargarte de decidir qué transacciones pueden llegar a la blockchain.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Yo voy a decidir qué transacciones entran?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente. Tu trabajo será revisar las peticiones que recibas y decidir si son seguras o no.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y si me equivoco?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Ay, amigo, ¿no serás el tipo de persona que firma contratos sin leerlos, no?", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Bueno, he de admitir que muchas veces lo he hecho...", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aquí, si apruebas algo que no debes, solo perderás vidas o puntuación...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "¡Bienvenido! Hasta ahora has entendido qué es un validador y cómo funcionan los intercambios en la blockchain, pero ahora te toca algo un poco distinto...", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Ah, sí? ¿Y qué tiene de distinto?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Hoy vas a encargarte de decidir qué transacciones pueden llegar a la blockchain.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Yo voy a decidir qué transacciones entran?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exactamente. Tu trabajo será revisar las peticiones que recibas y decidir si son seguras o no.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Y si me equivoco?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Ay, amigo, ¿no serás el tipo de persona que firma contratos sin leerlos, no?", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "risaChica1", "text": "Bueno, he de admitir que muchas veces lo he hecho...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Aquí, si apruebas algo que no debes, solo perderás vidas o puntuación...", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Pero ¿sabes lo que podrías perder en un caso real?", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entiendo que un poco de dinero.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡JAJAJAJA! Un poco... Más bien desde un poco hasta mucho, muchísimo. Todo depende de lo que tengas en la billetera.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entiendo que un poco de dinero.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "¡JAJAJAJA! Un poco... Más bien desde un poco hasta mucho, muchísimo. Todo depende de lo que tengas en la billetera.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Así que será mejor que prestes atención. Algunas peticiones estarán perfectamente bien...", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "...y otras esconderán pequeños detalles que no deberías pasar por alto.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Vale... ¿entonces tengo que encontrar detalles que me digan que una transacción es peligrosa?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exacto. Déjame que te explique más a fondo...", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "Vale... ¿entonces tengo que encontrar detalles que me digan que una transacción es peligrosa?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exacto. Déjame que te explique más a fondo...", "evento": "" },
 
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Antes de empezar, necesitas saber qué estás revisando.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Cuando un usuario quiere mover activos o interactuar con un contrato inteligente, necesita crear una transacción.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Es eso lo que se firma?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Efectivamente! Antes de enviarla a la blockchain, el usuario debe firmarla con su wallet. Esa firma es la forma de autorizar la operación.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces... si firmo algo sin mirar, estoy autorizando exactamente lo que pone ahí.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente. Cada vez que aparezca una petición, conocerás sus detalles acerca de lo que hará.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y todas las peticiones son iguales?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "No. Dependiendo de la operación, tendrás que fijarte en unos datos u otros.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Es eso lo que se firma?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Efectivamente! Antes de enviarla a la blockchain, el usuario debe firmarla con su wallet. Esa firma es la forma de autorizar la operación.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entonces... si firmo algo sin mirar, estoy autorizando exactamente lo que pone ahí.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exactamente. Cada vez que aparezca una petición, conocerás sus detalles acerca de lo que hará.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Y todas las peticiones son iguales?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "No. Dependiendo de la operación, tendrás que fijarte en unos datos u otros.", "evento": "" },
 
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aquí viene lo importante: no puedes decidir simplemente mirando la petición por encima.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Por qué? ¿Acaso se equivoca quien la manda?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Desgraciadamente, así es. Una petición puede parecer completamente normal y esconder un detalle que la convierte en peligrosa.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces tendré que comparar la información.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Eso es. Lo primero que debes hacer es LEER BIEN la petición: asegúrate de que lo que pide coincide con la transacción.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿En plan cómo?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Muy fácil: comprueba bien la cantidad que pide y las direcciones de los tokens y contratos utilizados.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Espera, ¿¿¿qué???", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Es muy sencillo, no te va a costar entenderlo. Cada petición es distinta, pero hay dos apartados clave en los que debes fijarte.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Por qué? ¿Acaso se equivoca quien la manda?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Desgraciadamente, así es. Una petición puede parecer completamente normal y esconder un detalle que la convierte en peligrosa.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entonces tendré que comparar la información.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Eso es. Lo primero que debes hacer es LEER BIEN la petición: asegúrate de que lo que pide coincide con la transacción.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿En plan cómo?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Muy fácil: comprueba bien la cantidad que pide y las direcciones de los tokens y contratos utilizados.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "Espera, ¿¿¿qué???", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Es muy sencillo, no te va a costar entenderlo. Cada petición es distinta, pero hay dos apartados clave en los que debes fijarte.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "El primero es la cantidad, es decir, cuántos tokens se están aprobando, enviando o intercambiando.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Y el segundo son los contratos y direcciones. Dicho rápido y fácil: asegúrate de que las direcciones de la petición coinciden con las del contrato.", "evento": "" }
       ]
@@ -45,7 +45,7 @@
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a hacer una prueba. Fíjate bien en esta petición.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Vamos a hacer una prueba. Fíjate bien en esta petición.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aprueba el contrato solo si coincide con lo que pide la petición.", "evento": "" }
       ],
       "transaction": {
@@ -64,16 +64,16 @@
         "explanation": "La dirección de destino del contrato no es la de Marta."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Perfecto! Luis se equivocó con la dirección: la que pone en el contrato no es la de Marta.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Perfecto! Luis se equivocó con la dirección: la que pone en el contrato no es la de Marta.", "evento": "" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Casi! Fíjate bien: Luis se ha equivocado con la dirección. La que pone en el contrato no es la de Marta.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "¡Casi! Fíjate bien: Luis se ha equivocado con la dirección. La que pone en el contrato no es la de Marta.", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a ver qué tal esta otra.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Vamos a ver qué tal esta otra.", "evento": "" }
       ],
       "transaction": {
         "id": "T01",
@@ -91,31 +91,31 @@
         "explanation": "La cantidad y la dirección coinciden con la petición."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Muy bien! La cantidad y la dirección coincidían, así que tocaba aprobar.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Muy bien! La cantidad y la dirección coincidían, así que tocaba aprobar.", "evento": "" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Esta era legítima: la cantidad y la dirección coincidían. Rechazar transacciones buenas también cuesta puntos.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Esta era legítima: la cantidad y la dirección coincidían. Rechazar transacciones buenas también cuesta puntos.", "evento": "" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entendido. ¿Y eso es todo?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Me temo que no. Los peligros más importantes son los que el usuario no conoce.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entendido. ¿Y eso es todo?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Me temo que no. Los peligros más importantes son los que el usuario no conoce.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Pero en este juego estás de suerte: vas a conocerlos todos.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Fíjate bien en esta columna que tienes a la derecha. Aquí encontrarás cuatro fuentes de información.", "evento": "" },
 
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Primero tenemos esta lista. Aquí aparecen las direcciones que debes evitar.", "evento": "abrirPanel:addresses" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Direcciones de contratos?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exacto. Si cualquier contrato aparece en esta lista negra, no deberías aprobar una operación en la que aparezca.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces tengo que comprobar si la dirección sospechosa está aquí.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Efectivamente. Pero recuerda: no solo tienes que fijarte en eso, debes seguir pendiente de todo lo que te he contado antes.", "evento": "cerrarPaneles" }
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Direcciones de contratos?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exacto. Si cualquier contrato aparece en esta lista negra, no deberías aprobar una operación en la que aparezca.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entonces tengo que comprobar si la dirección sospechosa está aquí.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Efectivamente. Pero recuerda: no solo tienes que fijarte en eso, debes seguir pendiente de todo lo que te he contado antes.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a ver qué tal te va con esta petición.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Vamos a ver qué tal te va con esta petición.", "evento": "" }
       ],
       "transaction": {
         "id": "T02",
@@ -133,30 +133,30 @@
         "explanation": "El destino es el drainer 'FakeAirdrop' de la lista negra."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Exacto! Todo coincidía con la petición, pero el destino estaba en la lista negra. Nunca hay que pagar para recibir un regalo.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Exacto! Todo coincidía con la petición, pero el destino estaba en la lista negra. Nunca hay que pagar para recibir un regalo.", "evento": "" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Esa dirección estaba en la lista negra. Que el usuario la pida no la hace segura.", "evento": "abrirPanel:addresses" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Esa dirección estaba en la lista negra. Que el usuario la pida no la hace segura.", "evento": "abrirPanel:addresses" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Compruébalo tú mismo: 0xDeAd0bEEf133 es el drainer 'FakeAirdrop'.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Aquí tenemos otra lista. Esta vez contiene tokens que no son seguros.", "evento": "abrirPanel:tokens" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Por qué no iba a ser seguro un token?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Buena pregunta! Se trata de tokens que no funcionan de forma normal: por ejemplo, no se pueden vender, o no existe un pool de liquidez donde poder venderlos.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Pero no me basta con mirar el nombre?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "No exactamente. El nombre de un token no es suficiente: cualquiera puede elegir el nombre que quiera para su token.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Aquí tenemos otra lista. Esta vez contiene tokens que no son seguros.", "evento": "abrirPanel:tokens" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Por qué no iba a ser seguro un token?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Buena pregunta! Se trata de tokens que no funcionan de forma normal: por ejemplo, no se pueden vender, o no existe un pool de liquidez donde poder venderlos.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Pero no me basta con mirar el nombre?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "No exactamente. El nombre de un token no es suficiente: cualquiera puede elegir el nombre que quiera para su token.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Lo que no puede cambiar, y lo que realmente importa, es la dirección del token.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Así que dos tokens podrían tener nombres parecidos pero direcciones diferentes.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente.", "evento": "" }
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Así que dos tokens podrían tener nombres parecidos pero direcciones diferentes.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exactamente.", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Vamos a ver qué tal lo haces esta vez.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Vamos a ver qué tal lo haces esta vez.", "evento": "" }
       ],
       "transaction": {
         "id": "T03",
@@ -177,33 +177,33 @@
         "explanation": "Se llama USDC, pero su dirección (0xA0b869c621B7) es la del USDC falso de la lista de tokens."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Bien visto! Se llamaba USDC, pero su dirección era la del USDC falso. El nombre no basta, lo que manda es la dirección.", "evento": "cerrarPaneles" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Bien visto! Se llamaba USDC, pero su dirección era la del USDC falso. El nombre no basta, lo que manda es la dirección.", "evento": "cerrarPaneles" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Te ha engañado el nombre. Mira la lista: la dirección 0xA0b869c621B7 es un USDC falso.", "evento": "abrirPanel:tokens" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Te ha engañado el nombre. Mira la lista: la dirección 0xA0b869c621B7 es un USDC falso.", "evento": "abrirPanel:tokens" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Cualquiera puede llamar USDC a su token. Lo que no puede falsificar es la dirección.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Otro punto muy importante: aquí encontrarás la fee máxima permitida para cada transacción.", "evento": "abrirPanel:fees" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Eso me suena. Era lo que se pagaba a los validadores por escribir en la blockchain, ¿no?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Muy bien! Veo que te has enterado.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Otro punto muy importante: aquí encontrarás la fee máxima permitida para cada transacción.", "evento": "abrirPanel:fees" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Eso me suena. Era lo que se pagaba a los validadores por escribir en la blockchain, ¿no?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "¡Muy bien! Veo que te has enterado.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Como te dije en Pool Trader, al intercambiar un token tenemos que pagar a los validadores por escribir en la blockchain.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Y esta fee va cambiando, ¿no?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exacto. Por eso hay usuarios que cuentan con un presupuesto límite a la hora de hacer transacciones. Si la fee está demasiado cara, prefieren hacerla en otro momento.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¡Anda, qué curioso! ¿Y por mi parte qué hago?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por tu parte, no debes permitir transacciones que superen la fee máxima establecida para cada tipo de transacción.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "Y esta fee va cambiando, ¿no?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exacto. Por eso hay usuarios que cuentan con un presupuesto límite a la hora de hacer transacciones. Si la fee está demasiado cara, prefieren hacerla en otro momento.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "risaChica1", "text": "¡Anda, qué curioso! ¿Y por mi parte qué hago?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Por tu parte, no debes permitir transacciones que superen la fee máxima establecida para cada tipo de transacción.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por ejemplo, cuando recibas un swap, compara la fee de la petición con el máximo permitido para un swap. Se mide en GWEI.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "En este panel tienes las fees máximas asumibles por nuestros usuarios para cada tipo de operación.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entiendo.", "evento": "" }
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entiendo.", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Venga, vamos a hacer otra de prueba.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Venga, vamos a hacer otra de prueba.", "evento": "" }
       ],
       "transaction": {
         "id": "T04",
@@ -221,35 +221,35 @@
         "explanation": "60 gwei es más del doble del máximo para un envío (25 gwei)."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Bien visto! La fee era de 60 gwei y el máximo para un envío es 25.", "evento": "cerrarPaneles" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Bien visto! La fee era de 60 gwei y el máximo para un envío es 25.", "evento": "cerrarPaneles" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "La petición coincidía, pero la fee era de 60 gwei y el máximo para un envío es 25.", "evento": "abrirPanel:fees" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "La petición coincidía, pero la fee era de 60 gwei y el máximo para un envío es 25.", "evento": "abrirPanel:fees" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Esa diferencia la paga el usuario, y no estaba dispuesto a pagar tanto.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Otro punto muy importante: aquí encontrarás el slippage máximo permitido para cada token.", "evento": "abrirPanel:slippage" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y eso qué es? Slip... stick es pintalabios, ¿no?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Jajaja! Espero que sea broma.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Otro punto muy importante: aquí encontrarás el slippage máximo permitido para cada token.", "evento": "abrirPanel:slippage" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Y eso qué es? Slip... stick es pintalabios, ¿no?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "¡Jajaja! Espero que sea broma.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¿Te acuerdas de qué pasaba en Pool Trader al intercambiar un token cuando la pool de liquidez estaba algo vacía?", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Es cierto, el precio cambiaba muy fácilmente...", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Exactamente! Cuando hay muy pocos tokens en la pool de liquidez respecto a los que queremos intercambiar...", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Es cierto, el precio cambiaba muy fácilmente...", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Exactamente! Cuando hay muy pocos tokens en la pool de liquidez respecto a los que queremos intercambiar...", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "...recibimos, en proporción, menos tokens por ese intercambio, porque al influir en el precio, este juega en nuestra contra.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entiendo. ¿Y cómo solucionan esto los usuarios?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Me alegra que preguntes, es el quid de la cuestión. Para resolverlo, muchos ponen un límite de variabilidad en el precio a la hora de intercambiar tokens: el 'slippage'.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¡Anda, qué curioso! ¿Y por mi parte qué hago?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por tu parte, no debes permitir transacciones que superen el máximo establecido.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "Entiendo. ¿Y cómo solucionan esto los usuarios?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Me alegra que preguntes, es el quid de la cuestión. Para resolverlo, muchos ponen un límite de variabilidad en el precio a la hora de intercambiar tokens: el 'slippage'.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "risaChica1", "text": "¡Anda, qué curioso! ¿Y por mi parte qué hago?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Por tu parte, no debes permitir transacciones que superen el máximo establecido.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Por ejemplo, cuando recibas un swap, compara el slippage de la petición con el máximo permitido para el token que se recibe.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Y si se pasa, la rechazo, ¿no?", "evento": "" }
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "Y si se pasa, la rechazo, ¿no?", "evento": "" }
       ]
     },
     {
       "kind": "transaction",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Exacto! A ver qué tal lo haces.", "evento": "" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Exacto! A ver qué tal lo haces.", "evento": "" }
       ],
       "transaction": {
         "id": "T05",
@@ -270,39 +270,39 @@
         "explanation": "Slippage del 8% cuando el máximo para PEPE es 3%."
       },
       "dialoguesIfCorrect": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "¡Muy bien! El slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "cerrarPaneles" }
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "¡Muy bien! El slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "cerrarPaneles" }
       ],
       "dialoguesIfWrong": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Todo lo demás estaba bien, pero el slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "abrirPanel:slippage" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Todo lo demás estaba bien, pero el slippage era del 8% y para PEPE aceptamos como mucho un 3%.", "evento": "abrirPanel:slippage" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Con un slippage tan alto, el usuario podría recibir muchos menos tokens de los que espera.", "evento": "cerrarPaneles" }
       ]
     },
     {
       "kind": "dialogue",
       "dialogues": [
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Hay una última cosa que todavía no has visto.", "evento": "cerrarPaneles" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Déjame adivinar... también tengo que hacerlo rápido.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Exactamente. Cada petición tiene un tiempo limitado para tomar una decisión.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces no puedo quedarme diez minutos mirando cada dirección.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "No. Tendrás que aprender a revisar la información importante con rapidez.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Hay una última cosa que todavía no has visto.", "evento": "cerrarPaneles" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "risaChica1", "text": "Déjame adivinar... también tengo que hacerlo rápido.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Exactamente. Cada petición tiene un tiempo limitado para tomar una decisión.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Entonces no puedo quedarme diez minutos mirando cada dirección.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "No. Tendrás que aprender a revisar la información importante con rapidez.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Además, a medida que avances, el tiempo de cada tipo de petición se reducirá poco a poco.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Perfecto... justo lo que necesitaba.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Tranquilo. Con práctica acabarás reconociendo rápidamente qué datos necesitas comprobar.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "Perfecto... justo lo que necesitaba.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Tranquilo. Con práctica acabarás reconociendo rápidamente qué datos necesitas comprobar.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Además, las transacciones más difíciles tienen un extra de tiempo.", "evento": "" },
 
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Y, por supuesto, tus decisiones tienen consecuencias. Cuando aciertes una decisión, conseguirás puntos.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "¿Y cuando falle?", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Si apruebas una transacción que no debías, perderás una vida. Eso sí, si consigues suficientes puntos, podrás recuperar vidas.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Entonces puedo asumir algunos riesgos si estoy jugando bien.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Puedes equivocarte, pero recuerda que cada vida cuenta. Cada vida sobrante suma puntos extra al final de la partida.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "dudaChica2", "text": "¿Y cuando falle?", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Si apruebas una transacción que no debías, perderás una vida. Eso sí, si consigues suficientes puntos, podrás recuperar vidas.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "risaChica1", "text": "Entonces puedo asumir algunos riesgos si estoy jugando bien.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "extranezaProfe3", "text": "Puedes equivocarte, pero recuerda que cada vida cuenta. Cada vida sobrante suma puntos extra al final de la partida.", "evento": "" },
 
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Grábate en la cabeza una última idea: no intentes decidir mirando un solo aspecto.", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Comprueba que todos los datos tengan sentido juntos. Una petición puede parecer aceptable...", "evento": "" },
         { "characterId": "profe", "characterName": "Profesor Merkle", "text": "...hasta que compruebas una dirección. O una fee. O el token. O el slippage.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Así que la trampa puede estar escondida en cualquier parte.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Y tú tienes que encontrarla antes de firmar.", "evento": "" },
-        { "characterId": "jugador", "characterName": "Tú", "text": "Vale. Creo que ya entiendo mi trabajo.", "evento": "" },
-        { "characterId": "profe", "characterName": "Profesor Merkle", "text": "Entonces ya estás preparado. ¡Comencemos!", "evento": "" }
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Así que la trampa puede estar escondida en cualquier parte.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "sorpresaProfe2", "text": "Y tú tienes que encontrarla antes de firmar.", "evento": "" },
+        { "characterId": "jugador", "characterName": "Tú", "murmullo": "entendimientoChica3", "text": "Vale. Creo que ya entiendo mi trabajo.", "evento": "" },
+        { "characterId": "profe", "characterName": "Profesor Merkle", "murmullo": "risaProfe1", "text": "Entonces ya estás preparado. ¡Comencemos!", "evento": "" }
       ]
     }
   ]

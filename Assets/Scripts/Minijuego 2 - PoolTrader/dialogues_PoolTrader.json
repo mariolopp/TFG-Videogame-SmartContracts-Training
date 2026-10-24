@@ -3,6 +3,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "¡Bienvenido a Pool Trader!",
       "evento": ""
     },
@@ -15,6 +16,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Un mercado?",
       "evento": ""
     },
@@ -27,6 +29,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "No. Vamos a empezar desde cero.",
       "evento": ""
     },
@@ -63,12 +66,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale… ¿pero qué es exactamente un token?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Un token es, básicamente, un activo digital que puede ser transferido entre usuarios.",
       "evento": ""
     },
@@ -99,12 +104,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale... lo pillo, pero ¿cómo se supone que utilizo esos tokens?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Muy sencillo. Tú simplemente los vas a intercambiar.",
       "evento": "LiveUserAmnt"
     },
@@ -117,12 +124,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Fee? ¿Me suena del minijuego que hemos jugado antes?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Exacto!",
       "evento": ""
     },
@@ -141,12 +150,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Pero yo no tengo dinero, ¿cómo voy a pagar eso?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Tranquilo, me he encargado de traer un par de bolsas para tí",
       "evento": "ETH_bag_icon"
     },
@@ -189,12 +200,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Okey, cuentame mas sobre quienes son los que intercambian esos tokens",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "En este lugar, hay personas que quieren unos tokens y otras que quieren tokens diferentes.",
       "evento": ""
     },
@@ -213,12 +226,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Y por qué alguien querría intercambiar un token?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Puede querer utilizarlo, guardarlo o intercambiarlo después.",
       "evento": ""
     },
@@ -249,6 +264,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "¿Entonces esto existe porque no todos queremos las mismas monedas?",
       "evento": ""
     },
@@ -261,6 +277,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Exacto!",
       "evento": ""
     },
@@ -285,12 +302,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale, sé qué estoy intercambiando. Pero… ¿con quién?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Aquí está la parte interesante.",
       "evento": ""
     },
@@ -327,12 +346,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Y quién mete esos activos en el depósito?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Los liquidity providers, o proveedores de liquidez.",
       "evento": ""
     },
@@ -345,6 +366,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entonces los liquidity providers ponen los activos…",
       "evento": ""
     },
@@ -357,6 +379,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Exactamente. Puedes imaginarlo como una tienda de intercambio de libros.",
       "evento": ""
     },
@@ -393,12 +416,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Y los liquidity providers hacen todo esto gratis?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "extranezaProfe3",
       "text": "En absoluto",
       "evento": ""
     },
@@ -429,48 +454,56 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entiendo, entonces, los depósitos...",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "extranezaProfe3",
       "text": "Esos depósitos se llaman pool de liquidez, recuerda",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Está bien, entonces, la pool de liquidez proporciona los ¿libros?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "extranezaProfe3",
       "text": "Tokens. Lo que se intercambia son tokens, sigue...",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale, la pool de liquidez proporciona los tokens, y los ¿usuarios? los intercambian.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "¡Muy bien! A los usuarios que hacen esto los llamamos traders, ¿recuerdas?",
       "evento": ""
     },
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Comprendo, entonces la liquidity pool proporciona los tokens para que los traders los puedan intercambiar",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "¡Efectivamente! Lo más importante es que una liquidity pool es una reserva de tokens mantenida por usuarios llamados liquidity providers.",
       "evento": ""
     },
@@ -484,12 +517,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "risaChica1",
       "text": "Me flipa esto que cuentas, y ¿cómo funcionan esos intercambios de los que hablas?",
       "evento": "."
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "JAJAJ, me encantan tus preguntas.",
       "evento": ""
     },
@@ -538,12 +573,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entonces es como cambiar una moneda por otra.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Sí, pero hay una diferencia importante.",
       "evento": ""
     },
@@ -574,12 +611,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Y eso afecta al precio?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Exactamente.",
       "evento": ""
     },
@@ -640,12 +679,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Esto es un poco complejo, ¿porque cambia tanto el precio?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Piensa en la pool como un recipiente.",
       "evento": ""
     },
@@ -670,12 +711,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entonces no puedo asumir que BTC (<sprite=\"BTC\" index=0>) siempre cuesta lo mismo.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Correcto. Aunque a veces haya poca diferencia, el precio rara vez es exacto al anterior",
       "evento": ""
     },
@@ -700,12 +743,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "O sea que mis propias operaciones pueden cambiar el mercado.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Sí. Y eso será muy importante.",
       "evento": ""
     },
@@ -748,12 +793,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "risaChica1",
       "text": "Entonces puedo controlar el precio si hago suficientes intercambios.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "extranezaProfe3",
       "text": "No tan rápido.",
       "evento": ""
     },
@@ -766,12 +813,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Hay más personas?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Muchos. Se llaman traders, ¿recuerdas?",
       "evento": ""
     },
@@ -802,12 +851,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entonces el precio puede cambiar aunque yo no haga nada.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Exactamente.",
       "evento": ""
     },
@@ -826,12 +877,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "entendimientoChica3",
       "text": "Entonces tengo que fijarme en lo que hacen los demás.",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Correcto, pero sobre todo en cómo cambian las proporciones de la pool.",
       "evento": ""
     },
@@ -868,6 +921,7 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "Vale, ya entiendo la pool y los intercambios.",
       "evento": ""
     },
@@ -880,6 +934,7 @@
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "sorpresaProfe2",
       "text": "Aquí es donde entra nuestro sistema de turnos.",
       "evento": ""
     },
@@ -916,12 +971,14 @@
     {
       "characterId": "jugador",
       "characterName": "Tú",
+      "murmullo": "dudaChica2",
       "text": "¿Y después vuelve a empezar?",
       "evento": ""
     },
     {
       "characterId": "profe",
       "characterName": "Mentor",
+      "murmullo": "risaProfe1",
       "text": "Exactamente.",
       "evento": ""
     },

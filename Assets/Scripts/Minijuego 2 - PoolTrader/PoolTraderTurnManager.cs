@@ -317,6 +317,7 @@ public class PoolTraderTurnManager : MonoBehaviour
         if (endGameCloseButton != null)
         {
             endGameCloseButton.onClick.AddListener(PlayButtonSound);
+            endGameCloseButton.onClick.AddListener(() => AudioManager.Instance?.PlaySFX("level_out&in"));
             endGameCloseButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
         yield return null;
@@ -332,7 +333,7 @@ public class PoolTraderTurnManager : MonoBehaviour
             turnLabelText.text = label;
             Punch(ref labelPunchCo, turnLabelText, phaseColor);
         }
-        //AudioManager.Instance?.PlaySFX("turn_change");
+        AudioManager.Instance?.PlaySFX("turn_change");
     }
 
     public void EndConversionTurn()
@@ -377,6 +378,7 @@ public class PoolTraderTurnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(wait);
 
+        AudioSource countLoop = PlayCountLoop(startValue, targetValue);
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -392,6 +394,14 @@ public class PoolTraderTurnManager : MonoBehaviour
         }
 
         text.text = $"x{Mathf.RoundToInt(targetValue)}";
+        if (AudioManager.Instance != null) AudioManager.Instance.StopLoopSFX(countLoop);
+    }
+
+    // Si no hay nada que contar (se queda en el mismo número) no suena
+    private AudioSource PlayCountLoop(float startValue, float targetValue)
+    {
+        if (AudioManager.Instance == null || Mathf.RoundToInt(startValue) == Mathf.RoundToInt(targetValue)) return null;
+        return AudioManager.Instance.PlayLoopSFX("scoreCounterBucle", this);
     }
 
     private static void PlayButtonSound()

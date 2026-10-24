@@ -33,6 +33,174 @@ MonoBehaviour:
     pitchVariance: 0.05
   - id: coin_sound
     clip: {fileID: 8300000, guid: dd1287eb1a493ab5ea7609b54493605d, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ui_confirm
+    clip: {fileID: 8300000, guid: e4643cb79c044098bd9e1699aa28c430, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ui_error
+    clip: {fileID: 8300000, guid: 29734ebdb1e948308ef555f56474e1dd, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: bm_mine_start
+    clip: {fileID: 8300000, guid: 0637f96c943d48e096e3a2ee4a69630f, type: 3}
+    volume: 0.75
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: bm_block_valid
+    clip: {fileID: 8300000, guid: d91c3952bc43455bbea25a7dee4533f0, type: 3}
+    volume: 0.9
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: bm_block_rejected
+    clip: {fileID: 8300000, guid: b9ceff45ae9a4c38b5c16072f2d69c7a, type: 3}
+    volume: 0.85
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: pt_swap
+    clip: {fileID: 8300000, guid: 690c12279096456ebd990d21385f9fde, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 1
+    pitchVariance: 0.03
+  - id: pt_liquidity_add
+    clip: {fileID: 8300000, guid: 83621ab13a264d83928cb2dc988674e0, type: 3}
+    volume: 0.75
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: pt_liquidity_remove
+    clip: {fileID: 8300000, guid: 9840755ee44f4866bdb6a9350c840324, type: 3}
+    volume: 0.75
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: pt_slippage_alert
+    clip: {fileID: 8300000, guid: fc01b41388e243db819886a90f1f66dc, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: turn_change
+    clip: {fileID: 8300000, guid: 7d3da2e1507e4bad8429ec1015e778a6, type: 3}
+    volume: 0.55
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ca_contract_open
+    clip: {fileID: 8300000, guid: edbb2fd0e27f47e88a8a7b847a2e9a2e, type: 3}
+    volume: 0.6
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ca_stamp_approved
+    clip: {fileID: 8300000, guid: c8d2594a083742a2a8252e20020dbfa3, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ca_stamp_rejected
+    clip: {fileID: 8300000, guid: 605bce9201a84976baf90f077af07e49, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ca_blacklist_new
+    clip: {fileID: 8300000, guid: 97916ed479544f168f13ff8437324524, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: statue_build
+    clip: {fileID: 8300000, guid: 52893de56b0547ea93ac670a9e2104da, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: escritura
+    clip: {fileID: 8300000, guid: 59e40a3ebd1a6e6f8a304d9d31bd6387, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: risaChica1
+    clip: {fileID: 8300000, guid: 6a80c9d04c8cb45dfb753df2285c5a19, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: dudaChica2
+    clip: {fileID: 8300000, guid: 9cee686467f95e88eba5f032fc6cc975, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: entendimientoChica3
+    clip: {fileID: 8300000, guid: 35a9d1629cfa7a28989c22bdc56c93a6, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: risaProfe1
+    clip: {fileID: 8300000, guid: 9a8b2c6e2c8bff3599723a2c421b5b2f, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: sorpresaProfe2
+    clip: {fileID: 8300000, guid: b2851410969c6dfa5aaa494720907fb2, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: extranezaProfe3
+    clip: {fileID: 8300000, guid: a460c30a36c2a5f1086cff2d561f0567, type: 3}
+    volume: 0.8
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: ruleta_buttons
+    clip: {fileID: 8300000, guid: 3af1365d8eecf81f7bdd23b2550b1f50, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: scoreCounterBucle
+    clip: {fileID: 8300000, guid: f4922a8cd3645d74596f5bafe428e427, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: level_out&in
+    clip: {fileID: 8300000, guid: 10bbbfa14e327dd948a4530714d87821, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: pop
+    clip: {fileID: 8300000, guid: 3b7ae16372ca9e8fcb8b804d180a2252, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: new_minigame
+    clip: {fileID: 8300000, guid: 68cfdb02e47b26e309f82513b44b4ff2, type: 3}
+    volume: 1
+    pitch: 1
+    randomizePitch: 0
+    pitchVariance: 0.05
+  - id: fail
+    clip: {fileID: 8300000, guid: 33324cf9a806facffad046dca19c894a, type: 3}
     volume: 1
     pitch: 1
     randomizePitch: 0

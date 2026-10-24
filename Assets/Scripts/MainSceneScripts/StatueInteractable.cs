@@ -51,11 +51,12 @@ public class StatueInteractable : MonoBehaviour, ICameraFocusTarget
     [Tooltip("Id del efecto al comprar (vacío = sin sonido).")]
     [SerializeField] private string buySfxId = "validarButtonSound";
     [Tooltip("Id del efecto si no llegan las bolsas (vacío = sin sonido).")]
-    [SerializeField] private string deniedSfxId = "";
+    [SerializeField] private string deniedSfxId = "ui_error";
     [SerializeField] private float shakeDuration = 0.35f;
     [SerializeField] private float shakeAmplitude = 0.12f;
 
     private StandInteractor interactor;
+    private playerMovement movement;
     private TMP_Text promptText;
     private Transform[] shakeTargets;   // hijos del globo (fondo y texto)
     private Vector3[] shakeRest;
@@ -94,6 +95,7 @@ public class StatueInteractable : MonoBehaviour, ICameraFocusTarget
     {
         interactor = FindObjectOfType<StandInteractor>();
         if (interactor == null) Debug.LogWarning("StatueInteractable: no hay jugador (StandInteractor) en la escena.", this);
+        else movement = interactor.GetComponent<playerMovement>();
     }
 
     private void Update()
@@ -164,7 +166,8 @@ public class StatueInteractable : MonoBehaviour, ICameraFocusTarget
     {
         if (prompt == null || visible == promptVisible) return;
         promptVisible = visible;
-        if (visible) prompt.Show();
+        // Igual que en los stands: el pop solo suena si el jugador se ha acercado andando
+        if (visible) prompt.Show(movement != null && movement.IsMovingByInput);
         else prompt.Hide();
     }
 

@@ -60,7 +60,7 @@ public class StandInteractable : MonoBehaviour, ICameraFocusTarget
     [Tooltip("Orden de dibujado durante el zoom, para quedar por delante del jugador y del entorno.")]
     [SerializeField] private int zoomSortingOrder = 1000;
     [Tooltip("Id del efecto en la SoundLibrary (vacío = sin sonido).")]
-    [SerializeField] private string enterSfxId = "stand_enter";
+    [SerializeField] private string enterSfxId = "level_out&in";
 
     [Header("Bloqueo")]
     [Tooltip("Color que multiplica las imágenes del stand mientras su minijuego está bloqueado.")]
@@ -70,7 +70,7 @@ public class StandInteractable : MonoBehaviour, ICameraFocusTarget
     [Tooltip("Cuánto crece la imagen destacada en el 'pop' del desbloqueo.")]
     [SerializeField] private float unlockPopScale = 0.15f;
     [Tooltip("Id del efecto al desbloquearse (vacío = sin sonido).")]
-    [SerializeField] private string unlockSfxId = "coin_sound";
+    [SerializeField] private string unlockSfxId = "new_minigame";
 
     private Transform featuredTransform;
     private Vector3 restLocalPosition;
@@ -199,10 +199,11 @@ public class StandInteractable : MonoBehaviour, ICameraFocusTarget
 
     public void SetHighlighted(bool value) => isHighlighted = value;
 
-    public void SetPromptVisible(bool visible)
+    /// <param name="playSfx">true si aparece porque el jugador se ha acercado (no al aparecer ya al lado)</param>
+    public void SetPromptVisible(bool visible, bool playSfx = false)
     {
         if (prompt == null) return;
-        if (visible) prompt.Show();
+        if (visible) prompt.Show(playSfx);
         else prompt.Hide();
     }
 

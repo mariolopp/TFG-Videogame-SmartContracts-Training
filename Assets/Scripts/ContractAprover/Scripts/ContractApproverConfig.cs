@@ -88,10 +88,13 @@ public class ContractApproverConfig : ScriptableObject
     public string feedbackCharacterNameEn = "Prof";
 
     [Header("Sonidos (IDs de SoundLibrary)")]
-    public string sfxCorrect = "";
-    public string sfxWrong = "";
-    public string sfxStamp = "";
-    public string sfxNewBlacklistEntry = "";
+    public string sfxCorrect = "ui_confirm";
+    public string sfxWrong = "fail";
+    [Tooltip("Golpe del sello al APROBAR (firma). Mismo gesto que el de rechazo, pero cierra con un acorde brillante")]
+    public string sfxStampApproved = "ca_stamp_approved";
+    [Tooltip("Golpe del sello al RECHAZAR. Más grave y apagado que el de aprobar")]
+    public string sfxStampRejected = "ca_stamp_rejected";
+    public string sfxNewBlacklistEntry = "ca_blacklist_new";
 
     [Header("Debug")]
     [Tooltip("Comprobador de cada transacción con el validador automático para avisar en la Console si el JSON parece incoherente")]

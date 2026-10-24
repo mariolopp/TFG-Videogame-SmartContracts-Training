@@ -129,6 +129,7 @@ public class blockMinerUI : MonoBehaviour
         if (endScreenButton != null)
         {
             endScreenButton.onClick.AddListener(PlayButtonSound);
+            endScreenButton.onClick.AddListener(() => AudioManager.Instance?.PlaySFX("level_out&in"));
             endScreenButton.onClick.AddListener(() => SceneManager.LoadScene("MainScene"));
         }
 
@@ -141,6 +142,7 @@ public class blockMinerUI : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(wait);
 
+        AudioSource countLoop = PlayCountLoop(startValue, targetValue);
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -156,6 +158,14 @@ public class blockMinerUI : MonoBehaviour
         }
 
         text.text = $"{prefix}{Mathf.RoundToInt(targetValue)}{suffix}";
+        if (AudioManager.Instance != null) AudioManager.Instance.StopLoopSFX(countLoop);
+    }
+
+    // Si no hay nada que contar (se queda en el mismo número) no suena
+    private AudioSource PlayCountLoop(float startValue, float targetValue)
+    {
+        if (AudioManager.Instance == null || Mathf.RoundToInt(startValue) == Mathf.RoundToInt(targetValue)) return null;
+        return AudioManager.Instance.PlayLoopSFX("scoreCounterBucle", this);
     }
 
     private static void PlayButtonSound()

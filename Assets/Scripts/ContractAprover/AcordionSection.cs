@@ -32,6 +32,7 @@ public class AccordionSection : MonoBehaviour
 
     private void AlPulsarHeader()
     {
+        ContractApproverManager.PlaySfx("pop");
         if (EstaAbierto) Plegar();
         else
         {

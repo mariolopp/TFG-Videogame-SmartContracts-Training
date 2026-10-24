@@ -95,7 +95,8 @@ public class StandInteractor : MonoBehaviour
         {
             if (currentStand != null) currentStand.SetPromptVisible(false);
             currentStand = closest;
-            if (currentStand != null) currentStand.SetPromptVisible(true);
+            // Al volver de un minijuego el jugador aparece ya junto al stand: ahí el globo sale sin sonido
+            if (currentStand != null) currentStand.SetPromptVisible(true, playSfx: movement.IsMovingByInput);
         }
     }
 

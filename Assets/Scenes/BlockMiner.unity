@@ -718,7 +718,7 @@ MonoBehaviour:
   escalaRebote: 1.5
   duracionRebote: 0.4
   escalaReboteBarras: 1.12
-  sfxId: coin_sound
+  sfxId: bm_block_valid
   mensajePerdido: "\xA1BLOQUE PERDIDO!"
   mensajePerdidoEn: BLOCK LOST!
   colorRojo: {r: 1, g: 0.25, b: 0.25, a: 1}
@@ -727,7 +727,7 @@ MonoBehaviour:
   parpadeosPerdido: 3
   subidaPerdido: 180
   duracionTextoPerdido: 2.2
-  sfxIdPerdido: 
+  sfxIdPerdido: bm_block_rejected
 --- !u!4 &143290417
 Transform:
   m_ObjectHideFlags: 0
@@ -8435,7 +8435,7 @@ MonoBehaviour:
   escalaRebote: 1.5
   duracionRebote: 0.4
   escalaReboteBarras: 1.12
-  sfxId: coin_sound
+  sfxId: bm_block_valid
   mensajePerdido: "\xA1BLOQUE PERDIDO!"
   mensajePerdidoEn: BLOCK LOST!
   colorRojo: {r: 1, g: 0.25, b: 0.25, a: 1}
@@ -8444,7 +8444,7 @@ MonoBehaviour:
   parpadeosPerdido: 3
   subidaPerdido: 180
   duracionTextoPerdido: 2.2
-  sfxIdPerdido: 
+  sfxIdPerdido: bm_block_rejected
 --- !u!222 &7709829280808564051
 CanvasRenderer:
   m_ObjectHideFlags: 0

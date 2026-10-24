@@ -247,6 +247,9 @@ public class CinematicStarter : MonoBehaviour
             }
         }
 
+        // Empieza el minado: el AudioManager no se destruye con este objeto, así que el sonido sigue
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("bm_mine_start");
+
         Destroy(gameObject);
     }
 

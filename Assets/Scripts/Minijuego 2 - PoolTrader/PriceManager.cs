@@ -21,6 +21,8 @@ public class PriceManager : MonoBehaviour
     [SerializeField] private TMP_Text slippageText;
     [SerializeField] private Color slippageNegativeColor = Color.red;
     [SerializeField] private Color slippagePositiveColor = Color.green;
+    [Tooltip("A partir de este slippage (en valor absoluto, %) suena la alerta al operar. Con el pool lleno ronda el 7%.")]
+    [SerializeField] private float slippageAlertPercent = 10f;
 
     [Header("Botones (ya asignados en la escena)")]
     [SerializeField] private Button buyButton;
@@ -153,14 +155,17 @@ public class PriceManager : MonoBehaviour
         if (tradeAmount > userB)
         {
             Debug.LogWarning("PriceManager: B insuficiente para comprar.");
+            PlayErrorSound();
             return;
         }
         if (assets != null && assets.usd < currentChainFee) // NUEVO: chequeo de bolsas suficientes
         {
             Debug.LogWarning("PriceManager: bolsas insuficientes para pagar la fee.");
+            PlayErrorSound();
             return;
         }
 
+        PlaySlippageAlertIfHigh(sellingA: false);
         float amountOut = ExecuteTrade(sellingA: false, tradeAmount, touchUserBalances: true);
         if (assets != null) assets.SpendUSD(currentChainFee); // NUEVO
         swapAnimator.PlayEthToBtc(1f, amountOut);
@@ -175,14 +180,17 @@ public class PriceManager : MonoBehaviour
         if (tradeAmount > userA)
         {
             Debug.LogWarning("PriceManager: A insuficiente para vender.");
+            PlayErrorSound();
             return;
         }
         if (assets != null && assets.usd < currentChainFee) // NUEVO
         {
             Debug.LogWarning("PriceManager: bolsas insuficientes para pagar la fee.");
+            PlayErrorSound();
             return;
         }
 
+        PlaySlippageAlertIfHigh(sellingA: true);
         float amountOut = ExecuteTrade(sellingA: true, tradeAmount, touchUserBalances: true);
         if (assets != null) assets.SpendUSD(currentChainFee); // NUEVO
         swapAnimator.PlayBtcToEth(1f, amountOut);
@@ -270,5 +278,17 @@ public class PriceManager : MonoBehaviour
     private static void PlayButtonSound()
     {
         if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("select_button");
+    }
+
+    private static void PlayErrorSound()
+    {
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("ui_error");
+    }
+
+    // Se calcula antes de ejecutar el trade, con las reservas que ve el jugador al pulsar
+    private void PlaySlippageAlertIfHigh(bool sellingA)
+    {
+        if (Mathf.Abs(CalculateSlippagePercent(tradeAmount, sellingA)) < slippageAlertPercent) return;
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("pt_slippage_alert");
     }
 }

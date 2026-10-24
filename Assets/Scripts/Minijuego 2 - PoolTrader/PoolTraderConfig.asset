@@ -12,31 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cbdce1d6a7787e49dd5a7647eb097e, type: 3}
   m_Name: PoolTraderConfig
   m_EditorClassIdentifier: 
-  totalTurns: 3
+  totalTurns: 10
   playerTradeTurnDuration: 10
   conversionTurnDuration: 10
   bagsPerBTC: 3
   bagsPerETH: 2
   factorBags: 1
-  minTraders: 1
-  maxTraders: 1
-  delayBetweenTraders: 1
-  traderWalkDuration: 1
-  traderTradeAmountRange: {x: 1, y: 6}
-  trendBiasProbability: 0.66
+  maxBagsPerConversionTurn: 12
+  minTraders: 2
+  maxTraders: 3
+  delayBetweenTraders: 0.75
+  traderWalkDuration: 0.9
+  traderTradeAmountRange: {x: 2.5, y: 8}
+  trendBiasProbability: 0.67
   trendExhaustionMultiplier: 1.5
-  randomShockChance: 0.25
+  randomShockChance: 0.24
   shockAmountMultiplierRange: {x: 1.5, y: 3}
-  chanceLiquidityTurnHappens: 0.33
-  minLiquidityProviders: 1
-  maxLiquidityProviders: 2
+  chanceLiquidityTurnHappens: 0.4
+  minLiquidityProviders: 2
+  maxLiquidityProviders: 3
   minLiquidityChangeFraction: 0.1
   maxLiquidityChangeFraction: 0.3
-  chanceProviderAdds: 0.6
+  chanceProviderAdds: 0.66
   minimumReserveBTC: 7
   minimumReserveETH: 10
   providerWalkDuration: 0.8
-  delayBetweenProviders: 1.5
+  delayBetweenProviders: 1
   colorLiquidityAdd: {r: 0.3, g: 0.85, b: 0.4, a: 1}
   colorLiquidityRemove: {r: 0.9, g: 0.3, b: 0.3, a: 1}
   colorTraderNeutral: {r: 0.75, g: 0.75, b: 0.75, a: 1}

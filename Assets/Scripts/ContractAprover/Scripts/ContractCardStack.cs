@@ -93,20 +93,26 @@ public class ContractCardStack : MonoBehaviour
         yield return Leave(approved, correct);
     }
 
-    /// Solo pone el sello (o el golpe si se acabó el tiempo), sin teñir la carta
-    public IEnumerator Stamp(bool approved, bool timeout)
+    /// Solo pone el sello (o el golpe si se acabó el tiempo), sin teñir la carta.
+    /// impactSfx suena a la vez que el golpe (p. ej. el de fallo)
+    public IEnumerator Stamp(bool approved, bool timeout, string impactSfx = null)
     {
         front.SetInteractable(false);
         front.Reveal();
         front.ShowStamp(approved, timeout);
 
-        if (timeout) yield return Punch(front.Rect, 0.15f, 0.06f);   // sin sello
+        if (timeout)
+        {
+            ContractApproverManager.PlaySfx(impactSfx);
+            yield return Punch(front.Rect, 0.15f, 0.06f);   // sin sello
+        }
         else
         {
             RectTransform card = front.Rect;
             yield return front.PlayStamp(config, () =>
             {
-                ContractApproverManager.PlaySfx(config.sfxStamp);
+                ContractApproverManager.PlaySfx(approved ? config.sfxStampApproved : config.sfxStampRejected);
+                ContractApproverManager.PlaySfx(impactSfx);
                 StartCoroutine(Punch(card, 0.12f, -0.04f));          // la carta se hunde con el golpe
             });
         }
