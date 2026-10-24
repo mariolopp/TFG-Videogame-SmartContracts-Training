@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36cf33894c29096ab896196a768bbdf, type: 3}
   m_Name: ContractApproverConfig
   m_EditorClassIdentifier: Assembly-CSharp::ContractApproverConfig
-  transactionsPerSession: 5
+  transactionsPerSession: 12
   playTutorial: 1
-  easyWeight: 50
-  normalWeight: 30
+  easyWeight: 45
+  normalWeight: 35
   hardWeight: 20
   startTime: 60
   minTime: 15
@@ -30,7 +30,7 @@ MonoBehaviour:
   maxLives: 5
   livesLostOnBadApprove: 1
   livesLostOnGoodReject: 0
-  livesLostOnTimeout: 1
+  livesLostOnTimeout: 0
   pointsCorrect: 10
   pointsLostOnGoodReject: 25
   pointsForExtraLife: 50
@@ -44,6 +44,11 @@ MonoBehaviour:
   cardMoveDuration: 0.3
   swipeDuration: 0.35
   stampHoldTime: 0.6
+  stampDropDuration: 0.18
+  stampSettleDuration: 0.12
+  stampStartScale: 2.5
+  stampStartRotation: 20
+  stampRandomTilt: 6
   correctColor: {r: 0.3, g: 0.85, b: 0.4, a: 1}
   wrongColor: {r: 0.9, g: 0.3, b: 0.3, a: 1}
   feedbackOnCorrect: 0
