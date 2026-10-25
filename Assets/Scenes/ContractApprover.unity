@@ -24718,7 +24718,7 @@ GameObject:
   - component: {fileID: 1649853785824525948}
   m_Layer: 5
   m_Name: Saltar dialogo
-  m_TagString: Untagged
+  m_TagString: SkipDialogButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

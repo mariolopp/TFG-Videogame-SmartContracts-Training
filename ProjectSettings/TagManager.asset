@@ -6,6 +6,7 @@ TagManager:
   tags:
   - esperarAccionSell
   - esperarAccionBuy
+  - SkipDialogButton
   layers:
   - Default
   - TransparentFX

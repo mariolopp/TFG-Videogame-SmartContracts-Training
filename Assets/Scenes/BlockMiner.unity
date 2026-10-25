@@ -6445,6 +6445,12 @@ MonoBehaviour:
   - characterId: jugador
     portraitSprite: {fileID: 21300000, guid: 7b8a91456cbfb094298e873b27535126, type: 3}
   typingSpeed: 0.04
+  typingSfxId: escritura
+  defaultMurmurs:
+  - characterId: profe
+    sfxId: risaProfe1
+  - characterId: jugador
+    sfxId: entendimientoChica3
 --- !u!1 &781850206914820916
 GameObject:
   m_ObjectHideFlags: 0
@@ -8238,7 +8244,7 @@ GameObject:
   - component: {fileID: 1649853785824525948}
   m_Layer: 5
   m_Name: Saltar dialogo
-  m_TagString: Untagged
+  m_TagString: SkipDialogButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

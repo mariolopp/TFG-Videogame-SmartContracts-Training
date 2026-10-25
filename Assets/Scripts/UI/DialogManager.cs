@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /*
@@ -166,23 +168,69 @@ public class DialogManager : MonoBehaviour
         currentFullText = line.text;
         CompleteTextImmediately();
     }
+    private static bool IsPointerOnSkipDialogOrLanguageButton()
+    {
+        if (EventSystem.current == null) return false;
+
+        var pointer = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
+        var hits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointer, hits);
+
+        foreach (var hit in hits)
+        {
+            var go = hit.gameObject;
+            if (go == null) continue;
+
+            // Botón de idioma
+            if (go.GetComponentInParent<LanguageToggleButton>() != null)
+                return true;
+
+            // Botón de saltar diálogo
+            if (go.CompareTag("SkipDialogButton"))
+                return true;
+
+            // Si el clic está sobre el propio diálogo, tampoco lo bloqueamos
+            if (go.GetComponentInParent<DialogManager>() != null)
+                return false;
+        }
+
+        return false;
+    }
 
     // --- LÓGICA DE CONTROL ---
     private void Update()
     {
-        if (gameObject.activeInHierarchy)
+        if (!gameObject.activeInHierarchy)
+            return;
+
+        // Cualquier tecla avanza el diálogo.
+        // Si el ratón está sobre "Saltar diálogo" o "Idioma", no se avanza.
+        if (Input.anyKeyDown)
         {
-            // Detecta click de cualquier tecla o mouse
-            if ((Input.GetMouseButtonDown(0) || Input.anyKeyDown) && !LanguageToggleButton.IsUnderPointer())
-            {
+            if (!IsPointerOnSkipDialogOrLanguageButton())
                 HandleInput();
-            }
+            return;
+        }
+
+        // Clic del ratón: solo bloquea si está encima del botón de saltar diálogo o idioma.
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (IsPointerOnSkipDialogOrLanguageButton())
+                return;
+
+            HandleInput();
         }
     }
 
     private void HandleInput()
     {
-        if (isAnimatingUI) return; // Evitar que se pueda pasar durante animaciones
+        if (isAnimatingUI)
+            return;
+
         if (isTyping)
         {
             CompleteTextImmediately();
@@ -348,25 +396,27 @@ public class DialogManager : MonoBehaviour
     // --- NUEVO: Permite saltar el diálogo completo desde fuera ---
     public void StopDialog()
     {
-        // Cortamos cualquier corrutina en marcha (typing, fade in/out)
         StopAllCoroutines();
         typingCoroutine = null;
         StopTypingSfx();
         isTyping = false;
         isAnimatingUI = false;
 
-        // Ocultamos la ventana de golpe, sin animación
-        uiCanvasGroup.alpha = 0f;
-        uiCanvasGroup.interactable = false;
-        uiCanvasGroup.blocksRaycasts = false;
+        if (uiCanvasGroup != null)
+        {
+            uiCanvasGroup.alpha = 0f;
+            uiCanvasGroup.interactable = false;
+            uiCanvasGroup.blocksRaycasts = false;
+        }
 
-        overlayBackground.SetActive(false);
+        if (overlayBackground != null)
+            overlayBackground.SetActive(false);
+
         gameObject.SetActive(false);
 
         pendingDialogues = null;
         currentStepIndex = 0;
 
-        // Disparamos el callback de fin, igual que si hubiera terminado normalmente
         if (onDialogFinished != null)
         {
             var callback = onDialogFinished;
@@ -380,11 +430,27 @@ public class DialogManager : MonoBehaviour
         if (typingCoroutine != null) StopCoroutine(typingCoroutine);
         StopTypingSfx();
         isTyping = false;
-        isAnimatingUI = true; // evita que un click en pantalla avance el diálogo mientras se espera el botón
+        isAnimatingUI = true;
+
+        uiCanvasGroup.alpha = 0f;
+        uiCanvasGroup.interactable = false;
+        uiCanvasGroup.blocksRaycasts = false;
+
+        if (overlayBackground != null)
+            overlayBackground.SetActive(false);
     }
+
     public void ResumeDialogAndAdvance()
     {
         isAnimatingUI = false;
+
+        uiCanvasGroup.alpha = 1f;
+        uiCanvasGroup.interactable = true;
+        uiCanvasGroup.blocksRaycasts = true;
+
+        if (overlayBackground != null)
+            overlayBackground.SetActive(true);
+
         AdvanceSequence();
     }
     IEnumerator FadeIn()
