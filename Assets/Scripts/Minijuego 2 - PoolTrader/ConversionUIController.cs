@@ -5,20 +5,25 @@ using TMPro;
 public class ConversionUIController : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
+    // Cada botón tiene un texto para las bolsas y otro para la moneda, así no se desplazan al cambiar los precios
     [SerializeField] private Button BTCToBagsButton;
-    [SerializeField] private TextMeshProUGUI BTCToBagsText;
+    [SerializeField] private TextMeshProUGUI BTCToBagsCoinText;
+    [SerializeField] private TextMeshProUGUI BTCToBagsBagsText;
     [SerializeField] private Button ETHToBagsButton;
-    [SerializeField] private TextMeshProUGUI ETHToBagsText;
+    [SerializeField] private TextMeshProUGUI ETHToBagsCoinText;
+    [SerializeField] private TextMeshProUGUI ETHToBagsBagsText;
     [SerializeField] private Button bagsToBTCButton;
-    [SerializeField] private TextMeshProUGUI bagsToBTCText;
+    [SerializeField] private TextMeshProUGUI bagsToBTCBagsText;
+    [SerializeField] private TextMeshProUGUI bagsToBTCCoinText;
     [SerializeField] private Button bagsToETHButton;
-    [SerializeField] private TextMeshProUGUI bagsToETHText;
+    [SerializeField] private TextMeshProUGUI bagsToETHBagsText;
+    [SerializeField] private TextMeshProUGUI bagsToETHCoinText;
     [SerializeField] private TMP_Text bagsRemainingText; // Bolsas que quedan por gastar este turno (x/max)
 
     [SerializeField] private AssetsManager assets;
     private PriceManager priceManager;
     private PoolTraderConfig config;
-    private int bagsSpentThisTurn;
+    private float bagsSpentThisTurn;
 
     public void Open(PriceManager pm, PoolTraderConfig cfg)
     {
@@ -33,22 +38,26 @@ public class ConversionUIController : MonoBehaviour
         if (panel != null) panel.SetActive(true);
 
         bagsToBTCButton.onClick.RemoveAllListeners();
-        bagsToBTCText.text = $"x{config.bagsPerBTC}              x1";
+        bagsToBTCBagsText.text = $"x{config.bagsPerBTC}";
+        bagsToBTCCoinText.text = "x1";
         bagsToBTCButton.onClick.AddListener(ConvertBagsToBTC);
         bagsToBTCButton.onClick.AddListener(PlayButtonSound);
 
         bagsToETHButton.onClick.RemoveAllListeners();
-        bagsToETHText.text = $"x{config.bagsPerETH}              x1";
+        bagsToETHBagsText.text = $"x{config.bagsPerETH}";
+        bagsToETHCoinText.text = "x1";
         bagsToETHButton.onClick.AddListener(ConvertBagsToETH);
         bagsToETHButton.onClick.AddListener(PlayButtonSound);
 
         BTCToBagsButton.onClick.RemoveAllListeners();
-        BTCToBagsText.text = $"x1              x{config.bagsPerBTC-config.factorBags}";
+        BTCToBagsCoinText.text = "x1";
+        BTCToBagsBagsText.text = $"x{config.bagsPerBTCSell}";
         BTCToBagsButton.onClick.AddListener(ConvertBTCToBags);
         BTCToBagsButton.onClick.AddListener(PlayButtonSound);
 
         ETHToBagsButton.onClick.RemoveAllListeners();
-        ETHToBagsText.text = $"x1              x{config.bagsPerETH-config.factorBags}";
+        ETHToBagsCoinText.text = "x1";
+        ETHToBagsBagsText.text = $"x{config.bagsPerETHSell}";
         ETHToBagsButton.onClick.AddListener(ConvertETHToBags);
         ETHToBagsButton.onClick.AddListener(PlayButtonSound);
 
@@ -65,7 +74,7 @@ public class ConversionUIController : MonoBehaviour
     // Compra 1 BTC a cambio del nº de bolsas establecido
     private void ConvertBagsToBTC()
     {
-        int bags = config.bagsPerBTC;
+        float bags = config.bagsPerBTC;
         if (!CanBuy(bags)) return;
         bagsSpentThisTurn += bags;
         assets.SpendUSD(bags);
@@ -75,7 +84,7 @@ public class ConversionUIController : MonoBehaviour
     // Compra 1 ETH a cambio del nº de bolsas establecido
     private void ConvertBagsToETH()
     {
-        int bags = config.bagsPerETH;
+        float bags = config.bagsPerETH;
         if (!CanBuy(bags)) return;
         bagsSpentThisTurn += bags;
         assets.SpendUSD(bags);
@@ -83,7 +92,7 @@ public class ConversionUIController : MonoBehaviour
     }
 
     // Comprueba saldo y el límite de bolsas gastadas en compras durante este turno
-    private bool CanBuy(int bags)
+    private bool CanBuy(float bags)
     {
         return bags > 0
             && bags <= assets.usd
@@ -95,7 +104,7 @@ public class ConversionUIController : MonoBehaviour
         float userBTC = priceManager.GetUserA();
         if (userBTC <= 0f) return;
         priceManager.AddUserBTC(-1f);
-        assets.AddUSD(config.bagsPerBTC-config.factorBags);
+        assets.AddUSD(config.bagsPerBTCSell);
     }
 
     private void ConvertETHToBags()
@@ -103,7 +112,7 @@ public class ConversionUIController : MonoBehaviour
         float userETH = priceManager.GetUserB();
         if (userETH <= 0f) return;
         priceManager.AddUserETH(-1f);
-        assets.AddUSD(config.bagsPerETH-config.factorBags);
+        assets.AddUSD(config.bagsPerETHSell);
     }
 
     private int ParseBags(TMP_InputField field)
@@ -118,7 +127,7 @@ public class ConversionUIController : MonoBehaviour
         //if (bagsBalanceText != null) bagsBalanceText.text = assets.GetUSD().ToString("F2");
         if (bagsRemainingText != null)
         {
-            int remaining = config.maxBagsPerConversionTurn - bagsSpentThisTurn;
+            float remaining = config.maxBagsPerConversionTurn - bagsSpentThisTurn;
             bagsRemainingText.text = $"{remaining}/{config.maxBagsPerConversionTurn}";
         }
         bagsToBTCButton.interactable = CanBuy(config.bagsPerBTC);

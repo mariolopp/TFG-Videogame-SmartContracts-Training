@@ -11,9 +11,10 @@ public class PoolTraderConfig : ScriptableObject
 
     [Header("Turno de conversión")]
     public float conversionTurnDuration = 10f;
-    public int bagsPerBTC = 4;
-    public int bagsPerETH = 2;
-    public int factorBags = 1; // Comisión entre compra y venta
+    public float bagsPerBTC = 3f; // Precio de compra de 1 BTC y su valor al final de la partida
+    public float bagsPerETH = 2f; // Precio de compra de 1 ETH y su valor al final de la partida
+    public float bagsPerBTCSell = 2f; // Bolsas recibidas al vender 1 BTC
+    public float bagsPerETHSell = 1.5f; // Bolsas recibidas al vender 1 ETH
     public int maxBagsPerConversionTurn = 12; // Máximo de bolsas que se pueden gastar comprando monedas por turno
 
     [Header("Turno de traders")]

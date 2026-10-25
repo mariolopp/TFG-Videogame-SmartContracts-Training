@@ -17,7 +17,8 @@ MonoBehaviour:
   conversionTurnDuration: 10
   bagsPerBTC: 3
   bagsPerETH: 2
-  factorBags: 1
+  bagsPerBTCSell: 2
+  bagsPerETHSell: 1.5
   maxBagsPerConversionTurn: 12
   minTraders: 2
   maxTraders: 3
